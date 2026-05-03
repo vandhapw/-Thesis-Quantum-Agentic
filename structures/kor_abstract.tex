@@ -1,1 +1,16 @@
-Body text in 11pt Shinmyungjo style.
+% Korean abstract (kor_abstract.tex). NOTE: Author should review for native fluency.
+% This is a draft Korean translation of the English abstract aligned with the V2 thesis content.
+
+\noindent
+본 논문은 산업용 예측 정비를 위한 3계층 실시간 파이프라인으로 구성된 \textbf{QASAMAP} (Quantum-Agentic Smart Manufacturing Anomaly detection and Predictive Maintenance) 프레임워크를 제안한다. 본 프레임워크는 50대의 기계를 69일간 모니터링하여 수집한 100{,}000개의 센서 측정값으로 구성된 스마트 제조 데이터셋을 기반으로 평가되었으며, 5개 센서 채널(온도, 진동, 습도, 압력, 에너지 소비), 5가지 고장 유형, 그리고 Apache Kafka 기반의 1분 주기 실시간 스트리밍 인프라를 포함한다.
+
+\textbf{Layer~1}은 시간적 그래프 합성곱 신경망(T-GCN)을 통해 시공간적 센서 예측을 수행한다. 50개 노드와 538개 방향성 엣지로 구성된 교차 상관 지연 그래프(Machine~40을 앵커 노드로 사용)를 기반으로 하는 T-GCN은 5개 센서 채널에 대해 평균 R\textsuperscript{2} = 0.7702를 달성하여, 단독 LSTM(R\textsuperscript{2} = 0.6853)과 Hybrid LSTM-GCN(R\textsuperscript{2} = 0.7134)을 모두 능가한다. 또한 지도 학습 분류기(XGBoost, LightGBM, CatBoost, HistGradientBoosting, TabNet)는 이상치 탐지에서 최고 F1 = 0.999, 5-클래스 고장 유형 분류에서 F1 = 0.880의 성능을 보이며, 이상치 플래그, 다운타임 위험도, RUL 예측, 고장 유형, 정비 필요 플래그 등의 보조 출력을 제공한다.
+
+\textbf{Layer~2}는 Ollama Cloud API를 통해 세 개의 클라우드 LLM(\textit{glm-5.1}, \textit{kimi-k2.6}, \textit{deepseek-v4-pro})을 병렬로 호출하는 다중 LLM 앙상블을 구현한다. 각 LLM은 Layer~1의 출력을 통합하여 기계별 4단계 정비 우선순위 라벨(Critical / High / Medium / Low)을 다수결 투표 방식으로 생성한다. 25대 테스트 기계 $\times$ 5개 윈도우 = 125개 케이스에 대한 사전 등록된 평가에서, 합성 기준값(Lei 2018 + ISO 13374-2)과의 Quadratic-Weighted Kappa $\kappa = 0.7425$ (95\% 신뢰구간 [0.619, 0.835])를 달성하였다. 이는 Landis-Koch 1977 기준에 따른 \emph{상당한 일치(substantial agreement)} 수준이며, Critical 등급의 정밀도는 1.000, 실제 Critical 기계에 대한 Critical-or-High 커버리지도 1.000으로 운영적 안전성을 보장한다. 앙상블의 종단간 p95 지연 시간은 32.7초로 60초 Kafka 생산자 주기 내에 안전하게 수행된다. V1 ($\kappa = 0.362$), V2 ($\kappa = 0.191$), V3 ($\kappa = 0.7425$ 통과)에 걸친 세 가지 사전 등록 방법론 변경 사항은 모두 투명하게 문서화되었다.
+
+\textbf{Layer~3}은 정비 스케줄링 문제를 결정 변수 $x_{m,e,s} \in \{0,1\}$에 대한 이차 비제약 이진 최적화(QUBO)로 정식화한다. 산업적으로 현실적인 제약 조건(평일 09:00--18:00 근무 시간, 1--20명의 직원 그룹, 순차적 다중 작업, CMMS 문헌에 기반한 고장 유형별 정비 시간)이 적용된다. 6개의 솔버를 315개의 통제된 인스턴스와 135개의 동적 재최적화 이벤트에 걸쳐 벤치마킹하였다. 4개의 고전적 휴리스틱(Greedy, Genetic Algorithm, Simulated Annealing, Tabu Search)은 모두 동일한 최적 makespan으로 수렴하였으며, 가장 큰 테스트 규모(50대 기계 $\times$ 5일 $\times$ 20명 직원 = 45{,}000개 이진 변수)에서도 100\% 실행 가능성과 1초 미만의 wall-clock 시간을 달성하였다. 반면 두 개의 양자 계열 솔버(dwave-neal 기반 시뮬레이션 양자 어닐링, Goto et al.\ 2019의 양자 영감 Simulated Bifurcation)는 본 밀집 스케줄링 QUBO 인코딩에서 일관되게 실행 가능한 해를 생성하지 못하였다 (paired Wilcoxon $p < 10^{-5}$). 게이트 모델 QAOA는 큐비트 예산 제약으로 인해 의미 있는 문제 규모에서 적용 불가능하다. 실제 D-Wave 하드웨어 접근은 본 연구에서 확보되지 못하였다. 시뮬레이터 기반 평가에서의 정직한 실증적 발견은 본 문제 클래스에서 고전적 휴리스틱이 양자 계열 방법을 압도한다는 것이며, NISQ-Advanced 단계(2025--2028)를 위한 아키텍처 준비성 입장은 인접 스케줄링 분야의 산업 사례(Ford Otosan + D-Wave 6배 스케줄링 가속화; BASF + D-Wave 7200배 액체 충전 가속화)에 기반하고 있고, Cerezo et al.\ 2025 양자 머신러닝 회의론 문헌도 명시적으로 다룬다.
+
+Layer~2 + Layer~3 파이프라인의 종단간 처리 시간은 어떤 고전적 Layer~3 솔버를 선택하더라도 60초 실시간 Kafka 주기 내에서 26초 이상의 여유를 가지고 작동한다. 본 논문의 기여는 (1) 검증된 3계층 실시간 PdM 아키텍처, (2) 세 개의 사전 등록된 변경 사항을 완전히 투명하게 문서화한 다중 LLM 클라우드 앙상블 검증 방법론, (3) QASAMAP 현실적 문제 인스턴스에서의 고전 vs 양자 스케줄링에 대한 정직한 실증 평가이다. 향후 연구로는 실제 D-Wave 하드웨어 테스트, 전체 fleet 규모 평가, 그리고 합성 기준값에 대한 전문가 주석 검증이 포함된다.
+
+\noindent
+\textbf{주요어:} 스마트 제조, 예측 정비, 이상치 탐지, T-GCN 시공간 예측, 에이전틱 AI, 대형 언어 모델 앙상블, 양자 최적화, NISQ, 스케줄링 QUBO, 실시간 Kafka 파이프라인, 사전 등록 평가
