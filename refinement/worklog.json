@@ -1,0 +1,40 @@
+{
+  "skill": "paper-orchestra / content-refinement-agent (Step 5)",
+  "adapted_from_single_paper.tex_to_multi_chapter_thesis": true,
+  "iter0_baseline_snapshot": "refinement/iter0/",
+  "iter1_snapshot": "refinement/iter1/",
+  "iter1_decisions": [
+    {
+      "file": "structures/introduction.tex",
+      "section": "Contribution (V2 follow-up paragraph)",
+      "action": "REDUCE_VERBOSITY",
+      "rationale": "5th/6th/7th contributions previously restated full numeric details (κ=0.7425 95% CI, exact LLM model names, paired Wilcoxon p<1e-5) that are also given in canonical chapters. Replaced with one-sentence summary per contribution + cross-reference to canonical chapter section.",
+      "honor_skill_safety_rules": true,
+      "no_new_numbers_introduced": true,
+      "no_defensive_limitations_added": true,
+      "no_fabricated_experiments": true
+    },
+    {
+      "file": "structures/conclusion.tex",
+      "section": "V2 Follow-Up: Re-Evaluation Under Realistic Deployment Input Set and Honest Quantum Scheduling",
+      "action": "REDUCE_VERBOSITY",
+      "rationale": "Section previously contained 5 paragraphs each restating full V2 details (Layer 2 ensemble κ, Multi-Agent Pipeline 4-stage description, Layer 3 QUBO formulation, methodological discipline trajectory, honest scope). All these are canonically given in Chapter 5 §V2 Follow-Up and Chapter 6 §V2 Follow-Up. Compressed to 1 paragraph that synthesizes via cross-references."
+    },
+    {
+      "file": "structures/analysis_discussion.tex",
+      "section": "Summary (chapter-end)",
+      "action": "REDUCE_VERBOSITY",
+      "rationale": "Last paragraph of chapter Summary restated κ=0.7425 + composite GT formula + Multi-Agent Pipeline characterization that are already canonical earlier in the SAME chapter. Replaced with one-sentence pointer."
+    }
+  ],
+  "iter1_safety_checks_passed": {
+    "no_new_numeric_claims": true,
+    "no_new_experiments_described": true,
+    "no_defensive_limitations_phrasing": true,
+    "no_fabricated_baselines": true,
+    "section_subsection_titles_unchanged": true,
+    "newthesis_chapter_structure_preserved": true
+  },
+  "diff_stat": "+3 / -16 lines across 3 files",
+  "halt_decision": "Run focused on duplication reduction; classical Step 5 score-trajectory loop NOT executed because no single paper.tex exists to score and refinement target was specific (cross-chapter duplication). One iteration applied; further iterations could chase additional duplications (e.g., README.md cross-references, abstract overlap with intro) but those would yield diminishing returns per the Step 5 plateau heuristic."
+}

@@ -1,0 +1,193 @@
+\section{Smart Manufacturing System and Data Environment}
+
+This section establishes the operational foundation of the QASAMAP framework. It begins with a high-level overview of the three-layer architecture, then describes the smart manufacturing setting that motivates the research, the data sources and their statistical characteristics that drive the predictive modelling design, and finally details the data infrastructure and integration layer that enables real-time streaming and model deployment.
+
+\subsection{QASAMAP Architecture Overview}
+
+QASAMAP is organised into three functional layers, as illustrated in Figure~\ref{fig:research_methodology}. The following paragraphs provide a high-level summary of each layer; subsequent subsections present detailed formulations and implementation specifics.
+
+\textbf{Layer 1 --- Data and Predictive Modelling.} The first layer handles real-time sensor data ingestion via an Apache Kafka pipeline simulation and executes three families of predictive models. A Temporal Graph Convolutional Network (T-GCN) performs spatiotemporal sensor stream forecasting, exploiting a cross-correlation lag graph constructed from the temporal relationships among the 50 monitored machines. The cross-correlation graph comprises 50 nodes and 538 directed edges, with Machine 40 identified as the anchor node based on its highest out-degree centrality. Supervised tree-based ensemble models (XGBoost, LightGBM, CatBoost, HistGradientBoosting) and the TabNet deep tabular model are evaluated for five classification targets (machine status, anomaly flag, failure type, downtime risk, maintenance required) and one regression target (predicted RUL). The empirical motivation for graph-based modelling is grounded in the dataset: temperature (Pearson $r = 0.447$ with anomaly flag) is the most informative single sensor, and the cross-correlation structure reveals predictive relationships between machines that enable machine-wide anomaly propagation.
+
+\textbf{Layer 2 --- Agentic AI Framework.} The second layer implements a multi-agent orchestration system comprising \textbf{nine} LLM-powered agents --- Monitoring, Diagnosis, Planning, Reporting, Correlation, Explainability, Self-Reflection, Scheduling, and Pattern Learning --- coordinated by the \texttt{MultiAgentOrchestrator} class using the \texttt{glm-5.1:cloud} model via the Ollama Cloud API. The LLM benchmark additionally evaluates \texttt{qwen3.5:397b-cloud} and \texttt{deepseek-v4-pro:cloud}. Each agent receives structured prompts containing classical risk context (risk score, sensor flags, RUL status) and quantum-inspired heuristic context (Pauli-Z labels, QUBO priority ranks, QAOA slot assignments). \textbf{Post-audit safeguard:} No ground-truth fields (\texttt{status}, \texttt{failure\_type}) are passed to any LLM agent prompt. Supporting components include the \texttt{ContextMemoryStore} with sliding window and decision log, the \texttt{ReasoningEngine} for classical multi-factor risk scoring, and the \texttt{LearningLoop} for autonomous threshold adaptation based on false positive and false negative feedback.
+
+\textbf{Layer 3 --- Quantum-Inspired Classical Heuristic Engine.} The third layer augments the agentic pipeline with three quantum-inspired classical heuristics. The Pauli-Z multi-sensor encoding function (\texttt{energy\_distance\_anomaly\_score}) computes a normalized L2 distance from the training-set median per feature, mapped through a cosine formulation that mirrors the Pauli-Z expectation structure, producing a composite risk indicator $\langle Z \rangle_c$. The QUBO-formulated priority ranking (\texttt{random\_constrained\_search}) is a greedy seed plus random 1-bit-flip local search that minimises a QUBO-energy objective. The QAOA-formulated scheduling (\texttt{graph\_message\_passing\_score}) performs weighted-neighbour averaging on the T-GCN adjacency matrix. \textbf{Critical disclosure:} None of these components are executed on quantum hardware; they are classical heuristics designed to preserve the mathematical structure of their quantum counterparts for future hardware migration. A heuristic override mechanism escalates machines carrying quantum-style danger signals to active inspection even when their classical risk scores fall in the LOW category, providing a guard against false negatives that classical thresholds alone would miss.
+
+\subsection{Smart Manufacturing Setting}
+
+The QASAMAP framework is motivated by five convergent research gaps identified through systematic literature review and grounded in the empirical properties of the 100,000-reading smart manufacturing dataset (50 machines, 69 days, January--March 2025). The dataset exhibits 8.92\% anomalous readings, 19.70\% maintenance-required instances, and 16,333 critical low-RUL cases (1,637 below 10 hours), illustrating the scale and urgency of accurate maintenance prediction. The five gaps are: \textbf{Gap~1} is the siloed treatment of anomaly detection, prognostics, and scheduling as separate problems \cite{Chalapathy2019, pang_deep_2021, Gao2022}. \textbf{Gap~2} is the classical intractability of machine-level maintenance scheduling across large machine pools \cite{Blekos2024, symons_practitioners_2023}. \textbf{Gap~3} is the adoption of static model architectures that cannot adapt to non-stationary industrial environments \cite{lee_autoencoder-based_2024}. \textbf{Gap~4} is the limited application of quantum-enhanced risk encoding to industrial sensor assessment \cite{kreplin_squlearn_2025}. \textbf{Gap~5} is the absence of integrated agentic orchestration that simultaneously achieves autonomous decision-making, quantum integration, interpretability, and continuous learning \cite{ouyang_llmsense_2024, xing_deepsqa_2021}. QASAMAP addresses all five gaps within a single closed-loop framework.
+
+\subsection{Data Sources and Characteristics}
+
+The dataset models a smart manufacturing environment where machines are continuously monitored using industrial sensor variables. Each machine observation includes physical sensor readings and derived maintenance labels. The main physical variables are temperature, vibration, humidity, pressure, and energy consumption. These variables describe the operational state of a machine and serve as inputs for anomaly detection, remaining useful life estimation, risk scoring, and maintenance planning.
+
+The offline dataset contains 100,000 records collected from 50 machines over the period from 2025-01-01 to 2025-03-11. Each record represents one machine condition observation, including sensor measurements, machine status, anomaly indicator, predicted remaining useful life, failure type, downtime risk, and maintenance requirement. The streaming dataset is produced by a digital twin simulation and stored through a Kafka-MongoDB pipeline. The offline dataset is used for model development, feature analysis, risk formulation, and validation, while the Kafka streaming data is used to evaluate anomaly detection and predictive maintenance in a real-time decision-making scenario.
+
+Table~\ref{table:dataset_summary} summarises the key properties of the historical CSV dataset, and Table~\ref{table:feature_description} describes each feature column.
+
+\input{tables/dataset}
+
+\input{tables/feature_description}
+
+\paragraph{Dual-mode data architecture.} Figure~\ref{fig:data_sources_architecture} illustrates the dual operating modes of the QASAMAP data infrastructure. The \emph{historical batch mode} (top lane, blue) consumes the offline CSV dataset for feature engineering, model training (T-GCN + supervised classifiers), and the artefacts produced (trained model files, fitted scalers, sensor bounds) are subsequently deployed to the streaming pipeline. The \emph{real-time streaming mode} (bottom lane, green) operates the deployed models on a live one-event-per-machine-per-minute Kafka stream produced by the digital-twin simulator: events flow through the Kafka broker into a consumer that buffers the last 10 events per machine and persists them to MongoDB; the Layer~1 T-GCN forecaster and supervised classifier produce real-time outputs (sensor forecast, anomaly flag, downtime risk, RUL); these feed the Layer~2 LLM ensemble and Layer~3 scheduler, which produce a maintenance decision and CMMS work order within the 60-second Kafka cycle. A continuous-learning feedback loop (red dashed arrow) periodically retrains the deployed models from accumulated streaming feedback.
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=\textwidth]{figures/images/data_sources_architecture.png}
+    \caption{Dual-mode data architecture for QASAMAP. Top lane: historical batch mode (offline CSV → feature engineering → model training on GPU → trained artefacts). Bottom lane: real-time streaming mode (digital-twin simulator → Kafka topic → consumer + MongoDB → Layer~1 T-GCN + classifier → Layer~2 LLM ensemble + Layer~3 scheduler → maintenance decision). Trained artefacts from the historical mode are deployed into the streaming inference path (orange arrow); a continuous-learning feedback loop (red dashed arrow) retrains the deployed models from accumulated runtime feedback.}
+    \label{fig:data_sources_architecture}
+\end{figure}
+
+\paragraph{Descriptive statistics on the historical CSV.} Figure~\ref{fig:data_sources_distribution} provides the descriptive characterisation of the historical dataset that motivates several design choices in the framework. The top row shows per-sensor distributions split by anomaly flag (normal vs anomaly): temperature is the most discriminative single sensor, with anomalous readings shifted noticeably higher than the normal-class median, while humidity and pressure exhibit overlapping distributions that motivate the multi-sensor integration in Layer~2. The middle row shows the failure-type distribution (severe class imbalance: \textit{Normal} 91.9\% versus the four minority failure modes \textit{Vibration Issue}, \textit{Overheating}, \textit{Pressure Drop}, and \textit{Electrical Fault} totalling 8.1\%) and the RUL histogram (near-uniform distribution, mean $\approx 234$ h, 16{,}333 readings below the critical 50-h threshold). The bottom panel shows a 200-minute sample sensor trace from machine M-40 with all five sensors normalised to $[0,1]$ for visual comparison, illustrating the streaming-cadence one-minute timestamp granularity that the Kafka pipeline delivers and that the T-GCN sliding-window ($W=10$) consumes.
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=\textwidth]{figures/images/data_sources_distribution.png}
+    \caption{Historical dataset descriptive statistics on 100{,}000 rows × 50 machines × 69 days. Top row: per-sensor violin plots split by anomaly flag (blue = normal, red = anomaly). Middle row left: failure-type class distribution (severe imbalance with \textit{Normal} = 91.9\% and minority classes 1.0--3.1\%). Middle row right: RUL histogram with critical (50 h) and imminent (10 h) thresholds marked. Bottom row: 200-minute sample sensor trace from M-40 with all five sensors normalised to $[0,1]$, illustrating the one-minute Kafka producer cadence and the sliding-window granularity that downstream forecasting consumes.}
+    \label{fig:data_sources_distribution}
+\end{figure}
+
+The empirical consequences of siloed modelling are directly observable in the dataset. The anomaly flag, predicted RUL, failure type, and maintenance required label are all statistically interdependent: temperature correlates with anomaly flag at $r = 0.447$, anomaly flag correlates with downtime risk at $r \approx 1.0$, and RUL correlates with downtime risk at $r = -0.436$. The 16,333 readings with RUL below 50 hours represent machines that are simultaneously anomalous and prognostically critical --- a dual characterization that joint modelling exploits far more effectively than independent models.
+
+\subsubsection{Spatiotemporal Forecasting with T-GCN}
+
+The Temporal Graph Convolutional Network (T-GCN) layer provides 30-minute ahead forecasts of all five sensor channels across the 50-machine pool. The T-GCN architecture is structured around four stages, as illustrated in Figure~\ref{fig:tgcn_architecture}.
+
+\input{figures/images/tgcn_architecture}
+
+\paragraph{Stage 1: Data Engineering and Feature Preparation.} Raw sensor readings are augmented with two engineered features: a heat-stress proxy \texttt{temp\_vibe\_idx} = temperature $\times$ vibration, capturing combined thermal and mechanical loading; and an efficiency proxy \texttt{press\_energy\_ratio} = energy\_consumption / (pressure + 0.1), capturing hydraulic efficiency degradation. The resulting seven-variable feature set is preprocessed using sensor-specific rolling mean smoothing (window~10 for vibration, 5 for others), first-order differencing for stationarity, and StandardScaler normalization fitted on the training split. A 10-step sliding window partitions the differenced, scaled sequences into input-output training pairs.
+
+\paragraph{Stage 2: Cross-Correlation Lag Graph Construction.} The T-GCN spatial structure is defined by a directed graph $G = (V, E, W)$ constructed from pairwise lagged cross-correlations of the temperature time series. For each machine pair $(m_i, m_j)$, the \texttt{compute\_machine\_lag\_matrix} function computes the Pearson correlation at integer lags from $-10$ to $+10$ timesteps, recording the lag and strength at maximum absolute correlation. Edges are added when the correlation strength exceeds 0.35, yielding 50 nodes and 538 directed edges. The normalized adjacency matrix is $A_{\text{norm}} = D^{-1/2} A D^{-1/2}$, where $D$ is the degree matrix. Machine~40 is designated as the anchor node based on its highest out-degree centrality among all machines.
+
+\paragraph{Stage 3: T-GCN Core Model.} The \texttt{TemporalGCN} class implements two Graph Convolution layers (64 hidden units, Dropout 0.2) for spatial information propagation across the machine graph at each timestep, followed by two stacked GRU layers (128 hidden units, Dropout 0.2) for temporal evolution modeling. The output head is a two-layer MLP (Linear(128$\to$64) + ReLU + Linear(64$\to$7)) that predicts next-step differenced sensor values, which are inverse-transformed to original-scale forecasts. Training uses the Adam optimizer (lr = 0.0005, weight decay = 1e-5) with cosine annealing and gradient clipping at norm 1.0 for 15 epochs.
+
+\paragraph{Stage 4: Machine-Wide Propagation and Streaming.} The \texttt{propagate\_from\_anchor} function implements baseline and anomaly injection machine-wide propagation. In the anomaly scenario, Machine~40's input window receives a $+$20\% temperature and $+$30\% vibration spike; dependent machines are perturbed by $w \cdot \epsilon$ (propagation weight $w$, perturbation factor $\epsilon = 0.02$) before their own T-GCN rollout. The \texttt{AnchorBufferManager} handles partial sensor streams from Machine~40, imputing missing values from the T-GCN's previous prediction and maintaining a sliding buffer for continuous streaming inference.
+
+\subsubsection{Supervised Classification and Regression}
+
+The supervised prediction layer evaluates five tree-based ensemble models (XGBoost, LightGBM, CatBoost, HistGradientBoosting) and TabNet for six machine health prediction targets. Five classification targets (machine status, anomaly flag, failure type, downtime risk, maintenance required) are evaluated using Accuracy, Precision, Recall, F1-score, AUC-ROC, and Matthews Correlation Coefficient (MCC). One regression target (predicted RUL) is evaluated using MAE, RMSE, R\textsuperscript{2}, and Explained Variance. Class imbalance in the failure type and maintenance required targets is handled through class-weight balancing in the ensemble learners and focal loss in TabNet.
+
+\subsection{Data Infrastructure and Integration}
+
+The data acquisition layer ingests continuous sensor streams from 50 machines, each producing five sensor readings (temperature, vibration, humidity, pressure, energy consumption) at one-minute intervals. The \texttt{kafka\_consumer\_simulation} function implements a Kafka consumer abstraction that delivers sensor events as normalized dictionaries containing machine identifier, timestamp, five sensor values, machine status, anomaly flag, predicted RUL, failure type, downtime risk, and maintenance required. In production deployment, this simulation is replaced by a live \texttt{KafkaConsumer} connecting to the factory's \texttt{sensor\_stream} topic.
+
+The \texttt{normalize\_event} function standardizes incoming events into a canonical dictionary format, resolving field name variations and applying default values for missing fields. The \texttt{group\_events\_by\_machine} function organizes the stream into per-machine event lists, enabling the quantum layer to process one representative event per machine before initiating the per-machine agentic pipeline. Sensor quality bounds derived from the dataset's physical ranges (temperature: 35.55--121.94\textdegree C; vibration: $-$17.09 to 113.80; humidity: 30.00--80.00\%; pressure: 1.00--5.00 bar; energy: 0.50--5.00 kWh) are stored in the \texttt{SENSOR\_BOUNDS} dictionary for downstream Pauli-Z normalization.
+
+The QASAMAP framework is structured as a closed-loop pipeline in which raw sensor data flows upward through data ingestion, T-GCN forecasting, supervised prediction, quantum encoding, quantum optimization, agentic orchestration, and learning loop layers, while feedback and threshold update signals flow downward to continuously refine lower-layer parameters. This bidirectional architecture directly addresses Gap~3 by enabling autonomous adaptation without manual retraining cycles. Figure~\ref{fig:research_methodology} illustrates the overall three-layer architecture at a high level, while Figures~\ref{fig:tgcn_architecture}, \ref{fig:agentic_ai_architecture}, and \ref{fig:quantum_agent_architecture} provide detailed views of the T-GCN pipeline, the Agentic AI orchestration system, and the integrated Quantum-Agentic decision loop respectively.
+
+
+\section{Agentic and Multi-Agent AI Layer}
+
+This section describes the agentic AI layer that autonomously orchestrates the complete predictive maintenance decision cycle. It begins with the types and roles of the nine constituent agents, then details their architectural capabilities and supporting infrastructure, and finally explains the inter-agent communication protocol and workflow that coordinates execution from sensor ingestion through maintenance dispatch.
+
+\subsection{Agent Types and Roles}
+
+The agentic layer implements a multi-agent orchestration system comprising \textbf{nine} LLM-powered agents coordinated by the \texttt{MultiAgentOrchestrator} class using the \texttt{glm-5.1:cloud} model via the Ollama Cloud API. The LLM benchmark additionally evaluates \texttt{qwen3.5:397b-cloud} and \texttt{deepseek-v4-pro:cloud}. Each agent receives structured prompts containing classical risk context (risk score, sensor flags, RUL status) and quantum-inspired heuristic context (Pauli-Z labels, QUBO priority ranks, QAOA slot assignments). \textbf{Post-audit safeguard:} No ground-truth fields (\texttt{status}, \texttt{failure\_type}) are passed to any LLM agent prompt.
+
+The \textbf{Monitoring Agent} receives sensor data, classical risk, and heuristic context, returning a structured assessment of risk level, anomaly type, heuristic confirmation, and confidence. The \textbf{Diagnosis Agent} uses per-sensor Pauli-Z values as heuristic evidence to identify probable failure cause, affected component, and urgency in hours. The \textbf{Planning Agent} uses QUBO rank and QAOA slot to decide among four actions (monitor, inspect, schedule\_maintenance, immediate\_shutdown) with priority P1--P4 and a heuristic-driven flag. The \textbf{Reporting Agent} generates a structured human-readable maintenance alert summarizing machine status, heuristic assessment, and recommended action.
+
+Additional agents extend the pipeline with specialised capabilities. The \textbf{Correlation Agent} performs fleet-level cross-sensor correlation analysis to identify anomaly propagation patterns across the machine pool. The \textbf{Explainability Agent} generates counterfactual explanations for agent decisions, documenting why a particular action was selected over alternatives. The \textbf{Self-Reflection Agent} performs internal consistency checking on the orchestration output, flagging contradictions between agent recommendations and heuristic signals. The \textbf{Scheduling Agent} plans maintenance windows based on QAOA slot assignments and resource availability constraints. The \textbf{Pattern Learning Agent} detects temporal patterns in the decision log to identify recurring failure modes and refine agent prompting strategies over time.
+
+\subsection{Agent Architecture and Capabilities}
+
+\paragraph{Context and Memory Store.} The \texttt{ContextMemoryStore} maintains four persistent data structures: a \texttt{sliding\_window} (10 most recent sensor events per machine as a \texttt{deque}); a \texttt{decision\_log} recording all agent actions with timestamps, risk scores, and heuristic override flags; a \texttt{feedback\_log} recording post-action outcomes for the learning loop; and a \texttt{quantum\_log} recording all Pauli-Z encodings, QUBO results, and QAOA assignments. This contextual memory enables agents to reason about temporal trends and maintain continuity across decision cycles.
+
+\paragraph{Classical Reasoning Engine.} The \texttt{ReasoningEngine} computes a classical risk score via a multi-factor scoring function. Warning-level threshold crossings for temperature (82\textdegree C), vibration (55), energy (3.8~kWh), humidity (68\%), and pressure (4.3~bar) each contribute 0.15 to the risk score; critical-level crossings contribute 0.35. RUL below 50~hours contributes 0.30, anomaly flag contributes 0.20, and downtime risk above 0.6 contributes 0.15. The composite score is clipped to $[0,1]$ and classified as \texttt{LOW} ($< 0.30$), \texttt{MEDIUM} ($0.30$--$0.60$), \texttt{HIGH} ($0.60$--$0.75$), or \texttt{CRITICAL} ($\geq 0.75$).
+
+\paragraph{Quantum Override Logic.} The method in \texttt{QuantumOrchestrator} triggers an override when any of three conditions holds: the machine's Pauli-Z label is \texttt{QUANTUM-ANOMALY} or \texttt{QUANTUM-WARN}; the machine was selected by the QUBO priority ranker; or the machine was assigned to QAOA Slot~A with heuristic risk above 0.40. When triggered, the agent bypasses the \texttt{auto-LOW-skip} rule and escalates the machine to active inspection, with the override reason documented for audit purposes. This heuristic override mechanism escalates machines carrying quantum-style danger signals to active inspection even when classical risk scores indicate LOW priority, guarding against false negatives that threshold-based systems alone would miss.
+
+\paragraph{Action Layer and Human-in-the-Loop.} The \texttt{execute\_action} function dispatches recommended actions to simulated external systems: CMMS work order creation, ERP spare parts check, supervisor notification, and maintenance scheduling. High-risk actions (schedule\_maintenance, immediate\_shutdown) require supervisor approval before execution, providing a human-in-the-loop safety gate. All actions are timestamped and logged to the decision log with full heuristic override context.
+
+\subsection{Inter-Agent Communication and Workflow}
+
+The \texttt{MultiAgentOrchestrator} sequences the nine LLM agents such that each agent's output feeds the next, quantum-inspired heuristic override signals are injected at the orchestration level, and all decisions are logged for feedback-based learning. The orchestration workflow proceeds through six stages, as illustrated in Figure~\ref{fig:agentic_ai_architecture}.
+
+\noindent
+\textbf{Note (V2 deployment patterns):} The 9-agent sequential pipeline described above is the original Ver13 design. Subsequent V2 work (see Chapter~5 §\ref{sec:el2_v3_followup}--§\ref{sec:multi_agent_pipeline_demo}) introduces two complementary deployment patterns: (i)~a \emph{parallel 3-LLM ensemble} (\texttt{glm-5.1:cloud}, \texttt{kimi-k2.6:cloud}, \texttt{deepseek-v4-pro:cloud}) for high-throughput tier classification with majority-vote aggregation, and (ii)~a \emph{sequential 4-stage role-specialised pipeline} (Monitoring $\to$ Diagnosing $\to$ Planning $\to$ Action) for case-level audit-trail deployment. Both patterns are validated against the same composite ground truth (Lei 2018 + ISO 13374-2). The two V2 patterns are complementary, not competing: the parallel ensemble runs at scale on every Kafka cycle for triage; the sequential pipeline runs on machines flagged Critical (or sample audits) for full structured trail.
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=\textwidth]{figures/images/agentic_ai_architecture.png}
+    \caption{Agentic AI Smart Manufacturing Architecture: The six-stage pipeline from Kafka data ingestion through the \texttt{ContextMemoryStore}, \texttt{ReasoningEngine}, \texttt{MultiAgentOrchestrator} (nine LLM agents: Monitoring, Diagnosis, Planning, Reporting, Correlation, Explainability, Self-Reflection, Scheduling, Pattern Learning), Action Layer with human-in-the-loop approval for high-risk actions, and \texttt{LearningLoop} for threshold adaptation and T-GCN retraining.}
+    \label{fig:agentic_ai_architecture}
+\end{figure}
+
+\paragraph{Stage 1: Ingestion and Context Assembly.} Sensor events from the Kafka pipeline are normalized, grouped by machine, and loaded into the \texttt{ContextMemoryStore}. The \texttt{ReasoningEngine} computes classical risk scores and the quantum layer generates Pauli-Z labels, QUBO ranks, and QAOA slot assignments.
+
+\paragraph{Stage 2: Monitoring and Diagnosis.} The Monitoring Agent assesses the current risk level using classical and heuristic context. The Diagnosis Agent identifies the probable failure cause and urgency using per-sensor Pauli-Z expectations as evidence.
+
+\paragraph{Stage 3: Planning and Reporting.} The Planning Agent selects an action and priority based on QUBO rank and QAOA slot. The Reporting Agent generates a structured maintenance alert summarizing the assessment, heuristic context, and recommended intervention.
+
+\paragraph{Stage 4: Extended Analysis.} The Correlation Agent analyses fleet-wide anomaly propagation. The Explainability Agent generates counterfactual explanations. The Self-Reflection Agent checks for contradictions between classical risk and heuristic signals.
+
+\paragraph{Stage 5: Scheduling and Pattern Detection.} The Scheduling Agent plans maintenance windows based on QAOA assignments and resource constraints. The Pattern Learning Agent updates temporal pattern models from the decision log.
+
+\paragraph{Stage 6: Feedback and Learning.} Outcomes from executed actions are recorded in the \texttt{feedback\_log}. The \texttt{LearningLoop} evaluates false positive and false negative rates and adjusts \texttt{ReasoningEngine} sensor thresholds accordingly: if FP rate exceeds 40\%, temperature and vibration warning thresholds are relaxed by 2\textdegree C and 2 units; if FN rate exceeds 20\%, the temperature warning threshold is tightened by 2\textdegree C. When the feedback log accumulates at least 5 records, a structured retraining payload is exported to \texttt{retrain\_payload.json} for submission to the T-GCN retraining pipeline, closing the closed-loop adaptation cycle.
+
+
+\section{Quantum and Quantum-Inspired Optimization Components}
+
+This section describes the quantum and quantum-inspired optimization layer that augments the classical predictive pipeline. It begins with the target optimization problems that the layer addresses, then presents the mathematical formulations (QUBO, Ising, QAOA, and Pauli-Z encoding), and finally explains how these components integrate with the classical agentic pipeline through heuristic override mechanisms and continuous learning.
+
+\subsection{Target Optimization Problems}
+
+The QASAMAP research problem is to jointly learn and deploy five functional components, of which three are addressed by the quantum-inspired optimization layer:
+
+\begin{enumerate}
+    \item \textbf{Spatiotemporal forecasting.} A T-GCN forecasting function $\Psi_{\text{T-GCN}}: \mathbb{R}^{W \times 7 \times N} \to \mathbb{R}^{H \times 5 \times N}$ that maps windowed multivariate sensor sequences across $N$ machines to $H$-step ahead forecasts, exploiting the cross-correlation lag graph $G = (V, E, W)$ constructed over the machine pool. This component is described in Section~\ref{sec:data_sources}.
+
+    \item \textbf{Supervised classification and regression.} A function $\Phi: \mathbb{R}^{d} \to (Y_c^{(1)} \times \cdots \times Y_c^{(5)} \times \mathbb{R}_+)$ that maps a sensor feature vector to five classification outputs and one regression output, using tree-based ensemble or deep tabular models. This component is described in Section~\ref{sec:data_sources}.
+
+    \item \textbf{Quantum-inspired classical risk encoding.} A function $\Gamma: \mathbb{R}^{5} \to [-1, +1]$ implemented via the \texttt{energy\_distance\_anomaly\_score} heuristic that mirrors the Pauli-Z multi-sensor encoding structure. It maps a machine's five normalized sensor values to a composite expectation-like value $\langle Z \rangle_c \in [-1, +1]$ and a risk label $\ell \in \{\texttt{QUANTUM-ANOMALY}, \texttt{QUANTUM-WARN}, \texttt{QUANTUM-MARGINAL}, \texttt{QUANTUM-NORMAL}\}$. The actual runtime computation is classical, not quantum.
+
+    \item \textbf{QUBO-formulated priority ranking and QAOA-formulated scheduling.} A function $\Omega: \{q_i\}_{i \in M} \to (\text{ranking}, \{0,1\}^{|M|})$ that maps machine heuristic risk scores to an ordered priority ranking (via classical local search) and a binary slot assignment vector (via greedy graph-message-passing) partitioning all machines into immediate and planned maintenance windows.
+
+    \item \textbf{Multi-agent agentic orchestration.} A system $\mathcal{A} = \{\text{Mon}, \text{Diag}, \text{Plan}, \text{Rep}, \text{Corr}, \text{XAI}, \text{SelfRef}, \text{Sched}, \text{Pat}\}$ that autonomously orchestrates the execution of $\Psi_{\text{T-GCN}}$, $\Phi$, $\Gamma$, and $\Omega$ in a closed-loop architecture. This component is described in Section~\ref{sec:agentic_layer}.
+\end{enumerate}
+
+The three optimization problems addressed by this layer are therefore: (i)~encoding multi-sensor risk into a single composite expectation value that captures inter-sensor correlations; (ii)~ranking machines by maintenance priority subject to cardinality constraints; and (iii)~scheduling machines into maintenance time slots subject to conflict-graph and capacity constraints. All three problems are NP-hard at scale, motivating the quantum-inspired heuristic approach.
+
+\subsection{Mathematical Formulation (QUBO/Ising/QAOA)}
+
+The quantum computing layer applies three quantum algorithms to augment the classical pipeline, as illustrated in Figure~\ref{fig:quantum_agent_architecture}. All mathematical formulations preserve the structure of their quantum counterparts for future hardware migration while executing on classical processors \cite{Blekos2024, Preskill2018}.
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=\textwidth]{figures/images/quantum_agent_architecture.png}
+    \caption{Integrated Quantum-Agentic architecture: The Heuristic Layer (Pauli-Z encoding, QUBO-formulated local search, QAOA-formulated graph scheduling) runs once per machine batch and feeds a consolidated heuristic context into the per-machine Agentic Decision Loop. The \texttt{should\_quantum\_override} gate escalates machines with heuristic danger signals regardless of classical risk level. The Learning Loop at the bottom implements Q-FN feedback and threshold adaptation.}
+    \label{fig:quantum_agent_architecture}
+\end{figure}
+
+\subsubsection{Pauli-Z Multi-Sensor Risk Encoding}
+
+The \texttt{PauliZRiskEncoder} class constructs a 5-qubit circuit \emph{in mathematical formulation} for each machine: Hadamard gates create superposition; parameterized RZ gates encode normalized sensor values as rotation angles $\theta_i = \pi \cdot \text{norm}_i$; CNOT gates between adjacent qubits introduce entanglement capturing pairwise sensor correlations. The per-sensor expectation is $\langle Z_i \rangle = \cos(\pi \cdot \text{norm}_i)$, yielding $+1$ for safe sensors, $0$ for marginal sensors, and $-1$ for sensors in the danger zone. The weighted composite $\langle Z \rangle_c = \sum_i w_i \langle Z_i \rangle$ (weights: temperature 0.30, vibration 0.30, humidity 0.15, pressure 0.15, energy 0.10) maps to quantum risk label \texttt{QUANTUM-ANOMALY} ($\langle Z \rangle_c < -0.20$), \texttt{QUANTUM-WARN} ($-0.20 \leq \langle Z \rangle_c < 0.30$), \texttt{QUANTUM-MARGINAL} ($0.30 \leq \langle Z \rangle_c < 0.60$), or \texttt{QUANTUM-NORMAL} ($\geq 0.60$).
+
+\begin{equation}
+    \langle Z \rangle_c = \sum_{i=0}^{4} w_i \cdot \cos(\pi \cdot \mathrm{norm}_i)
+    \label{eq:composite_z}
+\end{equation}
+
+\textbf{Algorithmic disclosure:} The runtime implementation in \texttt{classical\_optimization.py} computes a normalized L2 distance from the training-set median per feature, passed through $1 - \exp(-3d)$. This scalar is mapped to the four-tier \texttt{QUANTUM-*} label schema. No quantum circuit is executed.
+
+\subsubsection{QUBO-Formulated Priority Ranking}
+
+The \texttt{QuantumAnnealingOptimizer} class formulates machine prioritization as a QUBO problem: the matrix $Q$ encodes the objective of selecting highest-risk machines (diagonal terms $-w_i$) with a cardinality penalty (off-diagonal terms $+\lambda/2$). The \emph{classical} implementation uses \texttt{random\_constrained\_search} with \texttt{n\_samples=200}: a greedy seed plus random 1-bit-flip local search with a fixed random seed, yielding a binary selection vector and a full priority ranking of all machines by heuristic risk score. The optimal QUBO energy is logged as a convergence quality measure.
+
+\textbf{Algorithmic disclosure:} This is not executed on a D-Wave annealer or any quantum hardware. The \texttt{random\_constrained\_search} function is a classical heuristic that preserves the QUBO mathematical structure.
+
+\subsubsection{QAOA-Formulated Time-Slot Scheduling}
+
+The \texttt{QAOAScheduler} class assigns all machines to maintenance time slots using a \textbf{greedy graph-message-passing heuristic} inspired by the Quantum Approximate Optimisation Algorithm (QAOA). The problem Hamiltonian is $H = \frac{1}{2}\sum_{(i,j) \in E}(I - Z_i Z_j)$ augmented with Pauli-Z bias terms $-r_i \cdot 0.3 \cdot Z_i$ that steer high-risk machines toward Slot~A. The \emph{classical} implementation performs three rounds of weighted-neighbour averaging on the existing T-GCN adjacency matrix, ranks nodes by their aggregated influence score, and assigns the top-ranked nodes to Slot~A subject to a maximum slot capacity. The bitstring interpretation (qubit $i$ in state $|0\rangle$ assigns machine $i$ to Slot~A, $|1\rangle$ to Slot~B) is preserved for conceptual consistency with the QAOA formulation.
+
+\textbf{Algorithmic disclosure:} This is not a variational quantum circuit optimised via COBYLA on Qiskit Aer. The \texttt{graph\_message\_passing\_score} function is a classical heuristic that preserves the QAOA mathematical structure.
+
+\subsection{Hybrid Quantum-Classical Integration}
+
+The integration of quantum-inspired heuristics with the classical agentic pipeline occurs at three levels: signal injection, override arbitration, and feedback adaptation.
+
+\paragraph{Signal Injection.} The heuristic layer runs once per machine batch before the agentic orchestration cycle begins. It computes Pauli-Z labels for all machines, executes QUBO local search to produce a priority ranking, and runs QAOA-formulated graph scheduling to assign machines to maintenance slots. These three heuristic signals are consolidated into a \texttt{heuristic\_context} dictionary that is appended to every LLM agent prompt.
+
+\paragraph{Override Arbitration.} The \texttt{should\_quantum\_override} gate evaluates three conditions: (i)~Pauli-Z label is \texttt{QUANTUM-ANOMALY} or \texttt{QUANTUM-WARN}; (ii)~machine was selected by the QUBO priority ranker; (iii)~machine was assigned to QAOA Slot~A with heuristic risk above 0.40. When any condition holds, the machine is escalated to active inspection regardless of its classical risk classification. This mechanism provided actionable decisions for 5 out of 7 machines in the demonstration set that classical thresholds would have passively monitored.
+
+\paragraph{Feedback Adaptation.} The heuristic feedback mechanism cross-checks Pauli-Z labels against final agent actions: machines labeled \texttt{QUANTUM-ANOMALY} or \texttt{QUANTUM-WARN} that received only passive monitoring without heuristic override are flagged as potential heuristic false negatives (Q-FN) and logged for human review. The \texttt{LearningLoop} uses these Q-FN records to tighten heuristic thresholds when the false negative rate exceeds 20\%. When sufficient feedback accumulates (minimum 5 records), a retraining payload is exported to trigger T-GCN model updates, closing the closed-loop adaptation cycle.
+
+\textbf{Critical disclosure.} None of the components described in this section are executed on quantum hardware. They are classical heuristics designed to preserve the mathematical structure of their quantum counterparts (Pauli-Z encoding, QUBO local search, QAOA graph scheduling) for future hardware migration \cite{Blekos2024, Preskill2018}. The circuit diagrams, Hamiltonian formulations, and bitstring interpretations are retained as mathematical abstractions that would map directly to quantum gate operations when sufficient fault-tolerant quantum capacity becomes available.
