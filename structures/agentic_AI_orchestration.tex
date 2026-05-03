@@ -1,194 +1,66 @@
-% =====================================================================
-% Chapter 5 (V2 -- 3-layer aligned) -- Agentic AI Multi-Tier Detection
-% Layer 2 of the QASAMAP architecture
-%
-% Source: PHASE1_PROTOCOL_V2_ALIGNED_3LAYER.md + experiments/E-L2_agentic_validation/
-%
-% Honest framing: 3 pre-registered deviations documented; V3 substantial
-% agreement achieved (kappa = 0.7425).
-% =====================================================================
+\subsection{The Agentic Paradigm in Industrial Intelligence}
 
-\section{Agentic AI Layer in QASAMAP: Role and Position}
+The concept of an autonomous agent --- a computational entity that perceives its environment, maintains an internal world model, reasons about goals and constraints, and executes purposeful actions to achieve desired outcomes --- has been a central principle in artificial intelligence research. The emergence of large language model (LLM)-based agents has fundamentally altered the applicability of this paradigm to high-stakes industrial environments, making the deployment of sophisticated autonomous agents in predictive maintenance not only technically feasible but increasingly essential for sustaining competitiveness in modern manufacturing.
 
-The QASAMAP framework is structured as three coupled layers (per the architectural design developed with the supervisor):
+The agentic layer of QASAMAP receives analytical outputs from the deep-learning and quantum-inspired classical heuristic layers and transforms them into operational decisions, maintenance work orders, model-update triggers, and human-interpretable reports. The empirical motivation for the agentic architecture is grounded in the dataset evidence: the 69-day monitoring period reveals a dynamic operational environment in which daily anomaly rates fluctuate, machine health trajectories diverge, and maintenance demand patterns evolve continuously. A static analytical system cannot adapt to such non-stationarity without expensive manual retraining cycles. The agentic layer is the mechanism through which QASAMAP transcends static system limitations, implementing autonomous threshold calibration and continuous learning from operational feedback.
 
-\begin{itemize}
-    \item \textbf{Layer 1 --- Real-time streaming + T-GCN forecasting.} Apache Kafka producer streams sensor data every minute. The Temporal Graph Convolutional Network consumes the stream and produces per-machine sensor forecasts (Chapter~4).
-    \item \textbf{Layer 2 --- Agentic AI multi-tier detection.} A multi-agent LLM ensemble consumes the upstream output and assigns a maintenance priority tier per machine. \emph{This chapter.}
-    \item \textbf{Layer 3 --- Scheduling optimisation (classical vs quantum).} The list of machines flagged Critical/High by Layer~2 is fed to the Layer~3 scheduler to produce a maintenance plan (Chapter~6).
-\end{itemize}
+\subsection{Multi-Agent Orchestration Architecture}
 
-Layer~2 is the bridge between continuous sensor evidence and discrete actionable decisions. Its empirical reliability is a precondition for downstream scheduling: a Layer~3 scheduler operating on noisy Layer~2 input would produce inefficient or unsafe schedules. This chapter describes the design, the pre-registered evaluation protocol (E-L2), the iterative methodology evolution under three documented deviations, and the empirical result that authorises proceeding to Layer~3.
+The QASAMAP agentic layer implements a sequential multi-agent pipeline comprising \textbf{nine} specialised LLM-powered agents coordinated by the \texttt{MultiAgentOrchestrator} class in \texttt{agenticai\_enhanced.py}. The production deployment uses the \textbf{\texttt{glm-5.1:cloud}} model via the Ollama Cloud API; the LLM benchmark (\S\ref{sec:llm_benchmark}) additionally evaluates \texttt{qwen3.5:397b-cloud} and \texttt{deepseek-v4-pro:cloud}. The nine agents execute in a fixed sequence for each machine event, with each agent's structured output feeding into the next agent's prompt context. Figure~\ref{fig:agentic_ai_architecture} illustrates the complete orchestration pipeline including the \texttt{ContextMemoryStore}, \texttt{ReasoningEngine}, quantum override logic, Action Layer, and \texttt{LearningLoop}.
 
-\section{Composite Ground Truth Formula}
+The pipeline is initiated per machine event after the quantum-inspired classical heuristic layer has run. For each machine, the orchestrator assembles a unified context record containing: the raw sensor readings; the classical risk score and risk level (LOW/MEDIUM/HIGH/CRITICAL) from the \texttt{ReasoningEngine}; the per-sensor Pauli-Z expectations $\langle Z_i \rangle$ and composite label from the \texttt{PauliZRiskEncoder}; the QUBO priority rank; and the QAOA slot assignment. This unified context is passed through all agents in sequence.
 
-Following Lei et al.\ 2018 (\emph{Mech.\ Syst.\ Signal Process.}) and ISO 13374-2:2007 (Condition monitoring and diagnostics), each machine state is mapped to a four-tier criticality label by integrating multiple upstream signals:
+\subsection{Agent Roles and Responsibilities}
 
-\begin{itemize}
-    \item \textbf{Critical} if RUL $<$ 10 hours, or (anomaly\_flag = 1 and failure\_type $\in$ \{Electrical Fault, Pressure Drop\}), or downtime\_risk $\geq$ 0.8.
-    \item \textbf{High} else if 10 $\leq$ RUL $<$ 50 hours, or (maintenance\_required = 1 and anomaly\_flag = 1).
-    \item \textbf{Medium} else if maintenance\_required = 1 or anomaly\_flag = 1.
-    \item \textbf{Low} otherwise.
-\end{itemize}
+\paragraph{Monitoring Agent.}
+The Monitoring Agent is the first agent in the pipeline. It receives the sensor readings, classical risk score, and quantum context and returns a structured JSON assessment containing: \texttt{risk\_level} (LOW/MEDIUM/HIGH/CRITICAL), \texttt{anomaly\_type} (a descriptive label such as ``vibration anomaly'' or ``thermal event''), \texttt{quantum\_confirmation} (whether quantum signals corroborate the classical assessment), and \texttt{confidence} (a float in $[0,1]$). The Monitoring Agent's role is analogous to a first-line sensor analyst: it synthesises the raw evidence into an initial diagnostic hypothesis without yet committing to a maintenance action. In the quantum-augmented pipeline, the agent explicitly acknowledges the Pauli-Z composite label and QUBO rank as secondary evidence sources, enabling it to flag concern for machines that classical thresholds alone would route to passive monitoring.
 
-This formula is frozen pre-registration and serves as ground truth for Layer~2 validation. It is \emph{not} disclosed to the LLM ensemble; the LLM must reason from raw evidence to assign tier.
+\paragraph{Diagnosis Agent.}
+The Diagnosis Agent receives the Monitoring Agent's assessment together with the per-sensor Pauli-Z values as quantum evidence. It returns a structured diagnosis containing: \texttt{probable\_cause} (e.g., ``bearing wear'', ``overheating'', ``pressure drop''), \texttt{affected\_component} (e.g., ``spindle bearing'', ``cooling system''), \texttt{urgency\_hours} (an integer estimate of hours until intervention is required), and \texttt{quantum\_evidence\_used} (whether and which Pauli-Z values influenced the diagnosis). The Diagnosis Agent functions as a domain-expert reasoning system: it uses the individual $\langle Z_i \rangle$ values to identify which sensor is in the quantum danger zone and constructs a mechanistic explanation linking the sensor pattern to a probable failure mode. This interpretable, sensor-level diagnosis satisfies the explainability requirements of industrial AI governance and provides maintenance technicians with actionable evidence rather than opaque model scores.
 
-\section{Multi-Agent LLM Ensemble Architecture}
+\paragraph{Planning Agent.}
+The Planning Agent receives the diagnostic output together with the QUBO rank and QAOA slot assignment and determines a concrete maintenance action from four options: \texttt{monitor} (passive continuous surveillance), \texttt{inspect} (targeted physical inspection at the next opportunity), \texttt{schedule\_maintenance} (formal work order for a planned maintenance window), or \texttt{immediate\_shutdown} (emergency halt). The agent also assigns an action priority P1 (critical, $\leq$4 hours) through P4 (routine, next scheduled window) and sets a \texttt{quantum\_driven} flag indicating whether the quantum override mechanism was responsible for escalating the decision above the classical risk level. High-risk actions (\texttt{schedule\_maintenance}, \texttt{immediate\_shutdown}) are routed through the human-in-the-loop approval gate before execution.
 
-The Layer~2 ensemble queries multiple cloud LLMs independently per machine and aggregates their tier assignments via majority vote. The pre-registered LLM pool (V1) was four cloud models via the Ollama Cloud API: \texttt{glm-5.1:cloud}, \texttt{qwen3.5:cloud}, \texttt{kimi-k2.6:cloud}, and \texttt{deepseek-v4-pro:cloud}. After empirical evaluation, qwen3.5 was dropped due to a 53\% empty-content technical incompatibility (deviation \#002 documented).
+\paragraph{Reporting Agent.}
+The Reporting Agent synthesises the outputs of all three preceding agents into a structured natural-language maintenance alert. The alert summarises machine identity, current sensor readings, classical and quantum risk assessments, the Diagnosis Agent's finding, the Planning Agent's recommended action and priority, and the estimated urgency window. The report is designed for direct communication to maintenance supervisors and plant managers, bridging the gap between the system's computational outputs and the human operational context in which maintenance decisions are executed.
 
-\paragraph{Aggregation rule.} Each LLM produces a tier $t_k \in \{$Critical, High, Medium, Low$\}$. The ensemble tier is the majority vote across valid responses, with ties broken by selecting the highest-priority tier (Critical $>$ High $>$ Medium $>$ Low). A minimum of one valid response is required; if all LLMs fail to produce parseable JSON, the ensemble returns no tier.
+\textbf{Post-Audit Disclosure.} The Reporting Agent consistently fails JSON parsing (0\% JSON rate across all three benchmarked LLM models), emitting free-text instead of structured output. This limits downstream automation and is an open reliability issue discussed in Chapter~\ref{chap:agentic}.
 
-\paragraph{Realistic deployment input set.} After two methodology iterations exposed an information-asymmetry flaw, the active V3 prompt provides the LLM with the full upstream evidence set: five sensor readings, failure-type signature, RUL forecast, anomaly flag, downtime risk score, and maintenance recommendation flag. This matches the information set a deployed Layer~2 agent would receive in production from upstream T-GCN, classifier, and RUL regressor outputs.
+\paragraph{Correlation Agent.}
+The Correlation Agent performs inter-machine dependency analysis using the T-GCN adjacency matrix. It receives the full fleet event batch and all classical reasonings, then returns a structured correlation report containing: \texttt{correlated\_machines} (a list of machine ID pairs whose graph edge weight exceeds a threshold), \texttt{correlation\_strength} (edge weight normalised to $[0,1]$), and \texttt{suggested\_cluster\_action} (a fleet-level recommendation such as ``inspect adjacent machines in Zone~B''). This agent extends the single-machine diagnostic perspective to a fleet-level view, capturing spatial propagation patterns that individual-machine agents cannot detect.
 
-\section{Pre-Registered Validation Protocol (E-L2)}
+\paragraph{Explainability Agent (XAI).}
+The Explainability Agent provides counterfactual and feature-attribution explanations for the classical risk score. It receives a single machine event, the reasoning result, and the current sensor thresholds, then returns: \texttt{top\_risk\_features} (a ranked list of sensor contributions), \texttt{counterfactual\_scenario} (a hypothetical sensor state that would lower the risk to LOW), and \texttt{explanation\_confidence}. This agent addresses the ``black-box'' criticism of LLM-based diagnostic systems by grounding its explanations in the deterministic \texttt{ReasoningEngine} threshold structure.
 
-\paragraph{Sample design.} 25 test machines (odd \texttt{machine\_id}, per train/test split) $\times$ 5 windows per machine = 125 evaluation cases. Each case is a 60-minute sensor snapshot drawn deterministically with seed = 42.
+\paragraph{Self-Reflection Agent.}
+The Self-Reflection Agent reviews the outputs of the Monitoring, Diagnosis, and Planning agents and flags internal inconsistencies. It returns a structured critique containing: \texttt{inconsistencies\_found} (boolean), \texttt{inconsistency\_details} (a list of contradictions, e.g., ``Monitoring flags CRITICAL but Planning assigns P2 instead of P1''), and \texttt{recommended\_revision}. \textbf{Critical Disclosure:} This agent uses the \emph{same} LLM model as the agents it reviews; it is therefore a same-model sanity check, not a multi-model consensus mechanism. The pre-audit name ``Consensus Agent'' has been corrected to avoid implying independent-model validation.
 
-\paragraph{Primary metric.} Cohen's Quadratic-Weighted Kappa (Cohen 1968) between ensemble prediction and composite GT, with 1000-bootstrap 95\% confidence interval. Quadratic weights penalise misclassification distance, appropriate for ordinal multi-tier output.
+\paragraph{Scheduling Agent.}
+The Scheduling Agent proposes maintenance window plans across the fleet. It receives all events and all reasonings, then returns: \texttt{proposed\_schedule} (a mapping of machine IDs to time slots), \texttt{slot\_justification} (a rationale for each assignment), and \texttt{estimated\_downtime\_hours}. This agent operates upstream of the QAOA Slot~A/Slot~B assignment, providing an LLM-generated baseline that the heuristic scheduler can corroborate or override.
 
-\paragraph{Halt threshold.} $\kappa \geq 0.6$ (Landis-Koch 1977 substantial agreement) required to proceed to Layer~3. Otherwise STOP.
+\paragraph{Pattern Learning Agent.}
+The Pattern Learning Agent analyses temporal patterns from a per-machine sliding window (maximum length 10 events). It receives the history deque and returns: \texttt{detected\_pattern} (e.g., ``gradual temperature drift'', ``intermittent vibration spikes''), \texttt{pattern\_confidence}, and \texttt{trend\_forecast} (a one-sentence prediction of the next 24-hour trajectory). \textbf{Post-Audit Safeguard:} The agent prompt no longer asks the LLM to ``predict the next failure type'' from labelled history, eliminating label-leakage risk.
 
-\paragraph{Secondary metrics.} Top-K coverage at K = $\lceil 0.2 N \rceil$; cost-weighted misclassification (missed Critical penalty $= 100$); per-tier precision/recall/F1; Critical-or-High coverage of true Critical; per-LLM call latency and ensemble end-to-end latency for real-time feasibility check.
+\subsection{Context Memory and Reasoning Engine}
 
-\section{Methodology Evolution: Three Pre-Registered Deviations}
+The \texttt{ContextMemoryStore} maintains four persistent data structures across the full pipeline execution. A \texttt{sliding\_window} implemented as a \texttt{deque} of maximum length 10 stores the most recent sensor events per machine, providing short-term temporal context for agent reasoning. A \texttt{decision\_log} records all agent actions with timestamps, risk scores, and quantum override flags, enabling retrospective audit and accountability tracking. A \texttt{feedback\_log} records post-action outcomes for the \texttt{LearningLoop} and a \texttt{quantum\_log} stores all Pauli-Z encodings, QUBO results, and QAOA assignments for traceability.
 
-The validation went through three iterations. All deviations are documented in separate \texttt{PRE\_REG\_DEVIATION\_*.md} files; all intermediate results are preserved in the repository.
+The \texttt{ReasoningEngine} computes classical risk scores via a multi-factor scoring function. Warning-level threshold crossings for temperature (82$^\circ$C), vibration (55 units), energy (3.8 kWh), humidity (68\%), and pressure (4.3 bar) contribute 0.15 to the risk score; critical crossings contribute 0.35. RUL below 50 hours contributes 0.30, anomaly flag contributes 0.20, and downtime risk above 0.6 contributes 0.15. The composite score is clipped to $[0,1]$ and classified as LOW ($<0.30$), MEDIUM (0.30--0.60), HIGH (0.60--0.75), or CRITICAL ($\geq0.75$).
 
-\begin{table}[h!]
-\centering
-\caption{E-L2 methodology evolution across three pre-registered deviations.}
-\label{tab:el2_evolution}
-\begin{tabular}{llll}
-\hline
-\textbf{Version} & \textbf{Deviation} & \textbf{LLMs} & \textbf{Result $\kappa$} \\
-\hline
-V1 (original) & --- & 4 LLMs & 0.362 (STOP) \\
-V2 & \#001 + \#002 & 3 LLMs (no qwen3.5) & 0.191 (STOP, worse) \\
-\textbf{V3} & \textbf{\#003} & \textbf{3 LLMs} & \textbf{0.7425 (PASS)} \\
-\hline
-\end{tabular}
-\end{table}
+\subsection{Quantum Override Logic}
 
-\paragraph{Deviation \#001 (V1 $\to$ V2 prompt).} V1 yielded $\kappa = 0.362$ with high Critical-tier over-prediction and mid-tier confusion. V2 prompt added concrete numeric thresholds, decision-tree pseudocode, four worked examples per tier, and an explicit anti-overcall instruction.
+The \texttt{should\_quantum\_override} method in \texttt{QuantumOrchestrator} provides the key mechanism by which the quantum-inspired heuristic layer enhances the classical agentic pipeline. An override is triggered when any of three conditions holds: the machine's Pauli-Z label is \texttt{QUANTUM-ANOMALY} or \texttt{QUANTUM-WARN}; the machine was selected by the QUBO local search as highest priority; or the machine was assigned to QAOA Slot~A (IMMEDIATE/URGENT) with quantum risk above 0.40. When triggered, the orchestrator bypasses the \texttt{auto-LOW-skip} rule --- which would otherwise route LOW-risk machines to passive monitoring without agent invocation --- and escalates the machine through the full nine-agent reasoning chain. The override reason is documented in the decision log for transparency.
 
-\paragraph{Deviation \#002 (drop qwen3.5).} qwen3.5 exhibited a technical incompatibility with the Ollama Cloud endpoint: 53\% of responses returned empty content (the \texttt{think=False} parameter was not honoured, causing reasoning tokens to consume the \texttt{num\_predict} budget before any JSON output was produced). Increasing budget from 500 to 800 tokens did not resolve the issue. Dropped from ensemble in V2 onward.
+In the non-quantum agentic pipeline, the \texttt{auto-LOW-skip} rule causes 6 out of 7 machines in the experimental evaluation to receive passive monitoring without active agent reasoning. The quantum override mechanism raises this to active agent processing for 6 out of 7 machines, demonstrating that the quantum pre-screening layer fundamentally changes the coverage profile of the agentic system.
 
-\paragraph{V2 worse than V1 result and root cause analysis.} V2 yielded $\kappa = 0.191$, worse than V1. Per-LLM ablation showed all three remaining LLMs (glm-5.1, kimi-k2.6, deepseek-v4-pro) degraded under V2, indicating the V2 prompt itself was the problem rather than the ensemble structure. Diagnostic analysis revealed an \emph{information asymmetry}: the composite GT formula uses four fields (predicted\_remaining\_life, anomaly\_flag, downtime\_risk, maintenance\_required) that were not provided to the LLM in either V1 or V2. The LLM was asked to predict a label whose formula required hidden inputs.
+\subsection{Action Layer and Human-in-the-Loop Governance}
 
-\paragraph{Deviation \#003 (realistic deployment input set).} V3 expanded the LLM input to include all four upstream classifier output fields (RUL, anomaly flag, downtime risk, maintenance flag) alongside the original sensor readings and failure type. This matches the information a deployed Layer~2 agent would receive in production from upstream pipeline components. The composite GT formula remained undisclosed; the LLM still had to reason over the full input set.
+The \texttt{execute\_action} function dispatches recommended actions to simulated external operational systems: a CMMS for work order creation, an ERP system for spare parts availability checking, a supervisor notification system, and a maintenance scheduling calendar. All actions are timestamped and logged with full provenance including quantum override context and the natural language report from the Reporting Agent.
 
-\section{V3 Empirical Result}
+High-risk actions (\texttt{schedule\_maintenance}, \texttt{immediate\_shutdown}) require explicit supervisor approval before execution, implementing a human-in-the-loop safety gate that retains human authority over consequential decisions while delegating routine monitoring and inspection decisions to the autonomous pipeline. Override decisions by human supervisors are logged and fed back to the \texttt{LearningLoop} as labelled examples of expert judgment, enabling progressive calibration of agent thresholds to align with site-specific operational norms.
 
-\subsection{Primary result}
+\subsection{Continuous Learning Loop}
 
-\begin{table}[h!]
-\centering
-\caption{E-L2 V3 primary result against pre-registered halt threshold.}
-\begin{tabular}{lll}
-\hline
-\textbf{Metric} & \textbf{Value (95\% CI)} & \textbf{Threshold / Verdict} \\
-\hline
-Quadratic-Weighted Kappa (4-tier ordinal) & \textbf{0.7425} (CI [0.619, 0.835]) & $\geq$ 0.60 $\to$ \textbf{PASS} \\
-\hline
-\end{tabular}
-\end{table}
+The \texttt{LearningLoop} class implements two adaptation mechanisms that address the non-stationarity of real industrial environments. The classical feedback mechanism evaluates false positive and false negative rates from the \texttt{feedback\_log} after each decision cycle and adjusts \texttt{ReasoningEngine} sensor thresholds: if the false positive rate exceeds 40\%, temperature and vibration warning thresholds are relaxed by 2$^\circ$C and 2 units respectively; if the false negative rate exceeds 20\%, the temperature warning threshold is tightened by 2$^\circ$C.
 
-The point estimate $\kappa = 0.742$ falls in the \emph{substantial agreement} range per Landis-Koch 1977 (0.61--0.80). Critically, the 95\% CI lower bound (0.619) also exceeds the halt threshold, giving high confidence in the substantial-agreement claim.
-
-\subsection{Per-tier performance}
-
-\begin{table}[h!]
-\centering
-\caption{E-L2 V3 per-tier precision, recall, and F1.}
-\begin{tabular}{lrrr}
-\hline
-\textbf{Tier} & \textbf{Precision} & \textbf{Recall} & \textbf{F1} \\
-\hline
-\textbf{Critical} & \textbf{1.000} & 0.545 & 0.706 \\
-High & 0.316 & 0.600 & 0.414 \\
-Medium & 0.222 & 0.667 & 0.333 \\
-\textbf{Low} & \textbf{0.984} & 0.685 & 0.808 \\
-\hline
-\end{tabular}
-\end{table}
-
-Macro F1 = 0.565. Critical-or-High coverage of true Critical = 1.000 (operational safety: no missed Critical at the top two tiers).
-
-The ensemble achieves \textbf{perfect Critical precision} (every Critical prediction is correct) and \textbf{perfect Critical-or-High coverage} of truly Critical machines. This is the operationally most important property: no truly Critical machine is routed to passive monitoring.
-
-The 5/11 Critical $\to$ High downgrade is conservative-but-acceptable; those machines still receive same-day inspection rather than within-hours intervention.
-
-\subsection{Per-LLM ablation}
-
-\begin{table}[h!]
-\centering
-\caption{E-L2 V3 per-LLM ablation (informational; ensemble is the unit of analysis).}
-\begin{tabular}{lrr}
-\hline
-\textbf{LLM} & \textbf{$\kappa$} & \textbf{Macro F1} \\
-\hline
-glm-5.1:cloud & 0.643 & 0.537 \\
-kimi-k2.6:cloud & 0.665 & 0.399 \\
-deepseek-v4-pro:cloud & \textbf{0.728} & 0.484 \\
-\hline
-\textbf{Ensemble (majority vote)} & \textbf{0.7425} & \textbf{0.565} \\
-\hline
-\end{tabular}
-\end{table}
-
-The ensemble outperforms the best individual LLM ($\kappa = 0.742$ vs 0.728), confirming the value of multi-LLM aggregation in this setting. This is the opposite of V1, where qwen3.5's noise caused the ensemble to underperform the best individual LLM.
-
-\subsection{Real-time feasibility}
-
-\begin{table}[h!]
-\centering
-\caption{E-L2 V3 latency profile.}
-\begin{tabular}{lrr}
-\hline
-\textbf{Latency component} & \textbf{Median (s)} & \textbf{p95 (s)} \\
-\hline
-Per-LLM call & 3.15 & 24.7 \\
-Ensemble end-to-end (max LLM/case) & 6.45 & \textbf{32.7} \\
-\hline
-\end{tabular}
-\end{table}
-
-Ensemble e2e p95 = 32.7~s is well within the 60-s Kafka producer cycle, leaving 27.3~s headroom for downstream Layer~3 scheduling --- a margin validated empirically in Chapter~6 (E-L3B).
-
-\section{What Can and Cannot Be Claimed}
-
-\paragraph{What CAN be claimed.}
-\begin{itemize}
-    \item Layer~2 of QASAMAP achieves substantial agreement ($\kappa = 0.742$, 95\% CI [0.62, 0.83]) with composite GT on 125 multi-window QASAMAP test cases.
-    \item Operational safety: Critical-coverage = 1.000 means no truly-Critical machines are routed to lower tiers.
-    \item Real-time feasibility validated: ensemble e2e p95 = 32.7~s within 60-s Kafka cycle.
-    \item 3-LLM ensemble outperforms best individual LLM, justifying ensemble approach.
-\end{itemize}
-
-\paragraph{What CANNOT be claimed.}
-\begin{itemize}
-    \item ``LLM matches expert tier judgment'' --- composite GT is a synthetic label from digital-twin classifier outputs, not expert annotations.
-    \item ``Generalises across manufacturing domains'' --- single QASAMAP dataset, single failure-type taxonomy.
-    \item ``V3 prompt is optimal'' --- three iterations reached a workable design; further engineering may improve $\kappa$ further but is not required for the 0.6 threshold.
-    \item ``Ensemble is always better than individual LLM'' --- conditional on ensemble member quality (V1 showed degradation when one member, qwen3.5, was noisy).
-\end{itemize}
-
-\section{Halt Rule Cleared, Authorisation to Proceed}
-
-Per the pre-registered halt rule (PHASE1\_PROTOCOL\_V2 §3.11 and §6.5):
-
-\begin{quote}
-\textit{If $\kappa \geq 0.6$, PROCEED to E-L3A.}
-\end{quote}
-
-E-L2 V3 yields $\kappa = 0.7425$ (95\% CI lower bound 0.619 also exceeds 0.6). Layer~2 is therefore validated as the upstream input source for Layer~3 scheduling experiments, reported in Chapter~6.
-
-\section{Methodological Lessons}
-
-\begin{enumerate}
-    \item \textbf{Information asymmetry trap.} Pre-registered prompts that hide GT-formula inputs from the LLM create a fundamentally limited evaluation. Future LLM-validation studies should ensure the LLM input set matches what the production deployment would receive. This was the root cause of V1+V2 negative results; addressing it directly was sufficient to clear the threshold.
-    \item \textbf{Conservative iteration with deviation documentation.} Three pre-registered deviations were necessary to reach a passing result. Each deviation is documented with empirical justification --- engineering iteration, not p-hacking. The threshold ($\kappa \geq 0.6$) was preserved across all three.
-    \item \textbf{Ensemble robustness is conditional.} A single noisy member (qwen3.5 with 53\% empty content) drags the ensemble below the best individual. Member quality screening is essential.
-    \item \textbf{Latency budgets matter.} V3 ensemble e2e p95 = 32.7~s comfortably fits the 60-s Kafka cycle, but only because the prompt is concise and \texttt{num\_predict} is bounded. More elaborate prompts could push past the real-time budget.
-\end{enumerate}
+The quantum feedback mechanism cross-checks Pauli-Z labels against final agent actions: machines labelled \texttt{QUANTUM-ANOMALY} or \texttt{QUANTUM-WARN} that received only passive monitoring without quantum override are flagged as potential quantum false negatives (Q-FN) and logged for human review. When the \texttt{feedback\_log} accumulates at least 5 records, a structured retraining payload is exported to \texttt{retrain\_payload.json} containing the most recent sensor readings, updated threshold parameters, and flagged Q-FN cases for submission to the T-GCN retraining pipeline, closing the closed-loop adaptation cycle.

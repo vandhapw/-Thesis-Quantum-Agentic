@@ -1,0 +1,51 @@
+\begin{figure}[htbp]
+    \centering
+    \begin{tikzpicture}[
+        node distance=1.2cm and 2cm,
+        stage/.style={draw, thick, rounded corners, minimum width=2.8cm, minimum height=1.2cm, align=center, font=\small},
+        data/.style={draw, dashed, fill=gray!10, rounded corners, minimum width=2.2cm, minimum height=0.8cm, align=center, font=\scriptsize},
+        model/.style={draw, fill=blue!5, rounded corners, minimum width=2.2cm, minimum height=0.8cm, align=center, font=\scriptsize},
+        arrow/.style={->, thick, >=stealth},
+        feedback/.style={->, thick, >=stealth, dashed, red}
+    ]
+        % Data sources
+        \node[data] (sensors) {Multi-Sensor\\Streams\\(Temp, Vib, Hum,\\Press, Energy)};
+        \node[data, right=1.5cm of sensors] (features) {Feature\\Engineering\\(RUL, Health\\Indicators)};
+        \node[data, right=1.5cm of features] (labels) {Degradation\\Labels\\(Failure Types,\\Maintenance Need)};
+
+        % Models
+        \node[model, above=1.5cm of sensors] (stat) {Statistical\\SPC, HMM};
+        \node[model, above=1.5cm of features] (dl) {Deep Learning\\LSTM, CNN, GCN};
+        \node[model, above=1.5cm of labels] (ensemble) {Ensemble\\XGBoost, LightGBM};
+
+        % Predictions
+        \node[stage, fill=green!10, above=1.2cm of dl] (rul) {RUL\\Prediction};
+        \node[stage, fill=green!10, left=0.8cm of rul] (ad) {Anomaly\\Detection};
+        \node[stage, fill=green!10, right=0.8cm of rul] (sched) {Maintenance\\Scheduling};
+
+        % Action
+        \node[stage, fill=orange!10, above=1cm of rul] (action) {Maintenance\\Action};
+
+        % Arrows
+        \draw[arrow] (sensors) -- (features);
+        \draw[arrow] (features) -- (labels);
+        \draw[arrow] (sensors) -- (stat);
+        \draw[arrow] (features) -- (dl);
+        \draw[arrow] (labels) -- (ensemble);
+        \draw[arrow] (stat) -- (ad);
+        \draw[arrow] (dl) -- (rul);
+        \draw[arrow] (ensemble) -- (sched);
+        \draw[arrow] (ad) -- (action);
+        \draw[arrow] (rul) -- (action);
+        \draw[arrow] (sched) -- (action);
+
+        % Feedback loop
+        \draw[feedback] (action.east) to[out=0, in=0] ++(0.5,-2) to[out=180, in=0] (labels.east);
+        \node[font=\scriptsize, red, right=0.3cm of features, yshift=-1.5cm] {Feedback Loop};
+
+        % Gap annotation
+        \node[draw, thick, fill=red!5, rounded corners, minimum width=9cm, minimum height=0.7cm, align=center, font=\scriptsize, below=0.8cm of sensors] (gap) {\textbf{Research Gap:} Existing approaches treat these stages as isolated problems rather than a unified workflow \cite{kendall_multi-task_2017}};
+    \end{tikzpicture}
+    \caption{Predictive maintenance pipeline stages from multi-sensor data ingestion to maintenance action, illustrating the fragmentation of existing approaches that QASAMAP addresses through unified multi-task learning.}
+    \label{fig:pdm_pipeline}
+\end{figure}

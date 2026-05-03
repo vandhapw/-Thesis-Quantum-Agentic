@@ -1,4 +1,4 @@
-\documentclass[12pt]{report}
+\documentclass[11pt]{report}
 
 \input{structures/libraries}
 
@@ -6,12 +6,15 @@
 % --- Document Start ---
 \begin{document}
 
-% --- Title Page ---
+% --- Front Matter: Roman numeral page numbering ---
+\pagenumbering{roman}
+
+% --- Title Page (no page number) ---
+\thispagestyle{empty}
 \input{structures/title}
 
 % --- Approval Page ---
 \newpage
-% Approval content here
 \input{structures/approval_form}
 
 % --- Table of Contents ---
@@ -20,54 +23,103 @@
 
 % --- List of Tables and Figures ---
 \newpage
-\input{structures/list_table_figure}
+\addcontentsline{toc}{chapter}{List of Tables}
+\listoftables
+
+\newpage
+\addcontentsline{toc}{chapter}{List of Figures}
+\listoffigures
 
 % --- Abstracts ---
 \newpage
+% \begin{center}
+% {\large \textbf{Quantum-Agentic Smart Manufacturing Anomaly Detection and Predictive Maintenance}}\\[0.3em]
+% {\large \textbf{양자 에이전트 기반 스마트 제조 이상 탐지 및 예측 유지보수}}\\[0.8em]
+% Vandha Pradwiyasma Widartha\\[0.2em]
+% 정보시스템학과, 부경대학교\\[0.2em]
+% Doctor of Philosophy
+% \end{center}
+% \vspace{0.5em}
+% \hrule
+% \vspace{1em}
+% \chapter*{Abstract}
+% \addcontentsline{toc}{chapter}{Abstract (Korean)}
+% \input{structures/kor_abstract}
+\vspace{1em}
+\begingroup
+\let\clearpage\relax
+\let\cleardoublepage\relax
+\begin{center}
+{\large \textbf{양자 에이전트 기반 스마트 제조 이상 탐지 및 예측 유지보수}}\\[0.8em]
+Vandha Pradwiyasma Widartha\\[0.2em]
+정보시스템학과, 부경대학교\\[0.2em]
+\end{center}
+\vspace{1em}
 \chapter*{Abstract}
+\addcontentsline{toc}{chapter}{Abstract (Korean)}
 \input{structures/kor_abstract}
+\endgroup
 
 \newpage
-\chapter*{ABSTRACT}
+\vspace{1em}
+\begingroup
+\let\clearpage\relax
+\let\cleardoublepage\relax
+\begin{center}
+{\large \textbf{Quantum-Agentic Smart Manufacturing for Anomaly Detection and Predictive Maintenance}}\\[0.8em]
+Vandha Pradwiyasma Widartha\\[0.2em]
+Department of Information System, Pukyong National University\\[0.2em]
+\end{center}
+\vspace{1em}
+\chapter*{Abstract}
+\addcontentsline{toc}{chapter}{Abstract (English)}
 \input{structures/eng_abstract}
+\endgroup
 
+
+% --- Switch to Arabic page numbering for main text ---
+\clearpage
+\pagenumbering{arabic}
+\setcounter{page}{1}
 
 % --- Main Text ---
 \chapter{Introduction}
-Main body text in 11pt Shinmyungjo style.
 \input{structures/introduction}
 
-% ------ Related Works ------------------% 
-\chapter{Related Works}
+% ------ Literature Review ------------------%
+\renewcommand{\thechapter}{\Roman{chapter}}
+\renewcommand{\thesection}{\arabic{chapter}.\arabic{section}}
+\chapter{Literature Review}
 \input{structures/related_works}
+\renewcommand{\thechapter}{\arabic{chapter}}
+\renewcommand{\thesection}{\thechapter.\arabic{section}}
 
-% ------ methods ------------------% 
-\chapter{Methods}
+% ------ methods ------------------%
+\chapter{Quantum-Agentic Smart Manufacturing Framework}
 \input{structures/method}
 
-% ------ Experimental Results ------------------%
-\chapter{Experimental Result}
+% ------ Chapter 4 ------------------%
+\chapter{Data Ingestion and Spatio-Temporal Modeling using Temporal Graph Convolutional Networks}
+\label{chap:tgcn}
 \input{structures/experimental}
 
-% ------ Agentic AI Orchestration ------------------%
-\chapter{Agentic AI Orchestration}
-\input{structures/agentic_AI_orchestration}
-
-% ------ Quantum Computing Integration ------------------%
-\chapter{Quantum Computing Integration}
-\input{structures/quantum_integration}
-
-% ------ Analysis and Discussion ------------------%
-\chapter{Analysis and Discussion}
+% ------ Chapter 5 ------------------%
+\chapter{Multi-Agent System for Monitoring, Diagnosis, Planning, and Action}
+\label{chap:agentic}
 \input{structures/analysis_discussion}
 
-% ------ Conclusion ------------------% 
-\chapter{Conclusion}
+% ------ Chapter 6 ------------------%
+\chapter{Quantum Approaches for Optimizing Maintenance Scheduling}
+\label{chap:quantum}
+\input{structures/chapter6}
+
+% ------ Chapter 7 ------------------%
+\chapter{Conclusions and Future Work}
+\label{chap:conclusion}
 \input{structures/conclusion}
 
 % --- References ---
 \newpage
-\chapter*{References}
 \input{structures/references}
 
 % --- Appendices ---

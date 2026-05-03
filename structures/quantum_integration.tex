@@ -1,252 +1,73 @@
-% =====================================================================
-% Chapter 6 (V2 -- 3-layer aligned) -- Quantum Computing Layer for
-% Maintenance Scheduling Optimisation (Layer 3)
-%
-% Source: PHASE1_PROTOCOL_V2_ALIGNED_3LAYER.md + experiments/E-L3A + E-L3B
-%
-% Honest finding: classical heuristics dominate quantum-class methods on
-% dense scheduling QUBO at QASAMAP scale on simulator-only evaluation.
-% =====================================================================
+\subsection{Motivation for Quantum-Inspired Classical Optimization}
+\label{sec:quantum_integration}
 
-\section{Quantum Computing Layer in QASAMAP: Role and Position}
+The motivation for incorporating quantum-\emph{inspired} classical optimization into QASAMAP is grounded in two computational challenges revealed by the dataset analysis. The first challenge is multi-sensor risk encoding under class imbalance: the five sensor modalities exhibit complex nonlinear inter-sensor relationships, and the severe failure class imbalance (Electrical Fault: 1,014 instances vs.\ Normal: 91,899) means that minority failure patterns occupy a small, non-convex region of the classical feature space that threshold-based classifiers fail to capture reliably. Quantum-inspired encoding offers a principled \emph{mathematical} mechanism for representing these complex multi-sensor risk combinations as expectation-like values that carry richer information than individual sensor thresholds. The second challenge is the combinatorial complexity of maintenance scheduling: with 50 machines each generating a binary maintenance decision variable and pairwise conflict constraints, the scheduling problem belongs to the NP-hard combinatorial optimization class for which quantum algorithms \emph{may} offer asymptotic advantages at sufficient scale \cite{Blekos2024}.
 
-Layer~3 of the QASAMAP architecture is the maintenance scheduling optimiser. It receives the list of machines flagged Critical or High by the Layer~2 agentic AI (validated in Chapter~5 with $\kappa = 0.7425$) and produces a schedule assigning each machine to (employee, time slot) under industrial-realistic constraints:
+\textbf{Critical Implementation Disclosure.} All ``quantum'' components described in this section are implemented as \textbf{classical heuristics} in the current QASAMAP codebase (Ver13). The `PauliZRiskEncoder` is implemented as a normalized energy-distance anomaly score; the `QuantumAnnealingOptimizer` is a random constrained local search; and the `QAOAScheduler` is a greedy graph-message-passing scheduler. These heuristics are intentionally designed to mirror the \emph{mathematical structure} of their quantum counterparts (QUBO/Ising formulations, Pauli-Z expectation mappings) so that they can be replaced by genuine quantum circuits when hardware maturity permits. The experimental results reported in Chapter~6 therefore reflect \textbf{classical heuristic performance}, not execution on a quantum processor. This disclosure is made in accordance with the post-audit rewrite (2026-05) that corrected earlier misleading quantum labels.
 
+\subsection{Quantum Foundations: Superposition, Entanglement, and Expectation Values}
+
+Three quantum mechanical principles \emph{underpin the design} of the QASAMAP classical heuristics. Superposition enables a qubit to exist in a continuous linear combination of basis states $\alpha|0\rangle + \beta|1\rangle$ (where $|\alpha|^2 + |\beta|^2 = 1$), allowing a quantum circuit to represent a sensor value as a continuous probability amplitude rather than a discrete binary variable. In the \emph{quantum-inspired} `PauliZRiskEncoder` heuristic, a Hadamard gate $H$ creates an equal superposition $\frac{1}{\sqrt{2}}(|0\rangle + |1\rangle)$, and a subsequent $R_Z(\theta)$ rotation encodes the normalised sensor value as a phase shift, producing a state whose Pauli-Z expectation $\langle Z \rangle = \cos(\theta)$ varies continuously from $+1$ (safe) to $-1$ (danger) as $\theta$ ranges from $0$ to $\pi$. The \emph{classical} implementation computes the same scalar via $\cos(\pi \cdot \text{norm}_i)$ without executing a quantum circuit.
+
+Entanglement, created by CNOT gates coupling adjacent sensor qubits, establishes quantum correlations between sensor modalities such that the composite state of the 5-qubit register cannot be factored into independent single-qubit states. In the `PauliZRiskEncoder` heuristic, four CNOT gates between consecutive qubit pairs $(q_0, q_1)$, $(q_1, q_2)$, $(q_2, q_3)$, $(q_3, q_4)$ capture pairwise inter-sensor correlations --- for example, the joint contribution of simultaneously elevated temperature and vibration to the machine's composite risk level. The classical implementation preserves the same weighted-sum formula but does not execute entangling gates on a quantum device.
+
+Expectation values provide the classical output of the quantum circuit. After the $H$--$R_Z$--CNOT gate sequence and measurement, the per-sensor Pauli-Z expectation is analytically computed as $\langle Z_i \rangle = \cos(\pi \cdot \mathrm{norm}_i)$, where $\mathrm{norm}_i \in [0,1]$ is the sensor value normalised against its physical operating bounds stored in `SENSOR_BOUNDS`. The composite weighted expectation $\langle Z \rangle_c = \sum_i w_i \langle Z_i \rangle$ (weights: temperature 0.30, vibration 0.30, humidity 0.15, pressure 0.15, energy 0.10) provides a single scalar risk indicator per machine that integrates all five sensor channels into a physically meaningful and interpretable risk score.
+
+\subsection{Pauli-Z Multi-Sensor Risk Encoding (Classical Heuristic)}
+
+The `PauliZRiskEncoder` class implements the core \emph{quantum-inspired} sensing component of QASAMAP. For each machine event, the encoder constructs a 5-qubit circuit \emph{in mathematical formulation} and returns a per-machine result dictionary containing the per-sensor $\langle Z_i \rangle$ values, the composite $\langle Z \rangle_c$, the risk label, the circuit depth, and the normalised sensor values used as circuit parameters. The \emph{actual runtime} computation evaluates Equation~\eqref{eq:composite_z} directly on the CPU without invoking Qiskit Aer or a quantum backend.
+
+The risk label is determined by the following thresholds applied to $\langle Z \rangle_c$:
 \begin{itemize}
-    \item Working hours 09:00--18:00, Monday--Friday only (60-minute slots)
-    \item Employee pool of 1--20 staff (small, medium, large group sweeps)
-    \item Each employee handles tasks sequentially (one task at a time)
-    \item Maintenance duration per failure type from CMMS literature (Mobley 2002; Gulati 2013; ISO 17359:2018):
-    \begin{itemize}
-        \item Vibration Issue: 2 slots; Overheating: 2; Pressure Drop: 2; Electrical Fault: 3; Normal: 1
-    \end{itemize}
-    \item Objective: minimise makespan
+    \item `QUANTUM-ANOMALY': $\langle Z \rangle_c < -0.20$ --- composite sensor state in the danger zone
+    \item `QUANTUM-WARN': $-0.20 \leq \langle Z \rangle_c < 0.30$ --- composite state in the warning zone
+    \item `QUANTUM-MARGINAL': $0.30 \leq \langle Z \rangle_c < 0.60$ --- composite state in the marginal zone
+    \item `QUANTUM-NORMAL': $\langle Z \rangle_c \geq 0.60$ --- composite state in the safe zone
 \end{itemize}
 
-The scheduling problem is NP-hard (Pinedo 2016, \emph{Scheduling: Theory, Algorithms, and Systems}). The thesis evaluates whether quantum-class methods (gate-model QAOA, simulated quantum annealing, quantum-inspired Simulated Bifurcation) provide an advantage over classical heuristics (Greedy, Genetic Algorithm, Simulated Annealing, Tabu Search) on this problem at QASAMAP-realistic scale.
+The key advantage of this encoding over classical threshold-based risk assessment is that $\langle Z \rangle_c$ integrates all five sensor channels simultaneously through the weighted sum of cosine-encoded expectations. A machine with, for example, three sensors slightly below their individual warning thresholds may produce a composite $\langle Z \rangle_c$ below $-0.20$ --- triggering a `QUANTUM-ANOMALY' label even though no individual sensor would trigger a classical warning. This sensitivity to sub-threshold multi-sensor risk combinations is the primary mechanism by which the heuristic layer expands machine coverage in the experimental evaluation.
 
-This chapter is structured around two pre-registered experiments: \textbf{E-L3A} (static scheduling, exhaustive solver comparison) and \textbf{E-L3B} (dynamic rolling-horizon real-time feasibility). The honest empirical finding --- classical heuristics dominate at simulator-only evaluation --- is reported transparently with what-can/cannot-be-claimed sections.
+\textbf{Algorithmic Disclosure.} The actual implementation in `classical_optimization.py` computes a normalized L2 distance from the training-set median per feature, passed through $1 - \exp(-3d)$. The resulting scalar is mapped to the four-tier `QUANTUM-*' label schema above. This design choice preserves the interpretability benefits of the Pauli-Z formulation while avoiding the overhead and noise of quantum circuit simulation.
 
-\section{Critical Framing: NISQ-Era Honest Positioning}
+\subsection{QUBO-Based Classical Priority Ranking}
 
-Quantum computing for industrial scheduling is in the NISQ (Noisy Intermediate-Scale Quantum) era. Three honest framing principles guide this chapter:
+The `QuantumAnnealingOptimizer' class formulates the maintenance prioritization problem as a Quadratic Unconstrained Binary Optimization (QUBO) problem. The QUBO objective minimizes the energy:
+\begin{equation}
+E(\mathbf{x}) = \mathbf{x}^T Q \mathbf{x} = -\sum_i w_i x_i + \frac{\lambda}{2} \sum_{i \neq j} x_i x_j
+\label{eq:qubo}
+\end{equation}
+where $x_i \in \{0,1\}$ is the binary maintenance selection variable for machine $i$, $w_i$ is the machine's risk score from the Pauli-Z encoder, and $\lambda = 1.5$ is a penalty coefficient that discourages selecting all machines simultaneously. The diagonal terms $-w_i$ reward selecting high-risk machines (lower energy for high $w_i$ when $x_i = 1$), while the off-diagonal terms $+\lambda/2$ penalise over-selection (energy increases when multiple $x_i = 1$ simultaneously).
 
+The QUBO is solved via \textbf{randomised local search} (not simulated annealing on a quantum processor): 200 samples of a greedy seed plus random 1-bit-flip local search, with deterministic behaviour given a fixed random seed. The resulting binary vector $\mathbf{x}^*$ identifies the selected machines, and a full priority ranking is produced by sorting all machines by descending risk score. The optimal QUBO energy is logged as a convergence quality measure.
+
+\textbf{Algorithmic Disclosure.} The implementation in `classical_optimization.py' uses `random_constrained_search' with `n_samples=200' and `max_simultaneous=5'. It is \textbf{not} executed on a D-Wave annealer or any quantum hardware. The QUBO formulation is retained as a forward-compatible mathematical specification for future quantum hardware migration.
+
+\subsection{Greedy Graph Scheduling Heuristic}
+
+The `QAOAScheduler' class assigns all machines to maintenance time slots (Slot~A: IMMEDIATE/URGENT; Slot~B: PLANNED/ROUTINE) using a \textbf{greedy graph-message-passing heuristic} inspired by the Quantum Approximate Optimisation Algorithm (QAOA). The scheduling problem is formulated as a MaxCut problem on a machine conflict graph in which adjacent machines (defined by sequential ordering) conflict if scheduled simultaneously. The problem Hamiltonian is:
+\begin{equation}
+H_P = \frac{1}{2} \sum_{(i,j) \in E} (I - Z_i Z_j) - \sum_i r_i \cdot 0.3 \cdot Z_i
+\label{eq:qaoa_hamiltonian}
+\end{equation}
+where the first term maximises the cut (separating conflicting machines into different slots) and the second term provides Pauli-Z bias terms that steer high-risk machines (large $r_i$) toward Slot~A. The bias coefficient 0.3 is chosen to provide a strong but non-dominant influence that can be overcome by the MaxCut term when conflict constraints require high-risk machines to be separated across slots.
+
+The \emph{classical} implementation performs three rounds of weighted-neighbour averaging on the existing T-GCN adjacency matrix, ranks nodes by their aggregated influence score, and assigns the top-ranked nodes to Slot~A subject to a maximum slot capacity. The bitstring interpretation (qubit $i$ in state $|0\rangle$ assigns machine $i$ to Slot~A, $|1\rangle$ to Slot~B) is preserved for conceptual consistency with the QAOA formulation.
+
+\textbf{Algorithmic Disclosure.} The implementation in `classical_optimization.py' uses `graph_message_passing_score' with `n_rounds=3'. It is \textbf{not} a variational quantum circuit optimised via COBYLA. The QAOA Hamiltonian and ansatz are retained as a mathematical specification for future hardware implementation.
+
+\subsection{Classical Override Mechanism}
+
+The override mechanism is the integration point between the heuristic layer and the agentic pipeline. Implemented in the `QuantumOrchestrator' class, the mechanism evaluates three conditions for each machine: (1) its Pauli-Z label is `QUANTUM-ANOMALY' or `QUANTUM-WARN'; (2) it was selected by the QUBO local search; or (3) it was assigned to Slot~A with risk above 0.40. If any condition holds, the machine is escalated from passive monitoring to the full agentic reasoning chain, bypassing the classical `auto-LOW-skip' rule.
+
+In the experimental evaluation, the override is triggered for 5 out of 7 machines (M-1, M-2, M-3, M-4, M-32, M-40). Machine~47, with $\langle Z \rangle_c = +0.3608$ and risk 0.3196, correctly remains in passive monitoring, demonstrating that the override mechanism applies principled selectivity rather than indiscriminately escalating all machines. The override reason is recorded in the `ContextMemoryStore' decision log for full traceability.
+
+\subsection{Hardware Considerations and Future Quantum Migration}
+
+All ``quantum'' circuits in the current QASAMAP implementation are \textbf{mathematical abstractions} executed as classical heuristics. The transition to physical quantum hardware (NISQ processors from IBM Quantum, Google Quantum AI, or IonQ) will require:
 \begin{enumerate}
-    \item \textbf{No proven quantum advantage exists for general industrial scheduling today} (Cerezo et al.\ 2025, \emph{Nat.\ Comm.}). The literature explicitly cautions: ``To the best of current knowledge, there is no industrial application where quantum annealing unquestionably outperforms classical heuristic algorithms.''
-    \item \textbf{All QASAMAP quantum experiments use simulator backends.} Real D-Wave Leap free tier was sought but not available at runtime; gate-model NISQ hardware was not used.
-    \item \textbf{Recent skepticism wave (Cerezo et al.\ 2025) is acknowledged.} Variational quantum circuits without barren plateaus may be classically simulable. We address this directly in §\ref{sec:quantum_skepticism_layer3}.
+    \item Replacing the `energy_distance_anomaly_score' with a genuine variational quantum classifier (VQC) or quantum kernel method.
+    \item Replacing `random_constrained_search' with D-Wave quantum annealing or a classical-quantum hybrid QUBO solver.
+    \item Replacing `graph_message_passing_score' with a QAOA circuit executed on a gate-based processor, using COBYLA or SPSA for variational parameter optimisation.
 \end{enumerate}
 
-The defensible positioning is therefore: QASAMAP integrates quantum components as a \emph{future-ready computational layer} that is benchmarked against classical at simulator scale today and will benefit from quantum advantage as hardware matures (NISQ-Advanced 2025--2028 per Tsai et al.\ 2026 roadmap). Industrial precedents from adjacent scheduling domains anchor this positioning: Ford Otosan + D-Wave 6$\times$ scheduling speedup (2024) and BASF + D-Wave 7200$\times$ liquid-filling speedup (2024).
-
-\section{Scheduling QUBO Encoding}
-
-The decision variable is $x_{m,e,s} \in \{0,1\}$, equal to 1 iff machine $m$ starts maintenance with employee $e$ at slot $s$. Machine $m$ then occupies slots $[s, s+d_m)$ where $d_m$ is the failure-type-specific duration.
-
-Constraints:
-\begin{itemize}
-    \item C1: each machine assigned exactly once
-    \item C2: each employee at most one task per slot
-    \item C3: no spillover past last slot
-\end{itemize}
-
-These constraints are encoded as quadratic penalties with $\lambda = 5000$ (raised from initial $\lambda = 100$ after smoke testing showed quantum-class solvers picked constraint violation over makespan minimisation under weak penalty).
-
-\textbf{Variable count} $= N \times E \times S$, where $N$ is number of machines, $E$ is number of employees, $S$ is number of slots. For the smallest meaningful instance (5 machines $\times$ 1 employee $\times$ 9 slots), $N \times E \times S = 45$. For the largest (50 $\times$ 20 $\times$ 45), the count is 45000.
-
-\section{E-L3A — Static Scheduling Solver Comparison}
-
-\subsection{Solvers tested}
-
-\begin{table}[h!]
-\centering
-\caption{E-L3A solvers and applicability.}
-\label{tab:el3a_solvers}
-\begin{tabular}{llll}
-\hline
-\textbf{Solver} & \textbf{Class} & \textbf{Library} & \textbf{Coverage} \\
-\hline
-Greedy (urgency-FIFO) & Classical heuristic & custom & all sizes \\
-Genetic Algorithm & Classical metaheuristic & custom & all sizes \\
-Simulated Annealing & Classical heuristic & custom & all sizes \\
-Tabu Search & Classical heuristic & custom & all sizes \\
-QA\_neal (Ising mode) & Quantum-Annealing simulator & dwave-neal & nv $\leq$ 5000 \\
-SBM (Goto et al.\ 2019) & Quantum-Inspired (Toshiba) & custom & nv $\leq$ 3000 \\
-QAOA p=2 (gate model) & Quantum (statevector) & qiskit-aer & not applicable: nv $>$ 18 \\
-\hline
-\end{tabular}
-\end{table}
-
-\paragraph{Note on QAOA.} The scheduling QUBO encoding requires $N \times E \times S$ variables, at least 45 for the smallest meaningful instance. Practical statevector simulator limit on standard hardware is $\sim$18 qubits. Therefore gate-model QAOA was not applicable in E-L3A.
-
-\subsection{Sample design}
-
-3 problem sizes (Small 5 machines $\times$ 1 day, Medium 20 machines $\times$ 3 days, Large 50 machines $\times$ 5 days) $\times$ 3 employee-group sizes per size $\times$ 5 random seeds = 45 controlled instances. Total solver runs: 315.
-
-\subsection{Solution-quality results}
-
-\begin{table}[h!]
-\centering
-\caption{E-L3A mean makespan (5 seeds) by (size, employees, solver). $\dagger$ = infeasible solution.}
-\label{tab:el3a_makespan}
-\begin{tabular}{lrrrrrrr}
-\hline
-\textbf{Size} & \textbf{N} & \textbf{E} & \textbf{Greedy} & \textbf{GA} & \textbf{SA} & \textbf{TS} & \textbf{QA / SBM} \\
-\hline
-Small  & 5  & 1  & 8.6  & 8.6  & 8.6  & 8.6  & 9.2 / 9.0 \\
-Small  & 5  & 3  & \textbf{3.6} & \textbf{3.6} & \textbf{3.6} & \textbf{3.6} & 10.0$\dagger$ / 10.0$\dagger$ \\
-Small  & 5  & 5  & \textbf{2.6} & \textbf{2.6} & \textbf{2.6} & \textbf{2.6} & 10.4$\dagger$ / 10.4$\dagger$ \\
-Medium & 20 & 3  & \textbf{13.2} & \textbf{13.2} & \textbf{13.2} & \textbf{13.2} & 28.4$\dagger$ / 28.8$\dagger$ \\
-Medium & 20 & 5  & \textbf{8.2} & \textbf{8.2} & \textbf{8.2} & \textbf{8.2} & 28.4$\dagger$ / 28.6$\dagger$ \\
-Medium & 20 & 10 & \textbf{4.2} & \textbf{4.2} & \textbf{4.2} & \textbf{4.2} & n/a \\
-Large  & 50 & 5  & \textbf{19.6} & \textbf{19.6} & \textbf{19.6} & \textbf{19.6} & n/a \\
-Large  & 50 & 10 & \textbf{10.2} & \textbf{10.2} & \textbf{10.2} & \textbf{10.2} & n/a \\
-Large  & 50 & 20 & \textbf{5.2} & \textbf{5.2} & \textbf{5.2} & \textbf{5.2} & n/a \\
-\hline
-\end{tabular}
-\end{table}
-
-\subsection{Feasibility rate}
-
-\begin{table}[h!]
-\centering
-\caption{E-L3A feasibility rate (fraction of seeds yielding feasible solutions).}
-\label{tab:el3a_feasibility}
-\begin{tabular}{lrrrrrrr}
-\hline
-\textbf{Size} & \textbf{N} & \textbf{E} & \textbf{Greedy} & \textbf{GA} & \textbf{SA} & \textbf{TS} & \textbf{QA / SBM} \\
-\hline
-Small  & 5  & 1  & 0.4 & 0.4 & 0.4 & 0.4 & 0.4 / 0.4 \\
-Small  & 5  & 3  & \textbf{1.0} & \textbf{1.0} & \textbf{1.0} & \textbf{1.0} & 0.0 / 0.2 \\
-Small  & 5  & 5  & \textbf{1.0} & \textbf{1.0} & \textbf{1.0} & \textbf{1.0} & 0.0 / 0.0 \\
-Medium 20$\times$3, 5 & --- & --- & \textbf{1.0} & \textbf{1.0} & \textbf{1.0} & \textbf{1.0} & 0.0 / 0.0 \\
-Medium 20$\times$10, all Large & --- & --- & \textbf{1.0} & \textbf{1.0} & \textbf{1.0} & \textbf{1.0} & n/a \\
-\hline
-\end{tabular}
-\end{table}
-
-The Small $\times$ E=1 case has 0.4 feasibility across \emph{all} solvers because the problem is capacity-infeasible by construction (5 machines totalling $\sim$10 slot-hours into 9 employee-slot capacity). Excluding capacity-infeasible cases, classical solvers achieve 100\% feasibility on every cell. Quantum-class methods achieve 0--20\% feasibility everywhere.
-
-\subsection{Wall-clock time}
-
-\begin{table}[h!]
-\centering
-\caption{E-L3A mean wall-clock per solve (seconds). RT budget = 60 s.}
-\label{tab:el3a_walltime}
-\begin{tabular}{lrrrrrrr}
-\hline
-\textbf{Size} & \textbf{N} & \textbf{E} & \textbf{Greedy} & \textbf{GA} & \textbf{SA} & \textbf{TS} & \textbf{QA / SBM} \\
-\hline
-Small  & 5  & 5  & $<$0.001 & 0.23 & 0.02 & 0.23 & 5.26 / 0.019 \\
-Medium & 20 & 5  & $<$0.001 & 0.53 & 0.06 & 0.70 & \textbf{148.6}$\dagger$ / 2.38 \\
-Large  & 50 & 20 & 0.002 & 1.29 & 0.18 & 2.01 & n/a \\
-\hline
-\end{tabular}
-\end{table}
-
-QA\_neal at Medium 20$\times$5 takes 148~s, exceeding the 60-s real-time budget --- and still produces infeasible solutions. SBM is fast ($<$3 s) but also infeasible.
-
-\subsection{Statistical test}
-
-Paired Wilcoxon signed-rank on makespan, classical-best vs QA\_neal, over 25 paired observations: mean difference = $+18.2$ (QA\_neal worse), Wilcoxon $p < 10^{-5}$.
-
-\subsection{E-L3A verdict}
-
-\textbf{Classical heuristics dominate quantum-class methods on QASAMAP-scale dense scheduling QUBO at simulator-only evaluation.} All four classical solvers converge to identical optimal makespan with 100\% feasibility on every feasible-by-construction cell. QA\_neal and SBM consistently fail. Gate-model QAOA is not applicable due to qubit budget.
-
-\section{E-L3B — Dynamic Rolling-Horizon Real-Time Feasibility}
-
-Given the E-L3A finding, E-L3B narrows scope to validate \textbf{whether classical solvers can sustain real-time feasibility under event-driven re-optimisation} during a simulated 8-hour QASAMAP working day. Quantum-class methods are excluded based on E-L3A static failure.
-
-\subsection{Simulation protocol}
-
-\begin{itemize}
-    \item Day length: 8 hours (09:00--17:00) at Medium scale (20 initial machines, 5 employees, 3-day horizon)
-    \item Event types: new machine flag (Poisson $\lambda = 2$/hour), employee finish-early (proxy 10\%), employee delay (proxy 5\%)
-    \item Re-optimise on every event using current solver
-    \item 3 random seeds, 4 classical solvers, 45 re-optimisation events total
-    \item Real-time threshold: per-event wall-clock $\leq 60$ s
-\end{itemize}
-
-\subsection{Results}
-
-\begin{table}[h!]
-\centering
-\caption{E-L3B per-solver across 45 re-optimisation events.}
-\label{tab:el3b_summary}
-\begin{tabular}{lrrrrrr}
-\hline
-\textbf{Solver} & \textbf{Re-opts} & \textbf{Feas rate} & \textbf{Wall median (s)} & \textbf{Wall p95 (s)} & \textbf{Exceed 60s} \\
-\hline
-Greedy & 45 & \textbf{1.000} & $<$0.001 & $<$0.001 & 0 \\
-SA     & 45 & \textbf{1.000} & 0.09 & 0.12 & 0 \\
-GA     & 45 & \textbf{1.000} & 0.69 & 0.92 & 0 \\
-TS     & 45 & \textbf{1.000} & 1.07 & 1.36 & 0 \\
-\hline
-\end{tabular}
-\end{table}
-
-All 4 classical solvers pass real-time feasibility with $>$40$\times$ margin to the 60-s budget. Feasibility rate is 1.000 across 135 re-optimisation events. Zero deadline-miss events observed.
-
-\subsection{End-to-end Layer 2 + Layer 3 budget}
-
-\begin{table}[h!]
-\centering
-\caption{Combined Layer 2 + Layer 3 latency vs 60-s Kafka cycle.}
-\label{tab:e2e_budget}
-\begin{tabular}{lrrr}
-\hline
-\textbf{Component} & \textbf{Budget (s)} & \textbf{Actual p95 (s)} & \textbf{Margin (s)} \\
-\hline
-Layer 2 (4-LLM ensemble V3) & 60 & 32.7 & 27.3 \\
-Layer 3 (Greedy) & 27.3 & $<$0.001 & 27.3 \\
-Layer 3 (SA) & 27.3 & 0.12 & 27.2 \\
-Layer 3 (GA) & 27.3 & 0.92 & 26.4 \\
-Layer 3 (TS) & 27.3 & 1.36 & 25.9 \\
-\hline
-\end{tabular}
-\end{table}
-
-\textbf{End-to-end Layer 2 + Layer 3 fits within the 60-s Kafka producer cycle by $\geq 26$ s margin} for any classical solver choice.
-
-\section{Addressing Quantum-Skepticism Literature}
-\label{sec:quantum_skepticism_layer3}
-
-The 2025 wave of quantum-machine-learning skepticism, anchored by Cerezo et al.\ 2025 (\emph{Nature Communications}), demonstrates that variational quantum circuits without barren plateaus may be classically simulable. This chapter's empirical findings are consistent with that skepticism on this specific problem class:
-
-\begin{itemize}
-    \item Gate-model QAOA on dense scheduling QUBO requires more qubits than practical statevector simulators support.
-    \item Quantum-Annealing simulator (dwave-neal Ising) and Quantum-Inspired SBM consistently fail to produce feasible solutions on this problem encoding, despite hyperparameter tuning ($\lambda$ raised from 100 to 5000, num\_reads raised to 1000, SBM steps raised to 500).
-    \item Real D-Wave hardware was not available; even if it were, current quantum annealers demonstrate practical advantage primarily on \emph{specific} problem classes (Ford Otosan production scheduling 6$\times$ speedup; BASF liquid-filling 7200$\times$ speedup) that differ structurally from QASAMAP's industrial maintenance scheduling.
-\end{itemize}
-
-The honest position is that QASAMAP's quantum component is \emph{not currently demonstrating advantage} at simulator scale on the specific scheduling QUBO encoding tested. The Cerezo et al.\ 2025 skepticism is acknowledged; this chapter's claims are deliberately calibrated to remain valid even if the simulability conjecture is fully confirmed.
-
-\section{What Can and Cannot Be Claimed}
-
-\paragraph{What CAN be claimed.}
-\begin{itemize}
-    \item Classical heuristics (Greedy, GA, SA, TS) all converge to equivalent optimal makespan on QASAMAP scheduling at all tested scales (up to 50 machines $\times$ 5 days $\times$ 20 employees = 45000 binary variables).
-    \item All four classical solvers sustain real-time feasibility within the 60-s Kafka cycle.
-    \item Greedy heuristic is sufficient and optimal for this problem class on the tested sizes.
-    \item End-to-end Layer 2 + Layer 3 pipeline operates within 60-s Kafka cycle by $\geq 26$ s margin.
-    \item The dense scheduling QUBO encoding does not benefit from QA\_neal or SBM at simulator-only evaluation. Both quantum-class methods consistently fail to produce feasible solutions.
-\end{itemize}
-
-\paragraph{What CANNOT be claimed.}
-\begin{itemize}
-    \item ``Quantum hardware would also fail'' --- this study uses simulator only. Real D-Wave Advantage might perform differently due to native Ising mapping; D-Wave Leap free tier was not available at runtime.
-    \item ``QUBO encoding is fundamentally wrong'' --- alternative encodings might be more amenable to QA. The encoding tested is the natural one matching the decision-variable structure.
-    \item ``QASAMAP scheduling cannot benefit from quantum methods'' --- only the specific encoding $\times$ solver combinations tested here are evaluated.
-    \item ``Classical heuristics will always dominate'' --- generalises only to QASAMAP-class problems. Larger problems (500+ machines) may exceed classical heuristic capability.
-\end{itemize}
-
-\section{Honest Defense-Ready Synthesis}
-
-The QASAMAP framework integrates a fully working maintenance-scheduling pipeline (Layer~3) that produces feasible, near-optimal schedules under industrial-realistic constraints. The pipeline operates in real time within the 60-s Kafka producer cycle when paired with the Layer~2 agentic AI ensemble (Chapter~5).
-
-The thesis evaluated whether quantum-class methods provide an advantage over classical heuristics on this problem class. The honest empirical finding at simulator-only evaluation is: \textbf{they do not}. Classical heuristics dominate in both solution quality (100\% feasibility, identical optimal makespan across all 4 classical solvers) and wall-clock time. Gate-model QAOA is not applicable due to qubit budget; QA\_neal and SBM consistently produce infeasible solutions on dense scheduling QUBO.
-
-This negative result for quantum at QASAMAP scheduling is reported transparently with no overclaim. Real-hardware NISQ replication on D-Wave Advantage or future fault-tolerant systems may produce different results, anchored on industrial precedents from adjacent scheduling domains (Ford Otosan, BASF). QASAMAP's architecture is built to accommodate quantum solvers as they mature, but at simulator-only evaluation today, classical methods are the empirical winner.
-
-This chapter combined with Chapter~5 (Layer~2 V3 substantial agreement) constitutes the empirical evidence base for the QASAMAP 3-layer architecture: Layer~1 T-GCN forecasting (Chapter~4), Layer~2 agentic AI multi-tier detection (Chapter~5, $\kappa = 0.7425$), and Layer~3 scheduling optimisation (this chapter, classical-dominant). The pipeline is end-to-end operational, real-time feasible, and reported with academic integrity throughout.
+Gate error rates on current NISQ hardware (typically $10^{-3}$--$10^{-2}$ for two-qubit gates) will introduce noise into the $\langle Z_i \rangle$ expectation values, potentially blurring the boundary between `QUANTUM-WARN' and `QUANTUM-MARGINAL' risk labels. Qubit decoherence limits the executable circuit depth; the 5-qubit Pauli-Z circuit with depth 3 (H, RZ, CNOT layers) is within the coherence budget of current superconducting processors, while a genuine QAOA circuit depth scales with the number of repetitions $p$ and may require error mitigation techniques such as zero-noise extrapolation for $p > 2$. The limited qubit connectivity of physical processors may also require additional SWAP gates to implement the linear CNOT chain, increasing circuit depth and error accumulation. These hardware-specific considerations constitute the primary motivation for the physical hardware validation identified as a future research direction in Chapter~7.

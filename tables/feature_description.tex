@@ -1,0 +1,24 @@
+\begin{table}[htbp]
+\centering
+\caption{The Feature Description of Historical Dataset}
+\label{table:feature_description}
+\begin{tabularx}{\textwidth}{l l X}
+\toprule
+Feature & Type & Description \\
+\midrule
+Timestamp & datetime & Observation time of the machine vent \\
+Machine\_id & categorical / integer & Unique machine identifier \\
+Temperature & continuous & Machine temperature reading \\
+Vibration & continuous & Machine vibration level \\
+Humidity & continuous & Environmental humidity near machine \\
+Pressure & continuous & Pressure reading from machine/system \\
+Energy consumption & continuous & Machine energy usage \\
+Machine status & categorical & Machine state code \\
+Anomaly flag & binary & Indicates whether anomaly is detected \\
+Predicted remaining life & continuous & Estimated remaining useful life \\
+Failure type & categorical & Type of detected or predicted failure \\
+Downtime risk & continuous/binary & Estimated risk of downtime \\
+Maintenance required & binary & Whether maintenance is required \\
+\bottomrule
+\end{tabularx}
+\end{table}

@@ -1,0 +1,40 @@
+\begin{figure}[htbp]
+    \centering
+    \begin{tikzpicture}[
+        node distance=1.5cm and 2.5cm,
+        paradigm/.style={draw, thick, rounded corners, minimum width=3.5cm, minimum height=1.5cm, align=center, font=\small\bfseries},
+        detail/.style={draw, fill=gray!10, rounded corners, minimum width=3cm, minimum height=0.7cm, align=center, font=\scriptsize},
+        arrow/.style={->, thick, >=stealth}
+    ]
+        % Quantum Annealing
+        \node[paradigm, fill=blue!10] (qa) {Quantum Annealing\\(D-Wave)};
+        \node[detail, below=0.5cm of qa] (qubit) {Qubits: ~5,000+\\Topology: Pegasus};
+        \node[detail, below=0.2cm of qubit] (qubo) {QUBO / Ising\\Optimization};
+
+        % Gate-Based
+        \node[paradigm, fill=green!10, right=2.5cm of qa] (gb) {Gate-Based QC\\(IBM, Google, IonQ)};
+        \node[detail, below=0.5cm of gb] (gate) {Qubits: 27--1,000+\\Gate fidelity: 99.5\%};
+        \node[detail, below=0.2cm of gate] (algo) {QAOA, VQE,\\Quantum ML};
+
+        % Hybrid
+        \node[paradigm, fill=orange!10, right=2.5cm of gb] (hyb) {Hybrid Q-C\\(Variational)};
+        \node[detail, below=0.5cm of hyb] (classical) {Classical\\Optimizer};
+        \node[detail, below=0.2cm of classical] (variational) {Parameterized\\Quantum Circuits};
+
+        % NISQ Era
+        \node[draw, thick, fill=red!5, rounded corners, minimum width=12cm, minimum height=0.8cm, align=center, font=\small, above=1cm of gb] (nisq) {\textbf{NISQ Era} (Noisy Intermediate-Scale Quantum) --- Preskill 2018 \cite{Preskill2018}};
+
+        % Application to manufacturing
+        \node[draw, thick, fill=yellow!10, rounded corners, minimum width=12cm, minimum height=1cm, align=center, font=\small, below=2.5cm of gb] (app) {\textbf{Manufacturing Applications:} Maintenance Scheduling (QUBO) \cite{dalyac_qualifying_2021} | Vehicle Routing (QAOA) \cite{rosendo_quantum_2025} | Sensor Fusion (Quantum ML) \cite{kreplin_squlearn_2025}};
+
+        % Arrows
+        \draw[arrow] (nisq) -- (qa);
+        \draw[arrow] (nisq) -- (gb);
+        \draw[arrow] (nisq) -- (hyb);
+        \draw[arrow] (qa) -- (app);
+        \draw[arrow] (gb) -- (app);
+        \draw[arrow] (hyb) -- (app);
+    \end{tikzpicture}
+    \caption{Quantum computing paradigms in the NISQ era, spanning quantum annealing, gate-based processors, and hybrid variational architectures, with applications to manufacturing optimization reviewed in the literature.}
+    \label{fig:quantum_landscape}
+\end{figure}

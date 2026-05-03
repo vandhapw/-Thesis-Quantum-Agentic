@@ -1,0 +1,47 @@
+\begin{figure}[htbp]
+    \centering
+    \begin{tikzpicture}[
+        node distance=0.8cm and 1.5cm,
+        level1/.style={draw, thick, fill=blue!10, rounded corners, minimum width=3.5cm, minimum height=1cm, align=center, font=\small\bfseries},
+        level2/.style={draw, fill=blue!5, rounded corners, minimum width=2.8cm, minimum height=0.8cm, align=center, font=\small},
+        level3/.style={draw, fill=white, rounded corners, minimum width=2.2cm, minimum height=0.7cm, align=center, font=\scriptsize},
+        arrow/.style={->, >=stealth, thick},
+        label/.style={font=\scriptsize, text width=2cm, align=center}
+    ]
+        % Root
+        \node[level1] (root) {Deep Anomaly Detection\\\cite{Chalapathy2019}};
+
+        % Level 2 - paradigms
+        \node[level2, below left=1.2cm and 1.5cm of root] (sup) {Supervised};
+        \node[level2, below=1.2cm of root] (semi) {Semi-Supervised};
+        \node[level2, below right=1.2cm and 1.5cm of root] (unsup) {Unsupervised};
+
+        \draw[arrow] (root) -- (sup);
+        \draw[arrow] (root) -- (semi);
+        \draw[arrow] (root) -- (unsup);
+
+        % Level 3 - methods under supervised
+        \node[level3, below=0.6cm of sup] (cnn) {CNN Classifier};
+        \node[level3, below=0.2cm of cnn] (rnn) {RNN / LSTM};
+
+        % Level 3 - methods under semi-supervised
+        \node[level3, below=0.6cm of semi] (ae) {Autoencoder};
+        \node[level3, below=0.2cm of ae] (vae) {VAE};
+
+        % Level 3 - methods under unsupervised
+        \node[level3, below=0.6cm of unsup] (gan) {GAN-based};
+        \node[level3, below=0.2cm of gan] (cluster) {Deep Clustering};
+
+        \draw[arrow] (sup) -- (cnn);
+        \draw[arrow] (sup) -- (rnn);
+        \draw[arrow] (semi) -- (ae);
+        \draw[arrow] (semi) -- (vae);
+        \draw[arrow] (unsup) -- (gan);
+        \draw[arrow] (unsup) -- (cluster);
+
+        % Key insight box
+        \node[draw, thick, fill=red!5, rounded corners, minimum width=8cm, minimum height=0.8cm, align=center, font=\small, below=2.5cm of root] (insight) {\textbf{Key Insight:} Reconstruction-based methods trained on normal-only data achieve superior performance in imbalanced industrial settings \cite{pang_deep_2021}};
+    \end{tikzpicture}
+    \caption{Taxonomy of deep learning-based anomaly detection paradigms and architectures reviewed in the literature, highlighting the effectiveness of reconstruction-based methods for industrial settings.}
+    \label{fig:anomaly_taxonomy}
+\end{figure}

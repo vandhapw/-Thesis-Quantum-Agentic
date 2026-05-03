@@ -1,0 +1,57 @@
+\begin{figure}[htbp]
+    \centering
+    \begin{tikzpicture}[
+        node distance=0.8cm and 1.5cm,
+        component/.style={draw, thick, fill=blue!10, rounded corners, minimum width=2.8cm, minimum height=1cm, align=center, font=\small\bfseries},
+        agent/.style={draw, fill=green!5, rounded corners, minimum width=2.2cm, minimum height=0.7cm, align=center, font=\scriptsize},
+        memory/.style={draw, fill=yellow!10, rounded corners, minimum width=2.2cm, minimum height=0.7cm, align=center, font=\scriptsize},
+        arrow/.style={->, >=stealth, thick},
+        cycle/.style={->, >=stealth, thick, dashed, blue}
+    ]
+        % Central orchestrator
+        \node[component, fill=red!10] (orch) {MultiAgentOrchestrator\\(LLM Core)};
+
+        % Perception agents (left)
+        \node[agent, left=2cm of orch, yshift=1.5cm] (mon) {Monitoring\\Agent};
+        \node[agent, left=2cm of orch] (diag) {Diagnosis\\Agent};
+        \node[agent, left=2cm of orch, yshift=-1.5cm] (corr) {Correlation\\Agent};
+
+        % Action agents (right)
+        \node[agent, right=2cm of orch, yshift=1.5cm] (plan) {Planning\\Agent};
+        \node[agent, right=2cm of orch] (sched) {Scheduling\\Agent};
+        \node[agent, right=2cm of orch, yshift=-1.5cm] (rep) {Reporting\\Agent};
+
+        % Meta agents (bottom)
+        \node[agent, below=1.5cm of orch, xshift=-2cm] (xai) {Explainability\\Agent};
+        \node[agent, below=1.5cm of orch] (self) {Self-Reflection\\Agent};
+        \node[agent, below=1.5cm of orch, xshift=2cm] (pat) {Pattern\\Learning};
+
+        % Memory
+        \node[memory, above=1.5cm of orch] (mem) {ContextMemoryStore\\(Sliding Window + Decision Log)};
+
+        % Arrows from perception to orchestrator
+        \draw[arrow] (mon) -- (orch);
+        \draw[arrow] (diag) -- (orch);
+        \draw[arrow] (corr) -- (orch);
+
+        % Arrows from orchestrator to action
+        \draw[arrow] (orch) -- (plan);
+        \draw[arrow] (orch) -- (sched);
+        \draw[arrow] (orch) -- (rep);
+
+        % Arrows from orchestrator to meta
+        \draw[arrow] (orch) -- (xai);
+        \draw[arrow] (orch) -- (self);
+        \draw[arrow] (orch) -- (pat);
+
+        % Memory connection
+        \draw[cycle] (orch) -- (mem);
+        \draw[cycle] (mem) to[out=180, in=90] (mon);
+        \draw[cycle] (mem) to[out=0, in=90] (plan);
+
+        % Legend
+        \node[font=\scriptsize, below=0.5cm of xai, xshift=2cm] {\textcolor{blue}{---} Continuous learning loop};
+    \end{tikzpicture}
+    \caption{Agentic AI architecture comprising nine LLM-powered agents coordinated by the MultiAgentOrchestrator, illustrating the perception-reasoning-action cycle with contextual memory and continuous learning \cite{sapkota_ai_2026, AbouAli2026}.}
+    \label{fig:agentic_architecture_lit}
+\end{figure}

@@ -1,0 +1,42 @@
+\begin{figure}[htbp]
+    \centering
+    \begin{tikzpicture}[
+        node distance=1.2cm and 2cm,
+        box/.style={draw, thick, rounded corners, minimum width=3.5cm, minimum height=1.2cm, align=center, font=\small\bfseries},
+        sub/.style={draw, fill=gray!10, rounded corners, minimum width=3cm, minimum height=0.7cm, align=center, font=\scriptsize},
+        arrow/.style={->, thick, >=stealth},
+        hybrid/.style={->, thick, >=stealth, dashed, red}
+    ]
+        % Left: Traditional silos
+        \node[box, fill=blue!10] (ad) {Anomaly Detection\\(Deep Learning)};
+        \node[box, fill=blue!10, below=0.8cm of ad] (prog) {Prognostics\\(RUL Estimation)};
+        \node[box, fill=blue!10, below=0.8cm of prog] (sched) {Scheduling\\(Classical Heuristics)};
+
+        % Gap annotation
+        \node[draw, thick, fill=red!5, rounded corners, minimum width=3.5cm, minimum height=0.6cm, align=center, font=\scriptsize, right=0.5cm of prog] (gap) {\textbf{Gaps}\\Siloed\\No shared\\representation};
+
+        % Right: QASAMAP unified
+        \node[box, fill=green!10, right=4cm of ad] (tgcn) {T-GCN Forecasting\\(Spatiotemporal)};
+        \node[box, fill=green!10, below=0.8cm of tgcn] (supervised) {Supervised Learning\\(Multi-Task)};
+        \node[box, fill=green!10, below=0.8cm of supervised] (heuristic) {Quantum-Inspired\\Heuristics};
+        \node[box, fill=green!10, below=0.8cm of heuristic] (agentic) {Agentic AI\\(Autonomous Decisions)};
+
+        % Integration arrows
+        \draw[arrow] (tgcn) -- (supervised);
+        \draw[arrow] (supervised) -- (heuristic);
+        \draw[arrow] (heuristic) -- (agentic);
+
+        % Cross-layer connections
+        \draw[hybrid] (tgcn.east) to[out=0, in=0] ++(0.5,-0.5) to[out=180, in=0] (heuristic.east);
+        \draw[hybrid] (supervised.east) to[out=0, in=0] ++(0.5,-0.5) to[out=180, in=0] (agentic.east);
+
+        % Title
+        \node[font=\large\bfseries, above=0.5cm of ad, xshift=2cm] (title1) {Existing Approaches};
+        \node[font=\large\bfseries, above=0.5cm of tgcn, xshift=0cm] (title2) {QASAMAP Unified Framework};
+
+        % Bottom annotation
+        \node[draw, thick, fill=yellow!10, rounded corners, minimum width=11cm, minimum height=0.8cm, align=center, font=\small, below=0.8cm of agentic] (unified) {\textbf{Integration:} Shared sensor representations feed both heuristic optimization and agentic decision-making, closing the fragmentation gap.};
+    \end{tikzpicture}
+    \caption{Convergence of quantum computing and agentic AI paradigms within the QASAMAP framework, contrasting traditional siloed approaches with the proposed unified architecture that integrates spatiotemporal forecasting, multi-task learning, quantum-inspired heuristics, and autonomous agentic orchestration.}
+    \label{fig:quantum_agentic_convergence}
+\end{figure}

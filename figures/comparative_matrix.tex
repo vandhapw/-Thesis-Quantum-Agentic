@@ -1,0 +1,64 @@
+\begin{figure}[htbp]
+    \centering
+    \begin{tikzpicture}[
+        node distance=0.5cm and 0.2cm,
+        header/.style={draw, thick, fill=blue!20, minimum width=2.8cm, minimum height=0.8cm, align=center, font=\small\bfseries},
+        cell/.style={draw, fill=gray!5, minimum width=2.8cm, minimum height=0.8cm, align=center, font=\scriptsize},
+        check/.style={draw, fill=green!15, minimum width=2.8cm, minimum height=0.8cm, align=center, font=\scriptsize},
+        cross/.style={draw, fill=red!10, minimum width=2.8cm, minimum height=0.8cm, align=center, font=\scriptsize},
+        partial/.style={draw, fill=yellow!10, minimum width=2.8cm, minimum height=0.8cm, align=center, font=\scriptsize}
+    ]
+        % Headers
+        \node[header, minimum width=3.5cm] (method) at (0,0) {Method};
+        \node[header, right=0.2cm of method] (anom) {Anomaly\\Detection};
+        \node[header, right=0.2cm of anom] (rul) {RUL\\Prediction};
+        \node[header, right=0.2cm of rul] (sched) {Scheduling};
+        \node[header, right=0.2cm of sched] (agentic) {Agentic};
+        \node[header, right=0.2cm of agentic, minimum width=3.5cm] (closed) {Closed-Loop\\Adaptation};
+
+        % TSMAE row
+        \node[cell, minimum width=3.5cm, below=0.2cm of method] (tsmae) {TSMAE \cite{Gao2022}};
+        \node[check, right=0.2cm of tsmae] {\checkmark};
+        \node[cross, right=0.2cm of anom |- tsmae] {\texttimes};
+        \node[cross, right=0.2cm of rul |- tsmae] {\texttimes};
+        \node[cross, right=0.2cm of sched |- tsmae] {\texttimes};
+        \node[cross, right=0.2cm of closed |- tsmae] {\texttimes};
+
+        % QAOA row
+        \node[cell, minimum width=3.5cm, below=0.2cm of tsmae] (qaoa) {QAOA \cite{rosendo_quantum_2025}};
+        \node[cross, right=0.2cm of qaoa] {\texttimes};
+        \node[cross, right=0.2cm of anom |- qaoa] {\texttimes};
+        \node[check, right=0.2cm of rul |- qaoa] {\checkmark};
+        \node[cross, right=0.2cm of sched |- qaoa] {\texttimes};
+        \node[cross, right=0.2cm of closed |- qaoa] {\texttimes};
+
+        % Agentic RAG row
+        \node[cell, minimum width=3.5cm, below=0.2cm of qaoa] (rag) {Agentic RAG \cite{singh_agentic_2025}};
+        \node[cross, right=0.2cm of rag] {\texttimes};
+        \node[cross, right=0.2cm of anom |- rag] {\texttimes};
+        \node[cross, right=0.2cm of rul |- rag] {\texttimes};
+        \node[check, right=0.2cm of sched |- rag] {\checkmark};
+        \node[cross, right=0.2cm of closed |- rag] {\texttimes};
+
+        % Multi-task row
+        \node[cell, minimum width=3.5cm, below=0.2cm of rag] (mt) {Kendall et al. \cite{kendall_multi-task_2017}};
+        \node[partial, right=0.2cm of mt] {Partial};
+        \node[partial, right=0.2cm of anom |- mt] {Partial};
+        \node[cross, right=0.2cm of rul |- mt] {\texttimes};
+        \node[cross, right=0.2cm of sched |- mt] {\texttimes};
+        \node[cross, right=0.2cm of closed |- mt] {\texttimes};
+
+        % QASAMAP row
+        \node[cell, minimum width=3.5cm, below=0.2cm of mt, fill=green!10] (qasamap) {\textbf{QASAMAP (This Thesis)}};
+        \node[check, right=0.2cm of qasamap, fill=green!15] {\checkmark};
+        \node[check, right=0.2cm of anom |- qasamap, fill=green!15] {\checkmark};
+        \node[check, right=0.2cm of rul |- qasamap, fill=green!15] {\checkmark};
+        \node[check, right=0.2cm of sched |- qasamap, fill=green!15] {\checkmark};
+        \node[check, right=0.2cm of closed |- qasamap, fill=green!15] {\checkmark};
+
+        % Legend
+        \node[font=\scriptsize, below=0.5cm of qasamap, xshift=4cm] {\tikz\node[draw, fill=green!15, minimum width=0.5cm, minimum height=0.3cm] {}; = Full Support \quad \tikz\node[draw, fill=red!10, minimum width=0.5cm, minimum height=0.3cm] {}; = Not Supported \quad \tikz\node[draw, fill=yellow!10, minimum width=0.5cm, minimum height=0.3cm] {}; = Partial};
+    \end{tikzpicture}
+    \caption{Comparative analysis matrix of latest existing approaches across five predictive maintenance capabilities, highlighting the fragmentation of prior work and the unified coverage achieved by QASAMAP.}
+    \label{fig:comparative_matrix}
+\end{figure}

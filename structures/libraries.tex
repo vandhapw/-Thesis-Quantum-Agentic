@@ -1,5 +1,5 @@
 % --- Packages ---
-\usepackage[a4paper,top=32mm,bottom=35mm,left=38mm,right=38mm]{geometry}
+\usepackage[a4paper,top=52mm,bottom=35mm,left=38mm,right=38mm]{geometry}
 \usepackage{graphicx}
 \usepackage{setspace}
 \usepackage{titlesec}
@@ -7,35 +7,80 @@
 \usepackage{appendix}
 \usepackage{footmisc}
 \usepackage{caption}
-\usepackage{lmodern} % fallback font, replace with Shinmyungjo if available
-\usepackage{kotex}   % for Korean support (Hangul), works with pdfLaTeX
+\usepackage{lmodern} % fallback Latin font
+\usepackage{kotex}   % Korean support (Hangul)
 \usepackage{url}
 \usepackage{hyperref}
 \usepackage{amsmath}
+\usepackage{tabularx}
+\usepackage{tikz}
+\usepackage{booktabs}
+\usepackage{float}      % for [H]
+\usepackage{subcaption}
 
 % --- Font Setup ---
-\renewcommand{\rmdefault}{ptm} % Times Roman as fallback for Shinmyungjo
+% Main font: Shinmyungjo (신명조) for Korean text.
+% The following uses kotex's default HCR fonts as fallback if Shinmyungjo
+% is not installed. For a true Shinmyungjo setup, install the font and use:
+%   \SetHangulFonts{Shinmyungjo}{Shinmyungjo}{Shinmyungjo}
+%   \SetHanjaFonts{Shinmyungjo}{Shinmyungjo}{Shinmyungjo}
+% Fallback to Times Roman (ptm) for Latin characters.
+\renewcommand{\rmdefault}{ptm}
+\renewcommand{\sfdefault}{phv}
+\renewcommand{\ttdefault}{pcr}
+
+% Table and quote font size: 10 pt
 \renewcommand{\footnotelayout}{\fontsize{10pt}{12pt}\selectfont}
+\makeatletter
+\renewenvironment{quote}{%
+  \list{}{\rightmargin\leftmargin \small}%
+  \item\relax}
+  {\endlist}
+\makeatother
 
 % --- Line Spacing ---
+% 1.5 line spacing for readability (common for Korean theses)
 \setstretch{1.5}
 
 % --- Heading Styles ---
+% Chapter title: 15 pt, bold, centered.
+% [display] places label and title on separate lines (vertical stack).
 \titleformat{\chapter}[display]
-  {\normalfont\bfseries\centering\fontsize{15pt}{18pt}}{\chaptername\ \thechapter}{10pt}{\Huge}
+  {\normalfont\bfseries\centering\fontsize{15pt}{18pt}\selectfont}
+  {\chaptername\ \thechapter}{3pt}{\fontsize{15pt}{18pt}\selectfont}
+\titlespacing*{\chapter}{0pt}{0pt}{20pt}
 
+% Section (subjudul): 13 pt, bold
 \titleformat{\section}
-  {\normalfont\bfseries\fontsize{13pt}{16pt}}{\thesection}{1em}{}
+  {\normalfont\bfseries\fontsize{13pt}{16pt}\selectfont}
+  {\thesection}{1em}{}
 
+% Subsection: 12 pt
 \titleformat{\subsection}
-  {\normalfont\fontsize{12pt}{14pt}}{\thesubsection}{1em}{}
+  {\normalfont\fontsize{12pt}{14pt}\selectfont}
+  {\thesubsection}{1em}{}
 
+% Subsubsection: 11 pt (same as body)
 \titleformat{\subsubsection}
-  {\normalfont\fontsize{11pt}{13pt}}{\thesubsubsection}{1em}{}
+  {\normalfont\fontsize{11pt}{13pt}\selectfont}
+  {\thesubsubsection}{1em}{}
 
 % --- Table and Figure Captions ---
-\captionsetup[table]{font=bf,labelfont=bf,justification=raggedright,font=small}
-\captionsetup[figure]{font=bf,labelfont=bf,justification=centering,font=small}
+% Table caption ABOVE the table, 10 pt, bold
+\captionsetup[table]{
+  position=above,
+  font={small,bf},
+  labelfont=bf,
+  justification=raggedright
+}
+
+% Figure caption BELOW the figure, 10 pt, bold
+\captionsetup[figure]{
+  position=below,
+  font={small,bf},
+  labelfont=bf,
+  justification=centering
+}
 
 % --- Table of Contents Formatting ---
 \renewcommand{\cfttoctitlefont}{\centering\bfseries\fontsize{15pt}{18pt}\selectfont}
@@ -43,3 +88,19 @@
 \renewcommand{\cftsecfont}{\fontsize{12pt}{14pt}\selectfont}
 \renewcommand{\cftsubsecfont}{\fontsize{11pt}{13pt}\selectfont}
 
+% --- Paragraph Spacing ---
+\setlength{\parskip}{0.5em}   % space between paragraphs
+\setlength{\parindent}{0pt}   % remove indentation
+
+% --- Float Separation ---
+\setlength{\textfloatsep}{20pt} % space between table/figure and text
+\setlength{\intextsep}{15pt}
+
+% --- Citation Style ---
+% IEEE in-text citation style (numbers in brackets, not footnotes)
+% Ensure \bibliographystyle{IEEEtran} is used in references.tex
+\usepackage{cite}
+\usepackage{microtype}   % improved hyphenation and justification
+\tolerance=1000
+\emergencystretch=3em    % allow extra stretch for better justification
+\hyphenpenalty=50

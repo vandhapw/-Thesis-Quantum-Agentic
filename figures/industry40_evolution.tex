@@ -1,0 +1,61 @@
+\begin{figure}[htbp]
+    \centering
+    \begin{tikzpicture}[
+        node distance=1.2cm and 2.5cm,
+        box/.style={draw, rounded corners, minimum width=3cm, minimum height=0.9cm, align=center, font=\small},
+        era/.style={draw, thick, fill=blue!5, rounded corners, minimum width=2.8cm, minimum height=0.9cm, align=center, font=\small\bfseries},
+        tech/.style={draw, dashed, fill=gray!10, rounded corners, minimum width=1.8cm, minimum height=0.6cm, align=center, font=\scriptsize},
+        arrow/.style={->, thick, >=stealth},
+        label/.style={font=\scriptsize\itshape, text width=2.5cm, align=center}
+    ]
+        % Eras
+        \node[era] (ind1) {Industry 1.0\\Mechanization};
+        \node[era, right=of ind1] (ind2) {Industry 2.0\\Mass Production};
+        \node[era, right=of ind2] (ind3) {Industry 3.0\\Automation};
+        \node[era, right=of ind3, fill=green!10] (ind4) {Industry 4.0\\Cyber-Physical};
+
+        % Arrows
+        \draw[arrow] (ind1) -- (ind2);
+        \draw[arrow] (ind2) -- (ind3);
+        \draw[arrow] (ind3) -- (ind4);
+
+        % Enabling technologies for Industry 4.0
+        \node[tech, above=0.8cm of ind4] (iot) {Industrial IoT};
+        \node[tech, left=0.3cm of iot] (cloud) {Cloud};
+        \node[tech, right=0.3cm of iot] (bigdata) {Big Data};
+        \node[tech, above=0.3cm of iot] (ai) {AI / ML};
+        \node[tech, left=0.3cm of ai] (cps) {CPS};
+        \node[tech, right=0.3cm of ai] (edge) {Edge Comp.};
+
+        \draw[->, gray] (cps) -- (ind4);
+        \draw[->, gray] (cloud) -- (ind4);
+        \draw[->, gray] (iot) -- (ind4);
+        \draw[->, gray] (bigdata) -- (ind4);
+        \draw[->, gray] (ai) -- (ind4);
+        \draw[->, gray] (edge) -- (ind4);
+
+        % Maintenance paradigms
+        \node[box, below=1.5cm of ind1] (reactive) {Reactive\\Maintenance};
+        \node[box, below=1.5cm of ind2] (preventive) {Preventive\\Maintenance};
+        \node[box, below=1.5cm of ind3] (condition) {Condition-Based\\Maintenance};
+        \node[box, below=1.5cm of ind4, fill=green!5] (predictive) {Predictive\\Maintenance};
+
+        \draw[arrow] (reactive) -- (preventive);
+        \draw[arrow] (preventive) -- (condition);
+        \draw[arrow] (condition) -- (predictive);
+
+        % Vertical connections
+        \draw[dashed, gray] (ind1) -- (reactive);
+        \draw[dashed, gray] (ind2) -- (preventive);
+        \draw[dashed, gray] (ind3) -- (condition);
+        \draw[dashed, gray] (ind4) -- (predictive);
+
+        % Labels
+        \node[label, below=0.2cm of reactive] {Fix after failure};
+        \node[label, below=0.2cm of preventive] {Fixed schedule};
+        \node[label, below=0.2cm of condition] {Threshold-based};
+        \node[label, below=0.2cm of predictive] {Data-driven forecast};
+    \end{tikzpicture}
+    \caption{Evolution of manufacturing paradigms from Industry 1.0 to Industry 4.0, showing the progression of maintenance strategies alongside enabling technologies.}
+    \label{fig:industry40_evolution}
+\end{figure}
