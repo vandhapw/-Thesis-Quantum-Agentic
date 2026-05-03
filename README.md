@@ -15,10 +15,8 @@ PhD thesis source by **Vandha Pradwiyasma Widartha**, Pukyong National Universit
 │   ├── experimental.tex
 │   ├── analysis_discussion.tex
 │   ├── conclusion.tex
-│   ├── agentic_AI_orchestration.tex     # legacy (pre-audit) -- to be replaced by chapter5_agentic_v2
-│   ├── quantum_integration.tex          # legacy (pre-audit) -- to be replaced by chapter6_quantum_v2
-│   ├── chapter5_agentic_v2.tex          # NEW -- integrates phase_docs/PHASE0+1+2 (E1, E3, E5, E6)
-│   ├── chapter6_quantum_v2.tex          # NEW -- integrates phase_docs/PHASE0+1+2 quantum (E-Q1, E-Q3)
+│   ├── agentic_AI_orchestration.tex     # Chapter 5 -- post-audit honest content (integrates phase_docs/PHASE0+1+2: E1, E3, E5, E6)
+│   ├── quantum_integration.tex          # Chapter 6 -- post-audit honest content (integrates phase_docs/PHASE0+1+2 quantum: E-Q1, E-Q3)
 │   └── ...                              # abstracts, appendix, ack, etc.
 ├── figures/                       # PNG figures (architecture, datasets, performance, quantum circuit)
 ├── tables/                        # LaTeX tables
@@ -60,7 +58,9 @@ cd thesis_project   # if cloned into a subdirectory
 latexmk -pdf main.tex
 ```
 
-The current `main.tex` includes the legacy `agentic_AI_orchestration.tex` and `quantum_integration.tex`. To switch to the post-audit V2 chapters, edit `main.tex` to `\input{structures/chapter5_agentic_v2}` and `\input{structures/chapter6_quantum_v2}` (or include them as new chapters alongside the legacy ones for comparison).
+`main.tex` now includes 8 chapters in order: Introduction, Related Works, Methods, Experimental Result, **Agentic AI Orchestration** (Ch. 5 -- new), **Quantum Computing Integration** (Ch. 6 -- new), Analysis and Discussion, Conclusion. The agentic and quantum chapters reference statistical artifacts in `experiments/` and source documents in `phase_docs/`.
+
+Compile dependencies on the LaTeX side: standard packages from `structures/libraries.tex`. The new chapters cite keys (`cerezo2025bp`, `tsai2026roadmap`, `fordotosan2024dwave`, `basf2024dwave`, etc.) that may need to be added to `thesis.bib` if not already present.
 
 ## Reproducibility
 
