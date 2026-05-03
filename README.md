@@ -38,18 +38,31 @@ PhD thesis source by **Vandha Pradwiyasma Widartha**, Pukyong National Universit
     └── E-Q3_pauliz_detection/          # Pauli-Z entangled detector -- F1 0.290 at natural prevalence (best)
 ```
 
-## Headline empirical findings (honest framing throughout)
+## Headline empirical findings (V2 protocol, honest framing throughout)
 
-**Agentic track:**
-- E1 STRONG: Hybrid QASAMAP covers 55% of PdM decision dimensions vs Pure ML 20% (Cochran's Q significant on 6/8 dimensions, p<0.05)
-- E3 PRELIMINARY: LLM in-context learning F1 +0.048 over 5 examples (small but positive direction)
-- E5 LIMITED: Synthetic-on-synthetic perturbations cannot validate true OOD; threshold detectors stable
-- E6 COUNTER-RESULT: Single-call LLM beats specialized 9-agent on composite quality (Q=0.820 vs 0.630, F(2,12)=3.84). Reconciled with E1 by breadth-vs-quality distinction
-- E2, E4 DEFERRED with documented honest plans
+The V2 protocol (PHASE1_PROTOCOL_V2_ALIGNED_3LAYER.md) is the active execution plan, aligned with the supervisor-confirmed 3-layer architecture: T-GCN+Kafka (Layer 1, existing) → Agentic AI multi-tier detection (Layer 2) → Scheduling optimization classical vs quantum (Layer 3). The earlier V1 experiments (E1, E3, E5, E6, E-Q1, E-Q3) are preserved in `experiments/` for archive but were re-scoped under V2 because their framing did not match the 3-layer design.
 
-**Quantum track (NISQ-honest, simulator-based):**
-- E-Q3: 5-qubit Pauli-Z entangled detector achieves F1 = 0.290 at natural anomaly prevalence (9.6%) -- highest of 5 baselines, beating mathematically-isolated separable equivalent by +0.078 F1 (37% relative). Entanglement-driven lift verified by floating-point algebraic equivalence sanity check. McNemar p<0.0001 Bonferroni-corrected.
-- E-Q1: Simulated QAOA reaches solution-quality parity with classical Simulated Annealing at depth p>=2 (Wilcoxon p=0.317 for p=2, p=0.180 for p=3, N=20 paired instances). QAOA p=1 significantly worse (p=0.0077) -- replicates expected NISQ shallow-ansatz weakness. SA wall-clock 2-3 orders of magnitude faster (simulator overhead, not algorithmic).
+**Layer 2 (Agentic AI Multi-Tier Detection) — E-L2:**
+- V1 (4 LLMs, sensor-only prompt): κ=0.362 (fair, below threshold) → STOP
+- V2 (3 LLMs after dropping qwen3.5 due to 53% empty-content rate, decision-tree prompt): κ=0.191 (worse) → STOP. Exposed methodological flaw: GT formula uses 4 fields (RUL, anomaly_flag, downtime_risk, maintenance_required) that LLM was not given.
+- **V3 (3 LLMs, realistic deployment input set including upstream classifier outputs): κ = 0.7425 (95% CI [0.619, 0.835]) → PASS substantial agreement.** Critical precision = 1.000, Critical-or-High coverage of true Critical = 1.000, ensemble e2e p95 latency = 32.7s within 60s Kafka cycle.
+- 3 pre-registered deviations documented; all V1/V2/V3 results preserved in repo.
+
+**Layer 3A (Static Scheduling Classical vs Quantum) — E-L3A:**
+- 6 solvers tested across 3 sizes × 3 employee groups × 5 seeds = 315 solver runs.
+- **Classical (Greedy / GA / SA / TS) all converge to identical optimal makespan** with 100% feasibility, wall-clock <2s at largest size (50 machines × 5 days × 20 employees = 45000 binary vars).
+- **QA_neal and SBM consistently infeasible** on dense scheduling QUBO (feasibility 0.0–0.2 vs 1.0 classical), paired Wilcoxon p < 1e-5 against classical-best.
+- **QAOA not applicable** — encoding requires N×E×S vars (≥45) exceeding 18-qubit statevector simulator practical limit.
+- Honest finding: classical heuristics dominate on this scheduling QUBO at QASAMAP scale on simulator-only evaluation. Real D-Wave hardware was not available.
+
+**Layer 3B (Dynamic Rolling-Horizon Real-Time Feasibility) — E-L3B:**
+- Simulated 8-hour working day, event-driven re-optimization, 3 seeds × ~15 events = 45 events per solver.
+- **All 4 classical solvers PASS real-time feasibility**: p95 wall-clock <1.5s vs 60-s Kafka cycle budget; 0 deadline-misses across 135 re-opt events.
+- End-to-end Layer 2 (LLM ensemble p95 32.7s) + Layer 3 (classical p95 <1.5s) fits within 60-s budget with ≥26-s margin.
+- QA/SBM excluded based on E-L3A static failure.
+
+### V1 archive (NOT used for thesis defense — superseded by V2)
+The earlier V1 experiments (E1 capability coverage, E3 few-shot, E5 OOD synthetic, E6 multi-agent ablation, E-Q1 SA vs QAOA, E-Q3 Pauli-Z compound detection) are preserved in `experiments/` and `phase_docs/` as historical record. They were superseded by V2 because they framed quantum for detection (not scheduling) and used different evaluation framing than the supervisor-confirmed 3-layer architecture.
 
 ## Building the thesis
 
