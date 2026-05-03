@@ -28,6 +28,24 @@ Table~\ref{table:dataset_summary} summarises the key properties of the historica
 
 \input{tables/feature_description}
 
+\paragraph{Dual-mode data architecture.} Figure~\ref{fig:data_sources_architecture} illustrates the dual operating modes of the QASAMAP data infrastructure. The \emph{historical batch mode} (top lane, blue) consumes the offline CSV dataset for feature engineering, model training (T-GCN + supervised classifiers), and the artefacts produced (trained model files, fitted scalers, sensor bounds) are subsequently deployed to the streaming pipeline. The \emph{real-time streaming mode} (bottom lane, green) operates the deployed models on a live one-event-per-machine-per-minute Kafka stream produced by the digital-twin simulator: events flow through the Kafka broker into a consumer that buffers the last 10 events per machine and persists them to MongoDB; the Layer~1 T-GCN forecaster and supervised classifier produce real-time outputs (sensor forecast, anomaly flag, downtime risk, RUL); these feed the Layer~2 LLM ensemble and Layer~3 scheduler, which produce a maintenance decision and CMMS work order within the 60-second Kafka cycle. A continuous-learning feedback loop (red dashed arrow) periodically retrains the deployed models from accumulated streaming feedback.
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=\textwidth]{figures/images/data_sources_architecture.png}
+    \caption{Dual-mode data architecture for QASAMAP. Top lane: historical batch mode (offline CSV → feature engineering → model training on GPU → trained artefacts). Bottom lane: real-time streaming mode (digital-twin simulator → Kafka topic → consumer + MongoDB → Layer~1 T-GCN + classifier → Layer~2 LLM ensemble + Layer~3 scheduler → maintenance decision). Trained artefacts from the historical mode are deployed into the streaming inference path (orange arrow); a continuous-learning feedback loop (red dashed arrow) retrains the deployed models from accumulated runtime feedback.}
+    \label{fig:data_sources_architecture}
+\end{figure}
+
+\paragraph{Descriptive statistics on the historical CSV.} Figure~\ref{fig:data_sources_distribution} provides the descriptive characterisation of the historical dataset that motivates several design choices in the framework. The top row shows per-sensor distributions split by anomaly flag (normal vs anomaly): temperature is the most discriminative single sensor, with anomalous readings shifted noticeably higher than the normal-class median, while humidity and pressure exhibit overlapping distributions that motivate the multi-sensor integration in Layer~2. The middle row shows the failure-type distribution (severe class imbalance: \textit{Normal} 91.9\% versus the four minority failure modes \textit{Vibration Issue}, \textit{Overheating}, \textit{Pressure Drop}, and \textit{Electrical Fault} totalling 8.1\%) and the RUL histogram (near-uniform distribution, mean $\approx 234$ h, 16{,}333 readings below the critical 50-h threshold). The bottom panel shows a 200-minute sample sensor trace from machine M-40 with all five sensors normalised to $[0,1]$ for visual comparison, illustrating the streaming-cadence one-minute timestamp granularity that the Kafka pipeline delivers and that the T-GCN sliding-window ($W=10$) consumes.
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=\textwidth]{figures/images/data_sources_distribution.png}
+    \caption{Historical dataset descriptive statistics on 100{,}000 rows × 50 machines × 69 days. Top row: per-sensor violin plots split by anomaly flag (blue = normal, red = anomaly). Middle row left: failure-type class distribution (severe imbalance with \textit{Normal} = 91.9\% and minority classes 1.0--3.1\%). Middle row right: RUL histogram with critical (50 h) and imminent (10 h) thresholds marked. Bottom row: 200-minute sample sensor trace from M-40 with all five sensors normalised to $[0,1]$, illustrating the one-minute Kafka producer cadence and the sliding-window granularity that downstream forecasting consumes.}
+    \label{fig:data_sources_distribution}
+\end{figure}
+
 The empirical consequences of siloed modelling are directly observable in the dataset. The anomaly flag, predicted RUL, failure type, and maintenance required label are all statistically interdependent: temperature correlates with anomaly flag at $r = 0.447$, anomaly flag correlates with downtime risk at $r \approx 1.0$, and RUL correlates with downtime risk at $r = -0.436$. The 16,333 readings with RUL below 50 hours represent machines that are simultaneously anomalous and prognostically critical --- a dual characterization that joint modelling exploits far more effectively than independent models.
 
 \subsubsection{Spatiotemporal Forecasting with T-GCN}
