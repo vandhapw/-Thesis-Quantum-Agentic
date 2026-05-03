@@ -1,0 +1,1739 @@
+{
+  "metadata": {
+    "experiment": "E1_Capability_Coverage",
+    "n_machines": 25,
+    "n_dimensions": 8,
+    "n_approaches": 4,
+    "test_machine_ids": [
+      1,
+      3,
+      5,
+      7,
+      9,
+      11,
+      13,
+      15,
+      17,
+      19,
+      21,
+      23,
+      25,
+      27,
+      29,
+      31,
+      33,
+      35,
+      37,
+      39,
+      41,
+      43,
+      45,
+      47,
+      49
+    ],
+    "dimensions": [
+      "D1_detection",
+      "D2_severity_ranking",
+      "D3_root_cause",
+      "D4_affected_component",
+      "D5_temporal_urgency",
+      "D6_cross_machine_correlation",
+      "D7_action_recommendation",
+      "D8_operator_explanation"
+    ],
+    "approaches": [
+      "Pure_ML",
+      "Pure_Classical",
+      "Pure_Agentic",
+      "Hybrid_QASAMAP"
+    ],
+    "alpha_bonferroni": 0.0010416666666666667,
+    "n_pairwise_tests": 48
+  },
+  "per_machine_coverage": {
+    "Pure_ML": {
+      "1": {
+        "D1_detection": 1,
+        "D2_severity_ranking": 0,
+        "D3_root_cause": 0,
+        "D4_affected_component": 0,
+        "D5_temporal_urgency": 0,
+        "D6_cross_machine_correlation": 0,
+        "D7_action_recommendation": 0,
+        "D8_operator_explanation": 0
+      },
+      "3": {
+        "D1_detection": 1,
+        "D2_severity_ranking": 0,
+        "D3_root_cause": 0,
+        "D4_affected_component": 0,
+        "D5_temporal_urgency": 0,
+        "D6_cross_machine_correlation": 0,
+        "D7_action_recommendation": 1,
+        "D8_operator_explanation": 0
+      },
+      "5": {
+        "D1_detection": 1,
+        "D2_severity_ranking": 0,
+        "D3_root_cause": 0,
+        "D4_affected_component": 0,
+        "D5_temporal_urgency": 0,
+        "D6_cross_machine_correlation": 0,
+        "D7_action_recommendation": 1,
+        "D8_operator_explanation": 0
+      },
+      "7": {
+        "D1_detection": 1,
+        "D2_severity_ranking": 0,
+        "D3_root_cause": 0,
+        "D4_affected_component": 0,
+        "D5_temporal_urgency": 0,
+        "D6_cross_machine_correlation": 0,
+        "D7_action_recommendation": 0,
+        "D8_operator_explanation": 0
+      },
+      "9": {
+        "D1_detection": 1,
+        "D2_severity_ranking": 0,
+        "D3_root_cause": 0,
+        "D4_affected_component": 0,
+        "D5_temporal_urgency": 0,
+        "D6_cross_machine_correlation": 0,
+        "D7_action_recommendation": 1,
+        "D8_operator_explanation": 0
+      },
+      "11": {
+        "D1_detection": 1,
+        "D2_severity_ranking": 0,
+        "D3_root_cause": 0,
+        "D4_affected_component": 0,
+        "D5_temporal_urgency": 0,
+        "D6_cross_machine_correlation": 0,
+        "D7_action_recommendation": 1,
+        "D8_operator_explanation": 0
+      },
+      "13": {
+        "D1_detection": 1,
+        "D2_severity_ranking": 0,
+        "D3_root_cause": 0,
+        "D4_affected_component": 0,
+        "D5_temporal_urgency": 0,
+        "D6_cross_machine_correlation": 0,
+        "D7_action_recommendation": 0,
+        "D8_operator_explanation": 0
+      },
+      "15": {
+        "D1_detection": 1,
+        "D2_severity_ranking": 0,
+        "D3_root_cause": 0,
+        "D4_affected_component": 0,
+        "D5_temporal_urgency": 0,
+        "D6_cross_machine_correlation": 0,
+        "D7_action_recommendation": 1,
+        "D8_operator_explanation": 0
+      },
+      "17": {
+        "D1_detection": 1,
+        "D2_severity_ranking": 0,
+        "D3_root_cause": 0,
+        "D4_affected_component": 0,
+        "D5_temporal_urgency": 0,
+        "D6_cross_machine_correlation": 0,
+        "D7_action_recommendation": 1,
+        "D8_operator_explanation": 0
+      },
+      "19": {
+        "D1_detection": 1,
+        "D2_severity_ranking": 0,
+        "D3_root_cause": 0,
+        "D4_affected_component": 0,
+        "D5_temporal_urgency": 0,
+        "D6_cross_machine_correlation": 0,
+        "D7_action_recommendation": 0,
+        "D8_operator_explanation": 0
+      },
+      "21": {
+        "D1_detection": 1,
+        "D2_severity_ranking": 0,
+        "D3_root_cause": 0,
+        "D4_affected_component": 0,
+        "D5_temporal_urgency": 0,
+        "D6_cross_machine_correlation": 0,
+        "D7_action_recommendation": 1,
+        "D8_operator_explanation": 0
+      },
+      "23": {
+        "D1_detection": 1,
+        "D2_severity_ranking": 0,
+        "D3_root_cause": 0,
+        "D4_affected_component": 0,
+        "D5_temporal_urgency": 0,
+        "D6_cross_machine_correlation": 0,
+        "D7_action_recommendation": 1,
+        "D8_operator_explanation": 0
+      },
+      "25": {
+        "D1_detection": 1,
+        "D2_severity_ranking": 0,
+        "D3_root_cause": 0,
+        "D4_affected_component": 0,
+        "D5_temporal_urgency": 0,
+        "D6_cross_machine_correlation": 0,
+        "D7_action_recommendation": 0,
+        "D8_operator_explanation": 0
+      },
+      "27": {
+        "D1_detection": 1,
+        "D2_severity_ranking": 0,
+        "D3_root_cause": 0,
+        "D4_affected_component": 0,
+        "D5_temporal_urgency": 0,
+        "D6_cross_machine_correlation": 0,
+        "D7_action_recommendation": 1,
+        "D8_operator_explanation": 0
+      },
+      "29": {
+        "D1_detection": 1,
+        "D2_severity_ranking": 0,
+        "D3_root_cause": 0,
+        "D4_affected_component": 0,
+        "D5_temporal_urgency": 0,
+        "D6_cross_machine_correlation": 0,
+        "D7_action_recommendation": 1,
+        "D8_operator_explanation": 0
+      },
+      "31": {
+        "D1_detection": 1,
+        "D2_severity_ranking": 0,
+        "D3_root_cause": 0,
+        "D4_affected_component": 0,
+        "D5_temporal_urgency": 0,
+        "D6_cross_machine_correlation": 0,
+        "D7_action_recommendation": 0,
+        "D8_operator_explanation": 0
+      },
+      "33": {
+        "D1_detection": 1,
+        "D2_severity_ranking": 0,
+        "D3_root_cause": 0,
+        "D4_affected_component": 0,
+        "D5_temporal_urgency": 0,
+        "D6_cross_machine_correlation": 0,
+        "D7_action_recommendation": 1,
+        "D8_operator_explanation": 0
+      },
+      "35": {
+        "D1_detection": 1,
+        "D2_severity_ranking": 0,
+        "D3_root_cause": 0,
+        "D4_affected_component": 0,
+        "D5_temporal_urgency": 0,
+        "D6_cross_machine_correlation": 0,
+        "D7_action_recommendation": 0,
+        "D8_operator_explanation": 0
+      },
+      "37": {
+        "D1_detection": 1,
+        "D2_severity_ranking": 0,
+        "D3_root_cause": 0,
+        "D4_affected_component": 0,
+        "D5_temporal_urgency": 0,
+        "D6_cross_machine_correlation": 0,
+        "D7_action_recommendation": 0,
+        "D8_operator_explanation": 0
+      },
+      "39": {
+        "D1_detection": 1,
+        "D2_severity_ranking": 0,
+        "D3_root_cause": 0,
+        "D4_affected_component": 0,
+        "D5_temporal_urgency": 0,
+        "D6_cross_machine_correlation": 0,
+        "D7_action_recommendation": 0,
+        "D8_operator_explanation": 0
+      },
+      "41": {
+        "D1_detection": 1,
+        "D2_severity_ranking": 0,
+        "D3_root_cause": 0,
+        "D4_affected_component": 0,
+        "D5_temporal_urgency": 0,
+        "D6_cross_machine_correlation": 0,
+        "D7_action_recommendation": 1,
+        "D8_operator_explanation": 0
+      },
+      "43": {
+        "D1_detection": 1,
+        "D2_severity_ranking": 0,
+        "D3_root_cause": 0,
+        "D4_affected_component": 0,
+        "D5_temporal_urgency": 0,
+        "D6_cross_machine_correlation": 0,
+        "D7_action_recommendation": 0,
+        "D8_operator_explanation": 0
+      },
+      "45": {
+        "D1_detection": 1,
+        "D2_severity_ranking": 0,
+        "D3_root_cause": 0,
+        "D4_affected_component": 0,
+        "D5_temporal_urgency": 0,
+        "D6_cross_machine_correlation": 0,
+        "D7_action_recommendation": 1,
+        "D8_operator_explanation": 0
+      },
+      "47": {
+        "D1_detection": 1,
+        "D2_severity_ranking": 0,
+        "D3_root_cause": 0,
+        "D4_affected_component": 0,
+        "D5_temporal_urgency": 0,
+        "D6_cross_machine_correlation": 0,
+        "D7_action_recommendation": 1,
+        "D8_operator_explanation": 0
+      },
+      "49": {
+        "D1_detection": 1,
+        "D2_severity_ranking": 0,
+        "D3_root_cause": 0,
+        "D4_affected_component": 0,
+        "D5_temporal_urgency": 0,
+        "D6_cross_machine_correlation": 0,
+        "D7_action_recommendation": 1,
+        "D8_operator_explanation": 0
+      }
+    },
+    "Pure_Classical": {
+      "1": {
+        "D1_detection": 1,
+        "D2_severity_ranking": 0,
+        "D3_root_cause": 1,
+        "D4_affected_component": 0,
+        "D5_temporal_urgency": 0,
+        "D6_cross_machine_correlation": 1,
+        "D7_action_recommendation": 1,
+        "D8_operator_explanation": 0
+      },
+      "3": {
+        "D1_detection": 1,
+        "D2_severity_ranking": 0,
+        "D3_root_cause": 1,
+        "D4_affected_component": 0,
+        "D5_temporal_urgency": 0,
+        "D6_cross_machine_correlation": 1,
+        "D7_action_recommendation": 1,
+        "D8_operator_explanation": 0
+      },
+      "5": {
+        "D1_detection": 1,
+        "D2_severity_ranking": 0,
+        "D3_root_cause": 1,
+        "D4_affected_component": 0,
+        "D5_temporal_urgency": 0,
+        "D6_cross_machine_correlation": 1,
+        "D7_action_recommendation": 1,
+        "D8_operator_explanation": 0
+      },
+      "7": {
+        "D1_detection": 1,
+        "D2_severity_ranking": 0,
+        "D3_root_cause": 0,
+        "D4_affected_component": 0,
+        "D5_temporal_urgency": 0,
+        "D6_cross_machine_correlation": 1,
+        "D7_action_recommendation": 1,
+        "D8_operator_explanation": 0
+      },
+      "9": {
+        "D1_detection": 1,
+        "D2_severity_ranking": 0,
+        "D3_root_cause": 1,
+        "D4_affected_component": 0,
+        "D5_temporal_urgency": 0,
+        "D6_cross_machine_correlation": 1,
+        "D7_action_recommendation": 1,
+        "D8_operator_explanation": 0
+      },
+      "11": {
+        "D1_detection": 1,
+        "D2_severity_ranking": 0,
+        "D3_root_cause": 1,
+        "D4_affected_component": 0,
+        "D5_temporal_urgency": 0,
+        "D6_cross_machine_correlation": 1,
+        "D7_action_recommendation": 1,
+        "D8_operator_explanation": 0
+      },
+      "13": {
+        "D1_detection": 1,
+        "D2_severity_ranking": 0,
+        "D3_root_cause": 0,
+        "D4_affected_component": 0,
+        "D5_temporal_urgency": 0,
+        "D6_cross_machine_correlation": 1,
+        "D7_action_recommendation": 1,
+        "D8_operator_explanation": 0
+      },
+      "15": {
+        "D1_detection": 1,
+        "D2_severity_ranking": 0,
+        "D3_root_cause": 1,
+        "D4_affected_component": 0,
+        "D5_temporal_urgency": 0,
+        "D6_cross_machine_correlation": 1,
+        "D7_action_recommendation": 1,
+        "D8_operator_explanation": 0
+      },
+      "17": {
+        "D1_detection": 1,
+        "D2_severity_ranking": 0,
+        "D3_root_cause": 1,
+        "D4_affected_component": 0,
+        "D5_temporal_urgency": 0,
+        "D6_cross_machine_correlation": 1,
+        "D7_action_recommendation": 1,
+        "D8_operator_explanation": 0
+      },
+      "19": {
+        "D1_detection": 1,
+        "D2_severity_ranking": 0,
+        "D3_root_cause": 0,
+        "D4_affected_component": 0,
+        "D5_temporal_urgency": 0,
+        "D6_cross_machine_correlation": 1,
+        "D7_action_recommendation": 1,
+        "D8_operator_explanation": 0
+      },
+      "21": {
+        "D1_detection": 1,
+        "D2_severity_ranking": 0,
+        "D3_root_cause": 1,
+        "D4_affected_component": 0,
+        "D5_temporal_urgency": 0,
+        "D6_cross_machine_correlation": 1,
+        "D7_action_recommendation": 1,
+        "D8_operator_explanation": 0
+      },
+      "23": {
+        "D1_detection": 1,
+        "D2_severity_ranking": 0,
+        "D3_root_cause": 1,
+        "D4_affected_component": 0,
+        "D5_temporal_urgency": 0,
+        "D6_cross_machine_correlation": 1,
+        "D7_action_recommendation": 1,
+        "D8_operator_explanation": 0
+      },
+      "25": {
+        "D1_detection": 1,
+        "D2_severity_ranking": 0,
+        "D3_root_cause": 1,
+        "D4_affected_component": 0,
+        "D5_temporal_urgency": 0,
+        "D6_cross_machine_correlation": 1,
+        "D7_action_recommendation": 1,
+        "D8_operator_explanation": 0
+      },
+      "27": {
+        "D1_detection": 1,
+        "D2_severity_ranking": 0,
+        "D3_root_cause": 1,
+        "D4_affected_component": 0,
+        "D5_temporal_urgency": 0,
+        "D6_cross_machine_correlation": 1,
+        "D7_action_recommendation": 1,
+        "D8_operator_explanation": 0
+      },
+      "29": {
+        "D1_detection": 1,
+        "D2_severity_ranking": 0,
+        "D3_root_cause": 1,
+        "D4_affected_component": 0,
+        "D5_temporal_urgency": 0,
+        "D6_cross_machine_correlation": 1,
+        "D7_action_recommendation": 1,
+        "D8_operator_explanation": 0
+      },
+      "31": {
+        "D1_detection": 1,
+        "D2_severity_ranking": 0,
+        "D3_root_cause": 0,
+        "D4_affected_component": 0,
+        "D5_temporal_urgency": 0,
+        "D6_cross_machine_correlation": 1,
+        "D7_action_recommendation": 1,
+        "D8_operator_explanation": 0
+      },
+      "33": {
+        "D1_detection": 1,
+        "D2_severity_ranking": 0,
+        "D3_root_cause": 1,
+        "D4_affected_component": 0,
+        "D5_temporal_urgency": 0,
+        "D6_cross_machine_correlation": 1,
+        "D7_action_recommendation": 1,
+        "D8_operator_explanation": 0
+      },
+      "35": {
+        "D1_detection": 1,
+        "D2_severity_ranking": 0,
+        "D3_root_cause": 1,
+        "D4_affected_component": 0,
+        "D5_temporal_urgency": 0,
+        "D6_cross_machine_correlation": 1,
+        "D7_action_recommendation": 1,
+        "D8_operator_explanation": 0
+      },
+      "37": {
+        "D1_detection": 1,
+        "D2_severity_ranking": 0,
+        "D3_root_cause": 0,
+        "D4_affected_component": 0,
+        "D5_temporal_urgency": 0,
+        "D6_cross_machine_correlation": 1,
+        "D7_action_recommendation": 1,
+        "D8_operator_explanation": 0
+      },
+      "39": {
+        "D1_detection": 1,
+        "D2_severity_ranking": 0,
+        "D3_root_cause": 1,
+        "D4_affected_component": 0,
+        "D5_temporal_urgency": 0,
+        "D6_cross_machine_correlation": 1,
+        "D7_action_recommendation": 1,
+        "D8_operator_explanation": 0
+      },
+      "41": {
+        "D1_detection": 1,
+        "D2_severity_ranking": 0,
+        "D3_root_cause": 1,
+        "D4_affected_component": 0,
+        "D5_temporal_urgency": 0,
+        "D6_cross_machine_correlation": 1,
+        "D7_action_recommendation": 1,
+        "D8_operator_explanation": 0
+      },
+      "43": {
+        "D1_detection": 1,
+        "D2_severity_ranking": 0,
+        "D3_root_cause": 0,
+        "D4_affected_component": 0,
+        "D5_temporal_urgency": 0,
+        "D6_cross_machine_correlation": 1,
+        "D7_action_recommendation": 1,
+        "D8_operator_explanation": 0
+      },
+      "45": {
+        "D1_detection": 1,
+        "D2_severity_ranking": 0,
+        "D3_root_cause": 1,
+        "D4_affected_component": 0,
+        "D5_temporal_urgency": 0,
+        "D6_cross_machine_correlation": 1,
+        "D7_action_recommendation": 1,
+        "D8_operator_explanation": 0
+      },
+      "47": {
+        "D1_detection": 1,
+        "D2_severity_ranking": 0,
+        "D3_root_cause": 1,
+        "D4_affected_component": 0,
+        "D5_temporal_urgency": 0,
+        "D6_cross_machine_correlation": 1,
+        "D7_action_recommendation": 1,
+        "D8_operator_explanation": 0
+      },
+      "49": {
+        "D1_detection": 1,
+        "D2_severity_ranking": 0,
+        "D3_root_cause": 1,
+        "D4_affected_component": 0,
+        "D5_temporal_urgency": 0,
+        "D6_cross_machine_correlation": 1,
+        "D7_action_recommendation": 1,
+        "D8_operator_explanation": 0
+      }
+    },
+    "Pure_Agentic": {
+      "1": {
+        "D1_detection": 1,
+        "D2_severity_ranking": 0,
+        "D3_root_cause": 1,
+        "D4_affected_component": 1,
+        "D5_temporal_urgency": 1,
+        "D6_cross_machine_correlation": 1,
+        "D7_action_recommendation": 1,
+        "D8_operator_explanation": 1
+      },
+      "3": {
+        "D1_detection": 1,
+        "D2_severity_ranking": 0,
+        "D3_root_cause": 0,
+        "D4_affected_component": 0,
+        "D5_temporal_urgency": 0,
+        "D6_cross_machine_correlation": 0,
+        "D7_action_recommendation": 1,
+        "D8_operator_explanation": 0
+      },
+      "5": {
+        "D1_detection": 1,
+        "D2_severity_ranking": 0,
+        "D3_root_cause": 0,
+        "D4_affected_component": 0,
+        "D5_temporal_urgency": 0,
+        "D6_cross_machine_correlation": 0,
+        "D7_action_recommendation": 1,
+        "D8_operator_explanation": 0
+      },
+      "7": {
+        "D1_detection": 1,
+        "D2_severity_ranking": 0,
+        "D3_root_cause": 0,
+        "D4_affected_component": 0,
+        "D5_temporal_urgency": 0,
+        "D6_cross_machine_correlation": 0,
+        "D7_action_recommendation": 1,
+        "D8_operator_explanation": 0
+      },
+      "9": {
+        "D1_detection": 1,
+        "D2_severity_ranking": 0,
+        "D3_root_cause": 0,
+        "D4_affected_component": 0,
+        "D5_temporal_urgency": 0,
+        "D6_cross_machine_correlation": 0,
+        "D7_action_recommendation": 1,
+        "D8_operator_explanation": 0
+      },
+      "11": {
+        "D1_detection": 1,
+        "D2_severity_ranking": 0,
+        "D3_root_cause": 1,
+        "D4_affected_component": 1,
+        "D5_temporal_urgency": 1,
+        "D6_cross_machine_correlation": 1,
+        "D7_action_recommendation": 1,
+        "D8_operator_explanation": 1
+      },
+      "13": {
+        "D1_detection": 1,
+        "D2_severity_ranking": 0,
+        "D3_root_cause": 0,
+        "D4_affected_component": 0,
+        "D5_temporal_urgency": 0,
+        "D6_cross_machine_correlation": 0,
+        "D7_action_recommendation": 1,
+        "D8_operator_explanation": 0
+      },
+      "15": {
+        "D1_detection": 1,
+        "D2_severity_ranking": 0,
+        "D3_root_cause": 0,
+        "D4_affected_component": 0,
+        "D5_temporal_urgency": 0,
+        "D6_cross_machine_correlation": 0,
+        "D7_action_recommendation": 1,
+        "D8_operator_explanation": 0
+      },
+      "17": {
+        "D1_detection": 1,
+        "D2_severity_ranking": 0,
+        "D3_root_cause": 1,
+        "D4_affected_component": 1,
+        "D5_temporal_urgency": 1,
+        "D6_cross_machine_correlation": 1,
+        "D7_action_recommendation": 1,
+        "D8_operator_explanation": 1
+      },
+      "19": {
+        "D1_detection": 1,
+        "D2_severity_ranking": 0,
+        "D3_root_cause": 0,
+        "D4_affected_component": 0,
+        "D5_temporal_urgency": 0,
+        "D6_cross_machine_correlation": 0,
+        "D7_action_recommendation": 1,
+        "D8_operator_explanation": 0
+      },
+      "21": {
+        "D1_detection": 1,
+        "D2_severity_ranking": 0,
+        "D3_root_cause": 0,
+        "D4_affected_component": 0,
+        "D5_temporal_urgency": 0,
+        "D6_cross_machine_correlation": 0,
+        "D7_action_recommendation": 1,
+        "D8_operator_explanation": 0
+      },
+      "23": {
+        "D1_detection": 1,
+        "D2_severity_ranking": 0,
+        "D3_root_cause": 0,
+        "D4_affected_component": 0,
+        "D5_temporal_urgency": 0,
+        "D6_cross_machine_correlation": 0,
+        "D7_action_recommendation": 1,
+        "D8_operator_explanation": 0
+      },
+      "25": {
+        "D1_detection": 1,
+        "D2_severity_ranking": 0,
+        "D3_root_cause": 0,
+        "D4_affected_component": 0,
+        "D5_temporal_urgency": 0,
+        "D6_cross_machine_correlation": 0,
+        "D7_action_recommendation": 1,
+        "D8_operator_explanation": 0
+      },
+      "27": {
+        "D1_detection": 1,
+        "D2_severity_ranking": 0,
+        "D3_root_cause": 0,
+        "D4_affected_component": 0,
+        "D5_temporal_urgency": 0,
+        "D6_cross_machine_correlation": 0,
+        "D7_action_recommendation": 1,
+        "D8_operator_explanation": 0
+      },
+      "29": {
+        "D1_detection": 1,
+        "D2_severity_ranking": 0,
+        "D3_root_cause": 0,
+        "D4_affected_component": 0,
+        "D5_temporal_urgency": 0,
+        "D6_cross_machine_correlation": 0,
+        "D7_action_recommendation": 1,
+        "D8_operator_explanation": 0
+      },
+      "31": {
+        "D1_detection": 1,
+        "D2_severity_ranking": 0,
+        "D3_root_cause": 0,
+        "D4_affected_component": 0,
+        "D5_temporal_urgency": 0,
+        "D6_cross_machine_correlation": 0,
+        "D7_action_recommendation": 1,
+        "D8_operator_explanation": 0
+      },
+      "33": {
+        "D1_detection": 1,
+        "D2_severity_ranking": 0,
+        "D3_root_cause": 1,
+        "D4_affected_component": 1,
+        "D5_temporal_urgency": 1,
+        "D6_cross_machine_correlation": 1,
+        "D7_action_recommendation": 1,
+        "D8_operator_explanation": 1
+      },
+      "35": {
+        "D1_detection": 1,
+        "D2_severity_ranking": 0,
+        "D3_root_cause": 0,
+        "D4_affected_component": 0,
+        "D5_temporal_urgency": 0,
+        "D6_cross_machine_correlation": 0,
+        "D7_action_recommendation": 1,
+        "D8_operator_explanation": 0
+      },
+      "37": {
+        "D1_detection": 1,
+        "D2_severity_ranking": 0,
+        "D3_root_cause": 0,
+        "D4_affected_component": 0,
+        "D5_temporal_urgency": 0,
+        "D6_cross_machine_correlation": 0,
+        "D7_action_recommendation": 1,
+        "D8_operator_explanation": 0
+      },
+      "39": {
+        "D1_detection": 1,
+        "D2_severity_ranking": 0,
+        "D3_root_cause": 0,
+        "D4_affected_component": 0,
+        "D5_temporal_urgency": 0,
+        "D6_cross_machine_correlation": 0,
+        "D7_action_recommendation": 1,
+        "D8_operator_explanation": 0
+      },
+      "41": {
+        "D1_detection": 1,
+        "D2_severity_ranking": 0,
+        "D3_root_cause": 0,
+        "D4_affected_component": 0,
+        "D5_temporal_urgency": 0,
+        "D6_cross_machine_correlation": 0,
+        "D7_action_recommendation": 1,
+        "D8_operator_explanation": 0
+      },
+      "43": {
+        "D1_detection": 1,
+        "D2_severity_ranking": 0,
+        "D3_root_cause": 0,
+        "D4_affected_component": 0,
+        "D5_temporal_urgency": 0,
+        "D6_cross_machine_correlation": 0,
+        "D7_action_recommendation": 1,
+        "D8_operator_explanation": 0
+      },
+      "45": {
+        "D1_detection": 1,
+        "D2_severity_ranking": 0,
+        "D3_root_cause": 1,
+        "D4_affected_component": 1,
+        "D5_temporal_urgency": 1,
+        "D6_cross_machine_correlation": 1,
+        "D7_action_recommendation": 1,
+        "D8_operator_explanation": 1
+      },
+      "47": {
+        "D1_detection": 1,
+        "D2_severity_ranking": 0,
+        "D3_root_cause": 0,
+        "D4_affected_component": 0,
+        "D5_temporal_urgency": 0,
+        "D6_cross_machine_correlation": 0,
+        "D7_action_recommendation": 1,
+        "D8_operator_explanation": 0
+      },
+      "49": {
+        "D1_detection": 1,
+        "D2_severity_ranking": 0,
+        "D3_root_cause": 0,
+        "D4_affected_component": 0,
+        "D5_temporal_urgency": 0,
+        "D6_cross_machine_correlation": 0,
+        "D7_action_recommendation": 1,
+        "D8_operator_explanation": 0
+      }
+    },
+    "Hybrid_QASAMAP": {
+      "1": {
+        "D1_detection": 1,
+        "D2_severity_ranking": 0,
+        "D3_root_cause": 0,
+        "D4_affected_component": 1,
+        "D5_temporal_urgency": 1,
+        "D6_cross_machine_correlation": 1,
+        "D7_action_recommendation": 1,
+        "D8_operator_explanation": 1
+      },
+      "3": {
+        "D1_detection": 1,
+        "D2_severity_ranking": 0,
+        "D3_root_cause": 0,
+        "D4_affected_component": 0,
+        "D5_temporal_urgency": 0,
+        "D6_cross_machine_correlation": 1,
+        "D7_action_recommendation": 1,
+        "D8_operator_explanation": 1
+      },
+      "5": {
+        "D1_detection": 1,
+        "D2_severity_ranking": 0,
+        "D3_root_cause": 0,
+        "D4_affected_component": 0,
+        "D5_temporal_urgency": 0,
+        "D6_cross_machine_correlation": 1,
+        "D7_action_recommendation": 1,
+        "D8_operator_explanation": 1
+      },
+      "7": {
+        "D1_detection": 1,
+        "D2_severity_ranking": 0,
+        "D3_root_cause": 0,
+        "D4_affected_component": 0,
+        "D5_temporal_urgency": 0,
+        "D6_cross_machine_correlation": 1,
+        "D7_action_recommendation": 1,
+        "D8_operator_explanation": 1
+      },
+      "9": {
+        "D1_detection": 1,
+        "D2_severity_ranking": 0,
+        "D3_root_cause": 0,
+        "D4_affected_component": 0,
+        "D5_temporal_urgency": 0,
+        "D6_cross_machine_correlation": 1,
+        "D7_action_recommendation": 1,
+        "D8_operator_explanation": 1
+      },
+      "11": {
+        "D1_detection": 1,
+        "D2_severity_ranking": 0,
+        "D3_root_cause": 0,
+        "D4_affected_component": 1,
+        "D5_temporal_urgency": 1,
+        "D6_cross_machine_correlation": 1,
+        "D7_action_recommendation": 1,
+        "D8_operator_explanation": 1
+      },
+      "13": {
+        "D1_detection": 1,
+        "D2_severity_ranking": 0,
+        "D3_root_cause": 0,
+        "D4_affected_component": 0,
+        "D5_temporal_urgency": 0,
+        "D6_cross_machine_correlation": 1,
+        "D7_action_recommendation": 1,
+        "D8_operator_explanation": 1
+      },
+      "15": {
+        "D1_detection": 1,
+        "D2_severity_ranking": 0,
+        "D3_root_cause": 0,
+        "D4_affected_component": 0,
+        "D5_temporal_urgency": 0,
+        "D6_cross_machine_correlation": 1,
+        "D7_action_recommendation": 1,
+        "D8_operator_explanation": 1
+      },
+      "17": {
+        "D1_detection": 1,
+        "D2_severity_ranking": 0,
+        "D3_root_cause": 0,
+        "D4_affected_component": 1,
+        "D5_temporal_urgency": 1,
+        "D6_cross_machine_correlation": 1,
+        "D7_action_recommendation": 1,
+        "D8_operator_explanation": 1
+      },
+      "19": {
+        "D1_detection": 1,
+        "D2_severity_ranking": 0,
+        "D3_root_cause": 0,
+        "D4_affected_component": 0,
+        "D5_temporal_urgency": 0,
+        "D6_cross_machine_correlation": 1,
+        "D7_action_recommendation": 1,
+        "D8_operator_explanation": 1
+      },
+      "21": {
+        "D1_detection": 1,
+        "D2_severity_ranking": 0,
+        "D3_root_cause": 0,
+        "D4_affected_component": 0,
+        "D5_temporal_urgency": 0,
+        "D6_cross_machine_correlation": 1,
+        "D7_action_recommendation": 1,
+        "D8_operator_explanation": 1
+      },
+      "23": {
+        "D1_detection": 1,
+        "D2_severity_ranking": 0,
+        "D3_root_cause": 0,
+        "D4_affected_component": 0,
+        "D5_temporal_urgency": 0,
+        "D6_cross_machine_correlation": 1,
+        "D7_action_recommendation": 1,
+        "D8_operator_explanation": 1
+      },
+      "25": {
+        "D1_detection": 1,
+        "D2_severity_ranking": 0,
+        "D3_root_cause": 0,
+        "D4_affected_component": 0,
+        "D5_temporal_urgency": 0,
+        "D6_cross_machine_correlation": 1,
+        "D7_action_recommendation": 1,
+        "D8_operator_explanation": 1
+      },
+      "27": {
+        "D1_detection": 1,
+        "D2_severity_ranking": 0,
+        "D3_root_cause": 0,
+        "D4_affected_component": 0,
+        "D5_temporal_urgency": 0,
+        "D6_cross_machine_correlation": 1,
+        "D7_action_recommendation": 1,
+        "D8_operator_explanation": 1
+      },
+      "29": {
+        "D1_detection": 1,
+        "D2_severity_ranking": 0,
+        "D3_root_cause": 0,
+        "D4_affected_component": 0,
+        "D5_temporal_urgency": 0,
+        "D6_cross_machine_correlation": 1,
+        "D7_action_recommendation": 1,
+        "D8_operator_explanation": 1
+      },
+      "31": {
+        "D1_detection": 1,
+        "D2_severity_ranking": 0,
+        "D3_root_cause": 0,
+        "D4_affected_component": 0,
+        "D5_temporal_urgency": 0,
+        "D6_cross_machine_correlation": 1,
+        "D7_action_recommendation": 1,
+        "D8_operator_explanation": 1
+      },
+      "33": {
+        "D1_detection": 1,
+        "D2_severity_ranking": 0,
+        "D3_root_cause": 0,
+        "D4_affected_component": 1,
+        "D5_temporal_urgency": 1,
+        "D6_cross_machine_correlation": 1,
+        "D7_action_recommendation": 1,
+        "D8_operator_explanation": 1
+      },
+      "35": {
+        "D1_detection": 1,
+        "D2_severity_ranking": 0,
+        "D3_root_cause": 0,
+        "D4_affected_component": 0,
+        "D5_temporal_urgency": 0,
+        "D6_cross_machine_correlation": 1,
+        "D7_action_recommendation": 1,
+        "D8_operator_explanation": 1
+      },
+      "37": {
+        "D1_detection": 1,
+        "D2_severity_ranking": 0,
+        "D3_root_cause": 0,
+        "D4_affected_component": 0,
+        "D5_temporal_urgency": 0,
+        "D6_cross_machine_correlation": 1,
+        "D7_action_recommendation": 1,
+        "D8_operator_explanation": 1
+      },
+      "39": {
+        "D1_detection": 1,
+        "D2_severity_ranking": 0,
+        "D3_root_cause": 0,
+        "D4_affected_component": 0,
+        "D5_temporal_urgency": 0,
+        "D6_cross_machine_correlation": 1,
+        "D7_action_recommendation": 1,
+        "D8_operator_explanation": 1
+      },
+      "41": {
+        "D1_detection": 1,
+        "D2_severity_ranking": 0,
+        "D3_root_cause": 0,
+        "D4_affected_component": 0,
+        "D5_temporal_urgency": 0,
+        "D6_cross_machine_correlation": 1,
+        "D7_action_recommendation": 1,
+        "D8_operator_explanation": 1
+      },
+      "43": {
+        "D1_detection": 1,
+        "D2_severity_ranking": 0,
+        "D3_root_cause": 0,
+        "D4_affected_component": 0,
+        "D5_temporal_urgency": 0,
+        "D6_cross_machine_correlation": 1,
+        "D7_action_recommendation": 1,
+        "D8_operator_explanation": 1
+      },
+      "45": {
+        "D1_detection": 1,
+        "D2_severity_ranking": 0,
+        "D3_root_cause": 0,
+        "D4_affected_component": 1,
+        "D5_temporal_urgency": 1,
+        "D6_cross_machine_correlation": 1,
+        "D7_action_recommendation": 1,
+        "D8_operator_explanation": 1
+      },
+      "47": {
+        "D1_detection": 1,
+        "D2_severity_ranking": 0,
+        "D3_root_cause": 0,
+        "D4_affected_component": 0,
+        "D5_temporal_urgency": 0,
+        "D6_cross_machine_correlation": 1,
+        "D7_action_recommendation": 1,
+        "D8_operator_explanation": 1
+      },
+      "49": {
+        "D1_detection": 1,
+        "D2_severity_ranking": 0,
+        "D3_root_cause": 0,
+        "D4_affected_component": 0,
+        "D5_temporal_urgency": 0,
+        "D6_cross_machine_correlation": 1,
+        "D7_action_recommendation": 1,
+        "D8_operator_explanation": 1
+      }
+    }
+  },
+  "totals_per_dimension": {
+    "Pure_ML": {
+      "D1_detection": 25,
+      "D2_severity_ranking": 0,
+      "D3_root_cause": 0,
+      "D4_affected_component": 0,
+      "D5_temporal_urgency": 0,
+      "D6_cross_machine_correlation": 0,
+      "D7_action_recommendation": 15,
+      "D8_operator_explanation": 0
+    },
+    "Pure_Classical": {
+      "D1_detection": 25,
+      "D2_severity_ranking": 0,
+      "D3_root_cause": 19,
+      "D4_affected_component": 0,
+      "D5_temporal_urgency": 0,
+      "D6_cross_machine_correlation": 25,
+      "D7_action_recommendation": 25,
+      "D8_operator_explanation": 0
+    },
+    "Pure_Agentic": {
+      "D1_detection": 25,
+      "D2_severity_ranking": 0,
+      "D3_root_cause": 5,
+      "D4_affected_component": 5,
+      "D5_temporal_urgency": 5,
+      "D6_cross_machine_correlation": 5,
+      "D7_action_recommendation": 25,
+      "D8_operator_explanation": 5
+    },
+    "Hybrid_QASAMAP": {
+      "D1_detection": 25,
+      "D2_severity_ranking": 0,
+      "D3_root_cause": 0,
+      "D4_affected_component": 5,
+      "D5_temporal_urgency": 5,
+      "D6_cross_machine_correlation": 25,
+      "D7_action_recommendation": 25,
+      "D8_operator_explanation": 25
+    }
+  },
+  "totals_overall": {
+    "Pure_ML": 40,
+    "Pure_Classical": 94,
+    "Pure_Agentic": 75,
+    "Hybrid_QASAMAP": 110
+  },
+  "pairwise_mcnemar": [
+    {
+      "dimension": "D1_detection",
+      "approach_A": "Pure_ML",
+      "approach_B": "Pure_Classical",
+      "n11": 25,
+      "n10": 0,
+      "n01": 0,
+      "n00": 0,
+      "chi2": 0.0,
+      "p_raw": 1.0,
+      "phi": 0.0
+    },
+    {
+      "dimension": "D1_detection",
+      "approach_A": "Pure_ML",
+      "approach_B": "Pure_Agentic",
+      "n11": 25,
+      "n10": 0,
+      "n01": 0,
+      "n00": 0,
+      "chi2": 0.0,
+      "p_raw": 1.0,
+      "phi": 0.0
+    },
+    {
+      "dimension": "D1_detection",
+      "approach_A": "Pure_ML",
+      "approach_B": "Hybrid_QASAMAP",
+      "n11": 25,
+      "n10": 0,
+      "n01": 0,
+      "n00": 0,
+      "chi2": 0.0,
+      "p_raw": 1.0,
+      "phi": 0.0
+    },
+    {
+      "dimension": "D1_detection",
+      "approach_A": "Pure_Classical",
+      "approach_B": "Pure_Agentic",
+      "n11": 25,
+      "n10": 0,
+      "n01": 0,
+      "n00": 0,
+      "chi2": 0.0,
+      "p_raw": 1.0,
+      "phi": 0.0
+    },
+    {
+      "dimension": "D1_detection",
+      "approach_A": "Pure_Classical",
+      "approach_B": "Hybrid_QASAMAP",
+      "n11": 25,
+      "n10": 0,
+      "n01": 0,
+      "n00": 0,
+      "chi2": 0.0,
+      "p_raw": 1.0,
+      "phi": 0.0
+    },
+    {
+      "dimension": "D1_detection",
+      "approach_A": "Pure_Agentic",
+      "approach_B": "Hybrid_QASAMAP",
+      "n11": 25,
+      "n10": 0,
+      "n01": 0,
+      "n00": 0,
+      "chi2": 0.0,
+      "p_raw": 1.0,
+      "phi": 0.0
+    },
+    {
+      "dimension": "D2_severity_ranking",
+      "approach_A": "Pure_ML",
+      "approach_B": "Pure_Classical",
+      "n11": 0,
+      "n10": 0,
+      "n01": 0,
+      "n00": 25,
+      "chi2": 0.0,
+      "p_raw": 1.0,
+      "phi": 0.0
+    },
+    {
+      "dimension": "D2_severity_ranking",
+      "approach_A": "Pure_ML",
+      "approach_B": "Pure_Agentic",
+      "n11": 0,
+      "n10": 0,
+      "n01": 0,
+      "n00": 25,
+      "chi2": 0.0,
+      "p_raw": 1.0,
+      "phi": 0.0
+    },
+    {
+      "dimension": "D2_severity_ranking",
+      "approach_A": "Pure_ML",
+      "approach_B": "Hybrid_QASAMAP",
+      "n11": 0,
+      "n10": 0,
+      "n01": 0,
+      "n00": 25,
+      "chi2": 0.0,
+      "p_raw": 1.0,
+      "phi": 0.0
+    },
+    {
+      "dimension": "D2_severity_ranking",
+      "approach_A": "Pure_Classical",
+      "approach_B": "Pure_Agentic",
+      "n11": 0,
+      "n10": 0,
+      "n01": 0,
+      "n00": 25,
+      "chi2": 0.0,
+      "p_raw": 1.0,
+      "phi": 0.0
+    },
+    {
+      "dimension": "D2_severity_ranking",
+      "approach_A": "Pure_Classical",
+      "approach_B": "Hybrid_QASAMAP",
+      "n11": 0,
+      "n10": 0,
+      "n01": 0,
+      "n00": 25,
+      "chi2": 0.0,
+      "p_raw": 1.0,
+      "phi": 0.0
+    },
+    {
+      "dimension": "D2_severity_ranking",
+      "approach_A": "Pure_Agentic",
+      "approach_B": "Hybrid_QASAMAP",
+      "n11": 0,
+      "n10": 0,
+      "n01": 0,
+      "n00": 25,
+      "chi2": 0.0,
+      "p_raw": 1.0,
+      "phi": 0.0
+    },
+    {
+      "dimension": "D3_root_cause",
+      "approach_A": "Pure_ML",
+      "approach_B": "Pure_Classical",
+      "n11": 0,
+      "n10": 0,
+      "n01": 19,
+      "n00": 6,
+      "chi2": null,
+      "p_raw": 0.0,
+      "phi": 0.0
+    },
+    {
+      "dimension": "D3_root_cause",
+      "approach_A": "Pure_ML",
+      "approach_B": "Pure_Agentic",
+      "n11": 0,
+      "n10": 0,
+      "n01": 5,
+      "n00": 20,
+      "chi2": null,
+      "p_raw": 0.0625,
+      "phi": 0.0
+    },
+    {
+      "dimension": "D3_root_cause",
+      "approach_A": "Pure_ML",
+      "approach_B": "Hybrid_QASAMAP",
+      "n11": 0,
+      "n10": 0,
+      "n01": 0,
+      "n00": 25,
+      "chi2": 0.0,
+      "p_raw": 1.0,
+      "phi": 0.0
+    },
+    {
+      "dimension": "D3_root_cause",
+      "approach_A": "Pure_Classical",
+      "approach_B": "Pure_Agentic",
+      "n11": 5,
+      "n10": 14,
+      "n01": 0,
+      "n00": 6,
+      "chi2": null,
+      "p_raw": 0.00012,
+      "phi": 0.281
+    },
+    {
+      "dimension": "D3_root_cause",
+      "approach_A": "Pure_Classical",
+      "approach_B": "Hybrid_QASAMAP",
+      "n11": 0,
+      "n10": 19,
+      "n01": 0,
+      "n00": 6,
+      "chi2": null,
+      "p_raw": 0.0,
+      "phi": 0.0
+    },
+    {
+      "dimension": "D3_root_cause",
+      "approach_A": "Pure_Agentic",
+      "approach_B": "Hybrid_QASAMAP",
+      "n11": 0,
+      "n10": 5,
+      "n01": 0,
+      "n00": 20,
+      "chi2": null,
+      "p_raw": 0.0625,
+      "phi": 0.0
+    },
+    {
+      "dimension": "D4_affected_component",
+      "approach_A": "Pure_ML",
+      "approach_B": "Pure_Classical",
+      "n11": 0,
+      "n10": 0,
+      "n01": 0,
+      "n00": 25,
+      "chi2": 0.0,
+      "p_raw": 1.0,
+      "phi": 0.0
+    },
+    {
+      "dimension": "D4_affected_component",
+      "approach_A": "Pure_ML",
+      "approach_B": "Pure_Agentic",
+      "n11": 0,
+      "n10": 0,
+      "n01": 5,
+      "n00": 20,
+      "chi2": null,
+      "p_raw": 0.0625,
+      "phi": 0.0
+    },
+    {
+      "dimension": "D4_affected_component",
+      "approach_A": "Pure_ML",
+      "approach_B": "Hybrid_QASAMAP",
+      "n11": 0,
+      "n10": 0,
+      "n01": 5,
+      "n00": 20,
+      "chi2": null,
+      "p_raw": 0.0625,
+      "phi": 0.0
+    },
+    {
+      "dimension": "D4_affected_component",
+      "approach_A": "Pure_Classical",
+      "approach_B": "Pure_Agentic",
+      "n11": 0,
+      "n10": 0,
+      "n01": 5,
+      "n00": 20,
+      "chi2": null,
+      "p_raw": 0.0625,
+      "phi": 0.0
+    },
+    {
+      "dimension": "D4_affected_component",
+      "approach_A": "Pure_Classical",
+      "approach_B": "Hybrid_QASAMAP",
+      "n11": 0,
+      "n10": 0,
+      "n01": 5,
+      "n00": 20,
+      "chi2": null,
+      "p_raw": 0.0625,
+      "phi": 0.0
+    },
+    {
+      "dimension": "D4_affected_component",
+      "approach_A": "Pure_Agentic",
+      "approach_B": "Hybrid_QASAMAP",
+      "n11": 5,
+      "n10": 0,
+      "n01": 0,
+      "n00": 20,
+      "chi2": 0.0,
+      "p_raw": 1.0,
+      "phi": 1.0
+    },
+    {
+      "dimension": "D5_temporal_urgency",
+      "approach_A": "Pure_ML",
+      "approach_B": "Pure_Classical",
+      "n11": 0,
+      "n10": 0,
+      "n01": 0,
+      "n00": 25,
+      "chi2": 0.0,
+      "p_raw": 1.0,
+      "phi": 0.0
+    },
+    {
+      "dimension": "D5_temporal_urgency",
+      "approach_A": "Pure_ML",
+      "approach_B": "Pure_Agentic",
+      "n11": 0,
+      "n10": 0,
+      "n01": 5,
+      "n00": 20,
+      "chi2": null,
+      "p_raw": 0.0625,
+      "phi": 0.0
+    },
+    {
+      "dimension": "D5_temporal_urgency",
+      "approach_A": "Pure_ML",
+      "approach_B": "Hybrid_QASAMAP",
+      "n11": 0,
+      "n10": 0,
+      "n01": 5,
+      "n00": 20,
+      "chi2": null,
+      "p_raw": 0.0625,
+      "phi": 0.0
+    },
+    {
+      "dimension": "D5_temporal_urgency",
+      "approach_A": "Pure_Classical",
+      "approach_B": "Pure_Agentic",
+      "n11": 0,
+      "n10": 0,
+      "n01": 5,
+      "n00": 20,
+      "chi2": null,
+      "p_raw": 0.0625,
+      "phi": 0.0
+    },
+    {
+      "dimension": "D5_temporal_urgency",
+      "approach_A": "Pure_Classical",
+      "approach_B": "Hybrid_QASAMAP",
+      "n11": 0,
+      "n10": 0,
+      "n01": 5,
+      "n00": 20,
+      "chi2": null,
+      "p_raw": 0.0625,
+      "phi": 0.0
+    },
+    {
+      "dimension": "D5_temporal_urgency",
+      "approach_A": "Pure_Agentic",
+      "approach_B": "Hybrid_QASAMAP",
+      "n11": 5,
+      "n10": 0,
+      "n01": 0,
+      "n00": 20,
+      "chi2": 0.0,
+      "p_raw": 1.0,
+      "phi": 1.0
+    },
+    {
+      "dimension": "D6_cross_machine_correlation",
+      "approach_A": "Pure_ML",
+      "approach_B": "Pure_Classical",
+      "n11": 0,
+      "n10": 0,
+      "n01": 25,
+      "n00": 0,
+      "chi2": 23.04,
+      "p_raw": 0.0,
+      "phi": 0.0
+    },
+    {
+      "dimension": "D6_cross_machine_correlation",
+      "approach_A": "Pure_ML",
+      "approach_B": "Pure_Agentic",
+      "n11": 0,
+      "n10": 0,
+      "n01": 5,
+      "n00": 20,
+      "chi2": null,
+      "p_raw": 0.0625,
+      "phi": 0.0
+    },
+    {
+      "dimension": "D6_cross_machine_correlation",
+      "approach_A": "Pure_ML",
+      "approach_B": "Hybrid_QASAMAP",
+      "n11": 0,
+      "n10": 0,
+      "n01": 25,
+      "n00": 0,
+      "chi2": 23.04,
+      "p_raw": 0.0,
+      "phi": 0.0
+    },
+    {
+      "dimension": "D6_cross_machine_correlation",
+      "approach_A": "Pure_Classical",
+      "approach_B": "Pure_Agentic",
+      "n11": 5,
+      "n10": 20,
+      "n01": 0,
+      "n00": 0,
+      "chi2": null,
+      "p_raw": 0.0,
+      "phi": 0.0
+    },
+    {
+      "dimension": "D6_cross_machine_correlation",
+      "approach_A": "Pure_Classical",
+      "approach_B": "Hybrid_QASAMAP",
+      "n11": 25,
+      "n10": 0,
+      "n01": 0,
+      "n00": 0,
+      "chi2": 0.0,
+      "p_raw": 1.0,
+      "phi": 0.0
+    },
+    {
+      "dimension": "D6_cross_machine_correlation",
+      "approach_A": "Pure_Agentic",
+      "approach_B": "Hybrid_QASAMAP",
+      "n11": 5,
+      "n10": 0,
+      "n01": 20,
+      "n00": 0,
+      "chi2": null,
+      "p_raw": 0.0,
+      "phi": 0.0
+    },
+    {
+      "dimension": "D7_action_recommendation",
+      "approach_A": "Pure_ML",
+      "approach_B": "Pure_Classical",
+      "n11": 15,
+      "n10": 0,
+      "n01": 10,
+      "n00": 0,
+      "chi2": null,
+      "p_raw": 0.00195,
+      "phi": 0.0
+    },
+    {
+      "dimension": "D7_action_recommendation",
+      "approach_A": "Pure_ML",
+      "approach_B": "Pure_Agentic",
+      "n11": 15,
+      "n10": 0,
+      "n01": 10,
+      "n00": 0,
+      "chi2": null,
+      "p_raw": 0.00195,
+      "phi": 0.0
+    },
+    {
+      "dimension": "D7_action_recommendation",
+      "approach_A": "Pure_ML",
+      "approach_B": "Hybrid_QASAMAP",
+      "n11": 15,
+      "n10": 0,
+      "n01": 10,
+      "n00": 0,
+      "chi2": null,
+      "p_raw": 0.00195,
+      "phi": 0.0
+    },
+    {
+      "dimension": "D7_action_recommendation",
+      "approach_A": "Pure_Classical",
+      "approach_B": "Pure_Agentic",
+      "n11": 25,
+      "n10": 0,
+      "n01": 0,
+      "n00": 0,
+      "chi2": 0.0,
+      "p_raw": 1.0,
+      "phi": 0.0
+    },
+    {
+      "dimension": "D7_action_recommendation",
+      "approach_A": "Pure_Classical",
+      "approach_B": "Hybrid_QASAMAP",
+      "n11": 25,
+      "n10": 0,
+      "n01": 0,
+      "n00": 0,
+      "chi2": 0.0,
+      "p_raw": 1.0,
+      "phi": 0.0
+    },
+    {
+      "dimension": "D7_action_recommendation",
+      "approach_A": "Pure_Agentic",
+      "approach_B": "Hybrid_QASAMAP",
+      "n11": 25,
+      "n10": 0,
+      "n01": 0,
+      "n00": 0,
+      "chi2": 0.0,
+      "p_raw": 1.0,
+      "phi": 0.0
+    },
+    {
+      "dimension": "D8_operator_explanation",
+      "approach_A": "Pure_ML",
+      "approach_B": "Pure_Classical",
+      "n11": 0,
+      "n10": 0,
+      "n01": 0,
+      "n00": 25,
+      "chi2": 0.0,
+      "p_raw": 1.0,
+      "phi": 0.0
+    },
+    {
+      "dimension": "D8_operator_explanation",
+      "approach_A": "Pure_ML",
+      "approach_B": "Pure_Agentic",
+      "n11": 0,
+      "n10": 0,
+      "n01": 5,
+      "n00": 20,
+      "chi2": null,
+      "p_raw": 0.0625,
+      "phi": 0.0
+    },
+    {
+      "dimension": "D8_operator_explanation",
+      "approach_A": "Pure_ML",
+      "approach_B": "Hybrid_QASAMAP",
+      "n11": 0,
+      "n10": 0,
+      "n01": 25,
+      "n00": 0,
+      "chi2": 23.04,
+      "p_raw": 0.0,
+      "phi": 0.0
+    },
+    {
+      "dimension": "D8_operator_explanation",
+      "approach_A": "Pure_Classical",
+      "approach_B": "Pure_Agentic",
+      "n11": 0,
+      "n10": 0,
+      "n01": 5,
+      "n00": 20,
+      "chi2": null,
+      "p_raw": 0.0625,
+      "phi": 0.0
+    },
+    {
+      "dimension": "D8_operator_explanation",
+      "approach_A": "Pure_Classical",
+      "approach_B": "Hybrid_QASAMAP",
+      "n11": 0,
+      "n10": 0,
+      "n01": 25,
+      "n00": 0,
+      "chi2": 23.04,
+      "p_raw": 0.0,
+      "phi": 0.0
+    },
+    {
+      "dimension": "D8_operator_explanation",
+      "approach_A": "Pure_Agentic",
+      "approach_B": "Hybrid_QASAMAP",
+      "n11": 5,
+      "n10": 0,
+      "n01": 20,
+      "n00": 0,
+      "chi2": null,
+      "p_raw": 0.0,
+      "phi": 0.0
+    }
+  ],
+  "cochran_q_per_dimension": [
+    {
+      "dimension": "D1_detection",
+      "Q": 0,
+      "df": 3,
+      "p": 1.0
+    },
+    {
+      "dimension": "D2_severity_ranking",
+      "Q": 0,
+      "df": 3,
+      "p": 1.0
+    },
+    {
+      "dimension": "D3_root_cause",
+      "Q": 46.839,
+      "df": 3,
+      "p": 0.0
+    },
+    {
+      "dimension": "D4_affected_component",
+      "Q": 15.0,
+      "df": 3,
+      "p": 0.00198
+    },
+    {
+      "dimension": "D5_temporal_urgency",
+      "Q": 15.0,
+      "df": 3,
+      "p": 0.00198
+    },
+    {
+      "dimension": "D6_cross_machine_correlation",
+      "Q": 65.526,
+      "df": 3,
+      "p": 0.0
+    },
+    {
+      "dimension": "D7_action_recommendation",
+      "Q": 30.0,
+      "df": 3,
+      "p": 0.0
+    },
+    {
+      "dimension": "D8_operator_explanation",
+      "Q": 63.75,
+      "df": 3,
+      "p": 0.0
+    }
+  ]
+}

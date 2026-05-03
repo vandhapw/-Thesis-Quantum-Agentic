@@ -1,0 +1,341 @@
+{
+  "metadata": {
+    "experiment": "E5_OOD_Robustness",
+    "ethical_disclosure": "Synthetic perturbations applied to synthetic digital-twin output. Findings represent 'behavior under controlled perturbations' not evidence of real-world OOD robustness. Real-world validation requires independent industrial datasets.",
+    "n_test_machines": 25,
+    "n_positives_in_GT": 19,
+    "perturbations": [
+      "P1_sensor_failure",
+      "P2_combined_failure",
+      "P3_env_shift",
+      "P4_drift",
+      "P5_adversarial"
+    ],
+    "approaches": [
+      "Pure_Rule_Based",
+      "Fleet_Relative",
+      "Sliding_Window",
+      "Hybrid_Combined"
+    ]
+  },
+  "baseline_metrics": {
+    "Pure_Rule_Based": {
+      "TP": 12,
+      "FP": 4,
+      "FN": 7,
+      "TN": 2,
+      "precision": 0.75,
+      "recall": 0.6316,
+      "f1_score": 0.6857,
+      "accuracy": 0.56,
+      "n": 25
+    },
+    "Fleet_Relative": {
+      "TP": 11,
+      "FP": 2,
+      "FN": 8,
+      "TN": 4,
+      "precision": 0.8462,
+      "recall": 0.5789,
+      "f1_score": 0.6875,
+      "accuracy": 0.6,
+      "n": 25
+    },
+    "Sliding_Window": {
+      "TP": 7,
+      "FP": 3,
+      "FN": 12,
+      "TN": 3,
+      "precision": 0.7,
+      "recall": 0.3684,
+      "f1_score": 0.4828,
+      "accuracy": 0.4,
+      "n": 25
+    },
+    "Hybrid_Combined": {
+      "TP": 16,
+      "FP": 5,
+      "FN": 3,
+      "TN": 1,
+      "precision": 0.7619,
+      "recall": 0.8421,
+      "f1_score": 0.8,
+      "accuracy": 0.68,
+      "n": 25
+    }
+  },
+  "perturbed_metrics": {
+    "P1_sensor_failure": {
+      "Pure_Rule_Based": {
+        "TP": 12,
+        "FP": 4,
+        "FN": 7,
+        "TN": 2,
+        "precision": 0.75,
+        "recall": 0.6316,
+        "f1_score": 0.6857,
+        "accuracy": 0.56,
+        "n": 25
+      },
+      "Fleet_Relative": {
+        "TP": 9,
+        "FP": 2,
+        "FN": 10,
+        "TN": 4,
+        "precision": 0.8182,
+        "recall": 0.4737,
+        "f1_score": 0.6,
+        "accuracy": 0.52,
+        "n": 25
+      },
+      "Sliding_Window": {
+        "TP": 5,
+        "FP": 4,
+        "FN": 14,
+        "TN": 2,
+        "precision": 0.5556,
+        "recall": 0.2632,
+        "f1_score": 0.3571,
+        "accuracy": 0.28,
+        "n": 25
+      },
+      "Hybrid_Combined": {
+        "TP": 14,
+        "FP": 5,
+        "FN": 5,
+        "TN": 1,
+        "precision": 0.7368,
+        "recall": 0.7368,
+        "f1_score": 0.7368,
+        "accuracy": 0.6,
+        "n": 25
+      }
+    },
+    "P2_combined_failure": {
+      "Pure_Rule_Based": {
+        "TP": 13,
+        "FP": 4,
+        "FN": 6,
+        "TN": 2,
+        "precision": 0.7647,
+        "recall": 0.6842,
+        "f1_score": 0.7222,
+        "accuracy": 0.6,
+        "n": 25
+      },
+      "Fleet_Relative": {
+        "TP": 11,
+        "FP": 2,
+        "FN": 8,
+        "TN": 4,
+        "precision": 0.8462,
+        "recall": 0.5789,
+        "f1_score": 0.6875,
+        "accuracy": 0.6,
+        "n": 25
+      },
+      "Sliding_Window": {
+        "TP": 11,
+        "FP": 3,
+        "FN": 8,
+        "TN": 3,
+        "precision": 0.7857,
+        "recall": 0.5789,
+        "f1_score": 0.6667,
+        "accuracy": 0.56,
+        "n": 25
+      },
+      "Hybrid_Combined": {
+        "TP": 16,
+        "FP": 4,
+        "FN": 3,
+        "TN": 2,
+        "precision": 0.8,
+        "recall": 0.8421,
+        "f1_score": 0.8205,
+        "accuracy": 0.72,
+        "n": 25
+      }
+    },
+    "P3_env_shift": {
+      "Pure_Rule_Based": {
+        "TP": 15,
+        "FP": 5,
+        "FN": 4,
+        "TN": 1,
+        "precision": 0.75,
+        "recall": 0.7895,
+        "f1_score": 0.7692,
+        "accuracy": 0.64,
+        "n": 25
+      },
+      "Fleet_Relative": {
+        "TP": 11,
+        "FP": 2,
+        "FN": 8,
+        "TN": 4,
+        "precision": 0.8462,
+        "recall": 0.5789,
+        "f1_score": 0.6875,
+        "accuracy": 0.6,
+        "n": 25
+      },
+      "Sliding_Window": {
+        "TP": 11,
+        "FP": 3,
+        "FN": 8,
+        "TN": 3,
+        "precision": 0.7857,
+        "recall": 0.5789,
+        "f1_score": 0.6667,
+        "accuracy": 0.56,
+        "n": 25
+      },
+      "Hybrid_Combined": {
+        "TP": 17,
+        "FP": 5,
+        "FN": 2,
+        "TN": 1,
+        "precision": 0.7727,
+        "recall": 0.8947,
+        "f1_score": 0.8293,
+        "accuracy": 0.72,
+        "n": 25
+      }
+    },
+    "P4_drift": {
+      "Pure_Rule_Based": {
+        "TP": 12,
+        "FP": 4,
+        "FN": 7,
+        "TN": 2,
+        "precision": 0.75,
+        "recall": 0.6316,
+        "f1_score": 0.6857,
+        "accuracy": 0.56,
+        "n": 25
+      },
+      "Fleet_Relative": {
+        "TP": 12,
+        "FP": 2,
+        "FN": 7,
+        "TN": 4,
+        "precision": 0.8571,
+        "recall": 0.6316,
+        "f1_score": 0.7273,
+        "accuracy": 0.64,
+        "n": 25
+      },
+      "Sliding_Window": {
+        "TP": 11,
+        "FP": 3,
+        "FN": 8,
+        "TN": 3,
+        "precision": 0.7857,
+        "recall": 0.5789,
+        "f1_score": 0.6667,
+        "accuracy": 0.56,
+        "n": 25
+      },
+      "Hybrid_Combined": {
+        "TP": 16,
+        "FP": 4,
+        "FN": 3,
+        "TN": 2,
+        "precision": 0.8,
+        "recall": 0.8421,
+        "f1_score": 0.8205,
+        "accuracy": 0.72,
+        "n": 25
+      }
+    },
+    "P5_adversarial": {
+      "Pure_Rule_Based": {
+        "TP": 13,
+        "FP": 4,
+        "FN": 6,
+        "TN": 2,
+        "precision": 0.7647,
+        "recall": 0.6842,
+        "f1_score": 0.7222,
+        "accuracy": 0.6,
+        "n": 25
+      },
+      "Fleet_Relative": {
+        "TP": 11,
+        "FP": 2,
+        "FN": 8,
+        "TN": 4,
+        "precision": 0.8462,
+        "recall": 0.5789,
+        "f1_score": 0.6875,
+        "accuracy": 0.6,
+        "n": 25
+      },
+      "Sliding_Window": {
+        "TP": 8,
+        "FP": 2,
+        "FN": 11,
+        "TN": 4,
+        "precision": 0.8,
+        "recall": 0.4211,
+        "f1_score": 0.5517,
+        "accuracy": 0.48,
+        "n": 25
+      },
+      "Hybrid_Combined": {
+        "TP": 16,
+        "FP": 4,
+        "FN": 3,
+        "TN": 2,
+        "precision": 0.8,
+        "recall": 0.8421,
+        "f1_score": 0.8205,
+        "accuracy": 0.72,
+        "n": 25
+      }
+    }
+  },
+  "retention_matrix": {
+    "Pure_Rule_Based": {
+      "P1_sensor_failure": 1.0,
+      "P2_combined_failure": 1.0532302756307423,
+      "P3_env_shift": 1.1217733702785475,
+      "P4_drift": 1.0,
+      "P5_adversarial": 1.0532302756307423
+    },
+    "Fleet_Relative": {
+      "P1_sensor_failure": 0.8727272727272727,
+      "P2_combined_failure": 1.0,
+      "P3_env_shift": 1.0,
+      "P4_drift": 1.057890909090909,
+      "P5_adversarial": 1.0
+    },
+    "Sliding_Window": {
+      "P1_sensor_failure": 0.7396437448218723,
+      "P2_combined_failure": 1.3809030654515326,
+      "P3_env_shift": 1.3809030654515326,
+      "P4_drift": 1.3809030654515326,
+      "P5_adversarial": 1.1427091963545981
+    },
+    "Hybrid_Combined": {
+      "P1_sensor_failure": 0.9209999999999999,
+      "P2_combined_failure": 1.025625,
+      "P3_env_shift": 1.036625,
+      "P4_drift": 1.025625,
+      "P5_adversarial": 1.025625
+    }
+  },
+  "mean_retention_per_approach": {
+    "Pure_Rule_Based": 1.0456467843080064,
+    "Fleet_Relative": 0.9861236363636363,
+    "Sliding_Window": 1.2050124275062137,
+    "Hybrid_Combined": 1.0069
+  },
+  "stdev_retention_per_approach": {
+    "Pure_Rule_Based": 0.04489439521396302,
+    "Fleet_Relative": 0.06097038153721352,
+    "Sliding_Window": 0.2503047154912287,
+    "Hybrid_Combined": 0.043160775016211204
+  }
+}
