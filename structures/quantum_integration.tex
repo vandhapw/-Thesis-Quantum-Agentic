@@ -1,0 +1,61 @@
+\subsection{Motivation for Quantum Computing Integration}
+
+The motivation for incorporating quantum computing into QASAMAP is grounded in two distinct computational challenges revealed by the dataset analysis. The first challenge is multi-sensor risk encoding under class imbalance: the five sensor modalities exhibit complex nonlinear inter-sensor relationships, and the severe failure class imbalance (Electrical Fault: 1,014 instances vs.\ Normal: 91,899) means that minority failure patterns occupy a small, non-convex region of the classical feature space that threshold-based classifiers fail to capture reliably. Quantum encoding in Hilbert space offers a principled mechanism for representing these complex multi-sensor risk combinations as quantum expectation values that carry richer information than individual sensor thresholds. The second challenge is the combinatorial complexity of maintenance scheduling: with 50 machines each generating a binary maintenance decision variable and pairwise conflict constraints, the scheduling problem belongs to the NP-hard combinatorial optimization class for which quantum algorithms offer provable asymptotic advantages at sufficient scale.
+
+All quantum computing components in QASAMAP are implemented in \texttt{quantum\_agent.py} using Qiskit Aer statevector simulation. The three components are: (1) the \texttt{PauliZRiskEncoder} for multi-sensor quantum risk encoding; (2) the \texttt{QuantumAnnealingOptimizer} for QUBO-based machine priority ranking; and (3) the \texttt{QAOAScheduler} for maintenance time-slot assignment. These three components address risk sensing, prioritization, and scheduling respectively, forming a complete quantum-enhanced decision pipeline that operates once per machine batch before the per-machine agentic reasoning chain begins.
+
+\subsection{Quantum Foundations: Superposition, Entanglement, and Expectation Values}
+
+Three quantum mechanical principles underpin the QASAMAP quantum layer. Superposition enables a qubit to exist in a continuous linear combination of basis states $\alpha|0\rangle + \beta|1\rangle$ (where $|\alpha|^2 + |\beta|^2 = 1$), allowing a quantum circuit to represent a sensor value as a continuous probability amplitude rather than a discrete binary variable. In the \texttt{PauliZRiskEncoder}, a Hadamard gate $H$ creates an equal superposition $\frac{1}{\sqrt{2}}(|0\rangle + |1\rangle)$, and a subsequent $R_Z(\theta)$ rotation encodes the normalised sensor value as a phase shift, producing a state whose Pauli-Z expectation $\langle Z \rangle = \cos(\theta)$ varies continuously from $+1$ (safe) to $-1$ (danger) as $\theta$ ranges from $0$ to $\pi$.
+
+Entanglement, created by CNOT gates coupling adjacent sensor qubits, establishes quantum correlations between sensor modalities such that the composite state of the 5-qubit register cannot be factored into independent single-qubit states. In the \texttt{PauliZRiskEncoder}, four CNOT gates between consecutive qubit pairs $(q_0, q_1)$, $(q_1, q_2)$, $(q_2, q_3)$, $(q_3, q_4)$ capture pairwise inter-sensor correlations --- for example, the joint contribution of simultaneously elevated temperature and vibration to the machine's composite risk level.
+
+Expectation values provide the classical output of the quantum circuit. After the $H$--$R_Z$--CNOT gate sequence and measurement, the per-sensor Pauli-Z expectation is analytically computed as $\langle Z_i \rangle = \cos(\pi \cdot \mathrm{norm}_i)$, where $\mathrm{norm}_i \in [0,1]$ is the sensor value normalised against its physical operating bounds stored in \texttt{SENSOR\_BOUNDS}. The composite weighted expectation $\langle Z \rangle_c = \sum_i w_i \langle Z_i \rangle$ (weights: temperature 0.30, vibration 0.30, humidity 0.15, pressure 0.15, energy 0.10) provides a single scalar quantum risk indicator per machine that integrates all five sensor channels into a physically meaningful and interpretable risk score.
+
+\subsection{Pauli-Z Multi-Sensor Risk Encoding}
+
+The \texttt{PauliZRiskEncoder} class implements the core quantum sensing component of QASAMAP. For each machine event, the encoder constructs a 5-qubit circuit, executes it on the Qiskit Aer \texttt{AerSimulator} with statevector method, and returns a per-machine result dictionary containing the per-sensor $\langle Z_i \rangle$ values, the composite $\langle Z \rangle_c$, the quantum risk label, the circuit depth, and the normalised sensor values used as circuit parameters.
+
+The quantum risk label is determined by the following thresholds applied to $\langle Z \rangle_c$:
+\begin{itemize}
+    \item \texttt{QUANTUM-ANOMALY}: $\langle Z \rangle_c < -0.20$ --- composite sensor state in the quantum danger zone
+    \item \texttt{QUANTUM-WARN}: $-0.20 \leq \langle Z \rangle_c < 0.30$ --- composite state in the quantum warning zone
+    \item \texttt{QUANTUM-MARGINAL}: $0.30 \leq \langle Z \rangle_c < 0.60$ --- composite state in the quantum marginal zone
+    \item \texttt{QUANTUM-NORMAL}: $\langle Z \rangle_c \geq 0.60$ --- composite state in the safe zone
+\end{itemize}
+
+The key advantage of this encoding over classical threshold-based risk assessment is that $\langle Z \rangle_c$ integrates all five sensor channels simultaneously through the weighted sum of cosine-encoded expectations. A machine with, for example, three sensors slightly below their individual warning thresholds may produce a composite $\langle Z \rangle_c$ below $-0.20$ --- triggering a \texttt{QUANTUM-ANOMALY} label even though no individual sensor would trigger a classical warning. This sensitivity to sub-threshold multi-sensor risk combinations is the primary mechanism by which the quantum layer expands machine coverage in the experimental evaluation.
+
+\subsection{QUBO-Based Quantum Annealing for Machine Prioritization}
+
+The \texttt{QuantumAnnealingOptimizer} class formulates the maintenance prioritization problem as a Quadratic Unconstrained Binary Optimization (QUBO) problem. The QUBO objective minimizes the energy:
+\begin{equation}
+E(\mathbf{x}) = \mathbf{x}^T Q \mathbf{x} = -\sum_i w_i x_i + \frac{\lambda}{2} \sum_{i \neq j} x_i x_j
+\label{eq:qubo}
+\end{equation}
+where $x_i \in \{0,1\}$ is the binary maintenance selection variable for machine $i$, $w_i$ is the machine's quantum risk score from the Pauli-Z encoder, and $\lambda = 1.5$ is a penalty coefficient that discourages selecting all machines simultaneously. The diagonal terms $-w_i$ reward selecting high-risk machines (lower energy for high $w_i$ when $x_i = 1$), while the off-diagonal terms $+\lambda/2$ penalise over-selection (energy increases when multiple $x_i = 1$ simultaneously).
+
+The QUBO is solved via simulated annealing with 500 iterations and exponential cooling from $T = 5.0$ to $T_{\min} = 10^{-4}$ with cooling factor $\alpha = \exp(\ln(T_{\min}/T) / \text{iterations})$. At each iteration, a random bit flip is proposed and accepted if it reduces energy, or with Metropolis probability $\exp(-\Delta E / T)$ if it increases energy. The resulting binary vector $\mathbf{x}^*$ identifies the selected machines, and a full priority ranking is produced by sorting all machines by descending quantum risk score. In the experimental evaluation, Machine 32 is selected as the highest-priority machine with QUBO energy $-0.5144$, driven by its humidity Pauli-Z value of $-0.8704$.
+
+\subsection{QAOA for Maintenance Time-Slot Scheduling}
+
+The \texttt{QAOAScheduler} class assigns all machines to maintenance time slots (Slot~A: IMMEDIATE/URGENT; Slot~B: PLANNED/ROUTINE) using the Quantum Approximate Optimisation Algorithm (QAOA). The scheduling problem is formulated as a MaxCut problem on a machine conflict graph in which adjacent machines (defined by sequential ordering) conflict if scheduled simultaneously. The problem Hamiltonian is:
+\begin{equation}
+H_P = \frac{1}{2} \sum_{(i,j) \in E} (I - Z_i Z_j) - \sum_i r_i \cdot 0.3 \cdot Z_i
+\label{eq:qaoa_hamiltonian}
+\end{equation}
+where the first term maximises the cut (separating conflicting machines into different slots) and the second term provides Pauli-Z bias terms that steer high-risk machines (large $r_i$) toward Slot~A. The bias coefficient 0.3 is chosen to provide a strong but non-dominant influence that can be overcome by the MaxCut term when conflict constraints require high-risk machines to be separated across slots.
+
+The QAOA circuit uses a \texttt{QAOAAnsatz} with $p = 2$ repetitions, implemented via Qiskit's \texttt{QAOAAnsatz} class. The variational parameters are optimised via COBYLA with a maximum of 150 iterations, using the Qiskit Aer \texttt{EstimatorV2} primitive to evaluate the Hamiltonian expectation. The optimal bitstring from 1024 measurement shots determines the final slot assignment: qubit $i$ in state $|0\rangle$ assigns machine $i$ to Slot~A (IMMEDIATE/URGENT), and state $|1\rangle$ assigns it to Slot~B (PLANNED/ROUTINE).
+
+\subsection{Quantum Override Mechanism}
+
+The quantum override mechanism is the integration point between the quantum layer and the agentic pipeline. Implemented in the \texttt{should\_quantum\_override} method of \texttt{QuantumOrchestrator}, the mechanism evaluates three conditions for each machine: (1) its Pauli-Z label is \texttt{QUANTUM-ANOMALY} or \texttt{QUANTUM-WARN}; (2) it was selected by the QUBO annealer; or (3) it was assigned to Slot~A with quantum risk above 0.40. If any condition holds, the machine is escalated from passive monitoring to the full four-agent reasoning chain, bypassing the classical \texttt{auto-LOW-skip} rule.
+
+In the experimental evaluation, the quantum override is triggered for 5 out of 7 machines (M-1, M-2, M-3, M-4, M-32, M-40). Machine~47, with $\langle Z \rangle_c = +0.3608$ and quantum risk 0.3196, correctly remains in passive monitoring, demonstrating that the override mechanism applies principled selectivity rather than indiscriminately escalating all machines. The override reason is recorded in the \texttt{ContextMemoryStore} decision log for full traceability.
+
+\subsection{Quantum Circuit Simulation and Hardware Considerations}
+
+All quantum circuits in QASAMAP are executed on the Qiskit Aer \texttt{AerSimulator} using the statevector method, which provides exact quantum state amplitudes without shot noise. This simulation environment enables deterministic, reproducible circuit evaluations suitable for development and validation, but represents an idealised scenario that assumes perfect qubit fidelity, zero gate error rates, and unlimited coherence time.
+
+The transition to physical quantum hardware (NISQ processors from IBM Quantum, Google Quantum AI, or IonQ) will require addressing several practical constraints. Gate error rates on current NISQ hardware (typically $10^{-3}$--$10^{-2}$ for two-qubit gates) will introduce noise into the $\langle Z_i \rangle$ expectation values, potentially blurring the boundary between \texttt{QUANTUM-WARN} and \texttt{QUANTUM-MARGINAL} risk labels. Qubit decoherence limits the executable circuit depth; the 5-qubit Pauli-Z circuit with depth 3 (H, RZ, CNOT layers) is within the coherence budget of current superconducting processors, while the QAOA circuit depth scales with the number of repetitions $p$ and may require error mitigation techniques such as zero-noise extrapolation for $p > 2$. The limited qubit connectivity of physical processors may also require additional SWAP gates to implement the linear CNOT chain, increasing circuit depth and error accumulation. These hardware-specific considerations constitute the primary motivation for the physical hardware validation identified as a future research direction in Chapter~9.

@@ -1,0 +1,45 @@
+% --- Packages ---
+\usepackage[a4paper,top=32mm,bottom=35mm,left=38mm,right=38mm]{geometry}
+\usepackage{graphicx}
+\usepackage{setspace}
+\usepackage{titlesec}
+\usepackage{tocloft}
+\usepackage{appendix}
+\usepackage{footmisc}
+\usepackage{caption}
+\usepackage{lmodern} % fallback font, replace with Shinmyungjo if available
+\usepackage{kotex}   % for Korean support (Hangul), works with pdfLaTeX
+\usepackage{url}
+\usepackage{hyperref}
+\usepackage{amsmath}
+
+% --- Font Setup ---
+\renewcommand{\rmdefault}{ptm} % Times Roman as fallback for Shinmyungjo
+\renewcommand{\footnotelayout}{\fontsize{10pt}{12pt}\selectfont}
+
+% --- Line Spacing ---
+\setstretch{1.5}
+
+% --- Heading Styles ---
+\titleformat{\chapter}[display]
+  {\normalfont\bfseries\centering\fontsize{15pt}{18pt}}{\chaptername\ \thechapter}{10pt}{\Huge}
+
+\titleformat{\section}
+  {\normalfont\bfseries\fontsize{13pt}{16pt}}{\thesection}{1em}{}
+
+\titleformat{\subsection}
+  {\normalfont\fontsize{12pt}{14pt}}{\thesubsection}{1em}{}
+
+\titleformat{\subsubsection}
+  {\normalfont\fontsize{11pt}{13pt}}{\thesubsubsection}{1em}{}
+
+% --- Table and Figure Captions ---
+\captionsetup[table]{font=bf,labelfont=bf,justification=raggedright,font=small}
+\captionsetup[figure]{font=bf,labelfont=bf,justification=centering,font=small}
+
+% --- Table of Contents Formatting ---
+\renewcommand{\cfttoctitlefont}{\centering\bfseries\fontsize{15pt}{18pt}\selectfont}
+\renewcommand{\cftchapfont}{\bfseries\fontsize{13pt}{15pt}\selectfont}
+\renewcommand{\cftsecfont}{\fontsize{12pt}{14pt}\selectfont}
+\renewcommand{\cftsubsecfont}{\fontsize{11pt}{13pt}\selectfont}
+
