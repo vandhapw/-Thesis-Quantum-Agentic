@@ -1,0 +1,316 @@
+size,N,D,E,seed,nv,solver,obj,makespan,feasible,violations,wall_clock_s,skipped,n_assignments,skip_reason
+Small,5,1,1,42,45,Greedy,2009.0,9.0,False,"{'C1_unassigned': 0, 'C1_double': 0, 'C2_overlap': 2, 'C4_spillover': 0}",0.0,False,,
+Small,5,1,1,42,45,GA,2009.0,9.0,False,"{'C1_unassigned': 0, 'C1_double': 0, 'C2_overlap': 2, 'C4_spillover': 0}",0.18155288696289062,False,5.0,
+Small,5,1,1,42,45,SA,2009.0,9.0,False,"{'C1_unassigned': 0, 'C1_double': 0, 'C2_overlap': 2, 'C4_spillover': 0}",0.021028995513916016,False,5.0,
+Small,5,1,1,42,45,TS,2009.0,9.0,False,"{'C1_unassigned': 0, 'C1_double': 0, 'C2_overlap': 2, 'C4_spillover': 0}",0.1090695858001709,False,5.0,
+Small,5,1,1,42,45,QA_neal,1008.0,8.0,False,"{'C1_unassigned': 1, 'C1_double': 0, 'C2_overlap': 0, 'C4_spillover': 0}",1.36618971824646,False,4.0,
+Small,5,1,1,42,45,SBM,5010.0,10.0,False,"{'C1_unassigned': 0, 'C1_double': 0, 'C2_overlap': 3, 'C4_spillover': 2}",0.005999326705932617,False,5.0,
+Small,5,1,1,42,45,QAOA_p2,,,,,,True,,scheduling QUBO nv > 18 even at smallest instance; see E-Q1 V1 for QAOA scaling evaluation
+Small,5,1,1,7,45,Greedy,1009.0,9.0,False,"{'C1_unassigned': 0, 'C1_double': 0, 'C2_overlap': 1, 'C4_spillover': 0}",0.0,False,,
+Small,5,1,1,7,45,GA,1009.0,9.0,False,"{'C1_unassigned': 0, 'C1_double': 0, 'C2_overlap': 1, 'C4_spillover': 0}",0.1790025234222412,False,5.0,
+Small,5,1,1,7,45,SA,1009.0,9.0,False,"{'C1_unassigned': 0, 'C1_double': 0, 'C2_overlap': 1, 'C4_spillover': 0}",0.02499985694885254,False,5.0,
+Small,5,1,1,7,45,TS,1009.0,9.0,False,"{'C1_unassigned': 0, 'C1_double': 0, 'C2_overlap': 1, 'C4_spillover': 0}",0.12104058265686035,False,5.0,
+Small,5,1,1,7,45,QA_neal,1011.0,11.0,False,"{'C1_unassigned': 0, 'C1_double': 0, 'C2_overlap': 0, 'C4_spillover': 1}",0.826930046081543,False,5.0,
+Small,5,1,1,7,45,SBM,2009.0,9.0,False,"{'C1_unassigned': 1, 'C1_double': 0, 'C2_overlap': 1, 'C4_spillover': 0}",0.0049970149993896484,False,4.0,
+Small,5,1,1,7,45,QAOA_p2,,,,,,True,,scheduling QUBO nv > 18 even at smallest instance; see E-Q1 V1 for QAOA scaling evaluation
+Small,5,1,1,1234,45,Greedy,8.0,8.0,True,"{'C1_unassigned': 0, 'C1_double': 0, 'C2_overlap': 0, 'C4_spillover': 0}",0.0,False,,
+Small,5,1,1,1234,45,GA,8.0,8.0,True,"{'C1_unassigned': 0, 'C1_double': 0, 'C2_overlap': 0, 'C4_spillover': 0}",0.1670217514038086,False,5.0,
+Small,5,1,1,1234,45,SA,8.0,8.0,True,"{'C1_unassigned': 0, 'C1_double': 0, 'C2_overlap': 0, 'C4_spillover': 0}",0.018036603927612305,False,5.0,
+Small,5,1,1,1234,45,TS,8.0,8.0,True,"{'C1_unassigned': 0, 'C1_double': 0, 'C2_overlap': 0, 'C4_spillover': 0}",0.08399200439453125,False,5.0,
+Small,5,1,1,1234,45,QA_neal,8.0,8.0,True,"{'C1_unassigned': 0, 'C1_double': 0, 'C2_overlap': 0, 'C4_spillover': 0}",0.8005359172821045,False,5.0,
+Small,5,1,1,1234,45,SBM,8.0,8.0,True,"{'C1_unassigned': 0, 'C1_double': 0, 'C2_overlap': 0, 'C4_spillover': 0}",0.0060160160064697266,False,5.0,
+Small,5,1,1,1234,45,QAOA_p2,,,,,,True,,scheduling QUBO nv > 18 even at smallest instance; see E-Q1 V1 for QAOA scaling evaluation
+Small,5,1,1,100,45,Greedy,8.0,8.0,True,"{'C1_unassigned': 0, 'C1_double': 0, 'C2_overlap': 0, 'C4_spillover': 0}",0.0,False,,
+Small,5,1,1,100,45,GA,8.0,8.0,True,"{'C1_unassigned': 0, 'C1_double': 0, 'C2_overlap': 0, 'C4_spillover': 0}",0.17099261283874512,False,5.0,
+Small,5,1,1,100,45,SA,8.0,8.0,True,"{'C1_unassigned': 0, 'C1_double': 0, 'C2_overlap': 0, 'C4_spillover': 0}",0.01897597312927246,False,5.0,
+Small,5,1,1,100,45,TS,8.0,8.0,True,"{'C1_unassigned': 0, 'C1_double': 0, 'C2_overlap': 0, 'C4_spillover': 0}",0.09600090980529785,False,5.0,
+Small,5,1,1,100,45,QA_neal,8.0,8.0,True,"{'C1_unassigned': 0, 'C1_double': 0, 'C2_overlap': 0, 'C4_spillover': 0}",0.7871277332305908,False,5.0,
+Small,5,1,1,100,45,SBM,9.0,9.0,True,"{'C1_unassigned': 0, 'C1_double': 0, 'C2_overlap': 0, 'C4_spillover': 0}",0.0059986114501953125,False,5.0,
+Small,5,1,1,100,45,QAOA_p2,,,,,,True,,scheduling QUBO nv > 18 even at smallest instance; see E-Q1 V1 for QAOA scaling evaluation
+Small,5,1,1,200,45,Greedy,2009.0,9.0,False,"{'C1_unassigned': 0, 'C1_double': 0, 'C2_overlap': 2, 'C4_spillover': 0}",0.0,False,,
+Small,5,1,1,200,45,GA,2009.0,9.0,False,"{'C1_unassigned': 0, 'C1_double': 0, 'C2_overlap': 2, 'C4_spillover': 0}",0.17220616340637207,False,5.0,
+Small,5,1,1,200,45,SA,2009.0,9.0,False,"{'C1_unassigned': 0, 'C1_double': 0, 'C2_overlap': 2, 'C4_spillover': 0}",0.019997596740722656,False,5.0,
+Small,5,1,1,200,45,TS,2009.0,9.0,False,"{'C1_unassigned': 0, 'C1_double': 0, 'C2_overlap': 2, 'C4_spillover': 0}",0.10599255561828613,False,5.0,
+Small,5,1,1,200,45,QA_neal,1011.0,11.0,False,"{'C1_unassigned': 0, 'C1_double': 0, 'C2_overlap': 0, 'C4_spillover': 1}",0.8439216613769531,False,5.0,
+Small,5,1,1,200,45,SBM,1009.0,9.0,False,"{'C1_unassigned': 1, 'C1_double': 0, 'C2_overlap': 0, 'C4_spillover': 0}",0.005998134613037109,False,4.0,
+Small,5,1,1,200,45,QAOA_p2,,,,,,True,,scheduling QUBO nv > 18 even at smallest instance; see E-Q1 V1 for QAOA scaling evaluation
+Small,5,1,3,42,135,Greedy,4.0,4.0,True,"{'C1_unassigned': 0, 'C1_double': 0, 'C2_overlap': 0, 'C4_spillover': 0}",0.0,False,,
+Small,5,1,3,42,135,GA,4.0,4.0,True,"{'C1_unassigned': 0, 'C1_double': 0, 'C2_overlap': 0, 'C4_spillover': 0}",0.1979992389678955,False,5.0,
+Small,5,1,3,42,135,SA,4.0,4.0,True,"{'C1_unassigned': 0, 'C1_double': 0, 'C2_overlap': 0, 'C4_spillover': 0}",0.019023895263671875,False,5.0,
+Small,5,1,3,42,135,TS,4.0,4.0,True,"{'C1_unassigned': 0, 'C1_double': 0, 'C2_overlap': 0, 'C4_spillover': 0}",0.21997761726379395,False,5.0,
+Small,5,1,3,42,135,QA_neal,1010.0,10.0,False,"{'C1_unassigned': 0, 'C1_double': 0, 'C2_overlap': 0, 'C4_spillover': 1}",2.742647171020508,False,5.0,
+Small,5,1,3,42,135,SBM,5010.0,10.0,False,"{'C1_unassigned': 0, 'C1_double': 0, 'C2_overlap': 3, 'C4_spillover': 2}",0.022977590560913086,False,5.0,
+Small,5,1,3,42,135,QAOA_p2,,,,,,True,,scheduling QUBO nv > 18 even at smallest instance; see E-Q1 V1 for QAOA scaling evaluation
+Small,5,1,3,7,135,Greedy,4.0,4.0,True,"{'C1_unassigned': 0, 'C1_double': 0, 'C2_overlap': 0, 'C4_spillover': 0}",0.0,False,,
+Small,5,1,3,7,135,GA,4.0,4.0,True,"{'C1_unassigned': 0, 'C1_double': 0, 'C2_overlap': 0, 'C4_spillover': 0}",0.267611026763916,False,5.0,
+Small,5,1,3,7,135,SA,4.0,4.0,True,"{'C1_unassigned': 0, 'C1_double': 0, 'C2_overlap': 0, 'C4_spillover': 0}",0.01900005340576172,False,5.0,
+Small,5,1,3,7,135,TS,4.0,4.0,True,"{'C1_unassigned': 0, 'C1_double': 0, 'C2_overlap': 0, 'C4_spillover': 0}",0.2080233097076416,False,5.0,
+Small,5,1,3,7,135,QA_neal,3010.0,10.0,False,"{'C1_unassigned': 0, 'C1_double': 0, 'C2_overlap': 1, 'C4_spillover': 2}",2.710442304611206,False,5.0,
+Small,5,1,3,7,135,SBM,3011.0,11.0,False,"{'C1_unassigned': 0, 'C1_double': 0, 'C2_overlap': 1, 'C4_spillover': 2}",0.012013912200927734,False,5.0,
+Small,5,1,3,7,135,QAOA_p2,,,,,,True,,scheduling QUBO nv > 18 even at smallest instance; see E-Q1 V1 for QAOA scaling evaluation
+Small,5,1,3,1234,135,Greedy,3.0,3.0,True,"{'C1_unassigned': 0, 'C1_double': 0, 'C2_overlap': 0, 'C4_spillover': 0}",0.0,False,,
+Small,5,1,3,1234,135,GA,3.0,3.0,True,"{'C1_unassigned': 0, 'C1_double': 0, 'C2_overlap': 0, 'C4_spillover': 0}",0.20499801635742188,False,5.0,
+Small,5,1,3,1234,135,SA,3.0,3.0,True,"{'C1_unassigned': 0, 'C1_double': 0, 'C2_overlap': 0, 'C4_spillover': 0}",0.018002033233642578,False,5.0,
+Small,5,1,3,1234,135,TS,3.0,3.0,True,"{'C1_unassigned': 0, 'C1_double': 0, 'C2_overlap': 0, 'C4_spillover': 0}",0.21472525596618652,False,5.0,
+Small,5,1,3,1234,135,QA_neal,1010.0,10.0,False,"{'C1_unassigned': 0, 'C1_double': 0, 'C2_overlap': 0, 'C4_spillover': 1}",2.74865984916687,False,5.0,
+Small,5,1,3,1234,135,SBM,9.0,9.0,True,"{'C1_unassigned': 0, 'C1_double': 0, 'C2_overlap': 0, 'C4_spillover': 0}",0.014998435974121094,False,5.0,
+Small,5,1,3,1234,135,QAOA_p2,,,,,,True,,scheduling QUBO nv > 18 even at smallest instance; see E-Q1 V1 for QAOA scaling evaluation
+Small,5,1,3,100,135,Greedy,3.0,3.0,True,"{'C1_unassigned': 0, 'C1_double': 0, 'C2_overlap': 0, 'C4_spillover': 0}",0.0,False,,
+Small,5,1,3,100,135,GA,3.0,3.0,True,"{'C1_unassigned': 0, 'C1_double': 0, 'C2_overlap': 0, 'C4_spillover': 0}",0.1987442970275879,False,5.0,
+Small,5,1,3,100,135,SA,3.0,3.0,True,"{'C1_unassigned': 0, 'C1_double': 0, 'C2_overlap': 0, 'C4_spillover': 0}",0.019999265670776367,False,5.0,
+Small,5,1,3,100,135,TS,3.0,3.0,True,"{'C1_unassigned': 0, 'C1_double': 0, 'C2_overlap': 0, 'C4_spillover': 0}",0.21266841888427734,False,5.0,
+Small,5,1,3,100,135,QA_neal,1010.0,10.0,False,"{'C1_unassigned': 0, 'C1_double': 0, 'C2_overlap': 0, 'C4_spillover': 1}",2.7593796253204346,False,5.0,
+Small,5,1,3,100,135,SBM,1010.0,10.0,False,"{'C1_unassigned': 0, 'C1_double': 0, 'C2_overlap': 0, 'C4_spillover': 1}",0.01097559928894043,False,5.0,
+Small,5,1,3,100,135,QAOA_p2,,,,,,True,,scheduling QUBO nv > 18 even at smallest instance; see E-Q1 V1 for QAOA scaling evaluation
+Small,5,1,3,200,135,Greedy,4.0,4.0,True,"{'C1_unassigned': 0, 'C1_double': 0, 'C2_overlap': 0, 'C4_spillover': 0}",0.0,False,,
+Small,5,1,3,200,135,GA,4.0,4.0,True,"{'C1_unassigned': 0, 'C1_double': 0, 'C2_overlap': 0, 'C4_spillover': 0}",0.19700074195861816,False,5.0,
+Small,5,1,3,200,135,SA,4.0,4.0,True,"{'C1_unassigned': 0, 'C1_double': 0, 'C2_overlap': 0, 'C4_spillover': 0}",0.023000001907348633,False,5.0,
+Small,5,1,3,200,135,TS,4.0,4.0,True,"{'C1_unassigned': 0, 'C1_double': 0, 'C2_overlap': 0, 'C4_spillover': 0}",0.2686307430267334,False,5.0,
+Small,5,1,3,200,135,QA_neal,1010.0,10.0,False,"{'C1_unassigned': 0, 'C1_double': 0, 'C2_overlap': 0, 'C4_spillover': 1}",2.7478256225585938,False,5.0,
+Small,5,1,3,200,135,SBM,6010.0,10.0,False,"{'C1_unassigned': 0, 'C1_double': 0, 'C2_overlap': 3, 'C4_spillover': 3}",0.009976387023925781,False,5.0,
+Small,5,1,3,200,135,QAOA_p2,,,,,,True,,scheduling QUBO nv > 18 even at smallest instance; see E-Q1 V1 for QAOA scaling evaluation
+Small,5,1,5,42,225,Greedy,3.0,3.0,True,"{'C1_unassigned': 0, 'C1_double': 0, 'C2_overlap': 0, 'C4_spillover': 0}",0.0,False,,
+Small,5,1,5,42,225,GA,3.0,3.0,True,"{'C1_unassigned': 0, 'C1_double': 0, 'C2_overlap': 0, 'C4_spillover': 0}",0.2329998016357422,False,5.0,
+Small,5,1,5,42,225,SA,3.0,3.0,True,"{'C1_unassigned': 0, 'C1_double': 0, 'C2_overlap': 0, 'C4_spillover': 0}",0.020000696182250977,False,5.0,
+Small,5,1,5,42,225,TS,3.0,3.0,True,"{'C1_unassigned': 0, 'C1_double': 0, 'C2_overlap': 0, 'C4_spillover': 0}",0.24250507354736328,False,5.0,
+Small,5,1,5,42,225,QA_neal,4010.0,10.0,False,"{'C1_unassigned': 0, 'C1_double': 0, 'C2_overlap': 1, 'C4_spillover': 3}",5.1463963985443115,False,5.0,
+Small,5,1,5,42,225,SBM,6011.0,11.0,False,"{'C1_unassigned': 0, 'C1_double': 0, 'C2_overlap': 2, 'C4_spillover': 4}",0.017978906631469727,False,5.0,
+Small,5,1,5,42,225,QAOA_p2,,,,,,True,,scheduling QUBO nv > 18 even at smallest instance; see E-Q1 V1 for QAOA scaling evaluation
+Small,5,1,5,7,225,Greedy,3.0,3.0,True,"{'C1_unassigned': 0, 'C1_double': 0, 'C2_overlap': 0, 'C4_spillover': 0}",0.0,False,,
+Small,5,1,5,7,225,GA,3.0,3.0,True,"{'C1_unassigned': 0, 'C1_double': 0, 'C2_overlap': 0, 'C4_spillover': 0}",0.2628049850463867,False,5.0,
+Small,5,1,5,7,225,SA,3.0,3.0,True,"{'C1_unassigned': 0, 'C1_double': 0, 'C2_overlap': 0, 'C4_spillover': 0}",0.02900075912475586,False,5.0,
+Small,5,1,5,7,225,TS,3.0,3.0,True,"{'C1_unassigned': 0, 'C1_double': 0, 'C2_overlap': 0, 'C4_spillover': 0}",0.24102139472961426,False,5.0,
+Small,5,1,5,7,225,QA_neal,3011.0,11.0,False,"{'C1_unassigned': 0, 'C1_double': 0, 'C2_overlap': 0, 'C4_spillover': 3}",5.265325307846069,False,5.0,
+Small,5,1,5,7,225,SBM,4011.0,11.0,False,"{'C1_unassigned': 0, 'C1_double': 0, 'C2_overlap': 1, 'C4_spillover': 3}",0.019994258880615234,False,5.0,
+Small,5,1,5,7,225,QAOA_p2,,,,,,True,,scheduling QUBO nv > 18 even at smallest instance; see E-Q1 V1 for QAOA scaling evaluation
+Small,5,1,5,1234,225,Greedy,2.0,2.0,True,"{'C1_unassigned': 0, 'C1_double': 0, 'C2_overlap': 0, 'C4_spillover': 0}",0.0,False,,
+Small,5,1,5,1234,225,GA,2.0,2.0,True,"{'C1_unassigned': 0, 'C1_double': 0, 'C2_overlap': 0, 'C4_spillover': 0}",0.19397497177124023,False,5.0,
+Small,5,1,5,1234,225,SA,2.0,2.0,True,"{'C1_unassigned': 0, 'C1_double': 0, 'C2_overlap': 0, 'C4_spillover': 0}",0.018024682998657227,False,5.0,
+Small,5,1,5,1234,225,TS,2.0,2.0,True,"{'C1_unassigned': 0, 'C1_double': 0, 'C2_overlap': 0, 'C4_spillover': 0}",0.22902774810791016,False,5.0,
+Small,5,1,5,1234,225,QA_neal,1010.0,10.0,False,"{'C1_unassigned': 0, 'C1_double': 0, 'C2_overlap': 0, 'C4_spillover': 1}",5.385846376419067,False,5.0,
+Small,5,1,5,1234,225,SBM,2010.0,10.0,False,"{'C1_unassigned': 0, 'C1_double': 0, 'C2_overlap': 0, 'C4_spillover': 2}",0.020978450775146484,False,5.0,
+Small,5,1,5,1234,225,QAOA_p2,,,,,,True,,scheduling QUBO nv > 18 even at smallest instance; see E-Q1 V1 for QAOA scaling evaluation
+Small,5,1,5,100,225,Greedy,2.0,2.0,True,"{'C1_unassigned': 0, 'C1_double': 0, 'C2_overlap': 0, 'C4_spillover': 0}",0.0,False,,
+Small,5,1,5,100,225,GA,2.0,2.0,True,"{'C1_unassigned': 0, 'C1_double': 0, 'C2_overlap': 0, 'C4_spillover': 0}",0.20302820205688477,False,5.0,
+Small,5,1,5,100,225,SA,2.0,2.0,True,"{'C1_unassigned': 0, 'C1_double': 0, 'C2_overlap': 0, 'C4_spillover': 0}",0.024004220962524414,False,5.0,
+Small,5,1,5,100,225,TS,2.0,2.0,True,"{'C1_unassigned': 0, 'C1_double': 0, 'C2_overlap': 0, 'C4_spillover': 0}",0.20996928215026855,False,5.0,
+Small,5,1,5,100,225,QA_neal,5010.0,10.0,False,"{'C1_unassigned': 0, 'C1_double': 0, 'C2_overlap': 2, 'C4_spillover': 3}",5.399259090423584,False,5.0,
+Small,5,1,5,100,225,SBM,2010.0,10.0,False,"{'C1_unassigned': 0, 'C1_double': 0, 'C2_overlap': 1, 'C4_spillover': 1}",0.018976211547851562,False,5.0,
+Small,5,1,5,100,225,QAOA_p2,,,,,,True,,scheduling QUBO nv > 18 even at smallest instance; see E-Q1 V1 for QAOA scaling evaluation
+Small,5,1,5,200,225,Greedy,3.0,3.0,True,"{'C1_unassigned': 0, 'C1_double': 0, 'C2_overlap': 0, 'C4_spillover': 0}",0.0,False,,
+Small,5,1,5,200,225,GA,3.0,3.0,True,"{'C1_unassigned': 0, 'C1_double': 0, 'C2_overlap': 0, 'C4_spillover': 0}",0.25792860984802246,False,5.0,
+Small,5,1,5,200,225,SA,3.0,3.0,True,"{'C1_unassigned': 0, 'C1_double': 0, 'C2_overlap': 0, 'C4_spillover': 0}",0.025027036666870117,False,5.0,
+Small,5,1,5,200,225,TS,3.0,3.0,True,"{'C1_unassigned': 0, 'C1_double': 0, 'C2_overlap': 0, 'C4_spillover': 0}",0.23809027671813965,False,5.0,
+Small,5,1,5,200,225,QA_neal,5011.0,11.0,False,"{'C1_unassigned': 0, 'C1_double': 0, 'C2_overlap': 2, 'C4_spillover': 3}",5.1230950355529785,False,5.0,
+Small,5,1,5,200,225,SBM,3010.0,10.0,False,"{'C1_unassigned': 0, 'C1_double': 0, 'C2_overlap': 0, 'C4_spillover': 3}",0.018970251083374023,False,5.0,
+Small,5,1,5,200,225,QAOA_p2,,,,,,True,,scheduling QUBO nv > 18 even at smallest instance; see E-Q1 V1 for QAOA scaling evaluation
+Medium,20,3,3,42,1620,Greedy,13.0,13.0,True,"{'C1_unassigned': 0, 'C1_double': 0, 'C2_overlap': 0, 'C4_spillover': 0}",0.0,False,,
+Medium,20,3,3,42,1620,GA,13.0,13.0,True,"{'C1_unassigned': 0, 'C1_double': 0, 'C2_overlap': 0, 'C4_spillover': 0}",0.5140037536621094,False,20.0,
+Medium,20,3,3,42,1620,SA,13.0,13.0,True,"{'C1_unassigned': 0, 'C1_double': 0, 'C2_overlap': 0, 'C4_spillover': 0}",0.07799792289733887,False,20.0,
+Medium,20,3,3,42,1620,TS,13.0,13.0,True,"{'C1_unassigned': 0, 'C1_double': 0, 'C2_overlap': 0, 'C4_spillover': 0}",0.6750822067260742,False,20.0,
+Medium,20,3,3,42,1620,QA_neal,11029.0,29.0,False,"{'C1_unassigned': 0, 'C1_double': 0, 'C2_overlap': 5, 'C4_spillover': 6}",65.61093068122864,False,20.0,
+Medium,20,3,3,42,1620,SBM,20029.0,29.0,False,"{'C1_unassigned': 1, 'C1_double': 0, 'C2_overlap': 9, 'C4_spillover': 10}",0.995009183883667,False,19.0,
+Medium,20,3,3,42,1620,QAOA_p2,,,,,,True,,scheduling QUBO nv > 18 even at smallest instance; see E-Q1 V1 for QAOA scaling evaluation
+Medium,20,3,3,7,1620,Greedy,13.0,13.0,True,"{'C1_unassigned': 0, 'C1_double': 0, 'C2_overlap': 0, 'C4_spillover': 0}",0.0,False,,
+Medium,20,3,3,7,1620,GA,13.0,13.0,True,"{'C1_unassigned': 0, 'C1_double': 0, 'C2_overlap': 0, 'C4_spillover': 0}",0.4876575469970703,False,20.0,
+Medium,20,3,3,7,1620,SA,13.0,13.0,True,"{'C1_unassigned': 0, 'C1_double': 0, 'C2_overlap': 0, 'C4_spillover': 0}",0.07774782180786133,False,20.0,
+Medium,20,3,3,7,1620,TS,13.0,13.0,True,"{'C1_unassigned': 0, 'C1_double': 0, 'C2_overlap': 0, 'C4_spillover': 0}",0.7099430561065674,False,20.0,
+Medium,20,3,3,7,1620,QA_neal,21028.0,28.0,False,"{'C1_unassigned': 0, 'C1_double': 0, 'C2_overlap': 10, 'C4_spillover': 11}",65.82828831672668,False,20.0,
+Medium,20,3,3,7,1620,SBM,24029.0,29.0,False,"{'C1_unassigned': 2, 'C1_double': 0, 'C2_overlap': 12, 'C4_spillover': 10}",0.8901839256286621,False,18.0,
+Medium,20,3,3,7,1620,QAOA_p2,,,,,,True,,scheduling QUBO nv > 18 even at smallest instance; see E-Q1 V1 for QAOA scaling evaluation
+Medium,20,3,3,1234,1620,Greedy,13.0,13.0,True,"{'C1_unassigned': 0, 'C1_double': 0, 'C2_overlap': 0, 'C4_spillover': 0}",0.0,False,,
+Medium,20,3,3,1234,1620,GA,13.0,13.0,True,"{'C1_unassigned': 0, 'C1_double': 0, 'C2_overlap': 0, 'C4_spillover': 0}",0.4758133888244629,False,20.0,
+Medium,20,3,3,1234,1620,SA,13.0,13.0,True,"{'C1_unassigned': 0, 'C1_double': 0, 'C2_overlap': 0, 'C4_spillover': 0}",0.05841207504272461,False,20.0,
+Medium,20,3,3,1234,1620,TS,13.0,13.0,True,"{'C1_unassigned': 0, 'C1_double': 0, 'C2_overlap': 0, 'C4_spillover': 0}",0.8074989318847656,False,20.0,
+Medium,20,3,3,1234,1620,QA_neal,10028.0,28.0,False,"{'C1_unassigned': 0, 'C1_double': 0, 'C2_overlap': 4, 'C4_spillover': 6}",65.28474116325378,False,20.0,
+Medium,20,3,3,1234,1620,SBM,10028.0,28.0,False,"{'C1_unassigned': 2, 'C1_double': 0, 'C2_overlap': 4, 'C4_spillover': 4}",0.80977463722229,False,18.0,
+Medium,20,3,3,1234,1620,QAOA_p2,,,,,,True,,scheduling QUBO nv > 18 even at smallest instance; see E-Q1 V1 for QAOA scaling evaluation
+Medium,20,3,3,100,1620,Greedy,13.0,13.0,True,"{'C1_unassigned': 0, 'C1_double': 0, 'C2_overlap': 0, 'C4_spillover': 0}",0.0,False,,
+Medium,20,3,3,100,1620,GA,13.0,13.0,True,"{'C1_unassigned': 0, 'C1_double': 0, 'C2_overlap': 0, 'C4_spillover': 0}",0.5403928756713867,False,20.0,
+Medium,20,3,3,100,1620,SA,13.0,13.0,True,"{'C1_unassigned': 0, 'C1_double': 0, 'C2_overlap': 0, 'C4_spillover': 0}",0.06385326385498047,False,20.0,
+Medium,20,3,3,100,1620,TS,13.0,13.0,True,"{'C1_unassigned': 0, 'C1_double': 0, 'C2_overlap': 0, 'C4_spillover': 0}",0.7405333518981934,False,20.0,
+Medium,20,3,3,100,1620,QA_neal,13029.0,29.0,False,"{'C1_unassigned': 0, 'C1_double': 0, 'C2_overlap': 6, 'C4_spillover': 7}",65.91016030311584,False,20.0,
+Medium,20,3,3,100,1620,SBM,11029.0,29.0,False,"{'C1_unassigned': 0, 'C1_double': 0, 'C2_overlap': 5, 'C4_spillover': 6}",0.7930545806884766,False,20.0,
+Medium,20,3,3,100,1620,QAOA_p2,,,,,,True,,scheduling QUBO nv > 18 even at smallest instance; see E-Q1 V1 for QAOA scaling evaluation
+Medium,20,3,3,200,1620,Greedy,14.0,14.0,True,"{'C1_unassigned': 0, 'C1_double': 0, 'C2_overlap': 0, 'C4_spillover': 0}",0.0,False,,
+Medium,20,3,3,200,1620,GA,14.0,14.0,True,"{'C1_unassigned': 0, 'C1_double': 0, 'C2_overlap': 0, 'C4_spillover': 0}",0.56103515625,False,20.0,
+Medium,20,3,3,200,1620,SA,14.0,14.0,True,"{'C1_unassigned': 0, 'C1_double': 0, 'C2_overlap': 0, 'C4_spillover': 0}",0.060028791427612305,False,20.0,
+Medium,20,3,3,200,1620,TS,14.0,14.0,True,"{'C1_unassigned': 0, 'C1_double': 0, 'C2_overlap': 0, 'C4_spillover': 0}",0.7443063259124756,False,20.0,
+Medium,20,3,3,200,1620,QA_neal,20028.0,28.0,False,"{'C1_unassigned': 0, 'C1_double': 0, 'C2_overlap': 9, 'C4_spillover': 11}",65.71866774559021,False,20.0,
+Medium,20,3,3,200,1620,SBM,19029.0,29.0,False,"{'C1_unassigned': 1, 'C1_double': 0, 'C2_overlap': 9, 'C4_spillover': 9}",0.7476263046264648,False,19.0,
+Medium,20,3,3,200,1620,QAOA_p2,,,,,,True,,scheduling QUBO nv > 18 even at smallest instance; see E-Q1 V1 for QAOA scaling evaluation
+Medium,20,3,5,42,2700,Greedy,8.0,8.0,True,"{'C1_unassigned': 0, 'C1_double': 0, 'C2_overlap': 0, 'C4_spillover': 0}",0.0,False,,
+Medium,20,3,5,42,2700,GA,8.0,8.0,True,"{'C1_unassigned': 0, 'C1_double': 0, 'C2_overlap': 0, 'C4_spillover': 0}",0.5969383716583252,False,20.0,
+Medium,20,3,5,42,2700,SA,8.0,8.0,True,"{'C1_unassigned': 0, 'C1_double': 0, 'C2_overlap': 0, 'C4_spillover': 0}",0.05300021171569824,False,20.0,
+Medium,20,3,5,42,2700,TS,8.0,8.0,True,"{'C1_unassigned': 0, 'C1_double': 0, 'C2_overlap': 0, 'C4_spillover': 0}",0.7203469276428223,False,20.0,
+Medium,20,3,5,42,2700,QA_neal,17028.0,28.0,False,"{'C1_unassigned': 0, 'C1_double': 0, 'C2_overlap': 7, 'C4_spillover': 10}",148.1765170097351,False,20.0,
+Medium,20,3,5,42,2700,SBM,21029.0,29.0,False,"{'C1_unassigned': 2, 'C1_double': 0, 'C2_overlap': 9, 'C4_spillover': 10}",2.3715596199035645,False,18.0,
+Medium,20,3,5,42,2700,QAOA_p2,,,,,,True,,scheduling QUBO nv > 18 even at smallest instance; see E-Q1 V1 for QAOA scaling evaluation
+Medium,20,3,5,7,2700,Greedy,8.0,8.0,True,"{'C1_unassigned': 0, 'C1_double': 0, 'C2_overlap': 0, 'C4_spillover': 0}",0.0009999275207519531,False,,
+Medium,20,3,5,7,2700,GA,8.0,8.0,True,"{'C1_unassigned': 0, 'C1_double': 0, 'C2_overlap': 0, 'C4_spillover': 0}",0.5176601409912109,False,20.0,
+Medium,20,3,5,7,2700,SA,8.0,8.0,True,"{'C1_unassigned': 0, 'C1_double': 0, 'C2_overlap': 0, 'C4_spillover': 0}",0.05899858474731445,False,20.0,
+Medium,20,3,5,7,2700,TS,8.0,8.0,True,"{'C1_unassigned': 0, 'C1_double': 0, 'C2_overlap': 0, 'C4_spillover': 0}",0.6704297065734863,False,20.0,
+Medium,20,3,5,7,2700,QA_neal,14029.0,29.0,False,"{'C1_unassigned': 0, 'C1_double': 0, 'C2_overlap': 6, 'C4_spillover': 8}",149.09607338905334,False,20.0,
+Medium,20,3,5,7,2700,SBM,21029.0,29.0,False,"{'C1_unassigned': 1, 'C1_double': 0, 'C2_overlap': 10, 'C4_spillover': 10}",2.3585939407348633,False,19.0,
+Medium,20,3,5,7,2700,QAOA_p2,,,,,,True,,scheduling QUBO nv > 18 even at smallest instance; see E-Q1 V1 for QAOA scaling evaluation
+Medium,20,3,5,1234,2700,Greedy,8.0,8.0,True,"{'C1_unassigned': 0, 'C1_double': 0, 'C2_overlap': 0, 'C4_spillover': 0}",0.0010008811950683594,False,,
+Medium,20,3,5,1234,2700,GA,8.0,8.0,True,"{'C1_unassigned': 0, 'C1_double': 0, 'C2_overlap': 0, 'C4_spillover': 0}",0.48714160919189453,False,20.0,
+Medium,20,3,5,1234,2700,SA,8.0,8.0,True,"{'C1_unassigned': 0, 'C1_double': 0, 'C2_overlap': 0, 'C4_spillover': 0}",0.05404472351074219,False,20.0,
+Medium,20,3,5,1234,2700,TS,8.0,8.0,True,"{'C1_unassigned': 0, 'C1_double': 0, 'C2_overlap': 0, 'C4_spillover': 0}",0.6921329498291016,False,20.0,
+Medium,20,3,5,1234,2700,QA_neal,16029.0,29.0,False,"{'C1_unassigned': 0, 'C1_double': 0, 'C2_overlap': 7, 'C4_spillover': 9}",147.19032335281372,False,20.0,
+Medium,20,3,5,1234,2700,SBM,25028.0,28.0,False,"{'C1_unassigned': 2, 'C1_double': 0, 'C2_overlap': 12, 'C4_spillover': 11}",2.3946919441223145,False,18.0,
+Medium,20,3,5,1234,2700,QAOA_p2,,,,,,True,,scheduling QUBO nv > 18 even at smallest instance; see E-Q1 V1 for QAOA scaling evaluation
+Medium,20,3,5,100,2700,Greedy,8.0,8.0,True,"{'C1_unassigned': 0, 'C1_double': 0, 'C2_overlap': 0, 'C4_spillover': 0}",0.0,False,,
+Medium,20,3,5,100,2700,GA,8.0,8.0,True,"{'C1_unassigned': 0, 'C1_double': 0, 'C2_overlap': 0, 'C4_spillover': 0}",0.5471906661987305,False,20.0,
+Medium,20,3,5,100,2700,SA,8.0,8.0,True,"{'C1_unassigned': 0, 'C1_double': 0, 'C2_overlap': 0, 'C4_spillover': 0}",0.05796933174133301,False,20.0,
+Medium,20,3,5,100,2700,TS,8.0,8.0,True,"{'C1_unassigned': 0, 'C1_double': 0, 'C2_overlap': 0, 'C4_spillover': 0}",0.6948964595794678,False,20.0,
+Medium,20,3,5,100,2700,QA_neal,18028.0,28.0,False,"{'C1_unassigned': 0, 'C1_double': 0, 'C2_overlap': 9, 'C4_spillover': 9}",151.10446429252625,False,20.0,
+Medium,20,3,5,100,2700,SBM,18029.0,29.0,False,"{'C1_unassigned': 0, 'C1_double': 0, 'C2_overlap': 8, 'C4_spillover': 10}",2.3920953273773193,False,20.0,
+Medium,20,3,5,100,2700,QAOA_p2,,,,,,True,,scheduling QUBO nv > 18 even at smallest instance; see E-Q1 V1 for QAOA scaling evaluation
+Medium,20,3,5,200,2700,Greedy,9.0,9.0,True,"{'C1_unassigned': 0, 'C1_double': 0, 'C2_overlap': 0, 'C4_spillover': 0}",0.0010004043579101562,False,,
+Medium,20,3,5,200,2700,GA,9.0,9.0,True,"{'C1_unassigned': 0, 'C1_double': 0, 'C2_overlap': 0, 'C4_spillover': 0}",0.4857027530670166,False,20.0,
+Medium,20,3,5,200,2700,SA,9.0,9.0,True,"{'C1_unassigned': 0, 'C1_double': 0, 'C2_overlap': 0, 'C4_spillover': 0}",0.06399941444396973,False,20.0,
+Medium,20,3,5,200,2700,TS,9.0,9.0,True,"{'C1_unassigned': 0, 'C1_double': 0, 'C2_overlap': 0, 'C4_spillover': 0}",0.7143080234527588,False,20.0,
+Medium,20,3,5,200,2700,QA_neal,23028.0,28.0,False,"{'C1_unassigned': 0, 'C1_double': 0, 'C2_overlap': 10, 'C4_spillover': 13}",147.65061569213867,False,20.0,
+Medium,20,3,5,200,2700,SBM,30028.0,28.0,False,"{'C1_unassigned': 1, 'C1_double': 0, 'C2_overlap': 14, 'C4_spillover': 15}",2.3991754055023193,False,19.0,
+Medium,20,3,5,200,2700,QAOA_p2,,,,,,True,,scheduling QUBO nv > 18 even at smallest instance; see E-Q1 V1 for QAOA scaling evaluation
+Medium,20,3,10,42,5400,Greedy,4.0,4.0,True,"{'C1_unassigned': 0, 'C1_double': 0, 'C2_overlap': 0, 'C4_spillover': 0}",0.0010004043579101562,False,,
+Medium,20,3,10,42,5400,GA,4.0,4.0,True,"{'C1_unassigned': 0, 'C1_double': 0, 'C2_overlap': 0, 'C4_spillover': 0}",0.47413015365600586,False,20.0,
+Medium,20,3,10,42,5400,SA,4.0,4.0,True,"{'C1_unassigned': 0, 'C1_double': 0, 'C2_overlap': 0, 'C4_spillover': 0}",0.06199955940246582,False,20.0,
+Medium,20,3,10,42,5400,TS,4.0,4.0,True,"{'C1_unassigned': 0, 'C1_double': 0, 'C2_overlap': 0, 'C4_spillover': 0}",0.7133495807647705,False,20.0,
+Medium,20,3,10,42,5400,QA_neal,,,,,,True,,nv > 5000
+Medium,20,3,10,42,5400,SBM,,,,,,True,,nv > 3000
+Medium,20,3,10,42,5400,QAOA_p2,,,,,,True,,scheduling QUBO nv > 18 even at smallest instance; see E-Q1 V1 for QAOA scaling evaluation
+Medium,20,3,10,7,5400,Greedy,4.0,4.0,True,"{'C1_unassigned': 0, 'C1_double': 0, 'C2_overlap': 0, 'C4_spillover': 0}",0.0,False,,
+Medium,20,3,10,7,5400,GA,4.0,4.0,True,"{'C1_unassigned': 0, 'C1_double': 0, 'C2_overlap': 0, 'C4_spillover': 0}",0.46045541763305664,False,20.0,
+Medium,20,3,10,7,5400,SA,4.0,4.0,True,"{'C1_unassigned': 0, 'C1_double': 0, 'C2_overlap': 0, 'C4_spillover': 0}",0.061159610748291016,False,20.0,
+Medium,20,3,10,7,5400,TS,4.0,4.0,True,"{'C1_unassigned': 0, 'C1_double': 0, 'C2_overlap': 0, 'C4_spillover': 0}",0.6830277442932129,False,20.0,
+Medium,20,3,10,7,5400,QA_neal,,,,,,True,,nv > 5000
+Medium,20,3,10,7,5400,SBM,,,,,,True,,nv > 3000
+Medium,20,3,10,7,5400,QAOA_p2,,,,,,True,,scheduling QUBO nv > 18 even at smallest instance; see E-Q1 V1 for QAOA scaling evaluation
+Medium,20,3,10,1234,5400,Greedy,4.0,4.0,True,"{'C1_unassigned': 0, 'C1_double': 0, 'C2_overlap': 0, 'C4_spillover': 0}",0.0010020732879638672,False,,
+Medium,20,3,10,1234,5400,GA,4.0,4.0,True,"{'C1_unassigned': 0, 'C1_double': 0, 'C2_overlap': 0, 'C4_spillover': 0}",0.45667529106140137,False,20.0,
+Medium,20,3,10,1234,5400,SA,4.0,4.0,True,"{'C1_unassigned': 0, 'C1_double': 0, 'C2_overlap': 0, 'C4_spillover': 0}",0.0539698600769043,False,20.0,
+Medium,20,3,10,1234,5400,TS,4.0,4.0,True,"{'C1_unassigned': 0, 'C1_double': 0, 'C2_overlap': 0, 'C4_spillover': 0}",0.6791732311248779,False,20.0,
+Medium,20,3,10,1234,5400,QA_neal,,,,,,True,,nv > 5000
+Medium,20,3,10,1234,5400,SBM,,,,,,True,,nv > 3000
+Medium,20,3,10,1234,5400,QAOA_p2,,,,,,True,,scheduling QUBO nv > 18 even at smallest instance; see E-Q1 V1 for QAOA scaling evaluation
+Medium,20,3,10,100,5400,Greedy,4.0,4.0,True,"{'C1_unassigned': 0, 'C1_double': 0, 'C2_overlap': 0, 'C4_spillover': 0}",0.001001119613647461,False,,
+Medium,20,3,10,100,5400,GA,4.0,4.0,True,"{'C1_unassigned': 0, 'C1_double': 0, 'C2_overlap': 0, 'C4_spillover': 0}",0.46547698974609375,False,20.0,
+Medium,20,3,10,100,5400,SA,4.0,4.0,True,"{'C1_unassigned': 0, 'C1_double': 0, 'C2_overlap': 0, 'C4_spillover': 0}",0.05826067924499512,False,20.0,
+Medium,20,3,10,100,5400,TS,4.0,4.0,True,"{'C1_unassigned': 0, 'C1_double': 0, 'C2_overlap': 0, 'C4_spillover': 0}",0.6582467555999756,False,20.0,
+Medium,20,3,10,100,5400,QA_neal,,,,,,True,,nv > 5000
+Medium,20,3,10,100,5400,SBM,,,,,,True,,nv > 3000
+Medium,20,3,10,100,5400,QAOA_p2,,,,,,True,,scheduling QUBO nv > 18 even at smallest instance; see E-Q1 V1 for QAOA scaling evaluation
+Medium,20,3,10,200,5400,Greedy,5.0,5.0,True,"{'C1_unassigned': 0, 'C1_double': 0, 'C2_overlap': 0, 'C4_spillover': 0}",0.0,False,,
+Medium,20,3,10,200,5400,GA,5.0,5.0,True,"{'C1_unassigned': 0, 'C1_double': 0, 'C2_overlap': 0, 'C4_spillover': 0}",0.4737815856933594,False,20.0,
+Medium,20,3,10,200,5400,SA,5.0,5.0,True,"{'C1_unassigned': 0, 'C1_double': 0, 'C2_overlap': 0, 'C4_spillover': 0}",0.05860543251037598,False,20.0,
+Medium,20,3,10,200,5400,TS,5.0,5.0,True,"{'C1_unassigned': 0, 'C1_double': 0, 'C2_overlap': 0, 'C4_spillover': 0}",0.6704308986663818,False,20.0,
+Medium,20,3,10,200,5400,QA_neal,,,,,,True,,nv > 5000
+Medium,20,3,10,200,5400,SBM,,,,,,True,,nv > 3000
+Medium,20,3,10,200,5400,QAOA_p2,,,,,,True,,scheduling QUBO nv > 18 even at smallest instance; see E-Q1 V1 for QAOA scaling evaluation
+Large,50,5,5,42,11250,Greedy,20.0,20.0,True,"{'C1_unassigned': 0, 'C1_double': 0, 'C2_overlap': 0, 'C4_spillover': 0}",0.003000497817993164,False,,
+Large,50,5,5,42,11250,GA,20.0,20.0,True,"{'C1_unassigned': 0, 'C1_double': 0, 'C2_overlap': 0, 'C4_spillover': 0}",1.2480266094207764,False,50.0,
+Large,50,5,5,42,11250,SA,20.0,20.0,True,"{'C1_unassigned': 0, 'C1_double': 0, 'C2_overlap': 0, 'C4_spillover': 0}",0.17600631713867188,False,50.0,
+Large,50,5,5,42,11250,TS,20.0,20.0,True,"{'C1_unassigned': 0, 'C1_double': 0, 'C2_overlap': 0, 'C4_spillover': 0}",2.034503936767578,False,50.0,
+Large,50,5,5,42,11250,QA_neal,,,,,,True,,nv > 5000
+Large,50,5,5,42,11250,SBM,,,,,,True,,nv > 3000
+Large,50,5,5,42,11250,QAOA_p2,,,,,,True,,scheduling QUBO nv > 18 even at smallest instance; see E-Q1 V1 for QAOA scaling evaluation
+Large,50,5,5,7,11250,Greedy,19.0,19.0,True,"{'C1_unassigned': 0, 'C1_double': 0, 'C2_overlap': 0, 'C4_spillover': 0}",0.002000093460083008,False,,
+Large,50,5,5,7,11250,GA,19.0,19.0,True,"{'C1_unassigned': 0, 'C1_double': 0, 'C2_overlap': 0, 'C4_spillover': 0}",1.2291076183319092,False,50.0,
+Large,50,5,5,7,11250,SA,19.0,19.0,True,"{'C1_unassigned': 0, 'C1_double': 0, 'C2_overlap': 0, 'C4_spillover': 0}",0.15099239349365234,False,50.0,
+Large,50,5,5,7,11250,TS,19.0,19.0,True,"{'C1_unassigned': 0, 'C1_double': 0, 'C2_overlap': 0, 'C4_spillover': 0}",1.8937339782714844,False,50.0,
+Large,50,5,5,7,11250,QA_neal,,,,,,True,,nv > 5000
+Large,50,5,5,7,11250,SBM,,,,,,True,,nv > 3000
+Large,50,5,5,7,11250,QAOA_p2,,,,,,True,,scheduling QUBO nv > 18 even at smallest instance; see E-Q1 V1 for QAOA scaling evaluation
+Large,50,5,5,1234,11250,Greedy,19.0,19.0,True,"{'C1_unassigned': 0, 'C1_double': 0, 'C2_overlap': 0, 'C4_spillover': 0}",0.0019998550415039062,False,,
+Large,50,5,5,1234,11250,GA,19.0,19.0,True,"{'C1_unassigned': 0, 'C1_double': 0, 'C2_overlap': 0, 'C4_spillover': 0}",1.1944494247436523,False,50.0,
+Large,50,5,5,1234,11250,SA,19.0,19.0,True,"{'C1_unassigned': 0, 'C1_double': 0, 'C2_overlap': 0, 'C4_spillover': 0}",0.15468168258666992,False,50.0,
+Large,50,5,5,1234,11250,TS,19.0,19.0,True,"{'C1_unassigned': 0, 'C1_double': 0, 'C2_overlap': 0, 'C4_spillover': 0}",1.9205942153930664,False,50.0,
+Large,50,5,5,1234,11250,QA_neal,,,,,,True,,nv > 5000
+Large,50,5,5,1234,11250,SBM,,,,,,True,,nv > 3000
+Large,50,5,5,1234,11250,QAOA_p2,,,,,,True,,scheduling QUBO nv > 18 even at smallest instance; see E-Q1 V1 for QAOA scaling evaluation
+Large,50,5,5,100,11250,Greedy,19.0,19.0,True,"{'C1_unassigned': 0, 'C1_double': 0, 'C2_overlap': 0, 'C4_spillover': 0}",0.002973318099975586,False,,
+Large,50,5,5,100,11250,GA,19.0,19.0,True,"{'C1_unassigned': 0, 'C1_double': 0, 'C2_overlap': 0, 'C4_spillover': 0}",1.206235647201538,False,50.0,
+Large,50,5,5,100,11250,SA,19.0,19.0,True,"{'C1_unassigned': 0, 'C1_double': 0, 'C2_overlap': 0, 'C4_spillover': 0}",0.15876150131225586,False,50.0,
+Large,50,5,5,100,11250,TS,19.0,19.0,True,"{'C1_unassigned': 0, 'C1_double': 0, 'C2_overlap': 0, 'C4_spillover': 0}",1.9754130840301514,False,50.0,
+Large,50,5,5,100,11250,QA_neal,,,,,,True,,nv > 5000
+Large,50,5,5,100,11250,SBM,,,,,,True,,nv > 3000
+Large,50,5,5,100,11250,QAOA_p2,,,,,,True,,scheduling QUBO nv > 18 even at smallest instance; see E-Q1 V1 for QAOA scaling evaluation
+Large,50,5,5,200,11250,Greedy,21.0,21.0,True,"{'C1_unassigned': 0, 'C1_double': 0, 'C2_overlap': 0, 'C4_spillover': 0}",0.0029993057250976562,False,,
+Large,50,5,5,200,11250,GA,21.0,21.0,True,"{'C1_unassigned': 0, 'C1_double': 0, 'C2_overlap': 0, 'C4_spillover': 0}",1.287898063659668,False,50.0,
+Large,50,5,5,200,11250,SA,21.0,21.0,True,"{'C1_unassigned': 0, 'C1_double': 0, 'C2_overlap': 0, 'C4_spillover': 0}",0.18197917938232422,False,50.0,
+Large,50,5,5,200,11250,TS,21.0,21.0,True,"{'C1_unassigned': 0, 'C1_double': 0, 'C2_overlap': 0, 'C4_spillover': 0}",1.9847455024719238,False,50.0,
+Large,50,5,5,200,11250,QA_neal,,,,,,True,,nv > 5000
+Large,50,5,5,200,11250,SBM,,,,,,True,,nv > 3000
+Large,50,5,5,200,11250,QAOA_p2,,,,,,True,,scheduling QUBO nv > 18 even at smallest instance; see E-Q1 V1 for QAOA scaling evaluation
+Large,50,5,10,42,22500,Greedy,10.0,10.0,True,"{'C1_unassigned': 0, 'C1_double': 0, 'C2_overlap': 0, 'C4_spillover': 0}",0.0020008087158203125,False,,
+Large,50,5,10,42,22500,GA,10.0,10.0,True,"{'C1_unassigned': 0, 'C1_double': 0, 'C2_overlap': 0, 'C4_spillover': 0}",1.233586311340332,False,50.0,
+Large,50,5,10,42,22500,SA,10.0,10.0,True,"{'C1_unassigned': 0, 'C1_double': 0, 'C2_overlap': 0, 'C4_spillover': 0}",0.15636205673217773,False,50.0,
+Large,50,5,10,42,22500,TS,10.0,10.0,True,"{'C1_unassigned': 0, 'C1_double': 0, 'C2_overlap': 0, 'C4_spillover': 0}",2.001826763153076,False,50.0,
+Large,50,5,10,42,22500,QA_neal,,,,,,True,,nv > 5000
+Large,50,5,10,42,22500,SBM,,,,,,True,,nv > 3000
+Large,50,5,10,42,22500,QAOA_p2,,,,,,True,,scheduling QUBO nv > 18 even at smallest instance; see E-Q1 V1 for QAOA scaling evaluation
+Large,50,5,10,7,22500,Greedy,10.0,10.0,True,"{'C1_unassigned': 0, 'C1_double': 0, 'C2_overlap': 0, 'C4_spillover': 0}",0.004000425338745117,False,,
+Large,50,5,10,7,22500,GA,10.0,10.0,True,"{'C1_unassigned': 0, 'C1_double': 0, 'C2_overlap': 0, 'C4_spillover': 0}",1.4973232746124268,False,50.0,
+Large,50,5,10,7,22500,SA,10.0,10.0,True,"{'C1_unassigned': 0, 'C1_double': 0, 'C2_overlap': 0, 'C4_spillover': 0}",0.17002272605895996,False,50.0,
+Large,50,5,10,7,22500,TS,10.0,10.0,True,"{'C1_unassigned': 0, 'C1_double': 0, 'C2_overlap': 0, 'C4_spillover': 0}",2.147327184677124,False,50.0,
+Large,50,5,10,7,22500,QA_neal,,,,,,True,,nv > 5000
+Large,50,5,10,7,22500,SBM,,,,,,True,,nv > 3000
+Large,50,5,10,7,22500,QAOA_p2,,,,,,True,,scheduling QUBO nv > 18 even at smallest instance; see E-Q1 V1 for QAOA scaling evaluation
+Large,50,5,10,1234,22500,Greedy,10.0,10.0,True,"{'C1_unassigned': 0, 'C1_double': 0, 'C2_overlap': 0, 'C4_spillover': 0}",0.002000570297241211,False,,
+Large,50,5,10,1234,22500,GA,10.0,10.0,True,"{'C1_unassigned': 0, 'C1_double': 0, 'C2_overlap': 0, 'C4_spillover': 0}",1.3596997261047363,False,50.0,
+Large,50,5,10,1234,22500,SA,10.0,10.0,True,"{'C1_unassigned': 0, 'C1_double': 0, 'C2_overlap': 0, 'C4_spillover': 0}",0.17300653457641602,False,50.0,
+Large,50,5,10,1234,22500,TS,10.0,10.0,True,"{'C1_unassigned': 0, 'C1_double': 0, 'C2_overlap': 0, 'C4_spillover': 0}",2.012174606323242,False,50.0,
+Large,50,5,10,1234,22500,QA_neal,,,,,,True,,nv > 5000
+Large,50,5,10,1234,22500,SBM,,,,,,True,,nv > 3000
+Large,50,5,10,1234,22500,QAOA_p2,,,,,,True,,scheduling QUBO nv > 18 even at smallest instance; see E-Q1 V1 for QAOA scaling evaluation
+Large,50,5,10,100,22500,Greedy,10.0,10.0,True,"{'C1_unassigned': 0, 'C1_double': 0, 'C2_overlap': 0, 'C4_spillover': 0}",0.0020012855529785156,False,,
+Large,50,5,10,100,22500,GA,10.0,10.0,True,"{'C1_unassigned': 0, 'C1_double': 0, 'C2_overlap': 0, 'C4_spillover': 0}",1.236870527267456,False,50.0,
+Large,50,5,10,100,22500,SA,10.0,10.0,True,"{'C1_unassigned': 0, 'C1_double': 0, 'C2_overlap': 0, 'C4_spillover': 0}",0.15437555313110352,False,50.0,
+Large,50,5,10,100,22500,TS,10.0,10.0,True,"{'C1_unassigned': 0, 'C1_double': 0, 'C2_overlap': 0, 'C4_spillover': 0}",2.0215706825256348,False,50.0,
+Large,50,5,10,100,22500,QA_neal,,,,,,True,,nv > 5000
+Large,50,5,10,100,22500,SBM,,,,,,True,,nv > 3000
+Large,50,5,10,100,22500,QAOA_p2,,,,,,True,,scheduling QUBO nv > 18 even at smallest instance; see E-Q1 V1 for QAOA scaling evaluation
+Large,50,5,10,200,22500,Greedy,11.0,11.0,True,"{'C1_unassigned': 0, 'C1_double': 0, 'C2_overlap': 0, 'C4_spillover': 0}",0.0019989013671875,False,,
+Large,50,5,10,200,22500,GA,11.0,11.0,True,"{'C1_unassigned': 0, 'C1_double': 0, 'C2_overlap': 0, 'C4_spillover': 0}",1.2677628993988037,False,50.0,
+Large,50,5,10,200,22500,SA,11.0,11.0,True,"{'C1_unassigned': 0, 'C1_double': 0, 'C2_overlap': 0, 'C4_spillover': 0}",0.15785956382751465,False,50.0,
+Large,50,5,10,200,22500,TS,11.0,11.0,True,"{'C1_unassigned': 0, 'C1_double': 0, 'C2_overlap': 0, 'C4_spillover': 0}",1.9611635208129883,False,50.0,
+Large,50,5,10,200,22500,QA_neal,,,,,,True,,nv > 5000
+Large,50,5,10,200,22500,SBM,,,,,,True,,nv > 3000
+Large,50,5,10,200,22500,QAOA_p2,,,,,,True,,scheduling QUBO nv > 18 even at smallest instance; see E-Q1 V1 for QAOA scaling evaluation
+Large,50,5,20,42,45000,Greedy,5.0,5.0,True,"{'C1_unassigned': 0, 'C1_double': 0, 'C2_overlap': 0, 'C4_spillover': 0}",0.0020003318786621094,False,,
+Large,50,5,20,42,45000,GA,5.0,5.0,True,"{'C1_unassigned': 0, 'C1_double': 0, 'C2_overlap': 0, 'C4_spillover': 0}",1.2422733306884766,False,50.0,
+Large,50,5,20,42,45000,SA,5.0,5.0,True,"{'C1_unassigned': 0, 'C1_double': 0, 'C2_overlap': 0, 'C4_spillover': 0}",0.1843090057373047,False,50.0,
+Large,50,5,20,42,45000,TS,5.0,5.0,True,"{'C1_unassigned': 0, 'C1_double': 0, 'C2_overlap': 0, 'C4_spillover': 0}",1.9573216438293457,False,50.0,
+Large,50,5,20,42,45000,QA_neal,,,,,,True,,nv > 5000
+Large,50,5,20,42,45000,SBM,,,,,,True,,nv > 3000
+Large,50,5,20,42,45000,QAOA_p2,,,,,,True,,scheduling QUBO nv > 18 even at smallest instance; see E-Q1 V1 for QAOA scaling evaluation
+Large,50,5,20,7,45000,Greedy,5.0,5.0,True,"{'C1_unassigned': 0, 'C1_double': 0, 'C2_overlap': 0, 'C4_spillover': 0}",0.002022266387939453,False,,
+Large,50,5,20,7,45000,GA,5.0,5.0,True,"{'C1_unassigned': 0, 'C1_double': 0, 'C2_overlap': 0, 'C4_spillover': 0}",1.2017509937286377,False,50.0,
+Large,50,5,20,7,45000,SA,5.0,5.0,True,"{'C1_unassigned': 0, 'C1_double': 0, 'C2_overlap': 0, 'C4_spillover': 0}",0.16902995109558105,False,50.0,
+Large,50,5,20,7,45000,TS,5.0,5.0,True,"{'C1_unassigned': 0, 'C1_double': 0, 'C2_overlap': 0, 'C4_spillover': 0}",2.012904405593872,False,50.0,
+Large,50,5,20,7,45000,QA_neal,,,,,,True,,nv > 5000
+Large,50,5,20,7,45000,SBM,,,,,,True,,nv > 3000
+Large,50,5,20,7,45000,QAOA_p2,,,,,,True,,scheduling QUBO nv > 18 even at smallest instance; see E-Q1 V1 for QAOA scaling evaluation
+Large,50,5,20,1234,45000,Greedy,5.0,5.0,True,"{'C1_unassigned': 0, 'C1_double': 0, 'C2_overlap': 0, 'C4_spillover': 0}",0.0019991397857666016,False,,
+Large,50,5,20,1234,45000,GA,5.0,5.0,True,"{'C1_unassigned': 0, 'C1_double': 0, 'C2_overlap': 0, 'C4_spillover': 0}",1.251115083694458,False,50.0,
+Large,50,5,20,1234,45000,SA,5.0,5.0,True,"{'C1_unassigned': 0, 'C1_double': 0, 'C2_overlap': 0, 'C4_spillover': 0}",0.17448854446411133,False,50.0,
+Large,50,5,20,1234,45000,TS,5.0,5.0,True,"{'C1_unassigned': 0, 'C1_double': 0, 'C2_overlap': 0, 'C4_spillover': 0}",1.9475312232971191,False,50.0,
+Large,50,5,20,1234,45000,QA_neal,,,,,,True,,nv > 5000
+Large,50,5,20,1234,45000,SBM,,,,,,True,,nv > 3000
+Large,50,5,20,1234,45000,QAOA_p2,,,,,,True,,scheduling QUBO nv > 18 even at smallest instance; see E-Q1 V1 for QAOA scaling evaluation
+Large,50,5,20,100,45000,Greedy,5.0,5.0,True,"{'C1_unassigned': 0, 'C1_double': 0, 'C2_overlap': 0, 'C4_spillover': 0}",0.0010001659393310547,False,,
+Large,50,5,20,100,45000,GA,5.0,5.0,True,"{'C1_unassigned': 0, 'C1_double': 0, 'C2_overlap': 0, 'C4_spillover': 0}",1.2935864925384521,False,50.0,
+Large,50,5,20,100,45000,SA,5.0,5.0,True,"{'C1_unassigned': 0, 'C1_double': 0, 'C2_overlap': 0, 'C4_spillover': 0}",0.15400052070617676,False,50.0,
+Large,50,5,20,100,45000,TS,5.0,5.0,True,"{'C1_unassigned': 0, 'C1_double': 0, 'C2_overlap': 0, 'C4_spillover': 0}",1.9480018615722656,False,50.0,
+Large,50,5,20,100,45000,QA_neal,,,,,,True,,nv > 5000
+Large,50,5,20,100,45000,SBM,,,,,,True,,nv > 3000
+Large,50,5,20,100,45000,QAOA_p2,,,,,,True,,scheduling QUBO nv > 18 even at smallest instance; see E-Q1 V1 for QAOA scaling evaluation
+Large,50,5,20,200,45000,Greedy,6.0,6.0,True,"{'C1_unassigned': 0, 'C1_double': 0, 'C2_overlap': 0, 'C4_spillover': 0}",0.002999544143676758,False,,
+Large,50,5,20,200,45000,GA,6.0,6.0,True,"{'C1_unassigned': 0, 'C1_double': 0, 'C2_overlap': 0, 'C4_spillover': 0}",1.4822559356689453,False,50.0,
+Large,50,5,20,200,45000,SA,6.0,6.0,True,"{'C1_unassigned': 0, 'C1_double': 0, 'C2_overlap': 0, 'C4_spillover': 0}",0.19500470161437988,False,50.0,
+Large,50,5,20,200,45000,TS,6.0,6.0,True,"{'C1_unassigned': 0, 'C1_double': 0, 'C2_overlap': 0, 'C4_spillover': 0}",2.2035601139068604,False,50.0,
+Large,50,5,20,200,45000,QA_neal,,,,,,True,,nv > 5000
+Large,50,5,20,200,45000,SBM,,,,,,True,,nv > 3000
+Large,50,5,20,200,45000,QAOA_p2,,,,,,True,,scheduling QUBO nv > 18 even at smallest instance; see E-Q1 V1 for QAOA scaling evaluation

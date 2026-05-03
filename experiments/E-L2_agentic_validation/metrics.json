@@ -1,0 +1,118 @@
+{
+  "experiment": "E-L2",
+  "date": "2026-05-04",
+  "seed": 42,
+  "n_cases": 125,
+  "n_valid": 125,
+  "gt_distribution": {
+    "Critical": 11,
+    "High": 10,
+    "Medium": 12,
+    "Low": 92
+  },
+  "primary": {
+    "metric": "Cohen Quadratic-Weighted Kappa (4-tier ordinal)",
+    "value": 0.3618397835548759,
+    "ci_95_lower": 0.23287914740657087,
+    "ci_95_upper": 0.49775670740936945,
+    "bootstrap_n": 1000,
+    "threshold_for_proceed": 0.6,
+    "verdict": "STOP"
+  },
+  "secondary": {
+    "top_k_coverage": {
+      "K": 25,
+      "top_k_truly_critical_high": 12,
+      "rate": 0.48
+    },
+    "cost_weighted_misclass": {
+      "total": 97.0,
+      "mean_per_case": 0.776,
+      "cost_matrix_label": "missed_critical=100, critical_other=10, other=1"
+    },
+    "macro_f1": 0.2738606253312136,
+    "per_tier": {
+      "Critical": {
+        "precision": 0.38461538461538464,
+        "recall": 0.9090909090909091,
+        "f1": 0.5405405405405406
+      },
+      "High": {
+        "precision": 0.05,
+        "recall": 0.1,
+        "f1": 0.06666666666666667
+      },
+      "Medium": {
+        "precision": 0.05357142857142857,
+        "recall": 0.25,
+        "f1": 0.08823529411764706
+      },
+      "Low": {
+        "precision": 1.0,
+        "recall": 0.25,
+        "f1": 0.4
+      }
+    },
+    "coverage_critical_flagged": 0.9090909090909091,
+    "latency": {
+      "per_llm_median_s": 4.1325448751449585,
+      "per_llm_p95_s": 30.53880865573882,
+      "ensemble_e2e_median_s": 11.780729293823242,
+      "ensemble_e2e_p95_s": 64.92040028572082
+    }
+  },
+  "per_llm_ablation": {
+    "glm-5.1:cloud": {
+      "valid_n": 125,
+      "qw_kappa": 0.3668659866338375,
+      "macro_f1": 0.22817460317460314
+    },
+    "qwen3.5:cloud": {
+      "valid_n": 67,
+      "qw_kappa": 0.1470186290728619,
+      "macro_f1": 0.2160443722943723
+    },
+    "kimi-k2.6:cloud": {
+      "valid_n": 125,
+      "qw_kappa": 0.3356067732831608,
+      "macro_f1": 0.3321697605595911
+    },
+    "deepseek-v4-pro:cloud": {
+      "valid_n": 118,
+      "qw_kappa": 0.4245193116206065,
+      "macro_f1": 0.35100250626566415
+    }
+  },
+  "confusion_matrix": [
+    [
+      10,
+      0,
+      1,
+      0
+    ],
+    [
+      3,
+      1,
+      6,
+      0
+    ],
+    [
+      4,
+      5,
+      3,
+      0
+    ],
+    [
+      9,
+      14,
+      46,
+      23
+    ]
+  ],
+  "tier_index_order": [
+    "Critical",
+    "High",
+    "Medium",
+    "Low"
+  ]
+}

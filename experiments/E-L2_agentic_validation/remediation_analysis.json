@@ -1,0 +1,32 @@
+{
+  "option_C_deepseek_only": {
+    "qw_kappa": 0.4245193116206065,
+    "macro_f1": 0.35100250626566415,
+    "ci_95": [
+      0.2620557802867623,
+      0.5783156449956462
+    ],
+    "valid_n": 118
+  },
+  "option_B_2tier_ensemble": {
+    "kappa_binary": 0.1496598639455783,
+    "f1_needs_action": 0.4888888888888889,
+    "ci_95": [
+      0.08660256746693688,
+      0.2199894235854044
+    ],
+    "valid_n": 125
+  },
+  "option_BC_2tier_deepseek_only": {
+    "kappa_binary": 0.26998267755506067,
+    "f1_needs_action": 0.5454545454545454,
+    "ci_95": [
+      0.16685078297422695,
+      0.3799025890797232
+    ],
+    "valid_n": 118
+  },
+  "qwen35_failure_categories": {
+    "empty": 58
+  }
+}

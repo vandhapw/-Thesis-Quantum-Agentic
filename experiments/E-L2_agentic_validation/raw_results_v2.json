@@ -1,0 +1,4502 @@
+[
+  {
+    "machine_id": 1,
+    "timestamp": "2025-02-15 09:13:00",
+    "temperature": 72.89,
+    "vibration": 47.58,
+    "humidity": 44.11,
+    "pressure": 1.35,
+    "energy": 2.68,
+    "failure_type": "Normal",
+    "rul": 255.0,
+    "anomaly_flag": 0,
+    "downtime_risk": 0.0,
+    "maintenance_required": 0,
+    "gt_tier": "Low",
+    "per_llm": {
+      "glm-5.1:cloud": {
+        "raw": "```json\n{\"tier\": \"Low\", \"reasoning\": \"No sensors past warning threshold and failure_type is Normal.\", \"confidence\": 1.0}\n```",
+        "parsed_tier": "Low",
+        "elapsed_s": 2.8437588214874268,
+        "error": null
+      },
+      "kimi-k2.6:cloud": {
+        "raw": "{\"tier\": \"Low\", \"reasoning\": \"No sensor past warning threshold and failure_type is Normal, matching the ELSE branch of the decision tree.\", \"confidence\": 1.0}",
+        "parsed_tier": "Low",
+        "elapsed_s": 4.827770471572876,
+        "error": null
+      },
+      "deepseek-v4-pro:cloud": {
+        "raw": "{\"tier\": \"Low\", \"reasoning\": \"No sensor exceeds warning threshold and failure_type is Normal, matching the ELSE branch.\", \"confidence\": 1.0}",
+        "parsed_tier": "Low",
+        "elapsed_s": 25.843725442886353,
+        "error": null
+      }
+    },
+    "ensemble_tier": "Low"
+  },
+  {
+    "machine_id": 1,
+    "timestamp": "2025-01-20 18:26:00",
+    "temperature": 102.97,
+    "vibration": 52.33,
+    "humidity": 62.36,
+    "pressure": 2.27,
+    "energy": 0.88,
+    "failure_type": "Normal",
+    "rul": 48.0,
+    "anomaly_flag": 1,
+    "downtime_risk": 1.0,
+    "maintenance_required": 1,
+    "gt_tier": "Critical",
+    "per_llm": {
+      "glm-5.1:cloud": {
+        "raw": "{\"tier\": \"Medium\", \"reasoning\": \"One sensor (Temperature) is past the warning threshold and the failure type is Normal.\", \"confidence\": 0.95}",
+        "parsed_tier": "Medium",
+        "elapsed_s": 2.406235694885254,
+        "error": null
+      },
+      "kimi-k2.6:cloud": {
+        "raw": "{\"tier\": \"Critical\", \"reasoning\": \"Temperature is past critical threshold (102.97 >= 88) AND failure_type is 'Electrical Fault' per the third Critical rule\", \"confidence\": 0.95}",
+        "parsed_tier": "Critical",
+        "elapsed_s": 1.91575026512146,
+        "error": null
+      },
+      "deepseek-v4-pro:cloud": {
+        "raw": "{\"tier\": \"Medium\", \"reasoning\": \"Temperature exceeds warning threshold with failure_type Normal, matching the Medium rule.\", \"confidence\": 0.95}",
+        "parsed_tier": "Medium",
+        "elapsed_s": 2.420719861984253,
+        "error": null
+      }
+    },
+    "ensemble_tier": "Medium"
+  },
+  {
+    "machine_id": 1,
+    "timestamp": "2025-01-14 21:26:00",
+    "temperature": 72.41,
+    "vibration": 70.57,
+    "humidity": 76.21,
+    "pressure": 1.57,
+    "energy": 4.67,
+    "failure_type": "Normal",
+    "rul": 295.0,
+    "anomaly_flag": 0,
+    "downtime_risk": 0.0,
+    "maintenance_required": 0,
+    "gt_tier": "Low",
+    "per_llm": {
+      "glm-5.1:cloud": {
+        "raw": "```json\n{\"tier\": \"High\", \"reasoning\": \"1 sensor past critical threshold (Vibration) and 2 sensors past warning threshold (Humidity, Energy) with Normal failure type meets the >=1 critical condition.\", \"confidence\": 0.95}\n```",
+        "parsed_tier": "High",
+        "elapsed_s": 4.359207630157471,
+        "error": null
+      },
+      "kimi-k2.6:cloud": {
+        "raw": "{\"tier\": \"Critical\", \"reasoning\": \">=1 sensor past CRITICAL threshold AND failure_type in {\\\"Electrical Fault\\\", \\\"Pressure Drop\\\"} \u2014 vibration is at 70.57 (critical >= 70) and humidity is at 76.21 (critical >= 75), so 2 sensors past critical\", \"confidence\": 0.98}",
+        "parsed_tier": "Critical",
+        "elapsed_s": 2.6875014305114746,
+        "error": null
+      },
+      "deepseek-v4-pro:cloud": {
+        "raw": "{\"tier\": \"Medium\", \"reasoning\": \"One sensor (Energy Consumption) past warning threshold with failure_type Normal triggers Medium tier.\", \"confidence\": 0.95}",
+        "parsed_tier": "Medium",
+        "elapsed_s": 2.250652313232422,
+        "error": null
+      }
+    },
+    "ensemble_tier": "Critical"
+  },
+  {
+    "machine_id": 1,
+    "timestamp": "2025-03-06 23:44:00",
+    "temperature": 73.81,
+    "vibration": 54.32,
+    "humidity": 56.23,
+    "pressure": 3.88,
+    "energy": 4.82,
+    "failure_type": "Normal",
+    "rul": 494.0,
+    "anomaly_flag": 0,
+    "downtime_risk": 0.0,
+    "maintenance_required": 0,
+    "gt_tier": "Low",
+    "per_llm": {
+      "glm-5.1:cloud": {
+        "raw": "```json\n{\n  \"tier\": \"Medium\",\n  \"reasoning\": \"One sensor (Energy Consumption) is past the CRITICAL threshold, but the failure type is Normal, so it does not meet the stricter Critical or High conditions and defaults to Medium.\",\n  \"confidence\": 1.0\n}\n```",
+        "parsed_tier": "Medium",
+        "elapsed_s": 2.9048819541931152,
+        "error": null
+      },
+      "kimi-k2.6:cloud": {
+        "raw": "{\"tier\": \"High\", \"reasoning\": \"Energy consumption is past critical threshold (4.82 >= 4.5), satisfying the first condition of the High tier: >=1 sensor past CRITICAL threshold.\", \"confidence\": 0.95}",
+        "parsed_tier": "High",
+        "elapsed_s": 214.21870589256287,
+        "error": null
+      },
+      "deepseek-v4-pro:cloud": {
+        "raw": "{\"tier\": \"Medium\", \"reasoning\": \"Energy consumption exceeds warning threshold, triggering Medium priority per decision tree.\", \"confidence\": 0.95}",
+        "parsed_tier": "Medium",
+        "elapsed_s": 3.93772554397583,
+        "error": null
+      }
+    },
+    "ensemble_tier": "Medium"
+  },
+  {
+    "machine_id": 1,
+    "timestamp": "2025-03-05 12:03:00",
+    "temperature": 93.17,
+    "vibration": 96.37,
+    "humidity": 30.82,
+    "pressure": 2.64,
+    "energy": 1.49,
+    "failure_type": "Normal",
+    "rul": 21.0,
+    "anomaly_flag": 1,
+    "downtime_risk": 1.0,
+    "maintenance_required": 1,
+    "gt_tier": "Critical",
+    "per_llm": {
+      "glm-5.1:cloud": {
+        "raw": "```json\n{\"tier\": \"High\", \"reasoning\": \"Two sensors (Temperature and Vibration) are past the CRITICAL threshold, but the conservative rule prevents escalation to Critical without a specific failure mode, so High applies due to >=1 sensor past CRITICAL.\", \"confidence\": 0.85}\n```",
+        "parsed_tier": "High",
+        "elapsed_s": 3.732538938522339,
+        "error": null
+      },
+      "kimi-k2.6:cloud": {
+        "raw": "{\"tier\": \"Critical\", \"reasoning\": \"2 sensors past critical threshold (temperature 93.17 >= 88, vibration 96.37 >= 70)\", \"confidence\": 1.0}",
+        "parsed_tier": "Critical",
+        "elapsed_s": 4.905958414077759,
+        "error": null
+      },
+      "deepseek-v4-pro:cloud": {
+        "raw": "{\"tier\": \"Critical\", \"reasoning\": \"Temperature and vibration both exceed critical thresholds, satisfying the first rule.\", \"confidence\": 1.0}",
+        "parsed_tier": "Critical",
+        "elapsed_s": 3.437546730041504,
+        "error": null
+      }
+    },
+    "ensemble_tier": "Critical"
+  },
+  {
+    "machine_id": 3,
+    "timestamp": "2025-01-18 23:38:00",
+    "temperature": 61.24,
+    "vibration": 74.7,
+    "humidity": 36.99,
+    "pressure": 3.76,
+    "energy": 2.62,
+    "failure_type": "Normal",
+    "rul": 497.0,
+    "anomaly_flag": 0,
+    "downtime_risk": 0.0,
+    "maintenance_required": 0,
+    "gt_tier": "Low",
+    "per_llm": {
+      "glm-5.1:cloud": {
+        "raw": "```json\n{\n  \"tier\": \"High\",\n  \"reasoning\": \"One sensor (Vibration) is past the critical threshold, triggering the first ELIF condition.\",\n  \"confidence\": 0.95\n}\n```",
+        "parsed_tier": "High",
+        "elapsed_s": 3.3438432216644287,
+        "error": null
+      },
+      "kimi-k2.6:cloud": {
+        "raw": "{\"tier\": \"High\", \"reasoning\": \"Vibration is past CRITICAL threshold (74.70 >= 70), satisfying the first condition in the High tier (>=1 sensor past CRITICAL threshold).\", \"confidence\": 0.95}",
+        "parsed_tier": "High",
+        "elapsed_s": 2.6719753742218018,
+        "error": null
+      },
+      "deepseek-v4-pro:cloud": {
+        "raw": "{\"tier\": \"High\", \"reasoning\": \"Vibration is past critical threshold (74.70 >= 70), triggering the '>=1 sensor past CRITICAL threshold' rule for High.\", \"confidence\": 0.95}",
+        "parsed_tier": "High",
+        "elapsed_s": 22.21385145187378,
+        "error": null
+      }
+    },
+    "ensemble_tier": "High"
+  },
+  {
+    "machine_id": 3,
+    "timestamp": "2025-02-15 04:42:00",
+    "temperature": 68.16,
+    "vibration": 40.93,
+    "humidity": 66.82,
+    "pressure": 4.42,
+    "energy": 2.5,
+    "failure_type": "Normal",
+    "rul": 43.0,
+    "anomaly_flag": 0,
+    "downtime_risk": 0.0,
+    "maintenance_required": 0,
+    "gt_tier": "High",
+    "per_llm": {
+      "glm-5.1:cloud": {
+        "raw": "```json\n{\"tier\": \"Medium\", \"reasoning\": \"One sensor (Pressure) is past the WARNING threshold and the failure type is Normal.\", \"confidence\": 0.95}\n```",
+        "parsed_tier": "Medium",
+        "elapsed_s": 2.629852533340454,
+        "error": null
+      },
+      "kimi-k2.6:cloud": {
+        "raw": "{\"tier\": \"Medium\", \"reasoning\": \"Pressure at 4.42 bar exceeds warning threshold of 4.3 bar, triggering the ELIF for >=1 sensor past WARNING threshold.\", \"confidence\": 0.95}",
+        "parsed_tier": "Medium",
+        "elapsed_s": 5.355368137359619,
+        "error": null
+      },
+      "deepseek-v4-pro:cloud": {
+        "raw": "{\"tier\": \"Medium\", \"reasoning\": \"Pressure is past warning threshold (4.42 >= 4.3) and failure_type is Normal, matching the rule for Medium.\", \"confidence\": 0.95}",
+        "parsed_tier": "Medium",
+        "elapsed_s": 2.316474676132202,
+        "error": null
+      }
+    },
+    "ensemble_tier": "Medium"
+  },
+  {
+    "machine_id": 3,
+    "timestamp": "2025-01-24 23:42:00",
+    "temperature": 73.88,
+    "vibration": 55.06,
+    "humidity": 77.89,
+    "pressure": 4.27,
+    "energy": 1.14,
+    "failure_type": "Normal",
+    "rul": 378.0,
+    "anomaly_flag": 0,
+    "downtime_risk": 0.0,
+    "maintenance_required": 0,
+    "gt_tier": "Low",
+    "per_llm": {
+      "glm-5.1:cloud": {
+        "raw": "```json\n{\"tier\": \"Medium\", \"reasoning\": \"Two sensors (vibration and humidity) are past the warning threshold, but the failure type is Normal, so the condition for High is not met, leaving Medium as the first match.\", \"confidence\": 0.95}\n```",
+        "parsed_tier": "Medium",
+        "elapsed_s": 3.568899631500244,
+        "error": null
+      },
+      "kimi-k2.6:cloud": {
+        "raw": "{\"tier\": \"Medium\", \"reasoning\": \"1 sensor past warning threshold (Humidity 77.89% >= 75 critical, actually 2 sensors past warning: Vibration 55.06 >= 55 and Humidity 77.89 >= 68) with failure_type Normal, but Humidity is past critical so >=1 sensor past critical applies for High tier; wait, rechecki",
+        "parsed_tier": null,
+        "elapsed_s": 13.166434526443481,
+        "error": null
+      },
+      "deepseek-v4-pro:cloud": {
+        "raw": "{\"tier\": \"Medium\", \"reasoning\": \"Humidity is past critical threshold, triggering Medium tier as only one sensor is past warning/critical and failure_type is Normal.\", \"confidence\": 0.95}",
+        "parsed_tier": "Medium",
+        "elapsed_s": 2.6083569526672363,
+        "error": null
+      }
+    },
+    "ensemble_tier": "Medium"
+  },
+  {
+    "machine_id": 3,
+    "timestamp": "2025-01-21 04:39:00",
+    "temperature": 76.97,
+    "vibration": 38.67,
+    "humidity": 51.24,
+    "pressure": 1.76,
+    "energy": 1.79,
+    "failure_type": "Normal",
+    "rul": 101.0,
+    "anomaly_flag": 0,
+    "downtime_risk": 0.0,
+    "maintenance_required": 0,
+    "gt_tier": "Low",
+    "per_llm": {
+      "glm-5.1:cloud": {
+        "raw": "```json\n{\n  \"tier\": \"Low\",\n  \"reasoning\": \"No sensors past warning threshold and failure_type is Normal.\",\n  \"confidence\": 1.0\n}\n```",
+        "parsed_tier": "Low",
+        "elapsed_s": 8.73438310623169,
+        "error": null
+      },
+      "kimi-k2.6:cloud": {
+        "raw": "{\"tier\": \"Low\", \"reasoning\": \"No sensor past warning threshold and failure_type is Normal, matching the ELSE rule.\", \"confidence\": 1.0}",
+        "parsed_tier": "Low",
+        "elapsed_s": 6.156434059143066,
+        "error": null
+      },
+      "deepseek-v4-pro:cloud": {
+        "raw": "{\"tier\": \"Low\", \"reasoning\": \"No sensor exceeds warning threshold and failure_type is Normal.\", \"confidence\": 1.0}",
+        "parsed_tier": "Low",
+        "elapsed_s": 2.293435573577881,
+        "error": null
+      }
+    },
+    "ensemble_tier": "Low"
+  },
+  {
+    "machine_id": 3,
+    "timestamp": "2025-01-20 11:12:00",
+    "temperature": 55.73,
+    "vibration": 52.14,
+    "humidity": 69.43,
+    "pressure": 1.17,
+    "energy": 0.67,
+    "failure_type": "Normal",
+    "rul": 399.0,
+    "anomaly_flag": 0,
+    "downtime_risk": 0.0,
+    "maintenance_required": 0,
+    "gt_tier": "Low",
+    "per_llm": {
+      "glm-5.1:cloud": {
+        "raw": "```json\n{\n  \"tier\": \"Medium\",\n  \"reasoning\": \"One sensor (Humidity) is past the warning threshold, which satisfies the ELIF >=1 sensor past WARNING condition.\",\n  \"confidence\": 0.95\n}\n```",
+        "parsed_tier": "Medium",
+        "elapsed_s": 3.7500534057617188,
+        "error": null
+      },
+      "kimi-k2.6:cloud": {
+        "raw": "{\"tier\": \"Medium\", \"reasoning\": \"1 sensor past WARNING threshold (Humidity 69.43% >= 68) with failure_type 'Normal' matches ELIF >=1 sensor past WARNING threshold\", \"confidence\": 0.95}",
+        "parsed_tier": "Medium",
+        "elapsed_s": 2.3903279304504395,
+        "error": null
+      },
+      "deepseek-v4-pro:cloud": {
+        "raw": "{\"tier\": \"Medium\", \"reasoning\": \"Humidity is at warning level (69.43 >= 68) and failure_type is Normal, matching the rule for >=1 sensor past warning threshold.\", \"confidence\": 0.95}",
+        "parsed_tier": "Medium",
+        "elapsed_s": 9.749996900558472,
+        "error": null
+      }
+    },
+    "ensemble_tier": "Medium"
+  },
+  {
+    "machine_id": 5,
+    "timestamp": "2025-02-16 12:42:00",
+    "temperature": 79.87,
+    "vibration": 43.47,
+    "humidity": 51.39,
+    "pressure": 3.97,
+    "energy": 4.1,
+    "failure_type": "Normal",
+    "rul": 140.0,
+    "anomaly_flag": 0,
+    "downtime_risk": 0.0,
+    "maintenance_required": 0,
+    "gt_tier": "Low",
+    "per_llm": {
+      "glm-5.1:cloud": {
+        "raw": "```json\n{\"tier\": \"Medium\", \"reasoning\": \"One sensor (Energy Consumption) is past the warning threshold, which satisfies the first condition of the Medium tier.\", \"confidence\": 1.0}\n```",
+        "parsed_tier": "Medium",
+        "elapsed_s": 3.4220643043518066,
+        "error": null
+      },
+      "kimi-k2.6:cloud": {
+        "raw": "{\"tier\": \"Medium\", \"reasoning\": \"Energy Consumption is past WARNING threshold (4.10 >= 3.8), triggering the ELIF for >=1 sensor past WARNING threshold\", \"confidence\": 0.95}",
+        "parsed_tier": "Medium",
+        "elapsed_s": 2.7210135459899902,
+        "error": null
+      },
+      "deepseek-v4-pro:cloud": {
+        "raw": "{\"tier\": \"Medium\", \"reasoning\": \"Energy consumption exceeds warning threshold (4.10 >= 3.8) with failure_type Normal, matching the Medium rule.\", \"confidence\": 0.95}",
+        "parsed_tier": "Medium",
+        "elapsed_s": 7.904231548309326,
+        "error": null
+      }
+    },
+    "ensemble_tier": "Medium"
+  },
+  {
+    "machine_id": 5,
+    "timestamp": "2025-01-30 05:56:00",
+    "temperature": 79.88,
+    "vibration": 25.77,
+    "humidity": 46.95,
+    "pressure": 2.23,
+    "energy": 0.62,
+    "failure_type": "Normal",
+    "rul": 206.0,
+    "anomaly_flag": 0,
+    "downtime_risk": 0.0,
+    "maintenance_required": 0,
+    "gt_tier": "Low",
+    "per_llm": {
+      "glm-5.1:cloud": {
+        "raw": "```json\n{\n  \"tier\": \"Low\",\n  \"reasoning\": \"No sensors are past warning threshold and failure_type is Normal.\",\n  \"confidence\": 1.0\n}\n```",
+        "parsed_tier": "Low",
+        "elapsed_s": 2.0623691082000732,
+        "error": null
+      },
+      "kimi-k2.6:cloud": {
+        "raw": "{\"tier\": \"Low\", \"reasoning\": \"No sensor past warning threshold and failure_type is Normal, matching the ELSE rule.\", \"confidence\": 1.0}",
+        "parsed_tier": "Low",
+        "elapsed_s": 3.999652147293091,
+        "error": null
+      },
+      "deepseek-v4-pro:cloud": {
+        "raw": "{\"tier\": \"Low\", \"reasoning\": \"No sensor exceeds warning threshold and failure_type is Normal.\", \"confidence\": 1.0}",
+        "parsed_tier": "Low",
+        "elapsed_s": 20.99106216430664,
+        "error": null
+      }
+    },
+    "ensemble_tier": "Low"
+  },
+  {
+    "machine_id": 5,
+    "timestamp": "2025-02-17 19:41:00",
+    "temperature": 52.77,
+    "vibration": 41.42,
+    "humidity": 71.18,
+    "pressure": 1.55,
+    "energy": 2.29,
+    "failure_type": "Normal",
+    "rul": 18.0,
+    "anomaly_flag": 0,
+    "downtime_risk": 0.0,
+    "maintenance_required": 1,
+    "gt_tier": "High",
+    "per_llm": {
+      "glm-5.1:cloud": {
+        "raw": "```json\n{\n  \"tier\": \"Medium\",\n  \"reasoning\": \"One sensor (Humidity) is past the WARNING threshold and the failure type is Normal.\",\n  \"confidence\": 1.0\n}\n```",
+        "parsed_tier": "Medium",
+        "elapsed_s": 5.696636438369751,
+        "error": null
+      },
+      "kimi-k2.6:cloud": {
+        "raw": "{\"tier\": \"Medium\", \"reasoning\": \"1 sensor past WARNING threshold (Humidity 71.18% >= 68) with failure_type 'Normal' matches ELIF >=1 sensor past WARNING threshold\", \"confidence\": 0.95}",
+        "parsed_tier": "Medium",
+        "elapsed_s": 1.8906421661376953,
+        "error": null
+      },
+      "deepseek-v4-pro:cloud": {
+        "raw": "{\"tier\": \"Medium\", \"reasoning\": \"Humidity exceeds warning threshold (71.18 >= 68) and failure_type is Normal, matching the rule for Medium.\", \"confidence\": 0.95}",
+        "parsed_tier": "Medium",
+        "elapsed_s": 3.6564371585845947,
+        "error": null
+      }
+    },
+    "ensemble_tier": "Medium"
+  },
+  {
+    "machine_id": 5,
+    "timestamp": "2025-01-24 21:05:00",
+    "temperature": 66.91,
+    "vibration": 51.19,
+    "humidity": 56.54,
+    "pressure": 2.97,
+    "energy": 0.96,
+    "failure_type": "Normal",
+    "rul": 182.0,
+    "anomaly_flag": 0,
+    "downtime_risk": 0.0,
+    "maintenance_required": 0,
+    "gt_tier": "Low",
+    "per_llm": {
+      "glm-5.1:cloud": {
+        "raw": "```json\n{\"tier\": \"Medium\", \"reasoning\": \"One sensor (Vibration) is past WARNING threshold and failure_type is Normal, which matches the first ELIF condition.\", \"confidence\": 1.0}\n```",
+        "parsed_tier": "Medium",
+        "elapsed_s": 9.649200916290283,
+        "error": null
+      },
+      "kimi-k2.6:cloud": {
+        "raw": "{\"tier\": \"Low\", \"reasoning\": \"No sensors past warning threshold and failure_type is Normal, matching the ELSE branch of the decision tree.\", \"confidence\": 1.0}",
+        "parsed_tier": "Low",
+        "elapsed_s": 1.8977653980255127,
+        "error": null
+      },
+      "deepseek-v4-pro:cloud": {
+        "raw": "{\"tier\": \"Low\", \"reasoning\": \"No sensor exceeds warning threshold and failure_type is Normal.\", \"confidence\": 1.0}",
+        "parsed_tier": "Low",
+        "elapsed_s": 28.14508032798767,
+        "error": null
+      }
+    },
+    "ensemble_tier": "Low"
+  },
+  {
+    "machine_id": 5,
+    "timestamp": "2025-02-26 19:16:00",
+    "temperature": 71.79,
+    "vibration": 45.69,
+    "humidity": 54.12,
+    "pressure": 2.97,
+    "energy": 2.14,
+    "failure_type": "Normal",
+    "rul": 278.0,
+    "anomaly_flag": 0,
+    "downtime_risk": 0.0,
+    "maintenance_required": 0,
+    "gt_tier": "Low",
+    "per_llm": {
+      "glm-5.1:cloud": {
+        "raw": "```json\n{\"tier\": \"Low\", \"reasoning\": \"No sensors past warning thresholds and failure_type is Normal.\", \"confidence\": 1.0}\n```",
+        "parsed_tier": "Low",
+        "elapsed_s": 3.9065475463867188,
+        "error": null
+      },
+      "kimi-k2.6:cloud": {
+        "raw": "{\"tier\": \"Low\", \"reasoning\": \"No sensor past warning threshold and failure_type is Normal, matching the ELSE rule.\", \"confidence\": 1.0}",
+        "parsed_tier": "Low",
+        "elapsed_s": 1.6173985004425049,
+        "error": null
+      },
+      "deepseek-v4-pro:cloud": {
+        "raw": "{\"tier\": \"Low\", \"reasoning\": \"No sensor exceeds warning threshold and failure_type is Normal, matching the ELSE branch.\", \"confidence\": 1.0}",
+        "parsed_tier": "Low",
+        "elapsed_s": 24.542842626571655,
+        "error": null
+      }
+    },
+    "ensemble_tier": "Low"
+  },
+  {
+    "machine_id": 7,
+    "timestamp": "2025-01-07 03:33:00",
+    "temperature": 83.81,
+    "vibration": 42.92,
+    "humidity": 58.71,
+    "pressure": 1.61,
+    "energy": 2.09,
+    "failure_type": "Normal",
+    "rul": 378.0,
+    "anomaly_flag": 0,
+    "downtime_risk": 0.0,
+    "maintenance_required": 0,
+    "gt_tier": "Low",
+    "per_llm": {
+      "glm-5.1:cloud": {
+        "raw": "```json\n{\"tier\": \"Medium\", \"reasoning\": \"One sensor (Temperature) is past the warning threshold.\", \"confidence\": 0.95}\n```",
+        "parsed_tier": "Medium",
+        "elapsed_s": 2.1875085830688477,
+        "error": null
+      },
+      "kimi-k2.6:cloud": {
+        "raw": "{\"tier\": \"Medium\", \"reasoning\": \"1 sensor past warning threshold (Temperature 83.81 >= 82) with failure_type Normal triggers Medium tier\", \"confidence\": 0.95}",
+        "parsed_tier": "Medium",
+        "elapsed_s": 3.2190356254577637,
+        "error": null
+      },
+      "deepseek-v4-pro:cloud": {
+        "raw": "{\"tier\": \"Medium\", \"reasoning\": \"Temperature exceeds warning threshold with failure_type Normal, matching the Medium rule.\", \"confidence\": 0.95}",
+        "parsed_tier": "Medium",
+        "elapsed_s": 22.03618836402893,
+        "error": null
+      }
+    },
+    "ensemble_tier": "Medium"
+  },
+  {
+    "machine_id": 7,
+    "timestamp": "2025-01-18 17:02:00",
+    "temperature": 75.58,
+    "vibration": 69.16,
+    "humidity": 57.79,
+    "pressure": 2.87,
+    "energy": 2.23,
+    "failure_type": "Normal",
+    "rul": 146.0,
+    "anomaly_flag": 0,
+    "downtime_risk": 0.0,
+    "maintenance_required": 0,
+    "gt_tier": "Low",
+    "per_llm": {
+      "glm-5.1:cloud": {
+        "raw": "```json\n{\"tier\": \"Medium\", \"reasoning\": \"One sensor (Vibration) is past the WARNING threshold, which matches the first condition in the Medium tier.\", \"confidence\": 0.95}\n```",
+        "parsed_tier": "Medium",
+        "elapsed_s": 3.8902037143707275,
+        "error": null
+      },
+      "kimi-k2.6:cloud": {
+        "raw": "{\"tier\": \"Medium\", \"reasoning\": \"Vibration is past WARNING threshold (69.16 >= 55) but not critical, and failure_type is Normal, matching the >=1 sensor past WARNING threshold rule for Medium tier.\", \"confidence\": 0.95}",
+        "parsed_tier": "Medium",
+        "elapsed_s": 2.9080541133880615,
+        "error": null
+      },
+      "deepseek-v4-pro:cloud": {
+        "raw": "{\"tier\": \"Medium\", \"reasoning\": \"Vibration is past warning threshold (69.16 >= 55) and failure_type is Normal, matching the rule for Medium.\", \"confidence\": 0.95}",
+        "parsed_tier": "Medium",
+        "elapsed_s": 12.352140188217163,
+        "error": null
+      }
+    },
+    "ensemble_tier": "Medium"
+  },
+  {
+    "machine_id": 7,
+    "timestamp": "2025-01-16 10:35:00",
+    "temperature": 93.02,
+    "vibration": 43.44,
+    "humidity": 60.15,
+    "pressure": 3.49,
+    "energy": 3.58,
+    "failure_type": "Normal",
+    "rul": 35.0,
+    "anomaly_flag": 1,
+    "downtime_risk": 1.0,
+    "maintenance_required": 1,
+    "gt_tier": "Critical",
+    "per_llm": {
+      "glm-5.1:cloud": {
+        "raw": "```json\n{\"tier\": \"Medium\", \"reasoning\": \"One sensor (Temperature) is past the WARNING threshold and the failure type is Normal, matching the ELIF >=1 sensor past WARNING condition.\", \"confidence\": 1.0}\n```",
+        "parsed_tier": "Medium",
+        "elapsed_s": 2.6656911373138428,
+        "error": null
+      },
+      "kimi-k2.6:cloud": {
+        "raw": "{\"tier\": \"Critical\", \"reasoning\": \"Temperature is past critical threshold (93.02 >= 88) AND failure_type is 'Electrical Fault' - wait, failure_type is 'Normal'. Re-evaluating: Temperature is past critical threshold (93.02 >= 88), which satisfies '>=1 sensor past CRITICAL threshold' in the second bra",
+        "parsed_tier": "Critical",
+        "elapsed_s": 3.4377527236938477,
+        "error": null
+      },
+      "deepseek-v4-pro:cloud": {
+        "raw": "{\"tier\": \"Medium\", \"reasoning\": \"Temperature exceeds warning threshold with Normal failure type, matching the Medium rule.\", \"confidence\": 0.95}",
+        "parsed_tier": "Medium",
+        "elapsed_s": 9.484625101089478,
+        "error": null
+      }
+    },
+    "ensemble_tier": "Medium"
+  },
+  {
+    "machine_id": 7,
+    "timestamp": "2025-01-04 09:55:00",
+    "temperature": 93.95,
+    "vibration": 57.1,
+    "humidity": 70.11,
+    "pressure": 1.35,
+    "energy": 1.44,
+    "failure_type": "Normal",
+    "rul": 35.0,
+    "anomaly_flag": 1,
+    "downtime_risk": 1.0,
+    "maintenance_required": 1,
+    "gt_tier": "Critical",
+    "per_llm": {
+      "glm-5.1:cloud": {
+        "raw": "```json\n{\n  \"tier\": \"Medium\",\n  \"reasoning\": \"Three sensors are past the warning threshold, but the failure type is Normal, so the Medium tier is matched by the >=1 sensor past warning rule.\",\n  \"confidence\": 0.95\n}\n```",
+        "parsed_tier": "Medium",
+        "elapsed_s": 5.3901283740997314,
+        "error": null
+      },
+      "kimi-k2.6:cloud": {
+        "raw": "{\"tier\": \"High\", \"reasoning\": \"Temperature is past critical threshold (93.95 >= 88), satisfying the first condition in the High branch: >=1 sensor past CRITICAL threshold.\", \"confidence\": 0.95}",
+        "parsed_tier": "High",
+        "elapsed_s": 1.9688875675201416,
+        "error": null
+      },
+      "deepseek-v4-pro:cloud": {
+        "raw": "{\"tier\": \"Medium\", \"reasoning\": \"Temperature exceeds warning threshold and failure_type is Normal, matching the Medium rule.\", \"confidence\": 0.95}",
+        "parsed_tier": "Medium",
+        "elapsed_s": 15.953425884246826,
+        "error": null
+      }
+    },
+    "ensemble_tier": "Medium"
+  },
+  {
+    "machine_id": 7,
+    "timestamp": "2025-03-01 04:58:00",
+    "temperature": 76.71,
+    "vibration": 40.82,
+    "humidity": 38.1,
+    "pressure": 2.46,
+    "energy": 4.79,
+    "failure_type": "Normal",
+    "rul": 421.0,
+    "anomaly_flag": 0,
+    "downtime_risk": 0.0,
+    "maintenance_required": 0,
+    "gt_tier": "Low",
+    "per_llm": {
+      "glm-5.1:cloud": {
+        "raw": "```json\n{\"tier\": \"High\", \"reasoning\": \"One sensor (Energy Consumption) is past the critical threshold, which matches the first condition in the High tier.\", \"confidence\": 0.95}\n```",
+        "parsed_tier": "High",
+        "elapsed_s": 3.3589837551116943,
+        "error": null
+      },
+      "kimi-k2.6:cloud": {
+        "raw": "{\"tier\": \"Critical\", \"reasoning\": \"Energy Consumption is past CRITICAL threshold (4.79 >= 4.5) AND failure_type is 'Electrical Fault' per the first rule: >=1 sensor past CRITICAL threshold AND failure_type in {'Electrical Fault', 'Pressure Drop'}\", \"confidence\": 1.0}",
+        "parsed_tier": "Critical",
+        "elapsed_s": 3.8125712871551514,
+        "error": null
+      },
+      "deepseek-v4-pro:cloud": {
+        "raw": "{\"tier\": \"Low\", \"reasoning\": \"No sensor exceeds warning threshold and failure_type is Normal, matching the ELSE branch.\", \"confidence\": 1.0}",
+        "parsed_tier": "Low",
+        "elapsed_s": 1.1718087196350098,
+        "error": null
+      }
+    },
+    "ensemble_tier": "Critical"
+  },
+  {
+    "machine_id": 9,
+    "timestamp": "2025-01-06 12:46:00",
+    "temperature": 68.19,
+    "vibration": 39.28,
+    "humidity": 60.6,
+    "pressure": 2.13,
+    "energy": 2.44,
+    "failure_type": "Normal",
+    "rul": 253.0,
+    "anomaly_flag": 0,
+    "downtime_risk": 0.0,
+    "maintenance_required": 0,
+    "gt_tier": "Low",
+    "per_llm": {
+      "glm-5.1:cloud": {
+        "raw": "```json\n{\"tier\": \"Low\", \"reasoning\": \"No sensors past warning thresholds and failure type is Normal.\", \"confidence\": 1.0}\n```",
+        "parsed_tier": "Low",
+        "elapsed_s": 15.022807598114014,
+        "error": null
+      },
+      "kimi-k2.6:cloud": {
+        "raw": "{\"tier\": \"Low\", \"reasoning\": \"No sensor past warning threshold and failure_type is Normal, matching ELSE clause.\", \"confidence\": 1.0}",
+        "parsed_tier": "Low",
+        "elapsed_s": 1.7275049686431885,
+        "error": null
+      },
+      "deepseek-v4-pro:cloud": {
+        "raw": "{\n  \"tier\": \"Low\",\n  \"reasoning\": \"No sensor exceeds warning thresholds and failure_type is Normal, matching the ELSE branch.\",\n  \"confidence\": 1.0\n}",
+        "parsed_tier": "Low",
+        "elapsed_s": 2.4883463382720947,
+        "error": null
+      }
+    },
+    "ensemble_tier": "Low"
+  },
+  {
+    "machine_id": 9,
+    "timestamp": "2025-01-14 01:40:00",
+    "temperature": 88.79,
+    "vibration": 27.42,
+    "humidity": 55.86,
+    "pressure": 3.81,
+    "energy": 4.66,
+    "failure_type": "Vibration Issue",
+    "rul": 150.0,
+    "anomaly_flag": 0,
+    "downtime_risk": 0.0,
+    "maintenance_required": 1,
+    "gt_tier": "Medium",
+    "per_llm": {
+      "glm-5.1:cloud": {
+        "raw": "```json\n{\n  \"tier\": \"High\",\n  \"reasoning\": \"One sensor past critical threshold (Energy Consumption) and one sensor past warning threshold (Temperature).\",\n  \"confidence\": 0.95\n}\n```",
+        "parsed_tier": "High",
+        "elapsed_s": 4.052699327468872,
+        "error": null
+      },
+      "kimi-k2.6:cloud": {
+        "raw": "{\"tier\": \"Critical\", \"reasoning\": \"Temperature is past critical threshold (88.79 >= 88) and failure_type is 'Electrical Fault' AND temperature >= 88, matching the third Critical condition.\", \"confidence\": 0.95}",
+        "parsed_tier": "Critical",
+        "elapsed_s": 2.107215404510498,
+        "error": null
+      },
+      "deepseek-v4-pro:cloud": {
+        "raw": "{\"tier\": \"Critical\", \"reasoning\": \"Temperature is past critical threshold and energy consumption is past critical threshold, meeting the rule for >=2 sensors past critical.\", \"confidence\": 0.95}",
+        "parsed_tier": "Critical",
+        "elapsed_s": 32.58598256111145,
+        "error": null
+      }
+    },
+    "ensemble_tier": "Critical"
+  },
+  {
+    "machine_id": 9,
+    "timestamp": "2025-02-16 19:27:00",
+    "temperature": 73.12,
+    "vibration": 53.04,
+    "humidity": 41.62,
+    "pressure": 3.1,
+    "energy": 2.93,
+    "failure_type": "Normal",
+    "rul": 382.0,
+    "anomaly_flag": 0,
+    "downtime_risk": 0.0,
+    "maintenance_required": 0,
+    "gt_tier": "Low",
+    "per_llm": {
+      "glm-5.1:cloud": {
+        "raw": "```json\n{\"tier\": \"Low\", \"reasoning\": \"No sensors past warning threshold and failure_type is Normal.\", \"confidence\": 1.0}\n```",
+        "parsed_tier": "Low",
+        "elapsed_s": 15.249908924102783,
+        "error": null
+      },
+      "kimi-k2.6:cloud": {
+        "raw": "{\"tier\": \"Low\", \"reasoning\": \"No sensors past warning threshold and failure_type is Normal, matching the ELSE clause.\", \"confidence\": 1.0}",
+        "parsed_tier": "Low",
+        "elapsed_s": 1.7111256122589111,
+        "error": null
+      },
+      "deepseek-v4-pro:cloud": {
+        "raw": "{\"tier\": \"Medium\", \"reasoning\": \"Temperature is at warning level and failure_type is Normal, matching the rule for Medium.\", \"confidence\": 0.95}",
+        "parsed_tier": "Medium",
+        "elapsed_s": 2.798306941986084,
+        "error": null
+      }
+    },
+    "ensemble_tier": "Low"
+  },
+  {
+    "machine_id": 9,
+    "timestamp": "2025-01-20 18:44:00",
+    "temperature": 73.35,
+    "vibration": 38.8,
+    "humidity": 50.0,
+    "pressure": 1.93,
+    "energy": 0.58,
+    "failure_type": "Overheating",
+    "rul": 46.0,
+    "anomaly_flag": 0,
+    "downtime_risk": 0.0,
+    "maintenance_required": 1,
+    "gt_tier": "High",
+    "per_llm": {
+      "glm-5.1:cloud": {
+        "raw": "```json\n{\n  \"tier\": \"Medium\",\n  \"reasoning\": \"No sensors past critical or warning thresholds, but failure_type is Overheating (not Normal), triggering the Medium rule.\",\n  \"confidence\": 0.95\n}\n```",
+        "parsed_tier": "Medium",
+        "elapsed_s": 1.2662560939788818,
+        "error": null
+      },
+      "kimi-k2.6:cloud": {
+        "raw": "{\"tier\": \"Medium\", \"reasoning\": \"failure_type is 'Overheating' (non-Normal) with zero sensors past warning or critical, matching ELIF condition failure_type != 'Normal'\", \"confidence\": 0.95}",
+        "parsed_tier": "Medium",
+        "elapsed_s": 1.5997769832611084,
+        "error": null
+      },
+      "deepseek-v4-pro:cloud": {
+        "raw": "{\"tier\": \"Medium\", \"reasoning\": \"One sensor (temperature) is past warning threshold and failure_type is not Normal.\", \"confidence\": 0.9}",
+        "parsed_tier": "Medium",
+        "elapsed_s": 2.796469211578369,
+        "error": null
+      }
+    },
+    "ensemble_tier": "Medium"
+  },
+  {
+    "machine_id": 9,
+    "timestamp": "2025-02-13 02:06:00",
+    "temperature": 64.03,
+    "vibration": 34.49,
+    "humidity": 73.09,
+    "pressure": 1.61,
+    "energy": 1.41,
+    "failure_type": "Normal",
+    "rul": 190.0,
+    "anomaly_flag": 0,
+    "downtime_risk": 0.0,
+    "maintenance_required": 0,
+    "gt_tier": "Low",
+    "per_llm": {
+      "glm-5.1:cloud": {
+        "raw": "```json\n{\n  \"tier\": \"Medium\",\n  \"reasoning\": \"One sensor (Humidity) is past the WARNING threshold and the failure type is Normal, matching the ELIF >=1 sensor past WARNING threshold condition.\",\n  \"confidence\": 1.0\n}\n```",
+        "parsed_tier": "Medium",
+        "elapsed_s": 2.8435418605804443,
+        "error": null
+      },
+      "kimi-k2.6:cloud": {
+        "raw": "{\"tier\": \"Medium\", \"reasoning\": \"Humidity is past WARNING threshold (73.09 >= 68), triggering the ELIF >=1 sensor past WARNING threshold rule\", \"confidence\": 0.95}",
+        "parsed_tier": "Medium",
+        "elapsed_s": 8.875108242034912,
+        "error": null
+      },
+      "deepseek-v4-pro:cloud": {
+        "raw": "{\"tier\": \"Medium\", \"reasoning\": \"Humidity exceeds warning threshold (73.09 >= 68) and failure_type is Normal, matching the rule for Medium.\", \"confidence\": 0.95}",
+        "parsed_tier": "Medium",
+        "elapsed_s": 2.70849347114563,
+        "error": null
+      }
+    },
+    "ensemble_tier": "Medium"
+  },
+  {
+    "machine_id": 11,
+    "timestamp": "2025-02-15 12:06:00",
+    "temperature": 74.86,
+    "vibration": 69.39,
+    "humidity": 54.03,
+    "pressure": 1.99,
+    "energy": 4.31,
+    "failure_type": "Normal",
+    "rul": 24.0,
+    "anomaly_flag": 0,
+    "downtime_risk": 0.0,
+    "maintenance_required": 0,
+    "gt_tier": "High",
+    "per_llm": {
+      "glm-5.1:cloud": {
+        "raw": "```json\n{\"tier\": \"High\", \"reasoning\": \"One sensor (Vibration) is past the critical threshold, which matches the first condition in the High tier.\", \"confidence\": 1.0}\n```",
+        "parsed_tier": "High",
+        "elapsed_s": 5.401052474975586,
+        "error": null
+      },
+      "kimi-k2.6:cloud": {
+        "raw": "{\"tier\": \"High\", \"reasoning\": \"Vibration is past CRITICAL threshold (69.39 >= 70), satisfying the first condition in the High tier (>=1 sensor past CRITICAL threshold).\", \"confidence\": 0.95}",
+        "parsed_tier": "High",
+        "elapsed_s": 3.7078335285186768,
+        "error": null
+      },
+      "deepseek-v4-pro:cloud": {
+        "raw": "{\"tier\": \"Medium\", \"reasoning\": \"Vibration is past warning threshold and failure_type is Normal, matching the rule for Medium.\", \"confidence\": 0.95}",
+        "parsed_tier": "Medium",
+        "elapsed_s": 21.104431867599487,
+        "error": null
+      }
+    },
+    "ensemble_tier": "High"
+  },
+  {
+    "machine_id": 11,
+    "timestamp": "2025-02-01 18:58:00",
+    "temperature": 74.29,
+    "vibration": 57.9,
+    "humidity": 54.79,
+    "pressure": 2.83,
+    "energy": 3.24,
+    "failure_type": "Normal",
+    "rul": 19.0,
+    "anomaly_flag": 0,
+    "downtime_risk": 0.0,
+    "maintenance_required": 1,
+    "gt_tier": "High",
+    "per_llm": {
+      "glm-5.1:cloud": {
+        "raw": "```json\n{\n  \"tier\": \"Medium\",\n  \"reasoning\": \"One sensor (Vibration) is past the WARNING threshold and the failure_type is Normal, which matches the ELIF >=1 sensor past WARNING condition.\",\n  \"confidence\": 0.95\n}\n```",
+        "parsed_tier": "Medium",
+        "elapsed_s": 2.6247506141662598,
+        "error": null
+      },
+      "kimi-k2.6:cloud": {
+        "raw": "{\"tier\": \"Low\", \"reasoning\": \"No sensors past warning threshold and failure_type is Normal, matching the ELSE branch of the decision tree.\", \"confidence\": 1.0}",
+        "parsed_tier": "Low",
+        "elapsed_s": 1.45912766456604,
+        "error": null
+      },
+      "deepseek-v4-pro:cloud": {
+        "raw": "{\"tier\": \"Medium\", \"reasoning\": \"Vibration is past warning threshold (57.90 >= 55) and failure_type is Normal, matching the rule for Medium.\", \"confidence\": 0.95}",
+        "parsed_tier": "Medium",
+        "elapsed_s": 42.07229542732239,
+        "error": null
+      }
+    },
+    "ensemble_tier": "Medium"
+  },
+  {
+    "machine_id": 11,
+    "timestamp": "2025-01-16 21:32:00",
+    "temperature": 73.91,
+    "vibration": 65.82,
+    "humidity": 47.84,
+    "pressure": 3.67,
+    "energy": 2.05,
+    "failure_type": "Normal",
+    "rul": 198.0,
+    "anomaly_flag": 0,
+    "downtime_risk": 0.0,
+    "maintenance_required": 0,
+    "gt_tier": "Low",
+    "per_llm": {
+      "glm-5.1:cloud": {
+        "raw": "```json\n{\n  \"tier\": \"Medium\",\n  \"reasoning\": \"One sensor (Vibration) is past the warning threshold, and the failure type is Normal.\",\n  \"confidence\": 1.0\n}\n```",
+        "parsed_tier": "Medium",
+        "elapsed_s": 5.281483173370361,
+        "error": null
+      },
+      "kimi-k2.6:cloud": {
+        "raw": "{\"tier\": \"Medium\", \"reasoning\": \"Vibration is past warning threshold (65.82 >= 55), which satisfies the >=1 sensor past WARNING threshold condition in the Medium tier.\", \"confidence\": 0.95}",
+        "parsed_tier": "Medium",
+        "elapsed_s": 1.7027435302734375,
+        "error": null
+      },
+      "deepseek-v4-pro:cloud": {
+        "raw": "{\"tier\": \"Medium\", \"reasoning\": \"Vibration is past warning threshold and failure_type is Normal, matching the rule for Medium.\", \"confidence\": 0.95}",
+        "parsed_tier": "Medium",
+        "elapsed_s": 2.1250991821289062,
+        "error": null
+      }
+    },
+    "ensemble_tier": "Medium"
+  },
+  {
+    "machine_id": 11,
+    "timestamp": "2025-01-25 04:42:00",
+    "temperature": 70.09,
+    "vibration": 17.5,
+    "humidity": 32.76,
+    "pressure": 2.58,
+    "energy": 4.54,
+    "failure_type": "Overheating",
+    "rul": 330.0,
+    "anomaly_flag": 0,
+    "downtime_risk": 0.0,
+    "maintenance_required": 1,
+    "gt_tier": "Medium",
+    "per_llm": {
+      "glm-5.1:cloud": {
+        "raw": "```json\n{\n  \"tier\": \"Medium\",\n  \"reasoning\": \"No sensors past critical or warning threshold, but failure_type is not Normal, matching the ELIF condition for Medium.\",\n  \"confidence\": 0.95\n}\n```",
+        "parsed_tier": "Medium",
+        "elapsed_s": 2.227285861968994,
+        "error": null
+      },
+      "kimi-k2.6:cloud": {
+        "raw": "{\"tier\": \"High\", \"reasoning\": \"Energy consumption is past critical threshold (4.54 >= 4.5), satisfying the first condition in the High tier (>=1 sensor past CRITICAL threshold).\", \"confidence\": 1.0}",
+        "parsed_tier": "High",
+        "elapsed_s": 2.0310821533203125,
+        "error": null
+      },
+      "deepseek-v4-pro:cloud": {
+        "raw": "{\"tier\": \"Medium\", \"reasoning\": \"One sensor (Energy Consumption) is past warning threshold and failure_type is not Normal.\", \"confidence\": 0.9}",
+        "parsed_tier": "Medium",
+        "elapsed_s": 27.227802991867065,
+        "error": null
+      }
+    },
+    "ensemble_tier": "Medium"
+  },
+  {
+    "machine_id": 11,
+    "timestamp": "2025-01-28 01:18:00",
+    "temperature": 74.18,
+    "vibration": 32.89,
+    "humidity": 37.15,
+    "pressure": 4.48,
+    "energy": 2.0,
+    "failure_type": "Normal",
+    "rul": 92.0,
+    "anomaly_flag": 0,
+    "downtime_risk": 0.0,
+    "maintenance_required": 0,
+    "gt_tier": "Low",
+    "per_llm": {
+      "glm-5.1:cloud": {
+        "raw": "```json\n{\n  \"tier\": \"Medium\",\n  \"reasoning\": \"One sensor (Pressure) is past the warning threshold, satisfying the first condition of the ELIF branch.\",\n  \"confidence\": 1.0\n}\n```",
+        "parsed_tier": "Medium",
+        "elapsed_s": 11.141233921051025,
+        "error": null
+      },
+      "kimi-k2.6:cloud": {
+        "raw": "{\"SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS",
+        "parsed_tier": null,
+        "elapsed_s": 17.108519792556763,
+        "error": null
+      },
+      "deepseek-v4-pro:cloud": {
+        "raw": "{\"tier\": \"Medium\", \"reasoning\": \"Pressure is past warning threshold (4.48 >= 4.3) with failure_type Normal, matching the Medium rule.\", \"confidence\": 0.95}",
+        "parsed_tier": "Medium",
+        "elapsed_s": 10.797142505645752,
+        "error": null
+      }
+    },
+    "ensemble_tier": "Medium"
+  },
+  {
+    "machine_id": 13,
+    "timestamp": "2025-02-05 23:19:00",
+    "temperature": 77.6,
+    "vibration": 52.82,
+    "humidity": 74.76,
+    "pressure": 3.03,
+    "energy": 2.52,
+    "failure_type": "Normal",
+    "rul": 215.0,
+    "anomaly_flag": 0,
+    "downtime_risk": 0.0,
+    "maintenance_required": 0,
+    "gt_tier": "Low",
+    "per_llm": {
+      "glm-5.1:cloud": {
+        "raw": "```json\n{\n  \"tier\": \"Medium\",\n  \"reasoning\": \"One sensor (humidity) is past the warning threshold, matching the first condition of the ELIF branch.\",\n  \"confidence\": 1.0\n}\n```",
+        "parsed_tier": "Medium",
+        "elapsed_s": 3.828115463256836,
+        "error": null
+      },
+      "kimi-k2.6:cloud": {
+        "raw": "{\"tier\": \"Medium\", \"reasoning\": \"Humidity is past warning threshold (74.76% >= 75% critical, but 74.76% >= 68% warning), so >=1 sensor past WARNING threshold applies\", \"confidence\": 0.95}",
+        "parsed_tier": "Medium",
+        "elapsed_s": 1.7188208103179932,
+        "error": null
+      },
+      "deepseek-v4-pro:cloud": {
+        "raw": "{\"tier\": \"Medium\", \"reasoning\": \"Humidity is past warning threshold and failure_type is Normal, matching the Medium rule.\", \"confidence\": 0.95}",
+        "parsed_tier": "Medium",
+        "elapsed_s": 6.452830791473389,
+        "error": null
+      }
+    },
+    "ensemble_tier": "Medium"
+  },
+  {
+    "machine_id": 13,
+    "timestamp": "2025-02-16 19:21:00",
+    "temperature": 82.26,
+    "vibration": 38.96,
+    "humidity": 30.24,
+    "pressure": 2.25,
+    "energy": 3.91,
+    "failure_type": "Normal",
+    "rul": 94.0,
+    "anomaly_flag": 0,
+    "downtime_risk": 0.0,
+    "maintenance_required": 0,
+    "gt_tier": "Low",
+    "per_llm": {
+      "glm-5.1:cloud": {
+        "raw": "```json\n{\"tier\": \"Medium\", \"reasoning\": \"One sensor (Energy Consumption) is past the warning threshold and the failure type is Normal, matching the first condition of the ELIF branch.\", \"confidence\": 0.95}\n```",
+        "parsed_tier": "Medium",
+        "elapsed_s": 4.999918222427368,
+        "error": null
+      },
+      "kimi-k2.6:cloud": {
+        "raw": "{\"tier\": \"Medium\", \"reasoning\": \"1 sensor past WARNING threshold (Energy Consumption 3.91 >= 3.8) with failure_type 'Normal' matches ELIF condition for Medium\", \"confidence\": 0.95}",
+        "parsed_tier": "Medium",
+        "elapsed_s": 1.6719813346862793,
+        "error": null
+      },
+      "deepseek-v4-pro:cloud": {
+        "raw": "{\"tier\": \"Medium\", \"reasoning\": \"Energy consumption exceeds warning threshold (3.91 >= 3.8) with failure_type Normal, matching the Medium rule: >=1 sensor past warning.\", \"confidence\": 0.95}",
+        "parsed_tier": "Medium",
+        "elapsed_s": 1.6562230587005615,
+        "error": null
+      }
+    },
+    "ensemble_tier": "Medium"
+  },
+  {
+    "machine_id": 13,
+    "timestamp": "2025-01-22 21:33:00",
+    "temperature": 78.01,
+    "vibration": 64.31,
+    "humidity": 36.8,
+    "pressure": 3.48,
+    "energy": 4.08,
+    "failure_type": "Normal",
+    "rul": 152.0,
+    "anomaly_flag": 0,
+    "downtime_risk": 0.0,
+    "maintenance_required": 0,
+    "gt_tier": "Low",
+    "per_llm": {
+      "glm-5.1:cloud": {
+        "raw": "```json\n{\n  \"tier\": \"Medium\",\n  \"reasoning\": \"One sensor (Vibration) is past the WARNING threshold, which matches the first condition in the ELIF block.\",\n  \"confidence\": 1.0\n}\n```",
+        "parsed_tier": "Medium",
+        "elapsed_s": 2.937516689300537,
+        "error": null
+      },
+      "kimi-k2.6:cloud": {
+        "raw": "{\"tier\": \"High\", \"reasoning\": \"Energy consumption is past critical threshold (4.08 >= 4.5 is false, rechecking: 4.08 < 4.5, so not critical; vibration is past warning (64.31 >= 55) and energy is past warning (4.08 >= 3.8), so 2 sensors past warning with failure_type 'Normal' - wait, failure_type is ",
+        "parsed_tier": "High",
+        "elapsed_s": 2.9934329986572266,
+        "error": null
+      },
+      "deepseek-v4-pro:cloud": {
+        "raw": "",
+        "parsed_tier": null,
+        "elapsed_s": 10.14883279800415,
+        "error": "Server overloaded, please retry shortly (ref: 9031b527-f05f-40d4-bbb1-d0c143f8487c) (status code: 503)"
+      }
+    },
+    "ensemble_tier": "High"
+  },
+  {
+    "machine_id": 13,
+    "timestamp": "2025-02-06 06:21:00",
+    "temperature": 77.41,
+    "vibration": 55.88,
+    "humidity": 40.91,
+    "pressure": 1.41,
+    "energy": 4.9,
+    "failure_type": "Normal",
+    "rul": 364.0,
+    "anomaly_flag": 0,
+    "downtime_risk": 0.0,
+    "maintenance_required": 0,
+    "gt_tier": "Low",
+    "per_llm": {
+      "glm-5.1:cloud": {
+        "raw": "```json\n{\n  \"tier\": \"High\",\n  \"reasoning\": \"One sensor (Energy Consumption) is past the critical threshold, satisfying the first condition of the High tier.\",\n  \"confidence\": 0.95\n}\n```",
+        "parsed_tier": "High",
+        "elapsed_s": 11.06853175163269,
+        "error": null
+      },
+      "kimi-k2.6:cloud": {
+        "raw": "{\"tier\": \"High\", \"reasoning\": \"Energy consumption is past critical threshold (4.90 >= 4.5), satisfying the first condition in the High tier (>=1 sensor past critical).\", \"confidence\": 1.0}",
+        "parsed_tier": "High",
+        "elapsed_s": 1.519153356552124,
+        "error": null
+      },
+      "deepseek-v4-pro:cloud": {
+        "raw": "{\"tier\": \"Medium\", \"reasoning\": \"Energy consumption exceeds warning threshold (4.90 >= 3.8) and failure_type is Normal, matching the rule for Medium.\", \"confidence\": 0.95}",
+        "parsed_tier": "Medium",
+        "elapsed_s": 2.3403429985046387,
+        "error": null
+      }
+    },
+    "ensemble_tier": "High"
+  },
+  {
+    "machine_id": 13,
+    "timestamp": "2025-03-11 06:00:00",
+    "temperature": 108.37,
+    "vibration": 72.45,
+    "humidity": 33.6,
+    "pressure": 3.84,
+    "energy": 0.96,
+    "failure_type": "Normal",
+    "rul": 19.0,
+    "anomaly_flag": 1,
+    "downtime_risk": 1.0,
+    "maintenance_required": 1,
+    "gt_tier": "Critical",
+    "per_llm": {
+      "glm-5.1:cloud": {
+        "raw": "```json\n{\"tier\": \"High\", \"reasoning\": \"One sensor (vibration) is past the critical threshold, which satisfies the first condition of the High tier.\", \"confidence\": 0.95}\n```",
+        "parsed_tier": "High",
+        "elapsed_s": 7.7986671924591064,
+        "error": null
+      },
+      "kimi-k2.6:cloud": {
+        "raw": "{\"tier\": \"Critical\", \"reasoning\": \"Temperature (108.37 C) and Vibration (72.45) are both past critical thresholds, satisfying the first rule: >=2 sensors past CRITICAL threshold.\", \"confidence\": 1.0}",
+        "parsed_tier": "Critical",
+        "elapsed_s": 2.2482259273529053,
+        "error": null
+      },
+      "deepseek-v4-pro:cloud": {
+        "raw": "{\"tier\": \"High\", \"reasoning\": \"Vibration is past critical threshold (72.45 >= 70), triggering the '>=1 sensor past CRITICAL threshold' rule for High.\", \"confidence\": 0.95}",
+        "parsed_tier": "High",
+        "elapsed_s": 6.9533164501190186,
+        "error": null
+      }
+    },
+    "ensemble_tier": "High"
+  },
+  {
+    "machine_id": 15,
+    "timestamp": "2025-02-02 03:53:00",
+    "temperature": 67.25,
+    "vibration": 33.84,
+    "humidity": 32.54,
+    "pressure": 1.78,
+    "energy": 1.57,
+    "failure_type": "Normal",
+    "rul": 279.0,
+    "anomaly_flag": 0,
+    "downtime_risk": 0.0,
+    "maintenance_required": 0,
+    "gt_tier": "Low",
+    "per_llm": {
+      "glm-5.1:cloud": {
+        "raw": "```json\n{\"tier\": \"Low\", \"reasoning\": \"No sensors past warning thresholds and failure_type is Normal.\", \"confidence\": 1.0}\n```",
+        "parsed_tier": "Low",
+        "elapsed_s": 16.843818187713623,
+        "error": null
+      },
+      "kimi-k2.6:cloud": {
+        "raw": "{\"tier\": \"Low\", \"reasoning\": \"No sensors past warning threshold and failure_type is Normal, matching the ELSE branch.\", \"confidence\": 1.0}",
+        "parsed_tier": "Low",
+        "elapsed_s": 3.3279013633728027,
+        "error": null
+      },
+      "deepseek-v4-pro:cloud": {
+        "raw": "{\"tier\": \"Low\", \"reasoning\": \"No sensor exceeds warning threshold and failure_type is Normal, matching the ELSE branch.\", \"confidence\": 1.0}",
+        "parsed_tier": "Low",
+        "elapsed_s": 114.03134822845459,
+        "error": null
+      }
+    },
+    "ensemble_tier": "Low"
+  },
+  {
+    "machine_id": 15,
+    "timestamp": "2025-01-29 08:29:00",
+    "temperature": 72.26,
+    "vibration": 68.9,
+    "humidity": 49.32,
+    "pressure": 1.42,
+    "energy": 3.2,
+    "failure_type": "Normal",
+    "rul": 314.0,
+    "anomaly_flag": 0,
+    "downtime_risk": 0.0,
+    "maintenance_required": 0,
+    "gt_tier": "Low",
+    "per_llm": {
+      "glm-5.1:cloud": {
+        "raw": "```json\n{\"tier\": \"Medium\", \"reasoning\": \"One sensor (Vibration) is past the WARNING threshold and failure_type is Normal, which matches the ELIF >=1 sensor past WARNING threshold rule.\", \"confidence\": 0.95}\n```",
+        "parsed_tier": "Medium",
+        "elapsed_s": 3.2345869541168213,
+        "error": null
+      },
+      "kimi-k2.6:cloud": {
+        "raw": "{\"tier\": \"High\", \"reasoning\": \"Vibration is past critical threshold (68.90 >= 70), satisfying the first condition in the High tier rule.\", \"confidence\": 1.0}",
+        "parsed_tier": "High",
+        "elapsed_s": 2.625020742416382,
+        "error": null
+      },
+      "deepseek-v4-pro:cloud": {
+        "raw": "{\"tier\": \"Medium\", \"reasoning\": \"Vibration is past warning threshold and failure_type is Normal, matching the rule for Medium.\", \"confidence\": 0.95}",
+        "parsed_tier": "Medium",
+        "elapsed_s": 4.599875450134277,
+        "error": null
+      }
+    },
+    "ensemble_tier": "Medium"
+  },
+  {
+    "machine_id": 15,
+    "timestamp": "2025-01-19 02:23:00",
+    "temperature": 75.64,
+    "vibration": 32.38,
+    "humidity": 43.11,
+    "pressure": 4.56,
+    "energy": 0.72,
+    "failure_type": "Normal",
+    "rul": 241.0,
+    "anomaly_flag": 0,
+    "downtime_risk": 0.0,
+    "maintenance_required": 0,
+    "gt_tier": "Low",
+    "per_llm": {
+      "glm-5.1:cloud": {
+        "raw": "```json\n{\"tier\": \"Medium\", \"reasoning\": \"One sensor (Pressure) is past the warning threshold, which matches the ELIF >=1 sensor past WARNING condition.\", \"confidence\": 0.95}\n```",
+        "parsed_tier": "Medium",
+        "elapsed_s": 5.587745428085327,
+        "error": null
+      },
+      "kimi-k2.6:cloud": {
+        "raw": "{\"tier\": \"Medium\", \"reasoning\": \"Pressure is past WARNING threshold (4.56 >= 4.3), triggering the third rule.\", \"confidence\": 0.95}",
+        "parsed_tier": "Medium",
+        "elapsed_s": 2.0619421005249023,
+        "error": null
+      },
+      "deepseek-v4-pro:cloud": {
+        "raw": "{\"tier\": \"Medium\", \"reasoning\": \"Pressure is past warning threshold (4.56 >= 4.3) and failure_type is Normal, matching the rule for Medium.\", \"confidence\": 0.95}",
+        "parsed_tier": "Medium",
+        "elapsed_s": 3.094306468963623,
+        "error": null
+      }
+    },
+    "ensemble_tier": "Medium"
+  },
+  {
+    "machine_id": 15,
+    "timestamp": "2025-01-29 01:12:00",
+    "temperature": 54.23,
+    "vibration": 49.16,
+    "humidity": 48.16,
+    "pressure": 2.3,
+    "energy": 4.87,
+    "failure_type": "Normal",
+    "rul": 74.0,
+    "anomaly_flag": 0,
+    "downtime_risk": 0.0,
+    "maintenance_required": 0,
+    "gt_tier": "Low",
+    "per_llm": {
+      "glm-5.1:cloud": {
+        "raw": "```json\n{\n  \"tier\": \"High\",\n  \"reasoning\": \"One sensor past critical threshold (Energy Consumption 4.87 >= 4.5) triggers the High tier.\",\n  \"confidence\": 1.0\n}\n```",
+        "parsed_tier": "High",
+        "elapsed_s": 4.005011081695557,
+        "error": null
+      },
+      "kimi-k2.6:cloud": {
+        "raw": "{\"tier\": \"Critical\", \"reasoning\": \"Energy Consumption 4.87 kWh is past critical threshold 4.5, and failure_type is Electrical Fault, matching the rule '>=1 sensor past CRITICAL threshold AND failure_type in {Electrical Fault, Pressure Drop}'\", \"confidence\": 1.0}",
+        "parsed_tier": "Critical",
+        "elapsed_s": 1.710038423538208,
+        "error": null
+      },
+      "deepseek-v4-pro:cloud": {
+        "raw": "{\"tier\": \"Low\", \"reasoning\": \"No sensor exceeds warning threshold and failure_type is Normal.\", \"confidence\": 1.0}",
+        "parsed_tier": "Low",
+        "elapsed_s": 34.20327305793762,
+        "error": null
+      }
+    },
+    "ensemble_tier": "Critical"
+  },
+  {
+    "machine_id": 15,
+    "timestamp": "2025-01-06 01:06:00",
+    "temperature": 52.77,
+    "vibration": 48.44,
+    "humidity": 73.09,
+    "pressure": 3.67,
+    "energy": 3.49,
+    "failure_type": "Normal",
+    "rul": 98.0,
+    "anomaly_flag": 0,
+    "downtime_risk": 0.0,
+    "maintenance_required": 0,
+    "gt_tier": "Low",
+    "per_llm": {
+      "glm-5.1:cloud": {
+        "raw": "```json\n{\"tier\": \"Medium\", \"reasoning\": \"One sensor (Humidity) is past the warning threshold and the failure type is Normal.\", \"confidence\": 0.95}\n```",
+        "parsed_tier": "Medium",
+        "elapsed_s": 18.734675645828247,
+        "error": null
+      },
+      "kimi-k2.6:cloud": {
+        "raw": "{\"tier\": \"Medium\", \"reasoning\": \"Humidity 73.09% is past warning threshold >=68, and no other sensors are past warning or critical, matching ELIF >=1 sensor past WARNING threshold\", \"confidence\": 0.95}",
+        "parsed_tier": "Medium",
+        "elapsed_s": 1.8592095375061035,
+        "error": null
+      },
+      "deepseek-v4-pro:cloud": {
+        "raw": "{\"tier\": \"Medium\", \"reasoning\": \"Humidity is past warning threshold and failure_type is Normal, matching the Medium rule.\", \"confidence\": 0.9}",
+        "parsed_tier": "Medium",
+        "elapsed_s": 18.577989101409912,
+        "error": null
+      }
+    },
+    "ensemble_tier": "Medium"
+  },
+  {
+    "machine_id": 17,
+    "timestamp": "2025-03-02 22:39:00",
+    "temperature": 67.09,
+    "vibration": 44.51,
+    "humidity": 77.88,
+    "pressure": 1.92,
+    "energy": 3.73,
+    "failure_type": "Pressure Drop",
+    "rul": 207.0,
+    "anomaly_flag": 0,
+    "downtime_risk": 0.0,
+    "maintenance_required": 1,
+    "gt_tier": "Medium",
+    "per_llm": {
+      "glm-5.1:cloud": {
+        "raw": "```json\n{\n  \"tier\": \"High\",\n  \"reasoning\": \"One sensor (Humidity) is past the critical threshold and the failure type is 'Pressure Drop', satisfying the High condition.\",\n  \"confidence\": 1.0\n}\n```",
+        "parsed_tier": "High",
+        "elapsed_s": 2.7342257499694824,
+        "error": null
+      },
+      "kimi-k2.6:cloud": {
+        "raw": "{\"tier\": \"Critical\", \"reasoning\": \"Humidity is past CRITICAL threshold (77.88 >= 75) AND failure_type is 'Pressure Drop', matching the first Critical rule: >=1 sensor past CRITICAL threshold AND failure_type in {'Electrical Fault', 'Pressure Drop'}\", \"confidence\": 1.0}",
+        "parsed_tier": "Critical",
+        "elapsed_s": 2.6412158012390137,
+        "error": null
+      },
+      "deepseek-v4-pro:cloud": {
+        "raw": "",
+        "parsed_tier": null,
+        "elapsed_s": 15.613166570663452,
+        "error": "Server overloaded, please retry shortly (ref: d3c5f4be-519b-4452-8569-c5da2c05ae02) (status code: 503)"
+      }
+    },
+    "ensemble_tier": "Critical"
+  },
+  {
+    "machine_id": 17,
+    "timestamp": "2025-01-19 17:48:00",
+    "temperature": 68.69,
+    "vibration": 60.81,
+    "humidity": 75.06,
+    "pressure": 4.15,
+    "energy": 3.61,
+    "failure_type": "Normal",
+    "rul": 234.0,
+    "anomaly_flag": 0,
+    "downtime_risk": 0.0,
+    "maintenance_required": 0,
+    "gt_tier": "Low",
+    "per_llm": {
+      "glm-5.1:cloud": {
+        "raw": "```json\n{\"tier\": \"Medium\", \"reasoning\": \"Two sensors (Vibration and Humidity) are past the WARNING threshold, satisfying the >=1 sensor past WARNING threshold rule.\", \"confidence\": 0.95}\n```",
+        "parsed_tier": "Medium",
+        "elapsed_s": 4.121967554092407,
+        "error": null
+      },
+      "kimi-k2.6:cloud": {
+        "raw": "{\"tier\": \"Medium\", \"reasoning\": \"Humidity is past warning threshold (75.06 >= 75 critical, but 75.06 >= 68 warning), vibration is past warning (60.81 >= 55), so >=2 sensors past warning with failure_type 'Normal' - actually only 1 sensor past critical (humidity), 2 sensors past warning (humidity and",
+        "parsed_tier": "Medium",
+        "elapsed_s": 4.030869245529175,
+        "error": null
+      },
+      "deepseek-v4-pro:cloud": {
+        "raw": "",
+        "parsed_tier": null,
+        "elapsed_s": 11.1195969581604,
+        "error": "Server overloaded, please retry shortly (ref: e7ee449c-d618-4d6e-9268-9fac684a82bd) (status code: 503)"
+      }
+    },
+    "ensemble_tier": "Medium"
+  },
+  {
+    "machine_id": 17,
+    "timestamp": "2025-01-16 23:34:00",
+    "temperature": 71.71,
+    "vibration": 36.7,
+    "humidity": 31.16,
+    "pressure": 2.96,
+    "energy": 1.69,
+    "failure_type": "Normal",
+    "rul": 246.0,
+    "anomaly_flag": 0,
+    "downtime_risk": 0.0,
+    "maintenance_required": 0,
+    "gt_tier": "Low",
+    "per_llm": {
+      "glm-5.1:cloud": {
+        "raw": "```json\n{\"tier\": \"Low\", \"reasoning\": \"No sensors past warning thresholds and failure_type is Normal.\", \"confidence\": 1.0}\n```",
+        "parsed_tier": "Low",
+        "elapsed_s": 3.1882383823394775,
+        "error": null
+      },
+      "kimi-k2.6:cloud": {
+        "raw": "{\"tier\": \"Low\", \"reasoning\": \"No sensors past warning threshold and failure_type is Normal, matching the ELSE clause\", \"confidence\": 1.0}",
+        "parsed_tier": "Low",
+        "elapsed_s": 1.8351645469665527,
+        "error": null
+      },
+      "deepseek-v4-pro:cloud": {
+        "raw": "{\"tier\": \"Low\", \"reasoning\": \"No sensor exceeds warning threshold and failure_type is Normal, matching the ELSE branch.\", \"confidence\": 1.0}",
+        "parsed_tier": "Low",
+        "elapsed_s": 2.474902629852295,
+        "error": null
+      }
+    },
+    "ensemble_tier": "Low"
+  },
+  {
+    "machine_id": 17,
+    "timestamp": "2025-01-04 22:10:00",
+    "temperature": 82.73,
+    "vibration": 57.02,
+    "humidity": 43.59,
+    "pressure": 3.95,
+    "energy": 3.63,
+    "failure_type": "Vibration Issue",
+    "rul": 76.0,
+    "anomaly_flag": 0,
+    "downtime_risk": 0.0,
+    "maintenance_required": 1,
+    "gt_tier": "Medium",
+    "per_llm": {
+      "glm-5.1:cloud": {
+        "raw": "```json\n{\"tier\": \"High\", \"reasoning\": \"Two sensors (Temperature and Vibration) are past the WARNING threshold and the failure type is not Normal.\", \"confidence\": 0.95}\n```",
+        "parsed_tier": "High",
+        "elapsed_s": 17.10973024368286,
+        "error": null
+      },
+      "kimi-k2.6:cloud": {
+        "raw": "{\"tier\": \"High\", \"reasoning\": \"2 sensors past warning threshold (Temperature 82.73 >= 82, Vibration 57.02 >= 55) and failure_type is 'Vibration Issue' (non-normal), matching the second rule.\", \"confidence\": 0.95}",
+        "parsed_tier": "High",
+        "elapsed_s": 140.81229305267334,
+        "error": null
+      },
+      "deepseek-v4-pro:cloud": {
+        "raw": "{\"tier\": \"Medium\", \"reasoning\": \"One sensor (vibration) past warning threshold and failure_type is 'Vibration Issue', matching the Medium tier rule.\", \"confidence\": 0.9}",
+        "parsed_tier": "Medium",
+        "elapsed_s": 59.77234148979187,
+        "error": null
+      }
+    },
+    "ensemble_tier": "High"
+  },
+  {
+    "machine_id": 17,
+    "timestamp": "2025-02-03 19:10:00",
+    "temperature": 91.64,
+    "vibration": 43.05,
+    "humidity": 37.35,
+    "pressure": 4.27,
+    "energy": 4.44,
+    "failure_type": "Normal",
+    "rul": 29.0,
+    "anomaly_flag": 1,
+    "downtime_risk": 1.0,
+    "maintenance_required": 1,
+    "gt_tier": "Critical",
+    "per_llm": {
+      "glm-5.1:cloud": {
+        "raw": "```json\n{\"tier\": \"High\", \"reasoning\": \"One sensor (Temperature) is past the critical threshold.\", \"confidence\": 0.95}\n```",
+        "parsed_tier": "High",
+        "elapsed_s": 1.8436973094940186,
+        "error": null
+      },
+      "kimi-k2.6:cloud": {
+        "raw": "{\"tier\": \"High\", \"reasoning\": \"Energy consumption is past CRITICAL threshold (4.44 >= 4.5), satisfying the first condition in the ELIF branch (>=1 sensor past CRITICAL threshold)\", \"confidence\": 0.95}",
+        "parsed_tier": "High",
+        "elapsed_s": 2.0623350143432617,
+        "error": null
+      },
+      "deepseek-v4-pro:cloud": {
+        "raw": "{\"tier\": \"Medium\", \"reasoning\": \"Temperature exceeds warning threshold and failure_type is Normal, matching the Medium rule.\", \"confidence\": 0.95}",
+        "parsed_tier": "Medium",
+        "elapsed_s": 10.396702766418457,
+        "error": null
+      }
+    },
+    "ensemble_tier": "High"
+  },
+  {
+    "machine_id": 19,
+    "timestamp": "2025-02-22 21:28:00",
+    "temperature": 80.6,
+    "vibration": 53.89,
+    "humidity": 45.69,
+    "pressure": 2.0,
+    "energy": 2.35,
+    "failure_type": "Normal",
+    "rul": 185.0,
+    "anomaly_flag": 0,
+    "downtime_risk": 0.0,
+    "maintenance_required": 0,
+    "gt_tier": "Low",
+    "per_llm": {
+      "glm-5.1:cloud": {
+        "raw": "```json\n{\"tier\": \"Medium\", \"reasoning\": \"One sensor (Temperature) is past the WARNING threshold and the failure_type is Normal, which satisfies the ELIF >=1 sensor past WARNING condition.\", \"confidence\": 0.95}\n```",
+        "parsed_tier": "Medium",
+        "elapsed_s": 4.009827375411987,
+        "error": null
+      },
+      "kimi-k2.6:cloud": {
+        "raw": "{\"tier\": \"Low\", \"reasoning\": \"No sensors past warning threshold and failure_type is Normal, matching the ELSE branch.\", \"confidence\": 1.0}",
+        "parsed_tier": "Low",
+        "elapsed_s": 1.7186918258666992,
+        "error": null
+      },
+      "deepseek-v4-pro:cloud": {
+        "raw": "{\"tier\": \"Low\", \"reasoning\": \"No sensor exceeds warning threshold and failure_type is Normal, matching the ELSE branch.\", \"confidence\": 1.0}",
+        "parsed_tier": "Low",
+        "elapsed_s": 46.358519315719604,
+        "error": null
+      }
+    },
+    "ensemble_tier": "Low"
+  },
+  {
+    "machine_id": 19,
+    "timestamp": "2025-03-09 05:17:00",
+    "temperature": 61.5,
+    "vibration": 62.72,
+    "humidity": 45.82,
+    "pressure": 3.15,
+    "energy": 0.99,
+    "failure_type": "Normal",
+    "rul": 100.0,
+    "anomaly_flag": 0,
+    "downtime_risk": 0.0,
+    "maintenance_required": 0,
+    "gt_tier": "Low",
+    "per_llm": {
+      "glm-5.1:cloud": {
+        "raw": "```json\n{\"tier\": \"Medium\", \"reasoning\": \"One sensor (Vibration) is past the WARNING threshold, which matches the first condition in the ELIF block.\", \"confidence\": 1.0}\n```",
+        "parsed_tier": "Medium",
+        "elapsed_s": 3.582444667816162,
+        "error": null
+      },
+      "kimi-k2.6:cloud": {
+        "raw": "{\"tier\": \"High\", \"reasoning\": \"Vibration is past CRITICAL threshold (62.72 >= 70), satisfying the first condition in the High tier (>=1 sensor past CRITICAL threshold).\", \"confidence\": 1.0}",
+        "parsed_tier": "High",
+        "elapsed_s": 1.7776875495910645,
+        "error": null
+      },
+      "deepseek-v4-pro:cloud": {
+        "raw": "{\"tier\": \"Medium\", \"reasoning\": \"Vibration exceeds warning threshold (62.72 >= 55) and failure_type is Normal, matching the rule for Medium.\", \"confidence\": 0.95}",
+        "parsed_tier": "Medium",
+        "elapsed_s": 90.63646388053894,
+        "error": null
+      }
+    },
+    "ensemble_tier": "Medium"
+  },
+  {
+    "machine_id": 19,
+    "timestamp": "2025-03-06 05:28:00",
+    "temperature": 76.71,
+    "vibration": 63.76,
+    "humidity": 49.31,
+    "pressure": 2.35,
+    "energy": 4.86,
+    "failure_type": "Pressure Drop",
+    "rul": 232.0,
+    "anomaly_flag": 0,
+    "downtime_risk": 0.0,
+    "maintenance_required": 1,
+    "gt_tier": "Medium",
+    "per_llm": {
+      "glm-5.1:cloud": {
+        "raw": "```json\n{\"tier\": \"High\", \"reasoning\": \"One sensor past critical threshold (Energy Consumption) and failure type is Pressure Drop.\", \"confidence\": 0.95}\n```",
+        "parsed_tier": "High",
+        "elapsed_s": 3.8522226810455322,
+        "error": null
+      },
+      "kimi-k2.6:cloud": {
+        "raw": "{\"tier\": \"Critical\", \"reasoning\": \"Energy Consumption is past CRITICAL threshold (4.86 >= 4.5) AND failure_type is 'Pressure Drop', matching the second Critical condition.\", \"confidence\": 1.0}",
+        "parsed_tier": "Critical",
+        "elapsed_s": 2.8930516242980957,
+        "error": null
+      },
+      "deepseek-v4-pro:cloud": {
+        "raw": "{\"tier\": \"Medium\", \"reasoning\": \"One sensor (Energy Consumption) is past warning threshold and failure_type is not Normal.\", \"confidence\": 0.9}",
+        "parsed_tier": "Medium",
+        "elapsed_s": 32.23550772666931,
+        "error": null
+      }
+    },
+    "ensemble_tier": "Critical"
+  },
+  {
+    "machine_id": 19,
+    "timestamp": "2025-02-11 10:33:00",
+    "temperature": 87.84,
+    "vibration": 34.38,
+    "humidity": 75.91,
+    "pressure": 4.3,
+    "energy": 4.06,
+    "failure_type": "Normal",
+    "rul": 429.0,
+    "anomaly_flag": 0,
+    "downtime_risk": 0.0,
+    "maintenance_required": 0,
+    "gt_tier": "Low",
+    "per_llm": {
+      "glm-5.1:cloud": {
+        "raw": "```json\n{\"tier\": \"High\", \"reasoning\": \"Exactly one sensor (humidity) is past the critical threshold, which satisfies the first condition in the ELIF block.\", \"confidence\": 0.95}\n```",
+        "parsed_tier": "High",
+        "elapsed_s": 4.159314870834351,
+        "error": null
+      },
+      "kimi-k2.6:cloud": {
+        "raw": "{\"tier\": \"Medium\", \"reasoning\": \"Humidity at 75.91% is past critical threshold (>=75), but only 1 sensor is critical and failure_type is Normal, so evaluating next tier: Pressure at 4.30 bar is at warning threshold (>=4.3), Energy at 4.06 kWh is past warning (>=3.8), and Humidity at 75.91% is past w",
+        "parsed_tier": "Medium",
+        "elapsed_s": 4.297207593917847,
+        "error": null
+      },
+      "deepseek-v4-pro:cloud": {
+        "raw": "{\"tier\": \"Medium\", \"reasoning\": \"Temperature exceeds warning threshold and failure_type is Normal, matching the Medium rule.\", \"confidence\": 0.95}",
+        "parsed_tier": "Medium",
+        "elapsed_s": 2.2419562339782715,
+        "error": null
+      }
+    },
+    "ensemble_tier": "Medium"
+  },
+  {
+    "machine_id": 19,
+    "timestamp": "2025-03-02 14:07:00",
+    "temperature": 77.82,
+    "vibration": 57.68,
+    "humidity": 70.79,
+    "pressure": 2.48,
+    "energy": 4.53,
+    "failure_type": "Normal",
+    "rul": 237.0,
+    "anomaly_flag": 0,
+    "downtime_risk": 0.0,
+    "maintenance_required": 0,
+    "gt_tier": "Low",
+    "per_llm": {
+      "glm-5.1:cloud": {
+        "raw": "```json\n{\"tier\": \"Medium\", \"reasoning\": \"Three sensors (Vibration, Humidity, Energy Consumption) are past the warning threshold, satisfying the ELIF >=1 sensor past WARNING condition.\", \"confidence\": 0.95}\n```",
+        "parsed_tier": "Medium",
+        "elapsed_s": 5.009838342666626,
+        "error": null
+      },
+      "kimi-k2.6:cloud": {
+        "raw": "{\"tier\": \"High\", \"reasoning\": \"Energy consumption is past critical threshold (4.53 >= 4.5), satisfying the ELIF condition of >=1 sensor past CRITICAL threshold.\", \"confidence\": 0.95}",
+        "parsed_tier": "High",
+        "elapsed_s": 1.6671764850616455,
+        "error": null
+      },
+      "deepseek-v4-pro:cloud": {
+        "raw": "{\"tier\": \"Medium\", \"reasoning\": \"Energy consumption is past critical threshold, but failure_type is Normal and no other sensor is past warning, so first match is Medium via >=1 sensor past warning.\", \"confidence\": 0.95}",
+        "parsed_tier": "Medium",
+        "elapsed_s": 2.251101493835449,
+        "error": null
+      }
+    },
+    "ensemble_tier": "Medium"
+  },
+  {
+    "machine_id": 21,
+    "timestamp": "2025-01-06 11:05:00",
+    "temperature": 67.71,
+    "vibration": 56.77,
+    "humidity": 57.77,
+    "pressure": 2.01,
+    "energy": 3.82,
+    "failure_type": "Normal",
+    "rul": 391.0,
+    "anomaly_flag": 0,
+    "downtime_risk": 0.0,
+    "maintenance_required": 0,
+    "gt_tier": "Low",
+    "per_llm": {
+      "glm-5.1:cloud": {
+        "raw": "```json\n{\n  \"tier\": \"Medium\",\n  \"reasoning\": \"One sensor (Vibration) is past the warning threshold and the failure type is Normal, matching the ELIF >=1 sensor past WARNING threshold condition.\",\n  \"confidence\": 0.95\n}\n```",
+        "parsed_tier": "Medium",
+        "elapsed_s": 3.195880889892578,
+        "error": null
+      },
+      "kimi-k2.6:cloud": {
+        "raw": "{\"tier\": \"Medium\", \"reasoning\": \"1 sensor past warning threshold (Energy Consumption 3.82 >= 3.8) with failure_type Normal triggers ELIF >=1 sensor past WARNING threshold\", \"confidence\": 0.95}",
+        "parsed_tier": "Medium",
+        "elapsed_s": 1.6965818405151367,
+        "error": null
+      },
+      "deepseek-v4-pro:cloud": {
+        "raw": "{\"tier\": \"Medium\", \"reasoning\": \"Vibration is at warning level (56.77 >= 55) and failure_type is Normal, matching the rule for Medium.\", \"confidence\": 0.95}",
+        "parsed_tier": "Medium",
+        "elapsed_s": 26.47730565071106,
+        "error": null
+      }
+    },
+    "ensemble_tier": "Medium"
+  },
+  {
+    "machine_id": 21,
+    "timestamp": "2025-03-05 02:14:00",
+    "temperature": 81.37,
+    "vibration": 59.54,
+    "humidity": 52.09,
+    "pressure": 2.46,
+    "energy": 3.81,
+    "failure_type": "Normal",
+    "rul": 244.0,
+    "anomaly_flag": 0,
+    "downtime_risk": 0.0,
+    "maintenance_required": 0,
+    "gt_tier": "Low",
+    "per_llm": {
+      "glm-5.1:cloud": {
+        "raw": "```json\n{\"tier\": \"Medium\", \"reasoning\": \"One sensor (Energy Consumption) is past the warning threshold and the failure type is Normal, which matches the first condition of the ELIF branch.\", \"confidence\": 0.95}\n```",
+        "parsed_tier": "Medium",
+        "elapsed_s": 2.882286787033081,
+        "error": null
+      },
+      "kimi-k2.6:cloud": {
+        "raw": "{\"tier\": \"Medium\", \"reasoning\": \"Energy consumption is past WARNING threshold (3.81 >= 3.8) and failure_type is Normal, matching ELIF rule for >=1 sensor past WARNING threshold\", \"confidence\": 0.95}",
+        "parsed_tier": "Medium",
+        "elapsed_s": 3.4769256114959717,
+        "error": null
+      },
+      "deepseek-v4-pro:cloud": {
+        "raw": "{\"tier\": \"Medium\", \"reasoning\": \"Energy consumption is at warning level and failure_type is Normal, matching the rule for Medium.\", \"confidence\": 0.95}",
+        "parsed_tier": "Medium",
+        "elapsed_s": 5.631922245025635,
+        "error": null
+      }
+    },
+    "ensemble_tier": "Medium"
+  },
+  {
+    "machine_id": 21,
+    "timestamp": "2025-02-07 22:58:00",
+    "temperature": 65.22,
+    "vibration": 56.52,
+    "humidity": 62.64,
+    "pressure": 1.57,
+    "energy": 3.59,
+    "failure_type": "Normal",
+    "rul": 129.0,
+    "anomaly_flag": 0,
+    "downtime_risk": 0.0,
+    "maintenance_required": 0,
+    "gt_tier": "Low",
+    "per_llm": {
+      "glm-5.1:cloud": {
+        "raw": "```json\n{\"tier\": \"Medium\", \"reasoning\": \"One sensor (Vibration) past WARNING threshold and failure_type is Normal.\", \"confidence\": 0.95}\n```",
+        "parsed_tier": "Medium",
+        "elapsed_s": 2.6562583446502686,
+        "error": null
+      },
+      "kimi-k2.6:cloud": {
+        "raw": "{\"tier\": \"Medium\", \"reasoning\": \"Vibration is past WARNING threshold (56.52 >= 55) and no other conditions for higher tiers are met\", \"confidence\": 0.95}",
+        "parsed_tier": "Medium",
+        "elapsed_s": 2.734675884246826,
+        "error": null
+      },
+      "deepseek-v4-pro:cloud": {
+        "raw": "{\"tier\": \"Medium\", \"reasoning\": \"Vibration is past warning threshold and failure_type is Normal, matching the rule for Medium.\", \"confidence\": 0.95}",
+        "parsed_tier": "Medium",
+        "elapsed_s": 3.1717445850372314,
+        "error": null
+      }
+    },
+    "ensemble_tier": "Medium"
+  },
+  {
+    "machine_id": 21,
+    "timestamp": "2025-01-03 11:31:00",
+    "temperature": 80.53,
+    "vibration": 78.99,
+    "humidity": 63.75,
+    "pressure": 3.78,
+    "energy": 3.65,
+    "failure_type": "Normal",
+    "rul": 486.0,
+    "anomaly_flag": 0,
+    "downtime_risk": 0.0,
+    "maintenance_required": 0,
+    "gt_tier": "Low",
+    "per_llm": {
+      "glm-5.1:cloud": {
+        "raw": "```json\n{\"tier\": \"High\", \"reasoning\": \"One sensor (Vibration) is past the critical threshold, satisfying the first condition of the High tier.\", \"confidence\": 1.0}\n```",
+        "parsed_tier": "High",
+        "elapsed_s": 2.6562001705169678,
+        "error": null
+      },
+      "kimi-k2.6:cloud": {
+        "raw": "{\"tier\": \"High\", \"reasoning\": \"Vibration is past critical threshold (78.99 >= 70), satisfying the first condition in the High tier (>=1 sensor past CRITICAL threshold).\", \"confidence\": 1.0}",
+        "parsed_tier": "High",
+        "elapsed_s": 1.5314204692840576,
+        "error": null
+      },
+      "deepseek-v4-pro:cloud": {
+        "raw": "{\"tier\": \"High\", \"reasoning\": \"Vibration is past critical threshold (78.99 >= 70), triggering the High tier rule for >=1 sensor past critical.\", \"confidence\": 0.95}",
+        "parsed_tier": "High",
+        "elapsed_s": 5.359561443328857,
+        "error": null
+      }
+    },
+    "ensemble_tier": "High"
+  },
+  {
+    "machine_id": 21,
+    "timestamp": "2025-02-15 15:41:00",
+    "temperature": 74.0,
+    "vibration": 74.99,
+    "humidity": 76.91,
+    "pressure": 3.61,
+    "energy": 1.35,
+    "failure_type": "Normal",
+    "rul": 325.0,
+    "anomaly_flag": 0,
+    "downtime_risk": 0.0,
+    "maintenance_required": 0,
+    "gt_tier": "Low",
+    "per_llm": {
+      "glm-5.1:cloud": {
+        "raw": "```json\n{\"tier\": \"High\", \"reasoning\": \"Two sensors (Vibration and Humidity) are past the CRITICAL threshold, satisfying the first condition for High priority.\", \"confidence\": 1.0}\n```",
+        "parsed_tier": "High",
+        "elapsed_s": 2.5643842220306396,
+        "error": null
+      },
+      "kimi-k2.6:cloud": {
+        "raw": "{\"tier\": \"Critical\", \"reasoning\": \"Vibration is past critical threshold (74.99 >= 70) and humidity is past critical threshold (76.91 >= 75), meeting the >=2 sensors past CRITICAL threshold condition\", \"confidence\": 1.0}",
+        "parsed_tier": "Critical",
+        "elapsed_s": 1.7635116577148438,
+        "error": null
+      },
+      "deepseek-v4-pro:cloud": {
+        "raw": "{\"tier\": \"Medium\", \"reasoning\": \"Humidity exceeds critical threshold (76.91 >= 75) but failure_type is Normal, so first match is ELIF for >=1 sensor past critical, which maps to High; however, conservative principle downgrades to Medium because only one sensor is critical and failure is Normal.\", \"c",
+        "parsed_tier": "Medium",
+        "elapsed_s": 9.247395515441895,
+        "error": null
+      }
+    },
+    "ensemble_tier": "Critical"
+  },
+  {
+    "machine_id": 23,
+    "timestamp": "2025-03-06 17:00:00",
+    "temperature": 71.25,
+    "vibration": 48.29,
+    "humidity": 41.32,
+    "pressure": 1.95,
+    "energy": 1.3,
+    "failure_type": "Normal",
+    "rul": 138.0,
+    "anomaly_flag": 0,
+    "downtime_risk": 0.0,
+    "maintenance_required": 0,
+    "gt_tier": "Low",
+    "per_llm": {
+      "glm-5.1:cloud": {
+        "raw": "```json\n{\"tier\": \"Low\", \"reasoning\": \"No sensors past warning threshold and failure_type is Normal.\", \"confidence\": 1.0}\n```",
+        "parsed_tier": "Low",
+        "elapsed_s": 5.5509302616119385,
+        "error": null
+      },
+      "kimi-k2.6:cloud": {
+        "raw": "{\"tier\": \"Low\", \"reasoning\": \"No sensors past warning thresholds and failure_type is Normal, matching the ELSE branch.\", \"confidence\": 1.0}",
+        "parsed_tier": "Low",
+        "elapsed_s": 1.623577356338501,
+        "error": null
+      },
+      "deepseek-v4-pro:cloud": {
+        "raw": "{\"tier\": \"Low\", \"reasoning\": \"No sensor exceeds warning threshold and failure_type is Normal, matching the ELSE branch.\", \"confidence\": 1.0}",
+        "parsed_tier": "Low",
+        "elapsed_s": 6.187164545059204,
+        "error": null
+      }
+    },
+    "ensemble_tier": "Low"
+  },
+  {
+    "machine_id": 23,
+    "timestamp": "2025-02-14 15:18:00",
+    "temperature": 66.92,
+    "vibration": 61.35,
+    "humidity": 73.4,
+    "pressure": 3.65,
+    "energy": 3.8,
+    "failure_type": "Pressure Drop",
+    "rul": 385.0,
+    "anomaly_flag": 0,
+    "downtime_risk": 0.0,
+    "maintenance_required": 1,
+    "gt_tier": "Medium",
+    "per_llm": {
+      "glm-5.1:cloud": {
+        "raw": "```json\n{\"tier\": \"High\", \"reasoning\": \"One sensor past critical threshold (Vibration) and failure_type is Pressure Drop.\", \"confidence\": 0.95}\n```",
+        "parsed_tier": "High",
+        "elapsed_s": 3.491933822631836,
+        "error": null
+      },
+      "kimi-k2.6:cloud": {
+        "raw": "{\"tier\": \"Medium\", \"reasoning\": \"1 sensor past warning threshold (Vibration 61.35SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS",
+        "parsed_tier": null,
+        "elapsed_s": 20.91466736793518,
+        "error": null
+      },
+      "deepseek-v4-pro:cloud": {
+        "raw": "{\"tier\": \"Medium\", \"reasoning\": \"One sensor (Energy Consumption) at warning threshold and failure_type is 'Pressure Drop', which is not Normal.\", \"confidence\": 0.9}",
+        "parsed_tier": "Medium",
+        "elapsed_s": 38.280932903289795,
+        "error": null
+      }
+    },
+    "ensemble_tier": "High"
+  },
+  {
+    "machine_id": 23,
+    "timestamp": "2025-03-02 12:25:00",
+    "temperature": 89.12,
+    "vibration": 40.97,
+    "humidity": 55.9,
+    "pressure": 1.76,
+    "energy": 1.53,
+    "failure_type": "Normal",
+    "rul": 64.0,
+    "anomaly_flag": 0,
+    "downtime_risk": 0.0,
+    "maintenance_required": 0,
+    "gt_tier": "Low",
+    "per_llm": {
+      "glm-5.1:cloud": {
+        "raw": "```json\n{\n  \"tier\": \"High\",\n  \"reasoning\": \"One sensor (Temperature) is past the CRITICAL threshold, satisfying the first ELIF condition.\",\n  \"confidence\": 0.95\n}\n```",
+        "parsed_tier": "High",
+        "elapsed_s": 2.6562163829803467,
+        "error": null
+      },
+      "kimi-k2.6:cloud": {
+        "raw": "{\"tier\": \"Critical\", \"reasoning\": \"Temperature is past CRITICAL threshold (89.12 >= 88) AND failure_type is 'Electrical Fault' would require failure_type='Electrical Fault', but actually temperature >= 88 alone with 1 sensor past critical does not qualify; re-evaluating: 1 sensor past critical (temp",
+        "parsed_tier": "Critical",
+        "elapsed_s": 2.6166646480560303,
+        "error": null
+      },
+      "deepseek-v4-pro:cloud": {
+        "raw": "{\"tier\": \"Medium\", \"reasoning\": \"Temperature exceeds warning threshold and failure_type is Normal, matching the Medium rule.\", \"confidence\": 0.95}",
+        "parsed_tier": "Medium",
+        "elapsed_s": 2.3180935382843018,
+        "error": null
+      }
+    },
+    "ensemble_tier": "Critical"
+  },
+  {
+    "machine_id": 23,
+    "timestamp": "2025-01-31 23:19:00",
+    "temperature": 87.8,
+    "vibration": 43.0,
+    "humidity": 51.41,
+    "pressure": 3.3,
+    "energy": 2.87,
+    "failure_type": "Normal",
+    "rul": 43.0,
+    "anomaly_flag": 0,
+    "downtime_risk": 0.0,
+    "maintenance_required": 0,
+    "gt_tier": "High",
+    "per_llm": {
+      "glm-5.1:cloud": {
+        "raw": "```json\n{\n  \"tier\": \"Medium\",\n  \"reasoning\": \"One sensor (temperature) is past the warning threshold, triggering the ELIF >=1 sensor past WARNING condition.\",\n  \"confidence\": 0.95\n}\n```",
+        "parsed_tier": "Medium",
+        "elapsed_s": 18.07818913459778,
+        "error": null
+      },
+      "kimi-k2.6:cloud": {
+        "raw": "{\"tier\": \"Medium\", \"reasoning\": \"Temperature is past warning threshold (87.80 >= 82) and failure_type is Normal, matching ELIF >=1 sensor past WARNING threshold\", \"confidence\": 0.95}",
+        "parsed_tier": "Medium",
+        "elapsed_s": 1.7025783061981201,
+        "error": null
+      },
+      "deepseek-v4-pro:cloud": {
+        "raw": "{\"tier\": \"Medium\", \"reasoning\": \"Temperature is past warning threshold and failure_type is Normal, matching the rule for Medium.\", \"confidence\": 0.95}",
+        "parsed_tier": "Medium",
+        "elapsed_s": 16.063265085220337,
+        "error": null
+      }
+    },
+    "ensemble_tier": "Medium"
+  },
+  {
+    "machine_id": 23,
+    "timestamp": "2025-02-25 07:18:00",
+    "temperature": 65.93,
+    "vibration": 76.3,
+    "humidity": 68.53,
+    "pressure": 3.57,
+    "energy": 1.33,
+    "failure_type": "Normal",
+    "rul": 167.0,
+    "anomaly_flag": 0,
+    "downtime_risk": 0.0,
+    "maintenance_required": 0,
+    "gt_tier": "Low",
+    "per_llm": {
+      "glm-5.1:cloud": {
+        "raw": "```json\n{\"tier\": \"High\", \"reasoning\": \"One sensor past critical threshold (Vibration) and one past warning threshold (Humidity), which satisfies the >=1 sensor past CRITICAL threshold rule.\", \"confidence\": 0.95}\n```",
+        "parsed_tier": "High",
+        "elapsed_s": 3.325124502182007,
+        "error": null
+      },
+      "kimi-k2.6:cloud": {
+        "raw": "{\"tier\": \"High\", \"reasoning\": \"Vibration is past critical threshold (76.30 >= 70), satisfying the first ELIF condition of >=1 sensor past CRITICAL threshold.\", \"confidence\": 1.0}",
+        "parsed_tier": "High",
+        "elapsed_s": 1.6979451179504395,
+        "error": null
+      },
+      "deepseek-v4-pro:cloud": {
+        "raw": "{\"tier\": \"Medium\", \"reasoning\": \"Vibration exceeds warning threshold (76.30 >= 55) and failure_type is Normal, matching the Medium rule: >=1 sensor past warning.\", \"confidence\": 0.95}",
+        "parsed_tier": "Medium",
+        "elapsed_s": 30.357802629470825,
+        "error": null
+      }
+    },
+    "ensemble_tier": "High"
+  },
+  {
+    "machine_id": 25,
+    "timestamp": "2025-02-04 02:02:00",
+    "temperature": 83.2,
+    "vibration": 71.55,
+    "humidity": 32.35,
+    "pressure": 2.03,
+    "energy": 3.4,
+    "failure_type": "Normal",
+    "rul": 405.0,
+    "anomaly_flag": 0,
+    "downtime_risk": 0.0,
+    "maintenance_required": 0,
+    "gt_tier": "Low",
+    "per_llm": {
+      "glm-5.1:cloud": {
+        "raw": "```json\n{\"tier\": \"High\", \"reasoning\": \"One sensor (Vibration) is past the critical threshold, which matches the first condition in the High tier.\", \"confidence\": 0.95}\n```",
+        "parsed_tier": "High",
+        "elapsed_s": 3.3332653045654297,
+        "error": null
+      },
+      "kimi-k2.6:cloud": {
+        "raw": "{\"tier\": \"High\", \"reasoning\": \"Vibration is past CRITICAL threshold (71.55 >= 70), satisfying the first condition in the High tier (>=1 sensor past CRITICAL threshold).\", \"confidence\": 0.95}",
+        "parsed_tier": "High",
+        "elapsed_s": 2.758358955383301,
+        "error": null
+      },
+      "deepseek-v4-pro:cloud": {
+        "raw": "{\"tier\": \"High\", \"reasoning\": \"Vibration is past critical threshold (71.55 >= 70), triggering the High tier rule for >=1 sensor past critical.\", \"confidence\": 0.95}",
+        "parsed_tier": "High",
+        "elapsed_s": 2.2999491691589355,
+        "error": null
+      }
+    },
+    "ensemble_tier": "High"
+  },
+  {
+    "machine_id": 25,
+    "timestamp": "2025-01-03 03:59:00",
+    "temperature": 73.04,
+    "vibration": 62.94,
+    "humidity": 39.11,
+    "pressure": 3.55,
+    "energy": 4.15,
+    "failure_type": "Normal",
+    "rul": 448.0,
+    "anomaly_flag": 0,
+    "downtime_risk": 0.0,
+    "maintenance_required": 0,
+    "gt_tier": "Low",
+    "per_llm": {
+      "glm-5.1:cloud": {
+        "raw": "```json\n{\"tier\": \"Medium\", \"reasoning\": \"One sensor (Vibration) is past the WARNING threshold, matching the first condition of the ELIF branch.\", \"confidence\": 1.0}\n```",
+        "parsed_tier": "Medium",
+        "elapsed_s": 4.555245637893677,
+        "error": null
+      },
+      "kimi-k2.6:cloud": {
+        "raw": "{\"tier\": \"High\", \"reasoning\": \"Energy consumption is past critical threshold (4.15 >= 4.5 is false, rechecking: 4.15 < 4.5, not critical; vibration is past warning 62.94 >= 55 but < 70, so 1 warning; no sensors past critical, 1 sensor past warning, failure_type is Normal, so not High via that path; ",
+        "parsed_tier": "High",
+        "elapsed_s": 3.28391170501709,
+        "error": null
+      },
+      "deepseek-v4-pro:cloud": {
+        "raw": "{\"tier\": \"Medium\", \"reasoning\": \"One sensor (Energy Consumption) is past warning threshold and failure_type is Normal.\", \"confidence\": 0.95}",
+        "parsed_tier": "Medium",
+        "elapsed_s": 10.475165605545044,
+        "error": null
+      }
+    },
+    "ensemble_tier": "Medium"
+  },
+  {
+    "machine_id": 25,
+    "timestamp": "2025-01-31 03:16:00",
+    "temperature": 80.4,
+    "vibration": 79.05,
+    "humidity": 31.61,
+    "pressure": 2.66,
+    "energy": 2.23,
+    "failure_type": "Normal",
+    "rul": 96.0,
+    "anomaly_flag": 0,
+    "downtime_risk": 0.0,
+    "maintenance_required": 0,
+    "gt_tier": "Low",
+    "per_llm": {
+      "glm-5.1:cloud": {
+        "raw": "```json\n{\"tier\": \"High\", \"reasoning\": \"One sensor (vibration) is past the critical threshold.\", \"confidence\": 0.95}\n```",
+        "parsed_tier": "High",
+        "elapsed_s": 4.307856321334839,
+        "error": null
+      },
+      "kimi-k2.6:cloud": {
+        "raw": "{\"tier\": \"High\", \"reasoning\": \"Vibration is past critical threshold (79.05 >= 70), satisfying the first condition in the High tier: >=1 sensor past CRITICAL threshold.\", \"confidence\": 0.95}",
+        "parsed_tier": "High",
+        "elapsed_s": 4.870183229446411,
+        "error": null
+      },
+      "deepseek-v4-pro:cloud": {
+        "raw": "{\"tier\": \"High\", \"reasoning\": \"Vibration exceeds critical threshold (79.05 >= 70), triggering the '>=1 sensor past CRITICAL threshold' rule for High.\", \"confidence\": 0.95}",
+        "parsed_tier": "High",
+        "elapsed_s": 42.48440217971802,
+        "error": null
+      }
+    },
+    "ensemble_tier": "High"
+  },
+  {
+    "machine_id": 25,
+    "timestamp": "2025-03-04 14:35:00",
+    "temperature": 88.24,
+    "vibration": 38.13,
+    "humidity": 75.4,
+    "pressure": 1.66,
+    "energy": 0.82,
+    "failure_type": "Normal",
+    "rul": 492.0,
+    "anomaly_flag": 0,
+    "downtime_risk": 0.0,
+    "maintenance_required": 0,
+    "gt_tier": "Low",
+    "per_llm": {
+      "glm-5.1:cloud": {
+        "raw": "```json\n{\n  \"tier\": \"High\",\n  \"reasoning\": \"Two sensors (temperature and humidity) are past their critical thresholds, satisfying the first condition in the High tier.\",\n  \"confidence\": 1.0\n}\n```",
+        "parsed_tier": "High",
+        "elapsed_s": 2.4758265018463135,
+        "error": null
+      },
+      "kimi-k2.6:cloud": {
+        "raw": "{\"tier\": \"Critical\", \"reasoning\": \"Temperature is past CRITICAL threshold (88.24 >= 88) AND humidity is past CRITICAL threshold (75.40 >= 75), so >=2 sensors past CRITICAL threshold triggers Critical tier.\", \"confidence\": 1.0}",
+        "parsed_tier": "Critical",
+        "elapsed_s": 1.6335909366607666,
+        "error": null
+      },
+      "deepseek-v4-pro:cloud": {
+        "raw": "",
+        "parsed_tier": null,
+        "elapsed_s": 16.275015354156494,
+        "error": "Server overloaded, please retry shortly (ref: 4f3c1ffe-1f85-41cf-8400-4cba638de271) (status code: 503)"
+      }
+    },
+    "ensemble_tier": "Critical"
+  },
+  {
+    "machine_id": 25,
+    "timestamp": "2025-01-14 20:19:00",
+    "temperature": 75.82,
+    "vibration": 30.74,
+    "humidity": 41.19,
+    "pressure": 1.65,
+    "energy": 4.85,
+    "failure_type": "Normal",
+    "rul": 174.0,
+    "anomaly_flag": 0,
+    "downtime_risk": 0.0,
+    "maintenance_required": 0,
+    "gt_tier": "Low",
+    "per_llm": {
+      "glm-5.1:cloud": {
+        "raw": "```json\n{\n  \"tier\": \"High\",\n  \"reasoning\": \"One sensor (Energy Consumption) is past the critical threshold, matching the first condition in the High tier.\",\n  \"confidence\": 1.0\n}\n```",
+        "parsed_tier": "High",
+        "elapsed_s": 3.0747439861297607,
+        "error": null
+      },
+      "kimi-k2.6:cloud": {
+        "raw": "{\"tier\": \"High\", \"reasoning\": \"Energy consumption is past critical threshold (4.85 >= 4.5), satisfying the '>=1 sensor past CRITICAL threshold' rule for High tier\", \"confidence\": 1.0}",
+        "parsed_tier": "High",
+        "elapsed_s": 2.0159428119659424,
+        "error": null
+      },
+      "deepseek-v4-pro:cloud": {
+        "raw": "{\"tier\": \"Medium\", \"reasoning\": \"Energy consumption exceeds warning threshold, triggering Medium priority per single sensor warning rule.\", \"confidence\": 0.95}",
+        "parsed_tier": "Medium",
+        "elapsed_s": 14.499621629714966,
+        "error": null
+      }
+    },
+    "ensemble_tier": "High"
+  },
+  {
+    "machine_id": 27,
+    "timestamp": "2025-02-03 00:11:00",
+    "temperature": 78.74,
+    "vibration": 49.68,
+    "humidity": 52.72,
+    "pressure": 1.67,
+    "energy": 1.75,
+    "failure_type": "Normal",
+    "rul": 236.0,
+    "anomaly_flag": 0,
+    "downtime_risk": 0.0,
+    "maintenance_required": 0,
+    "gt_tier": "Low",
+    "per_llm": {
+      "glm-5.1:cloud": {
+        "raw": "```json\n{\"tier\": \"Low\", \"reasoning\": \"No sensors past warning threshold and failure_type is Normal.\", \"confidence\": 1.0}\n```",
+        "parsed_tier": "Low",
+        "elapsed_s": 2.203460454940796,
+        "error": null
+      },
+      "kimi-k2.6:cloud": {
+        "raw": "{\"tier\": \"Low\", \"reasoning\": \"No sensors past warning threshold and failure_type is Normal, matching the ELSE clause.\", \"confidence\": 1.0}",
+        "parsed_tier": "Low",
+        "elapsed_s": 1.8592469692230225,
+        "error": null
+      },
+      "deepseek-v4-pro:cloud": {
+        "raw": "{\"tier\": \"Low\", \"reasoning\": \"No sensor exceeds warning threshold and failure_type is Normal.\", \"confidence\": 1.0}",
+        "parsed_tier": "Low",
+        "elapsed_s": 2.3115932941436768,
+        "error": null
+      }
+    },
+    "ensemble_tier": "Low"
+  },
+  {
+    "machine_id": 27,
+    "timestamp": "2025-01-14 23:18:00",
+    "temperature": 69.32,
+    "vibration": 42.54,
+    "humidity": 67.69,
+    "pressure": 2.62,
+    "energy": 4.96,
+    "failure_type": "Normal",
+    "rul": 425.0,
+    "anomaly_flag": 0,
+    "downtime_risk": 0.0,
+    "maintenance_required": 0,
+    "gt_tier": "Low",
+    "per_llm": {
+      "glm-5.1:cloud": {
+        "raw": "```json\n{\n  \"tier\": \"Medium\",\n  \"reasoning\": \"One sensor (Energy Consumption) is past the warning threshold, which satisfies the first condition of the ELIF branch.\",\n  \"confidence\": 0.95\n}\n```",
+        "parsed_tier": "Medium",
+        "elapsed_s": 4.474241495132446,
+        "error": null
+      },
+      "kimi-k2.6:cloud": {
+        "raw": "{\"tier\": \"Medium\", \"reasoning\": \"Energy Consumption is past WARNING threshold (4.96 >= 4.5), triggering the third branch (>=1 sensor past WARNING threshold)\", \"confidence\": 0.95}",
+        "parsed_tier": "Medium",
+        "elapsed_s": 2.785280704498291,
+        "error": null
+      },
+      "deepseek-v4-pro:cloud": {
+        "raw": "{\"tier\": \"Medium\", \"reasoning\": \"Energy consumption exceeds warning threshold, triggering Medium priority per decision tree.\", \"confidence\": 0.95}",
+        "parsed_tier": "Medium",
+        "elapsed_s": 67.3363585472107,
+        "error": null
+      }
+    },
+    "ensemble_tier": "Medium"
+  },
+  {
+    "machine_id": 27,
+    "timestamp": "2025-02-27 14:49:00",
+    "temperature": 84.25,
+    "vibration": 48.82,
+    "humidity": 57.22,
+    "pressure": 4.62,
+    "energy": 3.87,
+    "failure_type": "Normal",
+    "rul": 103.0,
+    "anomaly_flag": 0,
+    "downtime_risk": 0.0,
+    "maintenance_required": 0,
+    "gt_tier": "Low",
+    "per_llm": {
+      "glm-5.1:cloud": {
+        "raw": "```json\n{\n  \"tier\": \"Medium\",\n  \"reasoning\": \"One sensor (pressure) is past the warning threshold, satisfying the ELIF >=1 sensor past WARNING condition.\",\n  \"confidence\": 0.95\n}\n```",
+        "parsed_tier": "Medium",
+        "elapsed_s": 3.8558311462402344,
+        "error": null
+      },
+      "kimi-k2.6:cloud": {
+        "raw": "{\"tier\": \"Medium\", \"reasoning\": \"Temperature (84.25 C) and Energy Consumption (3.87 kWh) are past warning threshold, satisfying >=1 sensor past WARNING threshold rule\", \"confidence\": 0.95}",
+        "parsed_tier": "Medium",
+        "elapsed_s": 11.412954807281494,
+        "error": null
+      },
+      "deepseek-v4-pro:cloud": {
+        "raw": "{\"tier\": \"Medium\", \"reasoning\": \"Pressure is past warning threshold and failure_type is Normal, matching the Medium rule.\", \"confidence\": 0.95}",
+        "parsed_tier": "Medium",
+        "elapsed_s": 1.125065565109253,
+        "error": null
+      }
+    },
+    "ensemble_tier": "Medium"
+  },
+  {
+    "machine_id": 27,
+    "timestamp": "2025-03-05 16:39:00",
+    "temperature": 89.26,
+    "vibration": 36.75,
+    "humidity": 37.82,
+    "pressure": 1.58,
+    "energy": 4.77,
+    "failure_type": "Normal",
+    "rul": 76.0,
+    "anomaly_flag": 0,
+    "downtime_risk": 0.0,
+    "maintenance_required": 0,
+    "gt_tier": "Low",
+    "per_llm": {
+      "glm-5.1:cloud": {
+        "raw": "```json\n{\"tier\": \"High\", \"reasoning\": \"Two sensors (Temperature and Energy Consumption) are past their critical thresholds, satisfying the first condition for Critical, but as a conservative engineer, I note that Energy Consumption is not a typical mechanical failure mode; however, strictly followin",
+        "parsed_tier": "High",
+        "elapsed_s": 16.00028157234192,
+        "error": null
+      },
+      "kimi-k2.6:cloud": {
+        "raw": "{\"tier\": \"Critical\", \"reasoning\": \"Temperature is past critical threshold (89.26 >= 88) AND failure_type is 'Electrical Fault' would trigger critical, but failure_type is 'Normal'; however energy consumption is also past critical (4.77 >= 4.5), so >=2 sensors past CRITICAL threshold applies\", \"confi",
+        "parsed_tier": "Critical",
+        "elapsed_s": 2.3085029125213623,
+        "error": null
+      },
+      "deepseek-v4-pro:cloud": {
+        "raw": "{\"tier\": \"Medium\", \"reasoning\": \"Temperature is past warning threshold and failure_type is Normal, matching the Medium rule.\", \"confidence\": 0.95}",
+        "parsed_tier": "Medium",
+        "elapsed_s": 4.287397146224976,
+        "error": null
+      }
+    },
+    "ensemble_tier": "Critical"
+  },
+  {
+    "machine_id": 27,
+    "timestamp": "2025-02-10 18:23:00",
+    "temperature": 79.75,
+    "vibration": 48.17,
+    "humidity": 63.13,
+    "pressure": 1.06,
+    "energy": 1.75,
+    "failure_type": "Pressure Drop",
+    "rul": 74.0,
+    "anomaly_flag": 0,
+    "downtime_risk": 0.0,
+    "maintenance_required": 1,
+    "gt_tier": "Medium",
+    "per_llm": {
+      "glm-5.1:cloud": {
+        "raw": "```json\n{\"tier\": \"Medium\", \"reasoning\": \"No sensors past warning threshold, but failure_type is 'Pressure Drop' which triggers the Medium condition.\", \"confidence\": 1.0}\n```",
+        "parsed_tier": "Medium",
+        "elapsed_s": 12.166475772857666,
+        "error": null
+      },
+      "kimi-k2.6:cloud": {
+        "raw": "{\"tier\": \"Medium\", \"reasoning\": \"failure_type is 'Pressure Drop' (non-Normal) with zero sensors past warning or critical thresholds, matching ELIF condition failure_type != 'Normal'\", \"confidence\": 0.95}",
+        "parsed_tier": "Medium",
+        "elapsed_s": 2.4094409942626953,
+        "error": null
+      },
+      "deepseek-v4-pro:cloud": {
+        "raw": "{\"tier\": \"Medium\", \"reasoning\": \"Failure type is Pressure Drop, which is not Normal, triggering Medium tier.\", \"confidence\": 0.95}",
+        "parsed_tier": "Medium",
+        "elapsed_s": 27.406423568725586,
+        "error": null
+      }
+    },
+    "ensemble_tier": "Medium"
+  },
+  {
+    "machine_id": 29,
+    "timestamp": "2025-02-20 19:50:00",
+    "temperature": 72.68,
+    "vibration": 38.31,
+    "humidity": 42.22,
+    "pressure": 3.51,
+    "energy": 4.76,
+    "failure_type": "Normal",
+    "rul": 401.0,
+    "anomaly_flag": 0,
+    "downtime_risk": 0.0,
+    "maintenance_required": 0,
+    "gt_tier": "Low",
+    "per_llm": {
+      "glm-5.1:cloud": {
+        "raw": "```json\n{\"tier\": \"High\", \"reasoning\": \"One sensor past critical threshold (Energy Consumption >= 4.5) triggers the High tier.\", \"confidence\": 1.0}\n```",
+        "parsed_tier": "High",
+        "elapsed_s": 2.5937421321868896,
+        "error": null
+      },
+      "kimi-k2.6:cloud": {
+        "raw": "{\"tier\": \"Low\", \"reasoning\": \"No sensors past warning threshold and failure_type is Normal, matching the ELSE branch of the decision tree.\", \"confidence\": 1.0}",
+        "parsed_tier": "Low",
+        "elapsed_s": 1.9528188705444336,
+        "error": null
+      },
+      "deepseek-v4-pro:cloud": {
+        "raw": "{\"tier\": \"Medium\", \"reasoning\": \"Energy consumption exceeds warning threshold, triggering Medium priority per decision tree.\", \"confidence\": 0.95}",
+        "parsed_tier": "Medium",
+        "elapsed_s": 1.2185988426208496,
+        "error": null
+      }
+    },
+    "ensemble_tier": "High"
+  },
+  {
+    "machine_id": 29,
+    "timestamp": "2025-02-10 22:22:00",
+    "temperature": 68.41,
+    "vibration": 50.39,
+    "humidity": 79.79,
+    "pressure": 4.95,
+    "energy": 2.95,
+    "failure_type": "Pressure Drop",
+    "rul": 426.0,
+    "anomaly_flag": 0,
+    "downtime_risk": 0.0,
+    "maintenance_required": 1,
+    "gt_tier": "Medium",
+    "per_llm": {
+      "glm-5.1:cloud": {
+        "raw": "```json\n{\"tier\": \"Critical\", \"reasoning\": \"One sensor past critical threshold (Pressure) combined with failure_type 'Pressure Drop' triggers the Critical tier.\", \"confidence\": 0.95}\n```",
+        "parsed_tier": "Critical",
+        "elapsed_s": 7.933611631393433,
+        "error": null
+      },
+      "kimi-k2.6:cloud": {
+        "raw": "{\" [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PA",
+        "parsed_tier": null,
+        "elapsed_s": 22.191583156585693,
+        "error": null
+      },
+      "deepseek-v4-pro:cloud": {
+        "raw": "{\"tier\": \"Critical\", \"reasoning\": \"Pressure is past critical threshold and failure_type is Pressure Drop, matching the rule for Critical.\", \"confidence\": 0.95}",
+        "parsed_tier": "Critical",
+        "elapsed_s": 2.521296501159668,
+        "error": null
+      }
+    },
+    "ensemble_tier": "Critical"
+  },
+  {
+    "machine_id": 29,
+    "timestamp": "2025-01-19 11:04:00",
+    "temperature": 67.48,
+    "vibration": 55.12,
+    "humidity": 38.67,
+    "pressure": 1.99,
+    "energy": 2.41,
+    "failure_type": "Normal",
+    "rul": 12.0,
+    "anomaly_flag": 0,
+    "downtime_risk": 0.0,
+    "maintenance_required": 1,
+    "gt_tier": "High",
+    "per_llm": {
+      "glm-5.1:cloud": {
+        "raw": "```json\n{\"tier\": \"Medium\", \"reasoning\": \"One sensor (Vibration) is past the warning threshold and the failure type is Normal, matching the >=1 sensor past WARNING rule.\", \"confidence\": 0.95}\n```",
+        "parsed_tier": "Medium",
+        "elapsed_s": 22.33350133895874,
+        "error": null
+      },
+      "kimi-k2.6:cloud": {
+        "raw": "{\"tier\": \"Medium\", \"reasoning\": \"Vibration is past WARNING threshold (55.12 >= 55) with failure_type 'Normal', matching the third rule (>=1 sensor past WARNING threshold).\", \"confidence\": 0.95}",
+        "parsed_tier": "Medium",
+        "elapsed_s": 2.3420984745025635,
+        "error": null
+      },
+      "deepseek-v4-pro:cloud": {
+        "raw": "{\"tier\": \"Medium\", \"reasoning\": \"Vibration is at warning level (55.12 >= 55) and failure_type is Normal, matching the rule for Medium.\", \"confidence\": 0.95}",
+        "parsed_tier": "Medium",
+        "elapsed_s": 7.835607528686523,
+        "error": null
+      }
+    },
+    "ensemble_tier": "Medium"
+  },
+  {
+    "machine_id": 29,
+    "timestamp": "2025-02-04 18:31:00",
+    "temperature": 63.04,
+    "vibration": 75.66,
+    "humidity": 61.38,
+    "pressure": 2.77,
+    "energy": 2.05,
+    "failure_type": "Normal",
+    "rul": 163.0,
+    "anomaly_flag": 0,
+    "downtime_risk": 0.0,
+    "maintenance_required": 0,
+    "gt_tier": "Low",
+    "per_llm": {
+      "glm-5.1:cloud": {
+        "raw": "```json\n{\n  \"tier\": \"High\",\n  \"reasoning\": \"One sensor (vibration) is past the critical threshold, matching the first condition in the High branch.\",\n  \"confidence\": 0.95\n}\n```",
+        "parsed_tier": "High",
+        "elapsed_s": 6.7205822467803955,
+        "error": null
+      },
+      "kimi-k2.6:cloud": {
+        "raw": "{\"tier\": \"High\", \"reasoning\": \"Vibration is past CRITICAL threshold (75.66 >= 70), satisfying the first condition in the High tier (>=1 sensor past CRITICAL threshold).\", \"confidence\": 1.0}",
+        "parsed_tier": "High",
+        "elapsed_s": 2.0112104415893555,
+        "error": null
+      },
+      "deepseek-v4-pro:cloud": {
+        "raw": "{\"tier\": \"High\", \"reasoning\": \"Vibration is past critical threshold (75.66 >= 70), triggering the '>=1 sensor past CRITICAL threshold' rule for High.\", \"confidence\": 0.95}",
+        "parsed_tier": "High",
+        "elapsed_s": 1.6120529174804688,
+        "error": null
+      }
+    },
+    "ensemble_tier": "High"
+  },
+  {
+    "machine_id": 29,
+    "timestamp": "2025-01-02 02:58:00",
+    "temperature": 66.94,
+    "vibration": 47.29,
+    "humidity": 60.19,
+    "pressure": 4.59,
+    "energy": 1.36,
+    "failure_type": "Normal",
+    "rul": 485.0,
+    "anomaly_flag": 0,
+    "downtime_risk": 0.0,
+    "maintenance_required": 0,
+    "gt_tier": "Low",
+    "per_llm": {
+      "glm-5.1:cloud": {
+        "raw": "```json\n{\n  \"tier\": \"Medium\",\n  \"reasoning\": \"Pressure is past the warning threshold and no other conditions for higher tiers are met.\",\n  \"confidence\": 1.0\n}\n```",
+        "parsed_tier": "Medium",
+        "elapsed_s": 3.0737247467041016,
+        "error": null
+      },
+      "kimi-k2.6:cloud": {
+        "raw": "{\"tier\": \"High\", \"reasoning\": \"Pressure is past CRITICAL threshold (4.59 >= 4.8), satisfying the first condition in the High tier (>=1 sensor past CRITICAL threshold).\", \"confidence\": 0.95}",
+        "parsed_tier": "High",
+        "elapsed_s": 1.709716796875,
+        "error": null
+      },
+      "deepseek-v4-pro:cloud": {
+        "raw": "{\"tier\": \"Medium\", \"reasoning\": \"Pressure is past warning threshold (4.59 >= 4.3) and no other sensors breach warning or critical, failure_type is Normal, matching the Medium rule.\", \"confidence\": 0.95}",
+        "parsed_tier": "Medium",
+        "elapsed_s": 2.3595688343048096,
+        "error": null
+      }
+    },
+    "ensemble_tier": "Medium"
+  },
+  {
+    "machine_id": 31,
+    "timestamp": "2025-02-14 15:12:00",
+    "temperature": 88.88,
+    "vibration": 48.4,
+    "humidity": 73.81,
+    "pressure": 4.87,
+    "energy": 2.76,
+    "failure_type": "Vibration Issue",
+    "rul": 14.0,
+    "anomaly_flag": 0,
+    "downtime_risk": 0.0,
+    "maintenance_required": 1,
+    "gt_tier": "High",
+    "per_llm": {
+      "glm-5.1:cloud": {
+        "raw": "```json\n{\n  \"tier\": \"High\",\n  \"reasoning\": \"One sensor past critical threshold (pressure) and two sensors past warning threshold (temperature, humidity) with a non-normal failure type.\",\n  \"confidence\": 0.95\n}\n```",
+        "parsed_tier": "High",
+        "elapsed_s": 14.3073148727417,
+        "error": null
+      },
+      "kimi-k2.6:cloud": {
+        "raw": "{\"tier\": \"Critical\", \"reasoning\": \"Temperature is past critical threshold (88.88 >= 88) AND failure_type is 'Vibration Issue' which satisfies the second branch of the Critical rule: >=1 sensor past critical threshold\", \"confidence\": 0.95}",
+        "parsed_tier": "Critical",
+        "elapsed_s": 1.8140013217926025,
+        "error": null
+      },
+      "deepseek-v4-pro:cloud": {
+        "raw": "{\"tier\": \"Critical\", \"reasoning\": \"Pressure is past critical threshold and failure_type is not Normal, but the critical rule requires either 2 critical breaches or specific failure types; however, temperature is also past critical, satisfying the first condition of the Critical rule.\", \"confidence\":",
+        "parsed_tier": "Critical",
+        "elapsed_s": 2.567438840866089,
+        "error": null
+      }
+    },
+    "ensemble_tier": "Critical"
+  },
+  {
+    "machine_id": 31,
+    "timestamp": "2025-02-15 17:29:00",
+    "temperature": 69.72,
+    "vibration": 71.67,
+    "humidity": 66.16,
+    "pressure": 1.51,
+    "energy": 2.35,
+    "failure_type": "Normal",
+    "rul": 91.0,
+    "anomaly_flag": 0,
+    "downtime_risk": 0.0,
+    "maintenance_required": 0,
+    "gt_tier": "Low",
+    "per_llm": {
+      "glm-5.1:cloud": {
+        "raw": "```json\n{\"tier\": \"High\", \"reasoning\": \"One sensor (Vibration) is past the critical threshold, triggering the High tier.\", \"confidence\": 0.95}\n```",
+        "parsed_tier": "High",
+        "elapsed_s": 3.829942226409912,
+        "error": null
+      },
+      "kimi-k2.6:cloud": {
+        "raw": "{\"tier\": \"High\", \"reasoning\": \"Vibration is past critical threshold (71.67 >= 70), satisfying the first condition in the High tier (>=1 sensor past critical).\", \"confidence\": 1.0}",
+        "parsed_tier": "High",
+        "elapsed_s": 1.6005094051361084,
+        "error": null
+      },
+      "deepseek-v4-pro:cloud": {
+        "raw": "{\"tier\": \"High\", \"reasoning\": \"Vibration is past critical threshold (71.67 >= 70), triggering High tier per '>=1 sensor past CRITICAL threshold' rule.\", \"confidence\": 0.95}",
+        "parsed_tier": "High",
+        "elapsed_s": 1.6457247734069824,
+        "error": null
+      }
+    },
+    "ensemble_tier": "High"
+  },
+  {
+    "machine_id": 31,
+    "timestamp": "2025-03-08 01:19:00",
+    "temperature": 65.06,
+    "vibration": 53.42,
+    "humidity": 54.32,
+    "pressure": 3.52,
+    "energy": 2.88,
+    "failure_type": "Normal",
+    "rul": 324.0,
+    "anomaly_flag": 0,
+    "downtime_risk": 0.0,
+    "maintenance_required": 0,
+    "gt_tier": "Low",
+    "per_llm": {
+      "glm-5.1:cloud": {
+        "raw": "```json\n{\"tier\": \"Medium\", \"reasoning\": \"One sensor (Vibration) is past the warning threshold, satisfying the first condition for Medium.\", \"confidence\": 1.0}\n```",
+        "parsed_tier": "Medium",
+        "elapsed_s": 3.435645580291748,
+        "error": null
+      },
+      "kimi-k2.6:cloud": {
+        "raw": "{\"tier\": \"Low\", \"reasoning\": \"No sensors past warning threshold and failure_type is Normal, matching the ELSE branch.\", \"confidence\": 1.0}",
+        "parsed_tier": "Low",
+        "elapsed_s": 1.5344336032867432,
+        "error": null
+      },
+      "deepseek-v4-pro:cloud": {
+        "raw": "{\"tier\": \"Medium\", \"reasoning\": \"Vibration at 53.42 is below warning, but failure_type is Normal so only one sensor near warning; however, temperature at 65.06 is below warning, so no sensor is past warning threshold. Re-evaluating: no sensor past warning and failure_type is Normal, so tier should b",
+        "parsed_tier": "Medium",
+        "elapsed_s": 2.5438966751098633,
+        "error": null
+      }
+    },
+    "ensemble_tier": "Medium"
+  },
+  {
+    "machine_id": 31,
+    "timestamp": "2025-02-19 05:49:00",
+    "temperature": 72.67,
+    "vibration": 67.12,
+    "humidity": 70.58,
+    "pressure": 3.5,
+    "energy": 0.87,
+    "failure_type": "Normal",
+    "rul": 84.0,
+    "anomaly_flag": 0,
+    "downtime_risk": 0.0,
+    "maintenance_required": 0,
+    "gt_tier": "Low",
+    "per_llm": {
+      "glm-5.1:cloud": {
+        "raw": "```json\n{\"tier\": \"Medium\", \"reasoning\": \"One sensor (Vibration) is past the WARNING threshold and the failure type is Normal, matching the ELIF >=1 sensor past WARNING condition.\", \"confidence\": 1.0}\n```",
+        "parsed_tier": "Medium",
+        "elapsed_s": 4.645853519439697,
+        "error": null
+      },
+      "kimi-k2.6:cloud": {
+        "raw": "{\"tier\": \"Medium\", \"reasoning\": \"Vibration is past warning threshold (67.12 >= 55), triggering the ELIF >=1 sensor past WARNING threshold rule.\", \"confidence\": 0.95}",
+        "parsed_tier": "Medium",
+        "elapsed_s": 1.788562297821045,
+        "error": null
+      },
+      "deepseek-v4-pro:cloud": {
+        "raw": "{\"tier\": \"Medium\", \"reasoning\": \"Temperature is past warning threshold and failure_type is Normal, matching the rule for Medium.\", \"confidence\": 0.95}",
+        "parsed_tier": "Medium",
+        "elapsed_s": 4.3839006423950195,
+        "error": null
+      }
+    },
+    "ensemble_tier": "Medium"
+  },
+  {
+    "machine_id": 31,
+    "timestamp": "2025-01-15 01:58:00",
+    "temperature": 74.07,
+    "vibration": 85.59,
+    "humidity": 65.82,
+    "pressure": 2.9,
+    "energy": 1.49,
+    "failure_type": "Normal",
+    "rul": 3.0,
+    "anomaly_flag": 1,
+    "downtime_risk": 1.0,
+    "maintenance_required": 1,
+    "gt_tier": "Critical",
+    "per_llm": {
+      "glm-5.1:cloud": {
+        "raw": "```json\n{\n  \"tier\": \"High\",\n  \"reasoning\": \"One sensor (Vibration) is past the critical threshold.\",\n  \"confidence\": 1.0\n}\n```",
+        "parsed_tier": "High",
+        "elapsed_s": 3.3711562156677246,
+        "error": null
+      },
+      "kimi-k2.6:cloud": {
+        "raw": "{\"tier\": \"Critical\", \"reasoning\": \"Vibration is past critical threshold (85.59 >= 70) and failure_type is 'Vibration Issue' from upstream classifier, but actually evaluating strictly: vibration alone is >=1 sensor past CRITICAL threshold, which matches the second ELIF for High. However, re-reading: ",
+        "parsed_tier": "Critical",
+        "elapsed_s": 5.115407705307007,
+        "error": null
+      },
+      "deepseek-v4-pro:cloud": {
+        "raw": "{\"tier\": \"Medium\", \"reasoning\": \"Vibration exceeds warning threshold (85.59 >= 55) and failure_type is Normal, matching the rule for Medium.\", \"confidence\": 0.95}",
+        "parsed_tier": "Medium",
+        "elapsed_s": 6.014861822128296,
+        "error": null
+      }
+    },
+    "ensemble_tier": "Critical"
+  },
+  {
+    "machine_id": 33,
+    "timestamp": "2025-01-21 02:28:00",
+    "temperature": 93.9,
+    "vibration": 20.14,
+    "humidity": 77.13,
+    "pressure": 2.66,
+    "energy": 1.8,
+    "failure_type": "Normal",
+    "rul": 30.0,
+    "anomaly_flag": 1,
+    "downtime_risk": 1.0,
+    "maintenance_required": 1,
+    "gt_tier": "Critical",
+    "per_llm": {
+      "glm-5.1:cloud": {
+        "raw": "```json\n{\"tier\": \"Medium\", \"reasoning\": \"Two sensors (temperature and humidity) are past their warning thresholds, but the failure type is Normal, so the ELIF condition for >=2 warnings requires a non-Normal failure type, falling back to the Medium tier due to >=1 sensor past warning.\", \"confidence\"",
+        "parsed_tier": "Medium",
+        "elapsed_s": 10.260414600372314,
+        "error": null
+      },
+      "kimi-k2.6:cloud": {
+        "raw": "{\"tier\": \"Critical\", \"reasoning\": \"Temperature is past critical threshold (93.90 >= 88) and humidity is past critical threshold (77.13 >= 75), so >=2 sensors past CRITICAL threshold per first rule.\", \"confidence\": 1.0}",
+        "parsed_tier": "Critical",
+        "elapsed_s": 1.7812559604644775,
+        "error": null
+      },
+      "deepseek-v4-pro:cloud": {
+        "raw": "{\"tier\": \"Medium\", \"reasoning\": \"Humidity exceeds critical threshold, triggering the rule for at least one sensor past critical.\", \"confidence\": 0.9}",
+        "parsed_tier": "Medium",
+        "elapsed_s": 8.751375198364258,
+        "error": null
+      }
+    },
+    "ensemble_tier": "Medium"
+  },
+  {
+    "machine_id": 33,
+    "timestamp": "2025-01-17 02:33:00",
+    "temperature": 64.12,
+    "vibration": 57.06,
+    "humidity": 37.1,
+    "pressure": 1.72,
+    "energy": 1.13,
+    "failure_type": "Normal",
+    "rul": 143.0,
+    "anomaly_flag": 0,
+    "downtime_risk": 0.0,
+    "maintenance_required": 0,
+    "gt_tier": "Low",
+    "per_llm": {
+      "glm-5.1:cloud": {
+        "raw": "```json\n{\"tier\": \"Medium\", \"reasoning\": \"One sensor (Vibration) is past the WARNING threshold, which matches the ELIF >= 1 sensor past WARNING condition.\", \"confidence\": 0.95}\n```",
+        "parsed_tier": "Medium",
+        "elapsed_s": 3.14074969291687,
+        "error": null
+      },
+      "kimi-k2.6:cloud": {
+        "raw": "{\"tier\": \"Medium\", \"reasoning\": \"Vibration is past WARNING threshold (57.06 >= 55), triggering the ELIF for >=1 sensor past WARNING threshold.\", \"confidence\": 0.95}",
+        "parsed_tier": "Medium",
+        "elapsed_s": 1.6229662895202637,
+        "error": null
+      },
+      "deepseek-v4-pro:cloud": {
+        "raw": "{\"tier\": \"Medium\", \"reasoning\": \"Vibration is at warning level (57.06 >= 55) and failure_type is Normal, matching the rule for Medium.\", \"confidence\": 0.95}",
+        "parsed_tier": "Medium",
+        "elapsed_s": 21.28568935394287,
+        "error": null
+      }
+    },
+    "ensemble_tier": "Medium"
+  },
+  {
+    "machine_id": 33,
+    "timestamp": "2025-01-11 07:17:00",
+    "temperature": 82.35,
+    "vibration": 64.08,
+    "humidity": 58.81,
+    "pressure": 2.47,
+    "energy": 1.01,
+    "failure_type": "Normal",
+    "rul": 412.0,
+    "anomaly_flag": 0,
+    "downtime_risk": 0.0,
+    "maintenance_required": 0,
+    "gt_tier": "Low",
+    "per_llm": {
+      "glm-5.1:cloud": {
+        "raw": "```json\n{\n  \"tier\": \"Medium\",\n  \"reasoning\": \"One sensor (Vibration) is past the WARNING threshold, which matches the first condition in the Medium branch.\",\n  \"confidence\": 1.0\n}\n```",
+        "parsed_tier": "Medium",
+        "elapsed_s": 4.740520000457764,
+        "error": null
+      },
+      "kimi-k2.6:cloud": {
+        "raw": "{\"tier\": \"Medium\", \"reasoning\": \"1 sensor past warning threshold (Vibration 64.08 >= 55) with failure_type Normal triggers ELIF >=1 sensor past WARNING threshold\", \"confidence\": 0.95}",
+        "parsed_tier": "Medium",
+        "elapsed_s": 1.6825783252716064,
+        "error": null
+      },
+      "deepseek-v4-pro:cloud": {
+        "raw": "{\"tier\": \"Medium\", \"reasoning\": \"Temperature exceeds warning threshold with Normal failure type, matching the Medium rule.\", \"confidence\": 0.95}",
+        "parsed_tier": "Medium",
+        "elapsed_s": 4.784613847732544,
+        "error": null
+      }
+    },
+    "ensemble_tier": "Medium"
+  },
+  {
+    "machine_id": 33,
+    "timestamp": "2025-02-09 21:08:00",
+    "temperature": 60.97,
+    "vibration": 31.64,
+    "humidity": 56.15,
+    "pressure": 1.77,
+    "energy": 3.7,
+    "failure_type": "Normal",
+    "rul": 375.0,
+    "anomaly_flag": 0,
+    "downtime_risk": 0.0,
+    "maintenance_required": 0,
+    "gt_tier": "Low",
+    "per_llm": {
+      "glm-5.1:cloud": {
+        "raw": "```json\n{\"tier\": \"Medium\", \"reasoning\": \"Exactly one sensor (Energy Consumption) is past the WARNING threshold and the failure type is Normal, triggering the ELIF >=1 sensor past WARNING condition.\", \"confidence\": 1.0}\n```",
+        "parsed_tier": "Medium",
+        "elapsed_s": 3.8750905990600586,
+        "error": null
+      },
+      "kimi-k2.6:cloud": {
+        "raw": "{\"tier\": \"Low\", \"reasoning\": \"No sensors past warning thresholds and failure_type is Normal, matching the ELSE branch.\", \"confidence\": 1.0}",
+        "parsed_tier": "Low",
+        "elapsed_s": 2.0469818115234375,
+        "error": null
+      },
+      "deepseek-v4-pro:cloud": {
+        "raw": "{\"tier\": \"Low\", \"reasoning\": \"No sensor exceeds warning threshold and failure_type is Normal, matching the ELSE branch.\", \"confidence\": 1.0}",
+        "parsed_tier": "Low",
+        "elapsed_s": 8.140819072723389,
+        "error": null
+      }
+    },
+    "ensemble_tier": "Low"
+  },
+  {
+    "machine_id": 33,
+    "timestamp": "2025-01-19 02:37:00",
+    "temperature": 57.8,
+    "vibration": 46.99,
+    "humidity": 65.11,
+    "pressure": 3.31,
+    "energy": 4.56,
+    "failure_type": "Normal",
+    "rul": 32.0,
+    "anomaly_flag": 0,
+    "downtime_risk": 0.0,
+    "maintenance_required": 0,
+    "gt_tier": "High",
+    "per_llm": {
+      "glm-5.1:cloud": {
+        "raw": "```json\n{\"tier\": \"Medium\", \"reasoning\": \"One sensor (Energy Consumption) is past the critical threshold, but the failure type is Normal, so the High tier condition is not met and the Medium tier is matched by the >=1 sensor past CRITICAL threshold rule.\", \"confidence\": 0.95}\n```",
+        "parsed_tier": "Medium",
+        "elapsed_s": 3.9063832759857178,
+        "error": null
+      },
+      "kimi-k2.6:cloud": {
+        "raw": "{\"tier\": \"High\", \"reasoning\": \"Energy consumption is past CRITICAL threshold (4.56 >= 4.5), satisfying the first condition in the High tier: >=1 sensor past CRITICAL threshold.\", \"confidence\": 1.0}",
+        "parsed_tier": "High",
+        "elapsed_s": 2.077646017074585,
+        "error": null
+      },
+      "deepseek-v4-pro:cloud": {
+        "raw": "{\"tier\": \"Medium\", \"reasoning\": \"Energy consumption is past warning threshold and failure_type is Normal, matching the rule for Medium.\", \"confidence\": 0.95}",
+        "parsed_tier": "Medium",
+        "elapsed_s": 29.000338792800903,
+        "error": null
+      }
+    },
+    "ensemble_tier": "Medium"
+  },
+  {
+    "machine_id": 35,
+    "timestamp": "2025-03-07 13:22:00",
+    "temperature": 67.94,
+    "vibration": 49.1,
+    "humidity": 57.65,
+    "pressure": 2.89,
+    "energy": 3.03,
+    "failure_type": "Normal",
+    "rul": 288.0,
+    "anomaly_flag": 0,
+    "downtime_risk": 0.0,
+    "maintenance_required": 0,
+    "gt_tier": "Low",
+    "per_llm": {
+      "glm-5.1:cloud": {
+        "raw": "```json\n{\"tier\": \"Low\", \"reasoning\": \"No sensors past warning threshold and failure_type is Normal.\", \"confidence\": 1.0}\n```",
+        "parsed_tier": "Low",
+        "elapsed_s": 10.874839782714844,
+        "error": null
+      },
+      "kimi-k2.6:cloud": {
+        "raw": "{\"tier\": \"Low\", \"reasoning\": \"No sensors past warning threshold and failure_type is Normal, matching the ELSE branch of the decision tree.\", \"confidence\": 1.0}",
+        "parsed_tier": "Low",
+        "elapsed_s": 2.6718921661376953,
+        "error": null
+      },
+      "deepseek-v4-pro:cloud": {
+        "raw": "{\"tier\": \"Low\", \"reasoning\": \"No sensor exceeds warning threshold and failure_type is Normal.\", \"confidence\": 1.0}",
+        "parsed_tier": "Low",
+        "elapsed_s": 81.85950374603271,
+        "error": null
+      }
+    },
+    "ensemble_tier": "Low"
+  },
+  {
+    "machine_id": 35,
+    "timestamp": "2025-01-17 22:18:00",
+    "temperature": 84.16,
+    "vibration": 51.23,
+    "humidity": 37.7,
+    "pressure": 3.91,
+    "energy": 2.75,
+    "failure_type": "Normal",
+    "rul": 263.0,
+    "anomaly_flag": 0,
+    "downtime_risk": 0.0,
+    "maintenance_required": 1,
+    "gt_tier": "Medium",
+    "per_llm": {
+      "glm-5.1:cloud": {
+        "raw": "```json\n{\n  \"tier\": \"Medium\",\n  \"reasoning\": \"One sensor (Temperature) is past the WARNING threshold and failure_type is Normal.\",\n  \"confidence\": 1.0\n}\n```",
+        "parsed_tier": "Medium",
+        "elapsed_s": 2.74994158744812,
+        "error": null
+      },
+      "kimi-k2.6:cloud": {
+        "raw": "{\"tier\": \"Medium\", \"reasoning\": \"Temperature is past warning threshold (84.16 >= 82), which matches the ELIF condition '>=1 sensor past WARNING threshold'\", \"confidence\": 0.95}",
+        "parsed_tier": "Medium",
+        "elapsed_s": 1.680976152420044,
+        "error": null
+      },
+      "deepseek-v4-pro:cloud": {
+        "raw": "{\"tier\": \"Medium\", \"reasoning\": \"Temperature exceeds warning threshold with failure_type Normal, matching the Medium rule.\", \"confidence\": 0.95}",
+        "parsed_tier": "Medium",
+        "elapsed_s": 2.694422721862793,
+        "error": null
+      }
+    },
+    "ensemble_tier": "Medium"
+  },
+  {
+    "machine_id": 35,
+    "timestamp": "2025-01-25 08:29:00",
+    "temperature": 72.63,
+    "vibration": 75.44,
+    "humidity": 78.86,
+    "pressure": 1.01,
+    "energy": 2.47,
+    "failure_type": "Normal",
+    "rul": 303.0,
+    "anomaly_flag": 0,
+    "downtime_risk": 0.0,
+    "maintenance_required": 0,
+    "gt_tier": "Low",
+    "per_llm": {
+      "glm-5.1:cloud": {
+        "raw": "```json\n{\n  \"tier\": \"High\",\n  \"reasoning\": \"Two sensors (Vibration and Humidity) are past the CRITICAL threshold, satisfying the first condition for Critical, but applying the conservative rule to choose the lower tier when in doubt between adjacent tiers results in High.\",\n  \"confidence\": 0.65\n}\n``",
+        "parsed_tier": "High",
+        "elapsed_s": 17.935453414916992,
+        "error": null
+      },
+      "kimi-k2.6:cloud": {
+        "raw": "{\"tier\": \"Critical\", \"reasoning\": \"Vibration is past CRITICAL threshold (75.44 >= 70) AND Humidity is past CRITICAL threshold (78.86 >= 75), so >=2 sensors past CRITICAL threshold triggers Critical tier\", \"confidence\": 1.0}",
+        "parsed_tier": "Critical",
+        "elapsed_s": 1.7925631999969482,
+        "error": null
+      },
+      "deepseek-v4-pro:cloud": {
+        "raw": "{\"tier\": \"Medium\", \"reasoning\": \"One sensor (vibration) past warning threshold with failure_type Normal triggers Medium tier.\", \"confidence\": 0.95}",
+        "parsed_tier": "Medium",
+        "elapsed_s": 1.952458143234253,
+        "error": null
+      }
+    },
+    "ensemble_tier": "Critical"
+  },
+  {
+    "machine_id": 35,
+    "timestamp": "2025-01-13 12:38:00",
+    "temperature": 77.03,
+    "vibration": 53.2,
+    "humidity": 59.22,
+    "pressure": 4.49,
+    "energy": 3.91,
+    "failure_type": "Normal",
+    "rul": 217.0,
+    "anomaly_flag": 0,
+    "downtime_risk": 0.0,
+    "maintenance_required": 0,
+    "gt_tier": "Low",
+    "per_llm": {
+      "glm-5.1:cloud": {
+        "raw": "```json\n{\n  \"tier\": \"Medium\",\n  \"reasoning\": \"One sensor (Pressure) is past the WARNING threshold and the failure type is Normal, matching the >=1 sensor past WARNING threshold rule.\",\n  \"confidence\": 0.95\n}\n```",
+        "parsed_tier": "Medium",
+        "elapsed_s": 4.734168767929077,
+        "error": null
+      },
+      "kimi-k2.6:cloud": {
+        "raw": "{\"tier\": \"Medium\", \"reasoning\": \"Pressure 4.49 bar is past warning threshold (>=4.3) and failure_type is Normal, matching ELIF >=1 sensor past WARNING threshold\", \"confidence\": 0.95}",
+        "parsed_tier": "Medium",
+        "elapsed_s": 3.9853432178497314,
+        "error": null
+      },
+      "deepseek-v4-pro:cloud": {
+        "raw": "{\"tier\": \"Medium\", \"reasoning\": \"Pressure is past warning threshold (4.49 >= 4.3) and failure_type is Normal, matching the rule for Medium.\", \"confidence\": 0.95}",
+        "parsed_tier": "Medium",
+        "elapsed_s": 98.78847932815552,
+        "error": null
+      }
+    },
+    "ensemble_tier": "Medium"
+  },
+  {
+    "machine_id": 35,
+    "timestamp": "2025-01-03 17:20:00",
+    "temperature": 80.94,
+    "vibration": 79.12,
+    "humidity": 64.78,
+    "pressure": 4.52,
+    "energy": 1.39,
+    "failure_type": "Normal",
+    "rul": 17.0,
+    "anomaly_flag": 0,
+    "downtime_risk": 0.0,
+    "maintenance_required": 1,
+    "gt_tier": "High",
+    "per_llm": {
+      "glm-5.1:cloud": {
+        "raw": "```json\n{\n  \"tier\": \"Medium\",\n  \"reasoning\": \"Two sensors (Vibration and Pressure) are past the WARNING threshold, satisfying the >=1 sensor past WARNING condition.\",\n  \"confidence\": 0.95\n}\n```",
+        "parsed_tier": "Medium",
+        "elapsed_s": 2.1925158500671387,
+        "error": null
+      },
+      "kimi-k2.6:cloud": {
+        "raw": "{\"tier\": \"High\", \"reasoning\": \"Vibration is past critical threshold (79.12 >= 70), satisfying the first condition in the High tier (>=1 sensor past CRITICAL threshold).\", \"confidence\": 0.95}",
+        "parsed_tier": "High",
+        "elapsed_s": 1.5460667610168457,
+        "error": null
+      },
+      "deepseek-v4-pro:cloud": {
+        "raw": "{\"tier\": \"Medium\", \"reasoning\": \"One sensor (vibration) is past critical threshold, but failure_type is Normal, so first match is Medium via '>=1 sensor past WARNING threshold'.\", \"confidence\": 0.95}",
+        "parsed_tier": "Medium",
+        "elapsed_s": 19.070481538772583,
+        "error": null
+      }
+    },
+    "ensemble_tier": "Medium"
+  },
+  {
+    "machine_id": 37,
+    "timestamp": "2025-02-08 14:40:00",
+    "temperature": 89.22,
+    "vibration": 48.32,
+    "humidity": 30.39,
+    "pressure": 4.25,
+    "energy": 0.68,
+    "failure_type": "Normal",
+    "rul": 400.0,
+    "anomaly_flag": 0,
+    "downtime_risk": 0.0,
+    "maintenance_required": 0,
+    "gt_tier": "Low",
+    "per_llm": {
+      "glm-5.1:cloud": {
+        "raw": "```json\n{\"tier\": \"High\", \"reasoning\": \"One sensor (Temperature) is past critical threshold, triggering the High tier.\", \"confidence\": 0.95}\n```",
+        "parsed_tier": "High",
+        "elapsed_s": 2.255622625350952,
+        "error": null
+      },
+      "kimi-k2.6:cloud": {
+        "raw": "{\"tier\": \"Critical\", \"reasoning\": \"Temperature is past CRITICAL threshold (89.22 >= 88) AND failure_type is 'Electrical Fault' would require Electrical Fault, but actually 1 sensor past critical meets the first part of High; however re-evaluating: temperature >=88 is critical, and the second Critica",
+        "parsed_tier": "Critical",
+        "elapsed_s": 3.4266161918640137,
+        "error": null
+      },
+      "deepseek-v4-pro:cloud": {
+        "raw": "{\"tier\": \"Medium\", \"reasoning\": \"Temperature exceeds warning threshold with failure_type Normal, matching the rule for Medium.\", \"confidence\": 0.95}",
+        "parsed_tier": "Medium",
+        "elapsed_s": 15.48446536064148,
+        "error": null
+      }
+    },
+    "ensemble_tier": "Critical"
+  },
+  {
+    "machine_id": 37,
+    "timestamp": "2025-02-02 06:59:00",
+    "temperature": 63.65,
+    "vibration": 83.54,
+    "humidity": 65.87,
+    "pressure": 4.78,
+    "energy": 4.89,
+    "failure_type": "Normal",
+    "rul": 8.0,
+    "anomaly_flag": 1,
+    "downtime_risk": 1.0,
+    "maintenance_required": 1,
+    "gt_tier": "Critical",
+    "per_llm": {
+      "glm-5.1:cloud": {
+        "raw": "```json\n{\"tier\": \"High\", \"reasoning\": \"Vibration and Energy Consumption are past critical, and Pressure is past warning, satisfying the >=1 sensor past CRITICAL threshold rule for High.\", \"confidence\": 0.95}\n```",
+        "parsed_tier": "High",
+        "elapsed_s": 2.1092233657836914,
+        "error": null
+      },
+      "kimi-k2.6:cloud": {
+        "raw": "{\"tier\": \"Critical\", \"reasoning\": \"Pressure is at 4.78 bar which equals critical threshold >= 4.8, and Vibration is at 83.54 which exceeds critical threshold >= 70, so >=2 sensors past CRITICAL threshold triggers Critical tier.\", \"confidence\": 1.0}",
+        "parsed_tier": "Critical",
+        "elapsed_s": 1.9281141757965088,
+        "error": null
+      },
+      "deepseek-v4-pro:cloud": {
+        "raw": "{\"tier\": \"Medium\", \"reasoning\": \"Pressure is past warning threshold and failure_type is Normal, matching the Medium rule.\", \"confidence\": 0.95}",
+        "parsed_tier": "Medium",
+        "elapsed_s": 16.2275390625,
+        "error": null
+      }
+    },
+    "ensemble_tier": "Critical"
+  },
+  {
+    "machine_id": 37,
+    "timestamp": "2025-01-11 06:24:00",
+    "temperature": 78.92,
+    "vibration": 52.27,
+    "humidity": 79.41,
+    "pressure": 2.23,
+    "energy": 2.67,
+    "failure_type": "Normal",
+    "rul": 456.0,
+    "anomaly_flag": 0,
+    "downtime_risk": 0.0,
+    "maintenance_required": 0,
+    "gt_tier": "Low",
+    "per_llm": {
+      "glm-5.1:cloud": {
+        "raw": "```json\n{\"tier\": \"Medium\", \"reasoning\": \"One sensor (Humidity) is past the WARNING threshold, satisfying the first condition of the Medium tier.\", \"confidence\": 0.95}\n```",
+        "parsed_tier": "Medium",
+        "elapsed_s": 17.848884344100952,
+        "error": null
+      },
+      "kimi-k2.6:cloud": {
+        "raw": "{\"tier\": \"Medium\", \"reasoning\": \"Humidity is past warning threshold (79.41% >= 75% critical, 79.41% >= 68% warning), satisfying the >=1 sensor past WARNING threshold condition in the third branch.\", \"confidence\": 0.95}",
+        "parsed_tier": "Medium",
+        "elapsed_s": 2.1019015312194824,
+        "error": null
+      },
+      "deepseek-v4-pro:cloud": {
+        "raw": "{\"tier\": \"Medium\", \"reasoning\": \"Humidity exceeds critical threshold, triggering Medium tier per single sensor past warning rule.\", \"confidence\": 0.9}",
+        "parsed_tier": "Medium",
+        "elapsed_s": 6.799742698669434,
+        "error": null
+      }
+    },
+    "ensemble_tier": "Medium"
+  },
+  {
+    "machine_id": 37,
+    "timestamp": "2025-02-28 19:31:00",
+    "temperature": 88.87,
+    "vibration": 81.97,
+    "humidity": 38.33,
+    "pressure": 4.63,
+    "energy": 1.67,
+    "failure_type": "Normal",
+    "rul": 44.0,
+    "anomaly_flag": 1,
+    "downtime_risk": 1.0,
+    "maintenance_required": 1,
+    "gt_tier": "Critical",
+    "per_llm": {
+      "glm-5.1:cloud": {
+        "raw": "```json\n{\n  \"tier\": \"High\",\n  \"reasoning\": \"Exactly one sensor (vibration) is past the critical threshold, which matches the first condition in the ELIF branch.\",\n  \"confidence\": 0.95\n}\n```",
+        "parsed_tier": "High",
+        "elapsed_s": 4.742203712463379,
+        "error": null
+      },
+      "kimi-k2.6:cloud": {
+        "raw": "{\"tier\": \"Critical\", \"reasoning\": \"Temperature is past critical threshold (88.87 >= 88) and failure_type is 'Electrical Fault' would trigger critical, but actually temperature alone is past critical and vibration is also past critical (81.97 >= 70), so 2 sensors past critical threshold\", \"confidence",
+        "parsed_tier": "Critical",
+        "elapsed_s": 2.359402894973755,
+        "error": null
+      },
+      "deepseek-v4-pro:cloud": {
+        "raw": "{\"tier\": \"Medium\", \"reasoning\": \"Temperature exceeds warning threshold and failure_type is Normal, matching the Medium rule.\", \"confidence\": 0.95}",
+        "parsed_tier": "Medium",
+        "elapsed_s": 5.7109339237213135,
+        "error": null
+      }
+    },
+    "ensemble_tier": "Critical"
+  },
+  {
+    "machine_id": 37,
+    "timestamp": "2025-02-28 01:51:00",
+    "temperature": 76.4,
+    "vibration": 52.95,
+    "humidity": 53.74,
+    "pressure": 2.3,
+    "energy": 3.41,
+    "failure_type": "Pressure Drop",
+    "rul": 207.0,
+    "anomaly_flag": 0,
+    "downtime_risk": 0.0,
+    "maintenance_required": 1,
+    "gt_tier": "Medium",
+    "per_llm": {
+      "glm-5.1:cloud": {
+        "raw": "```json\n{\"tier\": \"Medium\", \"reasoning\": \"No sensors past warning threshold, but failure_type is not Normal, matching the ELIF condition for Medium.\", \"confidence\": 0.95}\n```",
+        "parsed_tier": "Medium",
+        "elapsed_s": 2.23811411857605,
+        "error": null
+      },
+      "kimi-k2.6:cloud": {
+        "raw": "{\"tier\": \"Medium\", \"reasoning\": \"1 sensor past warning threshold (Vibration 52.95 >= 55 warning) AND failure_type 'Pressure Drop' != 'Normal' matches ELIF condition for Medium\", \"confidence\": 0.95}",
+        "parsed_tier": "Medium",
+        "elapsed_s": 18.18761658668518,
+        "error": null
+      },
+      "deepseek-v4-pro:cloud": {
+        "raw": "{\"tier\": \"Medium\", \"reasoning\": \"Failure type is 'Pressure Drop' which is not 'Normal', triggering Medium tier.\", \"confidence\": 0.95}",
+        "parsed_tier": "Medium",
+        "elapsed_s": 1.4315648078918457,
+        "error": null
+      }
+    },
+    "ensemble_tier": "Medium"
+  },
+  {
+    "machine_id": 39,
+    "timestamp": "2025-01-06 14:51:00",
+    "temperature": 69.5,
+    "vibration": 36.69,
+    "humidity": 37.84,
+    "pressure": 2.26,
+    "energy": 4.04,
+    "failure_type": "Normal",
+    "rul": 315.0,
+    "anomaly_flag": 0,
+    "downtime_risk": 0.0,
+    "maintenance_required": 0,
+    "gt_tier": "Low",
+    "per_llm": {
+      "glm-5.1:cloud": {
+        "raw": "```json\n{\"tier\": \"Medium\", \"reasoning\": \"One sensor (Energy Consumption) is past the warning threshold and the failure type is Normal, resulting in a Medium priority.\", \"confidence\": 0.95}\n```",
+        "parsed_tier": "Medium",
+        "elapsed_s": 3.960765838623047,
+        "error": null
+      },
+      "kimi-k2.6:cloud": {
+        "raw": "{\"tier\": \"Medium\", \"reasoning\": \"Energy consumption is past WARNING threshold (4.04 >= 3.8), triggering the third branch of the decision tree.\", \"confidence\": 0.95}",
+        "parsed_tier": "Medium",
+        "elapsed_s": 2.682450532913208,
+        "error": null
+      },
+      "deepseek-v4-pro:cloud": {
+        "raw": "{\"tier\": \"Medium\", \"reasoning\": \"Energy consumption exceeds warning threshold (4.04 >= 3.8) with failure_type Normal, matching the rule for >=1 sensor past warning.\", \"confidence\": 0.95}",
+        "parsed_tier": "Medium",
+        "elapsed_s": 12.542479515075684,
+        "error": null
+      }
+    },
+    "ensemble_tier": "Medium"
+  },
+  {
+    "machine_id": 39,
+    "timestamp": "2025-03-05 06:19:00",
+    "temperature": 78.04,
+    "vibration": 50.61,
+    "humidity": 74.49,
+    "pressure": 2.37,
+    "energy": 2.58,
+    "failure_type": "Normal",
+    "rul": 294.0,
+    "anomaly_flag": 0,
+    "downtime_risk": 0.0,
+    "maintenance_required": 0,
+    "gt_tier": "Low",
+    "per_llm": {
+      "glm-5.1:cloud": {
+        "raw": "```json\n{\n  \"tier\": \"Medium\",\n  \"reasoning\": \"One sensor (Humidity) is past the WARNING threshold and the failure_type is Normal, matching the ELIF (>=1 sensor past WARNING threshold) condition.\",\n  \"confidence\": 0.95\n}\n```",
+        "parsed_tier": "Medium",
+        "elapsed_s": 9.359033584594727,
+        "error": null
+      },
+      "kimi-k2.6:cloud": {
+        "raw": "{\"tier\": \"Medium\", \"reasoning\": \"Humidity is past WARNING threshold (74.49 >= 75 critical not reached, but 74.49 >= 68 warning), so >=1 sensor past WARNING threshold applies\", \"confidence\": 0.95}",
+        "parsed_tier": "Medium",
+        "elapsed_s": 1.9071078300476074,
+        "error": null
+      },
+      "deepseek-v4-pro:cloud": {
+        "raw": "{\"tier\": \"Medium\", \"reasoning\": \"Humidity is past warning threshold (74.49 >= 68) and failure_type is Normal, matching the Medium rule: >=1 sensor past warning.\", \"confidence\": 0.95}",
+        "parsed_tier": "Medium",
+        "elapsed_s": 1.6712241172790527,
+        "error": null
+      }
+    },
+    "ensemble_tier": "Medium"
+  },
+  {
+    "machine_id": 39,
+    "timestamp": "2025-01-25 20:15:00",
+    "temperature": 76.27,
+    "vibration": 25.99,
+    "humidity": 46.03,
+    "pressure": 2.05,
+    "energy": 4.43,
+    "failure_type": "Normal",
+    "rul": 165.0,
+    "anomaly_flag": 0,
+    "downtime_risk": 0.0,
+    "maintenance_required": 0,
+    "gt_tier": "Low",
+    "per_llm": {
+      "glm-5.1:cloud": {
+        "raw": "```json\n{\"tier\": \"Medium\", \"reasoning\": \"One sensor (Energy Consumption) is past the WARNING threshold, which satisfies the first condition of the ELIF block.\", \"confidence\": 1.0}\n```",
+        "parsed_tier": "Medium",
+        "elapsed_s": 23.557132244110107,
+        "error": null
+      },
+      "kimi-k2.6:cloud": {
+        "raw": "{\"tier\": \"Medium\", \"reasoning\": \"Energy consumption is past warning threshold (4.43 >= 3.8), triggering the ELIF >=1 sensor past WARNING threshold rule\", \"confidence\": 0.95}",
+        "parsed_tier": "Medium",
+        "elapsed_s": 3.1644551753997803,
+        "error": null
+      },
+      "deepseek-v4-pro:cloud": {
+        "raw": "{\"tier\": \"Medium\", \"reasoning\": \"Energy consumption is past warning threshold (4.43 >= 3.8) and failure_type is Normal, matching the rule for Medium.\", \"confidence\": 0.95}",
+        "parsed_tier": "Medium",
+        "elapsed_s": 15.68311858177185,
+        "error": null
+      }
+    },
+    "ensemble_tier": "Medium"
+  },
+  {
+    "machine_id": 39,
+    "timestamp": "2025-02-07 17:07:00",
+    "temperature": 89.81,
+    "vibration": 51.58,
+    "humidity": 59.9,
+    "pressure": 2.32,
+    "energy": 2.28,
+    "failure_type": "Normal",
+    "rul": 483.0,
+    "anomaly_flag": 0,
+    "downtime_risk": 0.0,
+    "maintenance_required": 0,
+    "gt_tier": "Low",
+    "per_llm": {
+      "glm-5.1:cloud": {
+        "raw": "```json\n{\n  \"tier\": \"High\",\n  \"reasoning\": \"One sensor (Temperature) is past the critical threshold, which matches the first condition in the High tier.\",\n  \"confidence\": 0.95\n}\n```",
+        "parsed_tier": "High",
+        "elapsed_s": 2.9200661182403564,
+        "error": null
+      },
+      "kimi-k2.6:cloud": {
+        "raw": "{\"tier\": \"Critical\", \"reasoning\": \"Temperature is past CRITICAL threshold (89.81 >= 88) AND failure_type is 'Electrical Fault' \u2014 matches the third Critical condition\", \"confidence\": 1.0}",
+        "parsed_tier": "Critical",
+        "elapsed_s": 3.1688666343688965,
+        "error": null
+      },
+      "deepseek-v4-pro:cloud": {
+        "raw": "{\"tier\": \"Medium\", \"reasoning\": \"Temperature exceeds warning threshold with Normal failure type, matching the Medium rule.\", \"confidence\": 0.95}",
+        "parsed_tier": "Medium",
+        "elapsed_s": 23.84436845779419,
+        "error": null
+      }
+    },
+    "ensemble_tier": "Critical"
+  },
+  {
+    "machine_id": 39,
+    "timestamp": "2025-02-19 18:51:00",
+    "temperature": 71.42,
+    "vibration": 44.61,
+    "humidity": 60.92,
+    "pressure": 3.79,
+    "energy": 2.53,
+    "failure_type": "Normal",
+    "rul": 445.0,
+    "anomaly_flag": 0,
+    "downtime_risk": 0.0,
+    "maintenance_required": 0,
+    "gt_tier": "Low",
+    "per_llm": {
+      "glm-5.1:cloud": {
+        "raw": "```json\n{\n  \"tier\": \"Low\",\n  \"reasoning\": \"No sensors past warning threshold and failure_type is Normal.\",\n  \"confidence\": 1.0\n}\n```",
+        "parsed_tier": "Low",
+        "elapsed_s": 7.102996110916138,
+        "error": null
+      },
+      "kimi-k2.6:cloud": {
+        "raw": "{\"tier\": \"Low\", \"reasoning\": \"No sensors past warning threshold and failure_type is Normal, matching the ELSE clause.\", \"confidence\": 1.0}",
+        "parsed_tier": "Low",
+        "elapsed_s": 1.9003620147705078,
+        "error": null
+      },
+      "deepseek-v4-pro:cloud": {
+        "raw": "{\"tier\": \"Low\", \"reasoning\": \"No sensor exceeds warning threshold and failure_type is Normal.\", \"confidence\": 1.0}",
+        "parsed_tier": "Low",
+        "elapsed_s": 5.488240718841553,
+        "error": null
+      }
+    },
+    "ensemble_tier": "Low"
+  },
+  {
+    "machine_id": 41,
+    "timestamp": "2025-03-06 11:42:00",
+    "temperature": 73.16,
+    "vibration": 41.05,
+    "humidity": 49.11,
+    "pressure": 2.03,
+    "energy": 3.02,
+    "failure_type": "Normal",
+    "rul": 236.0,
+    "anomaly_flag": 0,
+    "downtime_risk": 0.0,
+    "maintenance_required": 0,
+    "gt_tier": "Low",
+    "per_llm": {
+      "glm-5.1:cloud": {
+        "raw": "```json\n{\"tier\": \"Low\", \"reasoning\": \"No sensors past warning threshold and failure_type is Normal.\", \"confidence\": 1.0}\n```",
+        "parsed_tier": "Low",
+        "elapsed_s": 2.3749518394470215,
+        "error": null
+      },
+      "kimi-k2.6:cloud": {
+        "raw": "{\"tier\": \"Low\", \"reasoning\": \"No sensors past warning thresholds and failure_type is Normal, matching the ELSE clause.\", \"confidence\": 1.0}",
+        "parsed_tier": "Low",
+        "elapsed_s": 1.421849012374878,
+        "error": null
+      },
+      "deepseek-v4-pro:cloud": {
+        "raw": "{\"tier\": \"Low\", \"reasoning\": \"No sensor exceeds warning threshold and failure_type is Normal.\", \"confidence\": 1.0}",
+        "parsed_tier": "Low",
+        "elapsed_s": 2.218665838241577,
+        "error": null
+      }
+    },
+    "ensemble_tier": "Low"
+  },
+  {
+    "machine_id": 41,
+    "timestamp": "2025-01-29 02:23:00",
+    "temperature": 85.7,
+    "vibration": 54.59,
+    "humidity": 39.05,
+    "pressure": 2.1,
+    "energy": 4.64,
+    "failure_type": "Normal",
+    "rul": 160.0,
+    "anomaly_flag": 0,
+    "downtime_risk": 0.0,
+    "maintenance_required": 0,
+    "gt_tier": "Low",
+    "per_llm": {
+      "glm-5.1:cloud": {
+        "raw": "```json\n{\n  \"tier\": \"Medium\",\n  \"reasoning\": \"One sensor (Energy Consumption) is past the critical threshold, but the failure type is Normal, so it does not meet the Critical condition and is conservatively evaluated as High, however per the rule to choose the lower tier when in doubt between adjace",
+        "parsed_tier": "Medium",
+        "elapsed_s": 3.359621286392212,
+        "error": null
+      },
+      "kimi-k2.6:cloud": {
+        "raw": "{\"tier\": \"High\", \"reasoning\": \"Energy consumption is past CRITICAL threshold (4.64 >= 4.5), satisfying the first condition in the High tier (>=1 sensor past CRITICAL threshold).\", \"confidence\": 1.0}",
+        "parsed_tier": "High",
+        "elapsed_s": 1.6861929893493652,
+        "error": null
+      },
+      "deepseek-v4-pro:cloud": {
+        "raw": "{\"tier\": \"Medium\", \"reasoning\": \"Energy consumption exceeds critical threshold, triggering at least one sensor past critical, but failure type is Normal so High is not met.\", \"confidence\": 0.9}",
+        "parsed_tier": "Medium",
+        "elapsed_s": 68.26714205741882,
+        "error": null
+      }
+    },
+    "ensemble_tier": "Medium"
+  },
+  {
+    "machine_id": 41,
+    "timestamp": "2025-02-08 10:19:00",
+    "temperature": 84.86,
+    "vibration": 62.8,
+    "humidity": 72.1,
+    "pressure": 2.04,
+    "energy": 2.33,
+    "failure_type": "Normal",
+    "rul": 356.0,
+    "anomaly_flag": 0,
+    "downtime_risk": 0.0,
+    "maintenance_required": 0,
+    "gt_tier": "Low",
+    "per_llm": {
+      "glm-5.1:cloud": {
+        "raw": "```json\n{\n  \"tier\": \"Medium\",\n  \"reasoning\": \"Three sensors are past the warning threshold, which satisfies the first condition of the Medium tier.\",\n  \"confidence\": 1.0\n}\n```",
+        "parsed_tier": "Medium",
+        "elapsed_s": 2.178279161453247,
+        "error": null
+      },
+      "kimi-k2.6:cloud": {
+        "raw": "{\"tier\": \"Medium\", \"reasoning\": \"Three sensors past warning threshold (Temperature 84.86 >= 82, Vibration 62.80 >= 55, Humidity 72.10 >= 68) with failure_type Normal triggers the >=1 sensor past WARNING threshold branch in the ELIF clause\", \"confidence\": 0.95}",
+        "parsed_tier": "Medium",
+        "elapsed_s": 2.281311511993408,
+        "error": null
+      },
+      "deepseek-v4-pro:cloud": {
+        "raw": "{\"tier\": \"Medium\", \"reasoning\": \"Temperature exceeds warning threshold and failure_type is Normal, matching the Medium rule.\", \"confidence\": 0.95}",
+        "parsed_tier": "Medium",
+        "elapsed_s": 10.500028371810913,
+        "error": null
+      }
+    },
+    "ensemble_tier": "Medium"
+  },
+  {
+    "machine_id": 41,
+    "timestamp": "2025-01-20 16:02:00",
+    "temperature": 63.07,
+    "vibration": 66.42,
+    "humidity": 33.38,
+    "pressure": 4.69,
+    "energy": 3.26,
+    "failure_type": "Normal",
+    "rul": 321.0,
+    "anomaly_flag": 0,
+    "downtime_risk": 0.0,
+    "maintenance_required": 0,
+    "gt_tier": "Low",
+    "per_llm": {
+      "glm-5.1:cloud": {
+        "raw": "```json\n{\n  \"tier\": \"Medium\",\n  \"reasoning\": \"Two sensors (Vibration and Pressure) are past the WARNING threshold, satisfying the >=1 sensor past WARNING rule for Medium.\",\n  \"confidence\": 0.95\n}\n```",
+        "parsed_tier": "Medium",
+        "elapsed_s": 3.4897239208221436,
+        "error": null
+      },
+      "kimi-k2.6:cloud": {
+        "raw": "{\"tier\": \"High\", \"reasoning\": \"Pressure at 4.69 bar is past critical threshold (>= 4.8), satisfying the first condition in the High tier: >=1 sensor past CRITICAL threshold.\", \"confidence\": 1.0}",
+        "parsed_tier": "High",
+        "elapsed_s": 2.76130747795105,
+        "error": null
+      },
+      "deepseek-v4-pro:cloud": {
+        "raw": "{\"tier\": \"Medium\", \"reasoning\": \"Pressure is past warning threshold (4.69 >= 4.3) and failure_type is Normal, matching the rule for Medium.\", \"confidence\": 0.95}",
+        "parsed_tier": "Medium",
+        "elapsed_s": 4.64142370223999,
+        "error": null
+      }
+    },
+    "ensemble_tier": "Medium"
+  },
+  {
+    "machine_id": 41,
+    "timestamp": "2025-01-28 15:22:00",
+    "temperature": 70.46,
+    "vibration": 41.36,
+    "humidity": 68.46,
+    "pressure": 3.01,
+    "energy": 3.51,
+    "failure_type": "Normal",
+    "rul": 69.0,
+    "anomaly_flag": 0,
+    "downtime_risk": 0.0,
+    "maintenance_required": 0,
+    "gt_tier": "Low",
+    "per_llm": {
+      "glm-5.1:cloud": {
+        "raw": "```json\n{\"tier\": \"Medium\", \"reasoning\": \"One sensor (Humidity) is past the warning threshold and the failure type is Normal, matching the ELIF >=1 sensor past WARNING condition.\", \"confidence\": 0.95}\n```",
+        "parsed_tier": "Medium",
+        "elapsed_s": 2.310519218444824,
+        "error": null
+      },
+      "kimi-k2.6:cloud": {
+        "raw": "{\"SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS",
+        "parsed_tier": null,
+        "elapsed_s": 20.187277793884277,
+        "error": null
+      },
+      "deepseek-v4-pro:cloud": {
+        "raw": "{\"tier\": \"Medium\", \"reasoning\": \"Humidity is at warning level (68.46 >= 68) and failure_type is Normal, triggering Medium tier.\", \"confidence\": 0.95}",
+        "parsed_tier": "Medium",
+        "elapsed_s": 2.6874423027038574,
+        "error": null
+      }
+    },
+    "ensemble_tier": "Medium"
+  },
+  {
+    "machine_id": 43,
+    "timestamp": "2025-02-18 08:17:00",
+    "temperature": 69.3,
+    "vibration": 30.65,
+    "humidity": 56.66,
+    "pressure": 3.27,
+    "energy": 3.08,
+    "failure_type": "Normal",
+    "rul": 261.0,
+    "anomaly_flag": 0,
+    "downtime_risk": 0.0,
+    "maintenance_required": 0,
+    "gt_tier": "Low",
+    "per_llm": {
+      "glm-5.1:cloud": {
+        "raw": "```json\n{\"tier\": \"Low\", \"reasoning\": \"No sensors past warning threshold and failure_type is Normal, matching the ELSE branch.\", \"confidence\": 1.0}\n```",
+        "parsed_tier": "Low",
+        "elapsed_s": 7.390904426574707,
+        "error": null
+      },
+      "kimi-k2.6:cloud": {
+        "raw": "{\" [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] S [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [",
+        "parsed_tier": null,
+        "elapsed_s": 20.42182183265686,
+        "error": null
+      },
+      "deepseek-v4-pro:cloud": {
+        "raw": "{\"tier\": \"Low\", \"reasoning\": \"No sensor exceeds warning threshold and failure_type is Normal, matching the ELSE branch.\", \"confidence\": 1.0}",
+        "parsed_tier": "Low",
+        "elapsed_s": 2.1949079036712646,
+        "error": null
+      }
+    },
+    "ensemble_tier": "Low"
+  },
+  {
+    "machine_id": 43,
+    "timestamp": "2025-01-30 11:43:00",
+    "temperature": 79.85,
+    "vibration": 60.37,
+    "humidity": 36.35,
+    "pressure": 2.56,
+    "energy": 1.8,
+    "failure_type": "Normal",
+    "rul": 406.0,
+    "anomaly_flag": 0,
+    "downtime_risk": 0.0,
+    "maintenance_required": 0,
+    "gt_tier": "Low",
+    "per_llm": {
+      "glm-5.1:cloud": {
+        "raw": "```json\n{\n  \"tier\": \"Medium\",\n  \"reasoning\": \"One sensor (Vibration) is past the warning threshold, which matches the ELIF >=1 sensor past WARNING condition.\",\n  \"confidence\": 0.95\n}\n```",
+        "parsed_tier": "Medium",
+        "elapsed_s": 7.0354087352752686,
+        "error": null
+      },
+      "kimi-k2.6:cloud": {
+        "raw": "{\"tier\": \"Medium\", \"reasoning\": \"Vibration is past WARNING threshold (60.37 >= 55), and no other sensors are past warning or critical, but the single warning triggers the Medium tier per the third rule.\", \"confidence\": 0.95}",
+        "parsed_tier": "Medium",
+        "elapsed_s": 1.7964766025543213,
+        "error": null
+      },
+      "deepseek-v4-pro:cloud": {
+        "raw": "{\"tier\": \"Medium\", \"reasoning\": \"Vibration is past warning threshold with failure_type Normal, matching the Medium rule.\", \"confidence\": 0.95}",
+        "parsed_tier": "Medium",
+        "elapsed_s": 35.88978600502014,
+        "error": null
+      }
+    },
+    "ensemble_tier": "Medium"
+  },
+  {
+    "machine_id": 43,
+    "timestamp": "2025-02-05 21:10:00",
+    "temperature": 52.43,
+    "vibration": 24.36,
+    "humidity": 40.54,
+    "pressure": 2.22,
+    "energy": 1.88,
+    "failure_type": "Normal",
+    "rul": 261.0,
+    "anomaly_flag": 0,
+    "downtime_risk": 0.0,
+    "maintenance_required": 0,
+    "gt_tier": "Low",
+    "per_llm": {
+      "glm-5.1:cloud": {
+        "raw": "```json\n{\n  \"tier\": \"Low\",\n  \"reasoning\": \"No sensors past warning threshold and failure_type is Normal, matching the Low tier condition.\",\n  \"confidence\": 1.0\n}\n```",
+        "parsed_tier": "Low",
+        "elapsed_s": 3.88940167427063,
+        "error": null
+      },
+      "kimi-k2.6:cloud": {
+        "raw": "{\"tier\": \"Low\", \"reasoning\": \"No sensors past warning threshold and failure_type is Normal, matching the ELSE branch of the decision tree.\", \"confidence\": 1.0}",
+        "parsed_tier": "Low",
+        "elapsed_s": 2.014417886734009,
+        "error": null
+      },
+      "deepseek-v4-pro:cloud": {
+        "raw": "{\"tier\": \"Low\", \"reasoning\": \"No sensor exceeds warning threshold and failure_type is Normal.\", \"confidence\": 1.0}",
+        "parsed_tier": "Low",
+        "elapsed_s": 6.452904224395752,
+        "error": null
+      }
+    },
+    "ensemble_tier": "Low"
+  },
+  {
+    "machine_id": 43,
+    "timestamp": "2025-01-18 22:40:00",
+    "temperature": 67.73,
+    "vibration": 29.25,
+    "humidity": 72.3,
+    "pressure": 4.74,
+    "energy": 1.39,
+    "failure_type": "Normal",
+    "rul": 461.0,
+    "anomaly_flag": 0,
+    "downtime_risk": 0.0,
+    "maintenance_required": 0,
+    "gt_tier": "Low",
+    "per_llm": {
+      "glm-5.1:cloud": {
+        "raw": "```json\n{\"tier\": \"Medium\", \"reasoning\": \"Two sensors are past the warning threshold (humidity and pressure) but the failure type is Normal, so the Medium tier is matched by the >=1 sensor past warning rule.\", \"confidence\": 0.95}\n```",
+        "parsed_tier": "Medium",
+        "elapsed_s": 5.654613733291626,
+        "error": null
+      },
+      "kimi-k2.6:cloud": {
+        "raw": "{\"tier\": \"Medium\", \"reasoning\": \"Humidity at 72.30% is past WARNING threshold (>=68) and Pressure at 4.74 bar is past WARNING threshold (>=4.3), giving >=2 sensors past WARNING, but failure_type is Normal so High does not apply; single sensor warning rule applies for Medium tier.\", \"confidence\": 0.9",
+        "parsed_tier": "Medium",
+        "elapsed_s": 2.5790913105010986,
+        "error": null
+      },
+      "deepseek-v4-pro:cloud": {
+        "raw": "{\"tier\": \"Medium\", \"reasoning\": \"Humidity exceeds warning threshold (72.30 >= 68) and failure_type is Normal, matching the Medium rule.\", \"confidence\": 0.95}",
+        "parsed_tier": "Medium",
+        "elapsed_s": 2.6562445163726807,
+        "error": null
+      }
+    },
+    "ensemble_tier": "Medium"
+  },
+  {
+    "machine_id": 43,
+    "timestamp": "2025-01-21 18:03:00",
+    "temperature": 64.7,
+    "vibration": 54.15,
+    "humidity": 56.46,
+    "pressure": 3.61,
+    "energy": 1.1,
+    "failure_type": "Normal",
+    "rul": 155.0,
+    "anomaly_flag": 0,
+    "downtime_risk": 0.0,
+    "maintenance_required": 0,
+    "gt_tier": "Low",
+    "per_llm": {
+      "glm-5.1:cloud": {
+        "raw": "```json\n{\"tier\": \"Medium\", \"reasoning\": \"One sensor (Vibration) is past the WARNING threshold and the failure_type is Normal, matching the ELIF >=1 sensor past WARNING condition.\", \"confidence\": 0.95}\n```",
+        "parsed_tier": "Medium",
+        "elapsed_s": 4.890303611755371,
+        "error": null
+      },
+      "kimi-k2.6:cloud": {
+        "raw": "{\"tier\": \"Low\", \"reasoning\": \"No sensor is past warning threshold and failure_type is Normal, matching the ELSE branch of the decision tree.\", \"confidence\": 1.0}",
+        "parsed_tier": "Low",
+        "elapsed_s": 2.2602202892303467,
+        "error": null
+      },
+      "deepseek-v4-pro:cloud": {
+        "raw": "{\"tier\": \"Low\", \"reasoning\": \"No sensor exceeds warning threshold and failure_type is Normal, matching the ELSE branch.\", \"confidence\": 1.0}",
+        "parsed_tier": "Low",
+        "elapsed_s": 4.080814361572266,
+        "error": null
+      }
+    },
+    "ensemble_tier": "Low"
+  },
+  {
+    "machine_id": 45,
+    "timestamp": "2025-03-08 09:05:00",
+    "temperature": 76.64,
+    "vibration": 68.62,
+    "humidity": 43.69,
+    "pressure": 2.78,
+    "energy": 4.94,
+    "failure_type": "Normal",
+    "rul": 188.0,
+    "anomaly_flag": 0,
+    "downtime_risk": 0.0,
+    "maintenance_required": 0,
+    "gt_tier": "Low",
+    "per_llm": {
+      "glm-5.1:cloud": {
+        "raw": "```json\n{\n  \"tier\": \"High\",\n  \"reasoning\": \"One sensor (Energy Consumption) is past the critical threshold, which satisfies the first condition in the High tier rule.\",\n  \"confidence\": 0.95\n}\n```",
+        "parsed_tier": "High",
+        "elapsed_s": 14.172078609466553,
+        "error": null
+      },
+      "kimi-k2.6:cloud": {
+        "raw": "{\"tier\": \"High\", \"reasoning\": \"Energy consumption is past critical threshold (4.94 >= 4.5), satisfying the first condition in the High tier (>=1 sensor past CRITICAL threshold).\", \"confidence\": 0.95}",
+        "parsed_tier": "High",
+        "elapsed_s": 2.519472360610962,
+        "error": null
+      },
+      "deepseek-v4-pro:cloud": {
+        "raw": "{\"tier\": \"Medium\", \"reasoning\": \"Energy consumption exceeds warning threshold, triggering Medium priority per decision tree.\", \"confidence\": 0.95}",
+        "parsed_tier": "Medium",
+        "elapsed_s": 5.781034708023071,
+        "error": null
+      }
+    },
+    "ensemble_tier": "High"
+  },
+  {
+    "machine_id": 45,
+    "timestamp": "2025-01-19 11:46:00",
+    "temperature": 72.56,
+    "vibration": 22.2,
+    "humidity": 68.7,
+    "pressure": 4.89,
+    "energy": 1.54,
+    "failure_type": "Normal",
+    "rul": 238.0,
+    "anomaly_flag": 0,
+    "downtime_risk": 0.0,
+    "maintenance_required": 0,
+    "gt_tier": "Low",
+    "per_llm": {
+      "glm-5.1:cloud": {
+        "raw": "{\"tier\": \"Medium\", \"reasoning\": \"Two sensors past warning threshold (humidity and pressure) and failure_type is Normal, but the ELIF condition for >=2 sensors past warning requires failure_type != Normal, so it falls through to the Medium tier which matches >=1 sensor past warning.\", \"confidence\": 0",
+        "parsed_tier": "Medium",
+        "elapsed_s": 9.71105408668518,
+        "error": null
+      },
+      "kimi-k2.6:cloud": {
+        "raw": "{\"tier\": \"Critical\", \"reasoning\": \"Pressure at 4.89 bar is past critical threshold (>=4.8) AND failure_type 'Normal' does not prevent escalation since single critical threshold alone triggers High, but pressure is also past critical threshold AND failure_type in decision tree for Critical requires '",
+        "parsed_tier": "Critical",
+        "elapsed_s": 6.227532386779785,
+        "error": null
+      },
+      "deepseek-v4-pro:cloud": {
+        "raw": "{\"tier\": \"Medium\", \"reasoning\": \"Pressure is past critical threshold but failure_type is Normal, so only one sensor breach triggers Medium tier.\", \"confidence\": 0.95}",
+        "parsed_tier": "Medium",
+        "elapsed_s": 15.440388441085815,
+        "error": null
+      }
+    },
+    "ensemble_tier": "Medium"
+  },
+  {
+    "machine_id": 45,
+    "timestamp": "2025-03-01 22:08:00",
+    "temperature": 76.52,
+    "vibration": 53.99,
+    "humidity": 42.06,
+    "pressure": 4.86,
+    "energy": 3.28,
+    "failure_type": "Pressure Drop",
+    "rul": 238.0,
+    "anomaly_flag": 0,
+    "downtime_risk": 0.0,
+    "maintenance_required": 1,
+    "gt_tier": "Medium",
+    "per_llm": {
+      "glm-5.1:cloud": {
+        "raw": "```json\n{\"tier\": \"High\", \"reasoning\": \"One sensor (Pressure) is past the critical threshold, satisfying the first condition of the High tier.\", \"confidence\": 0.95}\n```",
+        "parsed_tier": "High",
+        "elapsed_s": 2.6956937313079834,
+        "error": null
+      },
+      "kimi-k2.6:cloud": {
+        "raw": "{\"tier\": \"Critical\", \"reasoning\": \"Pressure is past critical threshold (4.86 >= 4.8) AND failure_type is 'Pressure Drop', matching the second Critical rule.\", \"confidence\": 1.0}",
+        "parsed_tier": "Critical",
+        "elapsed_s": 2.078768014907837,
+        "error": null
+      },
+      "deepseek-v4-pro:cloud": {
+        "raw": "{\"tier\": \"Critical\", \"reasoning\": \"Pressure is past critical threshold and failure_type is 'Pressure Drop', matching the rule for Critical.\", \"confidence\": 0.95}",
+        "parsed_tier": "Critical",
+        "elapsed_s": 14.185178995132446,
+        "error": null
+      }
+    },
+    "ensemble_tier": "Critical"
+  },
+  {
+    "machine_id": 45,
+    "timestamp": "2025-01-02 05:22:00",
+    "temperature": 87.13,
+    "vibration": 56.2,
+    "humidity": 37.29,
+    "pressure": 4.67,
+    "energy": 1.44,
+    "failure_type": "Normal",
+    "rul": 483.0,
+    "anomaly_flag": 0,
+    "downtime_risk": 0.0,
+    "maintenance_required": 0,
+    "gt_tier": "Low",
+    "per_llm": {
+      "glm-5.1:cloud": {
+        "raw": "```json\n{\"tier\": \"Medium\", \"reasoning\": \"Two sensors are past the warning threshold and the failure type is Normal, which satisfies the first condition of the Medium tier.\", \"confidence\": 0.95}\n```",
+        "parsed_tier": "Medium",
+        "elapsed_s": 9.277278184890747,
+        "error": null
+      },
+      "kimi-k2.6:cloud": {
+        "raw": "{\"SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS",
+        "parsed_tier": null,
+        "elapsed_s": 17.295655727386475,
+        "error": null
+      },
+      "deepseek-v4-pro:cloud": {
+        "raw": "{\"tier\": \"Medium\", \"reasoning\": \"Temperature exceeds warning threshold with failure_type Normal, matching the Medium rule.\", \"confidence\": 0.95}",
+        "parsed_tier": "Medium",
+        "elapsed_s": 52.85539650917053,
+        "error": null
+      }
+    },
+    "ensemble_tier": "Medium"
+  },
+  {
+    "machine_id": 45,
+    "timestamp": "2025-02-23 02:06:00",
+    "temperature": 70.81,
+    "vibration": 50.8,
+    "humidity": 44.13,
+    "pressure": 1.43,
+    "energy": 2.16,
+    "failure_type": "Normal",
+    "rul": 378.0,
+    "anomaly_flag": 0,
+    "downtime_risk": 0.0,
+    "maintenance_required": 0,
+    "gt_tier": "Low",
+    "per_llm": {
+      "glm-5.1:cloud": {
+        "raw": "```json\n{\n  \"tier\": \"Low\",\n  \"reasoning\": \"No sensors past warning threshold and failure_type is Normal, matching the Low condition.\",\n  \"confidence\": 1.0\n}\n```",
+        "parsed_tier": "Low",
+        "elapsed_s": 3.3902173042297363,
+        "error": null
+      },
+      "kimi-k2.6:cloud": {
+        "raw": "{\"tier\": \"Low\", \"reasoning\": \"No sensors past warning threshold and failure_type is Normal, matching the ELSE branch.\", \"confidence\": 1.0}",
+        "parsed_tier": "Low",
+        "elapsed_s": 1.660325288772583,
+        "error": null
+      },
+      "deepseek-v4-pro:cloud": {
+        "raw": "{\"tier\": \"Low\", \"reasoning\": \"No sensor exceeds warning threshold and failure_type is Normal, matching the ELSE branch.\", \"confidence\": 1.0}",
+        "parsed_tier": "Low",
+        "elapsed_s": 98.95786428451538,
+        "error": null
+      }
+    },
+    "ensemble_tier": "Low"
+  },
+  {
+    "machine_id": 47,
+    "timestamp": "2025-02-16 12:30:00",
+    "temperature": 56.73,
+    "vibration": 57.12,
+    "humidity": 72.98,
+    "pressure": 2.69,
+    "energy": 2.3,
+    "failure_type": "Normal",
+    "rul": 482.0,
+    "anomaly_flag": 0,
+    "downtime_risk": 0.0,
+    "maintenance_required": 0,
+    "gt_tier": "Low",
+    "per_llm": {
+      "glm-5.1:cloud": {
+        "raw": "```json\n{\n  \"tier\": \"Medium\",\n  \"reasoning\": \"One sensor (Vibration) is past the WARNING threshold and the failure_type is Normal, matching the ELIF >= 1 sensor past WARNING condition.\",\n  \"confidence\": 0.95\n}\n```",
+        "parsed_tier": "Medium",
+        "elapsed_s": 3.6837222576141357,
+        "error": null
+      },
+      "kimi-k2.6:cloud": {
+        "raw": "{\"tier\": \"Medium\", \"reasoning\": \"Vibration is past warning threshold (57.12 >= 55) and humidity is past warning threshold (72.98 >= 68), so >=2 sensors past warning with failure_type 'Normal' triggers the third rule (>=1 sensor past warning)\", \"confidence\": 0.95}",
+        "parsed_tier": "Medium",
+        "elapsed_s": 2.264528751373291,
+        "error": null
+      },
+      "deepseek-v4-pro:cloud": {
+        "raw": "{\"tier\": \"Medium\", \"reasoning\": \"Vibration is past warning threshold and failure_type is Normal, matching the rule for Medium.\", \"confidence\": 0.95}",
+        "parsed_tier": "Medium",
+        "elapsed_s": 2.189938545227051,
+        "error": null
+      }
+    },
+    "ensemble_tier": "Medium"
+  },
+  {
+    "machine_id": 47,
+    "timestamp": "2025-01-26 19:53:00",
+    "temperature": 77.79,
+    "vibration": 40.23,
+    "humidity": 45.95,
+    "pressure": 4.71,
+    "energy": 2.2,
+    "failure_type": "Normal",
+    "rul": 399.0,
+    "anomaly_flag": 0,
+    "downtime_risk": 0.0,
+    "maintenance_required": 0,
+    "gt_tier": "Low",
+    "per_llm": {
+      "glm-5.1:cloud": {
+        "raw": "```json\n{\"tier\": \"Medium\", \"reasoning\": \"One sensor (Pressure) is past the WARNING threshold, which satisfies the first condition in the ELIF block.\", \"confidence\": 0.95}\n```",
+        "parsed_tier": "Medium",
+        "elapsed_s": 3.3031835556030273,
+        "error": null
+      },
+      "kimi-k2.6:cloud": {
+        "raw": "{\"tier\": \"Medium\", \"reasoning\": \"Pressure at 4.71 bar is past warning threshold (>=4.3), satisfying the ELIF condition for >=1 sensor past WARNING threshold\", \"confidence\": 0.95}",
+        "parsed_tier": "Medium",
+        "elapsed_s": 1.6753442287445068,
+        "error": null
+      },
+      "deepseek-v4-pro:cloud": {
+        "raw": "{\"tier\": \"Medium\", \"reasoning\": \"Pressure is past warning threshold (4.71 >= 4.3) and failure_type is Normal, matching the Medium rule.\", \"confidence\": 0.95}",
+        "parsed_tier": "Medium",
+        "elapsed_s": 1.2998697757720947,
+        "error": null
+      }
+    },
+    "ensemble_tier": "Medium"
+  },
+  {
+    "machine_id": 47,
+    "timestamp": "2025-02-18 10:23:00",
+    "temperature": 77.8,
+    "vibration": 34.81,
+    "humidity": 75.23,
+    "pressure": 4.12,
+    "energy": 3.3,
+    "failure_type": "Normal",
+    "rul": 251.0,
+    "anomaly_flag": 0,
+    "downtime_risk": 0.0,
+    "maintenance_required": 1,
+    "gt_tier": "Medium",
+    "per_llm": {
+      "glm-5.1:cloud": {
+        "raw": "```json\n{\n  \"tier\": \"Medium\",\n  \"reasoning\": \"One sensor (Humidity) is past the warning threshold and the failure type is Normal, which satisfies the >=1 sensor past WARNING threshold condition.\",\n  \"confidence\": 0.95\n}\n```",
+        "parsed_tier": "Medium",
+        "elapsed_s": 5.452768087387085,
+        "error": null
+      },
+      "kimi-k2.6:cloud": {
+        "raw": "{\"tier\": \"Medium\", \"reasoning\": \"Humidity is past WARNING threshold (75.23 >= 75 critical, but 75.23 > 68 warning), so >=1 sensor past WARNING threshold applies\", \"confidence\": 0.95}",
+        "parsed_tier": "Medium",
+        "elapsed_s": 2.982937812805176,
+        "error": null
+      },
+      "deepseek-v4-pro:cloud": {
+        "raw": "{\"tier\": \"Medium\", \"reasoning\": \"Humidity is past warning threshold and failure_type is Normal, matching the Medium rule.\", \"confidence\": 0.95}",
+        "parsed_tier": "Medium",
+        "elapsed_s": 2.218310832977295,
+        "error": null
+      }
+    },
+    "ensemble_tier": "Medium"
+  },
+  {
+    "machine_id": 47,
+    "timestamp": "2025-03-09 05:11:00",
+    "temperature": 61.92,
+    "vibration": 48.43,
+    "humidity": 78.22,
+    "pressure": 2.5,
+    "energy": 0.94,
+    "failure_type": "Normal",
+    "rul": 68.0,
+    "anomaly_flag": 0,
+    "downtime_risk": 0.0,
+    "maintenance_required": 0,
+    "gt_tier": "Low",
+    "per_llm": {
+      "glm-5.1:cloud": {
+        "raw": "```json\n{\"tier\": \"Medium\", \"reasoning\": \"One sensor (Humidity) is past the WARNING threshold and failure_type is Normal, matching the ELIF >=1 sensor past WARNING condition.\", \"confidence\": 0.95}\n```",
+        "parsed_tier": "Medium",
+        "elapsed_s": 2.5313305854797363,
+        "error": null
+      },
+      "kimi-k2.6:cloud": {
+        "raw": "{\"tier\": \"Medium\", \"reasoning\": \"Humidity is past WARNING threshold (78.22% >= 75% critical, so exceeds warning >= 68%), which satisfies the ELIF condition of >=1 sensor past WARNING threshold\", \"confidence\": 0.95}",
+        "parsed_tier": "Medium",
+        "elapsed_s": 4.325875520706177,
+        "error": null
+      },
+      "deepseek-v4-pro:cloud": {
+        "raw": "{\"tier\": \"Medium\", \"reasoning\": \"Humidity exceeds warning threshold (78.22 >= 68) and failure_type is Normal, matching the Medium rule: >=1 sensor past warning threshold.\", \"confidence\": 0.95}",
+        "parsed_tier": "Medium",
+        "elapsed_s": 3.7345035076141357,
+        "error": null
+      }
+    },
+    "ensemble_tier": "Medium"
+  },
+  {
+    "machine_id": 47,
+    "timestamp": "2025-02-01 12:33:00",
+    "temperature": 76.24,
+    "vibration": 76.85,
+    "humidity": 49.19,
+    "pressure": 3.8,
+    "energy": 2.57,
+    "failure_type": "Normal",
+    "rul": 228.0,
+    "anomaly_flag": 0,
+    "downtime_risk": 0.0,
+    "maintenance_required": 0,
+    "gt_tier": "Low",
+    "per_llm": {
+      "glm-5.1:cloud": {
+        "raw": "```json\n{\n  \"tier\": \"High\",\n  \"reasoning\": \"One sensor (Vibration) is past the critical threshold, matching the first condition of the High branch.\",\n  \"confidence\": 1.0\n}\n```",
+        "parsed_tier": "High",
+        "elapsed_s": 11.035342931747437,
+        "error": null
+      },
+      "kimi-k2.6:cloud": {
+        "raw": "{\"tier\": \"High\", \"reasoning\": \"Vibration is past CRITICAL threshold (76.85 >= 70), satisfying the first condition in the High tier (>=1 sensor past CRITICAL threshold).\", \"confidence\": 1.0}",
+        "parsed_tier": "High",
+        "elapsed_s": 3.2452499866485596,
+        "error": null
+      },
+      "deepseek-v4-pro:cloud": {
+        "raw": "{\"tier\": \"High\", \"reasoning\": \"Vibration exceeds critical threshold (76.85 >= 70), triggering the '>=1 sensor past CRITICAL threshold' rule for High.\", \"confidence\": 0.95}",
+        "parsed_tier": "High",
+        "elapsed_s": 8.094166040420532,
+        "error": null
+      }
+    },
+    "ensemble_tier": "High"
+  },
+  {
+    "machine_id": 49,
+    "timestamp": "2025-01-01 09:38:00",
+    "temperature": 91.92,
+    "vibration": 39.21,
+    "humidity": 49.46,
+    "pressure": 2.74,
+    "energy": 1.82,
+    "failure_type": "Normal",
+    "rul": 29.0,
+    "anomaly_flag": 1,
+    "downtime_risk": 1.0,
+    "maintenance_required": 1,
+    "gt_tier": "Critical",
+    "per_llm": {
+      "glm-5.1:cloud": {
+        "raw": "```json\n{\n  \"tier\": \"Medium\",\n  \"reasoning\": \"One sensor (Temperature) is past the WARNING threshold, matching the first condition in the Medium tier.\",\n  \"confidence\": 0.95\n}\n```",
+        "parsed_tier": "Medium",
+        "elapsed_s": 3.4566805362701416,
+        "error": null
+      },
+      "kimi-k2.6:cloud": {
+        "raw": "{\"tier\": \"Critical\", \"reasoning\": \"Temperature is past critical threshold (91.92 >= 88) AND failure_type is 'Electrical Fault' would trigger critical, but actually temperature >= 88 alone with failure_type 'Electrical Fault' satisfies the third Critical condition: failure_type == 'Electrical Fault' ",
+        "parsed_tier": "Critical",
+        "elapsed_s": 4.418130159378052,
+        "error": null
+      },
+      "deepseek-v4-pro:cloud": {
+        "raw": "{\"tier\": \"Medium\", \"reasoning\": \"Temperature exceeds warning threshold and failure_type is Normal, matching the Medium rule.\", \"confidence\": 0.95}",
+        "parsed_tier": "Medium",
+        "elapsed_s": 1.2974400520324707,
+        "error": null
+      }
+    },
+    "ensemble_tier": "Medium"
+  },
+  {
+    "machine_id": 49,
+    "timestamp": "2025-01-11 09:19:00",
+    "temperature": 78.55,
+    "vibration": 46.03,
+    "humidity": 77.27,
+    "pressure": 3.85,
+    "energy": 1.4,
+    "failure_type": "Normal",
+    "rul": 385.0,
+    "anomaly_flag": 0,
+    "downtime_risk": 0.0,
+    "maintenance_required": 0,
+    "gt_tier": "Low",
+    "per_llm": {
+      "glm-5.1:cloud": {
+        "raw": "```json\n{\n  \"tier\": \"Medium\",\n  \"reasoning\": \"One sensor (Humidity) is past the WARNING threshold and no other conditions for higher tiers are met.\",\n  \"confidence\": 0.95\n}\n```",
+        "parsed_tier": "Medium",
+        "elapsed_s": 3.780961275100708,
+        "error": null
+      },
+      "kimi-k2.6:cloud": {
+        "raw": "{\"tier\": \"Medium\", \"reasoning\": \"Humidity is past critical threshold (77.27% >= 75%), which satisfies the >=1 sensor past critical condition in the second rule, but wait - let me re-check: humidity critical is >=75, so 77.27 is past critical. This would trigger High. But re-reading: humidity warning",
+        "parsed_tier": null,
+        "elapsed_s": 18.18761110305786,
+        "error": null
+      },
+      "deepseek-v4-pro:cloud": {
+        "raw": "{\n  \"tier\": \"Medium\",\n  \"reasoning\": \"Humidity is past warning threshold (77.27% >= 68%) and failure_type is Normal, matching the rule for Medium.\",\n  \"confidence\": 0.95\n}",
+        "parsed_tier": "Medium",
+        "elapsed_s": 4.687731981277466,
+        "error": null
+      }
+    },
+    "ensemble_tier": "Medium"
+  },
+  {
+    "machine_id": 49,
+    "timestamp": "2025-01-07 04:23:00",
+    "temperature": 73.47,
+    "vibration": 46.62,
+    "humidity": 43.84,
+    "pressure": 3.95,
+    "energy": 1.43,
+    "failure_type": "Normal",
+    "rul": 208.0,
+    "anomaly_flag": 0,
+    "downtime_risk": 0.0,
+    "maintenance_required": 0,
+    "gt_tier": "Low",
+    "per_llm": {
+      "glm-5.1:cloud": {
+        "raw": "```json\n{\"tier\": \"Low\", \"reasoning\": \"No sensors past warning threshold and failure_type is Normal.\", \"confidence\": 1.0}\n```",
+        "parsed_tier": "Low",
+        "elapsed_s": 15.593470811843872,
+        "error": null
+      },
+      "kimi-k2.6:cloud": {
+        "raw": "{\"tier\": \"Low\", \"reasoning\": \"No sensors past warning threshold and failure_type is Normal, matching the ELSE clause.\", \"confidence\": 1.0}",
+        "parsed_tier": "Low",
+        "elapsed_s": 1.8283796310424805,
+        "error": null
+      },
+      "deepseek-v4-pro:cloud": {
+        "raw": "{\"tier\": \"Low\", \"reasoning\": \"No sensor exceeds warning threshold and failure_type is Normal.\", \"confidence\": 1.0}",
+        "parsed_tier": "Low",
+        "elapsed_s": 30.234432220458984,
+        "error": null
+      }
+    },
+    "ensemble_tier": "Low"
+  },
+  {
+    "machine_id": 49,
+    "timestamp": "2025-01-18 04:06:00",
+    "temperature": 66.47,
+    "vibration": 67.92,
+    "humidity": 59.17,
+    "pressure": 2.71,
+    "energy": 2.58,
+    "failure_type": "Normal",
+    "rul": 59.0,
+    "anomaly_flag": 0,
+    "downtime_risk": 0.0,
+    "maintenance_required": 0,
+    "gt_tier": "Low",
+    "per_llm": {
+      "glm-5.1:cloud": {
+        "raw": "```json\n{\"tier\": \"Medium\", \"reasoning\": \"One sensor (Vibration) is past the warning threshold and the failure type is Normal, which matches the >=1 sensor past WARNING condition.\", \"confidence\": 1.0}\n```",
+        "parsed_tier": "Medium",
+        "elapsed_s": 3.203212261199951,
+        "error": null
+      },
+      "kimi-k2.6:cloud": {
+        "raw": "{\"tier\": \"Medium\", \"reasoning\": \"Vibration is past warning threshold (67.92 >= 55), satisfying the ELIF condition of >=1 sensor past WARNING threshold\", \"confidence\": 0.95}",
+        "parsed_tier": "Medium",
+        "elapsed_s": 1.7856183052062988,
+        "error": null
+      },
+      "deepseek-v4-pro:cloud": {
+        "raw": "{\"tier\": \"Medium\", \"reasoning\": \"Vibration is past warning threshold and failure_type is Normal, matching the Medium rule.\", \"confidence\": 0.95}",
+        "parsed_tier": "Medium",
+        "elapsed_s": 6.369579076766968,
+        "error": null
+      }
+    },
+    "ensemble_tier": "Medium"
+  },
+  {
+    "machine_id": 49,
+    "timestamp": "2025-02-12 12:57:00",
+    "temperature": 54.75,
+    "vibration": 63.97,
+    "humidity": 73.95,
+    "pressure": 1.85,
+    "energy": 4.82,
+    "failure_type": "Normal",
+    "rul": 90.0,
+    "anomaly_flag": 0,
+    "downtime_risk": 0.0,
+    "maintenance_required": 0,
+    "gt_tier": "Low",
+    "per_llm": {
+      "glm-5.1:cloud": {
+        "raw": "```json\n{\n  \"tier\": \"Medium\",\n  \"reasoning\": \"One sensor (Energy Consumption) is past the warning threshold, matching the ELIF >=1 sensor past WARNING condition.\",\n  \"confidence\": 1.0\n}\n```",
+        "parsed_tier": "Medium",
+        "elapsed_s": 4.93737530708313,
+        "error": null
+      },
+      "kimi-k2.6:cloud": {
+        "raw": "{\"tier\": \"High\", \"reasoning\": \"Energy consumption is past critical threshold (4.82 >= 4.5), satisfying the first condition in the High tier (>=1 sensor past CRITICAL threshold).\", \"confidence\": 1.0}",
+        "parsed_tier": "High",
+        "elapsed_s": 1.640401840209961,
+        "error": null
+      },
+      "deepseek-v4-pro:cloud": {
+        "raw": "{\"tier\": \"Medium\", \"reasoning\": \"One sensor (Energy Consumption) past warning threshold with failure_type Normal triggers Medium tier.\", \"confidence\": 0.95}",
+        "parsed_tier": "Medium",
+        "elapsed_s": 5.062388896942139,
+        "error": null
+      }
+    },
+    "ensemble_tier": "Medium"
+  }
+]

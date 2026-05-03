@@ -1,0 +1,106 @@
+{
+  "experiment": "E-L2 V3",
+  "deviation_doc": "PRE_REG_DEVIATION_003.md",
+  "date": "2026-05-04",
+  "seed": 42,
+  "num_predict": 800,
+  "n_cases": 125,
+  "n_valid": 125,
+  "primary": {
+    "metric": "Cohen Quadratic-Weighted Kappa (4-tier ordinal)",
+    "value": 0.7424543647207662,
+    "ci_95_lower": 0.6192467118061604,
+    "ci_95_upper": 0.8345097774641466,
+    "threshold_for_proceed": 0.6,
+    "verdict": "PROCEED to E-L3A"
+  },
+  "secondary": {
+    "top_k_coverage": {
+      "K": 25,
+      "rate": 0.68
+    },
+    "cost_weighted_misclass": {
+      "total": 87.0,
+      "mean": 0.696
+    },
+    "macro_f1": 0.5651752743537733,
+    "per_tier": {
+      "Critical": {
+        "P": 1.0,
+        "R": 0.5454545454545454,
+        "F1": 0.7058823529411765
+      },
+      "High": {
+        "P": 0.3157894736842105,
+        "R": 0.6,
+        "F1": 0.41379310344827586
+      },
+      "Medium": {
+        "P": 0.2222222222222222,
+        "R": 0.6666666666666666,
+        "F1": 0.3333333333333333
+      },
+      "Low": {
+        "P": 0.984375,
+        "R": 0.6847826086956522,
+        "F1": 0.8076923076923077
+      }
+    },
+    "coverage_critical": 1.0,
+    "latency": {
+      "per_llm_median_s": 3.1524312496185303,
+      "per_llm_p95_s": 24.73055822849274,
+      "ensemble_e2e_median_s": 6.453349351882935,
+      "ensemble_e2e_p95_s": 32.67473564147949
+    }
+  },
+  "per_llm_ablation": {
+    "glm-5.1:cloud": {
+      "valid_n": 125,
+      "qw_kappa": 0.6432671805806134,
+      "macro_f1": 0.5372824550777306
+    },
+    "kimi-k2.6:cloud": {
+      "valid_n": 123,
+      "qw_kappa": 0.6654050857480781,
+      "macro_f1": 0.3990920719096066
+    },
+    "deepseek-v4-pro:cloud": {
+      "valid_n": 125,
+      "qw_kappa": 0.7280935768520419,
+      "macro_f1": 0.48362208147044217
+    }
+  },
+  "confusion_matrix": [
+    [
+      6,
+      5,
+      0,
+      0
+    ],
+    [
+      0,
+      6,
+      3,
+      1
+    ],
+    [
+      0,
+      4,
+      8,
+      0
+    ],
+    [
+      0,
+      4,
+      25,
+      63
+    ]
+  ],
+  "tier_index_order": [
+    "Critical",
+    "High",
+    "Medium",
+    "Low"
+  ]
+}

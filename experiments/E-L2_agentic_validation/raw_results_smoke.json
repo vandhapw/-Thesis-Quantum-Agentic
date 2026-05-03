@@ -1,0 +1,182 @@
+[
+  {
+    "machine_id": 1,
+    "timestamp": "2025-02-15 09:13:00",
+    "temperature": 72.89,
+    "vibration": 47.58,
+    "humidity": 44.11,
+    "pressure": 1.35,
+    "energy": 2.68,
+    "failure_type": "Normal",
+    "rul": 255.0,
+    "anomaly_flag": 0,
+    "downtime_risk": 0.0,
+    "maintenance_required": 0,
+    "gt_tier": "Low",
+    "per_llm": {
+      "glm-5.1:cloud": {
+        "raw": "```json\n{\n  \"tier\": \"Low\",\n  \"reasoning\": \"All sensor readings are well within normal bounds, the classifier reports a Normal state with zero anomaly and maintenance flags, and the RUL is substantial at 255 hours.\",\n  \"confidence\": 0.98\n}\n```",
+        "parsed_tier": "Low",
+        "elapsed_s": 4.625077724456787,
+        "error": null
+      },
+      "kimi-k2.6:cloud": {
+        "raw": "{\"tier\": \"Low\", \"reasoning\": \"All sensors well below warning thresholds, classifier reports Normal with anomaly flag=0, maintenance flag=0, downtime risk=0.00, and RUL of 255 hours indicates substantial remaining life with no degradation indicators.\", \"confidence\": 0.98}",
+        "parsed_tier": "Low",
+        "elapsed_s": 2.6722300052642822,
+        "error": null
+      },
+      "deepseek-v4-pro:cloud": {
+        "raw": "{\"tier\": \"Low\", \"reasoning\": \"All sensors are below warning thresholds, anomaly and maintenance flags are 0, downtime risk is 0.0, failure signature is Normal, and RUL is high at 255 hours.\", \"confidence\": 0.98}",
+        "parsed_tier": "Low",
+        "elapsed_s": 49.90602350234985,
+        "error": null
+      }
+    },
+    "ensemble_tier": "Low"
+  },
+  {
+    "machine_id": 1,
+    "timestamp": "2025-01-20 18:26:00",
+    "temperature": 102.97,
+    "vibration": 52.33,
+    "humidity": 62.36,
+    "pressure": 2.27,
+    "energy": 0.88,
+    "failure_type": "Normal",
+    "rul": 48.0,
+    "anomaly_flag": 1,
+    "downtime_risk": 1.0,
+    "maintenance_required": 1,
+    "gt_tier": "Critical",
+    "per_llm": {
+      "glm-5.1:cloud": {
+        "raw": "```json\n{\n  \"tier\": \"Critical\",\n  \"reasoning\": \"Despite the classifier labeling the failure mode as 'Normal', the anomaly flag, maximum downtime risk score, maintenance flag, and a critically high temperature of 102.97 C combined with a short 48-hour RUL strongly indicate imminent failure.\",\n  \"conf",
+        "parsed_tier": "Critical",
+        "elapsed_s": 10.493155002593994,
+        "error": null
+      },
+      "kimi-k2.6:cloud": {
+        "raw": "{\"tier\": \"High\", \"reasoning\": \"Anomaly flag and maintenance flag are both active with maximum downtime risk score, but temperature is the only critical sensor breach, failure mode is Normal, and RUL of 48 hours allows next-workday intervention.\", \"confidence\": 0.82}",
+        "parsed_tier": "High",
+        "elapsed_s": 4.401170015335083,
+        "error": null
+      },
+      "deepseek-v4-pro:cloud": {
+        "raw": "{\"tier\": \"High\", \"reasoning\": \"Anomaly flag, maintenance flag, and maximum downtime risk score indicate elevated risk despite only one sensor in warning and moderate RUL.\", \"confidence\": 0.85}",
+        "parsed_tier": "High",
+        "elapsed_s": 73.6773316860199,
+        "error": null
+      }
+    },
+    "ensemble_tier": "High"
+  },
+  {
+    "machine_id": 1,
+    "timestamp": "2025-01-14 21:26:00",
+    "temperature": 72.41,
+    "vibration": 70.57,
+    "humidity": 76.21,
+    "pressure": 1.57,
+    "energy": 4.67,
+    "failure_type": "Normal",
+    "rul": 295.0,
+    "anomaly_flag": 0,
+    "downtime_risk": 0.0,
+    "maintenance_required": 0,
+    "gt_tier": "Low",
+    "per_llm": {
+      "glm-5.1:cloud": {
+        "raw": "```json\n{\"tier\": \"High\", \"reasoning\": \"Vibration and humidity sensors are at critical thresholds, and energy consumption is at a warning level, which elevates risk despite the classifier indicating a normal state and a high remaining useful life.\", \"confidence\": 0.82}\n```",
+        "parsed_tier": "High",
+        "elapsed_s": 16.74641227722168,
+        "error": null
+      },
+      "kimi-k2.6:cloud": {
+        "raw": "{\"tier\": \"High\", \"reasoning\": \"Vibration and humidity are at critical thresholds, energy consumption is critical, and vibration is critical despite classifier showing Normal and zero flags, indicating severe sensor degradation not captured by upstream model.\", \"confidence\": 0.85}",
+        "parsed_tier": "High",
+        "elapsed_s": 25.344106912612915,
+        "error": null
+      },
+      "deepseek-v4-pro:cloud": {
+        "raw": "{\"tier\": \"Medium\", \"reasoning\": \"Vibration is at critical threshold and humidity is past critical, but anomaly flag, maintenance flag, and downtime risk are all normal with high RUL, suggesting sensor drift rather than imminent failure.\", \"confidence\": 0.75}",
+        "parsed_tier": "Medium",
+        "elapsed_s": 32.87466740608215,
+        "error": null
+      }
+    },
+    "ensemble_tier": "High"
+  },
+  {
+    "machine_id": 1,
+    "timestamp": "2025-03-06 23:44:00",
+    "temperature": 73.81,
+    "vibration": 54.32,
+    "humidity": 56.23,
+    "pressure": 3.88,
+    "energy": 4.82,
+    "failure_type": "Normal",
+    "rul": 494.0,
+    "anomaly_flag": 0,
+    "downtime_risk": 0.0,
+    "maintenance_required": 0,
+    "gt_tier": "Low",
+    "per_llm": {
+      "glm-5.1:cloud": {
+        "raw": "```json\n{\n  \"tier\": \"Medium\",\n  \"reasoning\": \"Energy consumption exceeds the critical threshold and pressure is at warning level, but the classifier reports a normal state with no anomaly or maintenance flags and a high RUL, warranting scheduled monitoring.\",\n  \"confidence\": 0.85\n}\n```",
+        "parsed_tier": "Medium",
+        "elapsed_s": 9.461211681365967,
+        "error": null
+      },
+      "kimi-k2.6:cloud": {
+        "raw": "{\"tier\": \"Low\", \"reasoning\": \"All classifier outputs indicate normal state (anomaly=0, downtime risk=0.00, maintenance flag=0, Normal signature), RUL is very high at 494 hours, and no sensors exceed warning thresholds despite energy consumption being near critical.\", \"confidence\": 0.92}",
+        "parsed_tier": "Low",
+        "elapsed_s": 8.27336859703064,
+        "error": null
+      },
+      "deepseek-v4-pro:cloud": {
+        "raw": "{\"tier\": \"Medium\", \"reasoning\": \"Energy consumption exceeds critical threshold while all other sensors, classifier outputs, and RUL remain normal, warranting scheduled inspection.\", \"confidence\": 0.85}",
+        "parsed_tier": "Medium",
+        "elapsed_s": 29.78132939338684,
+        "error": null
+      }
+    },
+    "ensemble_tier": "Medium"
+  },
+  {
+    "machine_id": 1,
+    "timestamp": "2025-03-05 12:03:00",
+    "temperature": 93.17,
+    "vibration": 96.37,
+    "humidity": 30.82,
+    "pressure": 2.64,
+    "energy": 1.49,
+    "failure_type": "Normal",
+    "rul": 21.0,
+    "anomaly_flag": 1,
+    "downtime_risk": 1.0,
+    "maintenance_required": 1,
+    "gt_tier": "Critical",
+    "per_llm": {
+      "glm-5.1:cloud": {
+        "raw": "```json\n{\n  \"tier\": \"Critical\",\n  \"reasoning\": \"Despite the Normal failure-mode signature, the machine exhibits critical-level sensor breaches in both temperature and vibration, combined with maximum downtime risk, active anomaly and maintenance flags, and a very low 21-hour RUL.\",\n  \"confidence\": 0",
+        "parsed_tier": "Critical",
+        "elapsed_s": 3.269698143005371,
+        "error": null
+      },
+      "kimi-k2.6:cloud": {
+        "raw": "{\"tier\": \"High\", \"reasoning\": \"Anomaly flag and maintenance recommendation are both active with maximum downtime risk score, but RUL of 21 hours and 'Normal' failure signature without severe sensor breaches (only temperature and vibration critical, others normal/low) suggest elevated but not imminen",
+        "parsed_tier": "High",
+        "elapsed_s": 3.746093511581421,
+        "error": null
+      },
+      "deepseek-v4-pro:cloud": {
+        "raw": "{\"tier\": \"Critical\", \"reasoning\": \"Anomaly flag, maximum downtime risk, maintenance flag, and very low RUL (21h) converge despite only two critical sensor breaches.\", \"confidence\": 0.95}",
+        "parsed_tier": "Critical",
+        "elapsed_s": 9.046862125396729,
+        "error": null
+      }
+    },
+    "ensemble_tier": "Critical"
+  }
+]
