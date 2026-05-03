@@ -1,0 +1,356 @@
+[
+  {
+    "machine_id": 29,
+    "gt_tier": "Critical",
+    "stages": {
+      "monitoring": {
+        "llm": "glm-5.1:cloud",
+        "elapsed_s": 6.178496360778809,
+        "raw": "```json\n{\n  \"status\": \"warning\",\n  \"severity\": \"high\",\n  \"flagged_sensors\": [\n    \"Temperature\",\n    \"Pressure\",\n    \"Energy Consumption\"\n  ],\n  \"reasoning\": \"Temperature is in the critical zone while pressure and energy consumption are in the warning zone, indicating an abnormal operating condition",
+        "parsed": {
+          "status": "warning",
+          "severity": "high",
+          "flagged_sensors": [
+            "Temperature",
+            "Pressure",
+            "Energy Consumption"
+          ],
+          "reasoning": "Temperature is in the critical zone while pressure and energy consumption are in the warning zone, indicating an abnormal operating condition despite the upstream failure type being normal.",
+          "confidence": 0.95
+        }
+      },
+      "diagnosing": {
+        "llm": "deepseek-v4-pro:cloud",
+        "elapsed_s": 5.036940813064575,
+        "raw": "{\"root_cause\": \"cooling system inefficiency\", \"affected_component\": \"heat exchanger\", \"failure_progression\": \"Reduced heat dissipation will cause temperature to continue rising, leading to thermal overload and potential system shutdown within the forecast 7-hour window.\", \"evidence\": [\"Temperature i",
+        "parsed": {
+          "root_cause": "cooling system inefficiency",
+          "affected_component": "heat exchanger",
+          "failure_progression": "Reduced heat dissipation will cause temperature to continue rising, leading to thermal overload and potential system shutdown within the forecast 7-hour window.",
+          "evidence": [
+            "Temperature in critical zone (90.74)",
+            "Pressure in warning zone (4.52)",
+            "Energy consumption elevated (3.94)",
+            "Normal failure-type signature suggests no catastrophic fault yet",
+            "High severity warning from Monitoring Agent"
+          ],
+          "confidence": 0.82
+        }
+      },
+      "planning": {
+        "llm": "kimi-k2.6:cloud",
+        "elapsed_s": 4.00806450843811,
+        "raw": "{\"action\": \"repair\", \"priority\": \"P2\", \"estimated_duration_hours\": 6, \"employees_needed\": 3, \"skills_needed\": [\"HVAC_technician\", \"mechanical_systems\", \"thermal_engineering\"], \"scheduled_within_hours\": 6, \"justification\": \"Cooling system inefficiency in heat exchanger with 7h RUL requires proactive ",
+        "parsed": {
+          "action": "repair",
+          "priority": "P2",
+          "estimated_duration_hours": 6,
+          "employees_needed": 3,
+          "skills_needed": [
+            "HVAC_technician",
+            "mechanical_systems",
+            "thermal_engineering"
+          ],
+          "scheduled_within_hours": 6,
+          "justification": "Cooling system inefficiency in heat exchanger with 7h RUL requires proactive repair before thermal overload shutdown, balancing urgency against available window to restore heat dissipation capacity."
+        }
+      },
+      "action": {
+        "llm": "deepseek-v4-pro:cloud",
+        "elapsed_s": 4.530399799346924,
+        "raw": "{\"work_order_id\": \"WO-M29-3F8A2B1C\", \"action_type\": \"repair\", \"dispatched_to\": \"Maintenance-Team-A\", \"scheduled_time\": \"2025-03-27T16:30:00Z\", \"approval_required\": true, \"status\": \"pending_approval\", \"audit_note\": \"P2 repair of heat exchanger cooling inefficiency scheduled within 6 hours; requires s",
+        "parsed": {
+          "work_order_id": "WO-M29-3F8A2B1C",
+          "action_type": "repair",
+          "dispatched_to": "Maintenance-Team-A",
+          "scheduled_time": "2025-03-27T16:30:00Z",
+          "approval_required": true,
+          "status": "pending_approval",
+          "audit_note": "P2 repair of heat exchanger cooling inefficiency scheduled within 6 hours; requires supervisor approval per repair action policy."
+        }
+      }
+    },
+    "total_elapsed_s": 19.761927843093872
+  },
+  {
+    "machine_id": 31,
+    "gt_tier": "High",
+    "stages": {
+      "monitoring": {
+        "llm": "glm-5.1:cloud",
+        "elapsed_s": 8.395270824432373,
+        "raw": "```json\n{\n  \"status\": \"normal\",\n  \"severity\": \"low\",\n  \"flagged_sensors\": [],\n  \"reasoning\": \"All sensor readings are well below their warning thresholds, and the upstream classifier indicates a normal state despite the maintenance flag.\",\n  \"confidence\": 0.95\n}\n```",
+        "parsed": {
+          "status": "normal",
+          "severity": "low",
+          "flagged_sensors": [],
+          "reasoning": "All sensor readings are well below their warning thresholds, and the upstream classifier indicates a normal state despite the maintenance flag.",
+          "confidence": 0.95
+        }
+      },
+      "diagnosing": {
+        "llm": "deepseek-v4-pro:cloud",
+        "elapsed_s": 2.502187728881836,
+        "raw": "{\"root_cause\": \"normal operation with no active fault\", \"affected_component\": \"none\", \"failure_progression\": \"No failure progression expected; system is operating within normal parameters despite the maintenance flag.\", \"evidence\": [\"All sensor readings are within normal ranges\", \"Failure-type signa",
+        "parsed": {
+          "root_cause": "normal operation with no active fault",
+          "affected_component": "none",
+          "failure_progression": "No failure progression expected; system is operating within normal parameters despite the maintenance flag.",
+          "evidence": [
+            "All sensor readings are within normal ranges",
+            "Failure-type signature is 'Normal'",
+            "Monitoring Agent status is 'normal' with low severity and no flagged sensors"
+          ],
+          "confidence": 0.95
+        }
+      },
+      "planning": {
+        "llm": "kimi-k2.6:cloud",
+        "elapsed_s": 2.942624092102051,
+        "raw": "{\"action\": \"monitor\", \"priority\": \"P4\", \"estimated_duration_hours\": 1, \"employees_needed\": 1, \"skills_needed\": [\"basic_systems_monitoring\"], \"scheduled_within_hours\": 168, \"justification\": \"System is operating normally with no active fault; routine monitoring suffices until next scheduled maintenanc",
+        "parsed": {
+          "action": "monitor",
+          "priority": "P4",
+          "estimated_duration_hours": 1,
+          "employees_needed": 1,
+          "skills_needed": [
+            "basic_systems_monitoring"
+          ],
+          "scheduled_within_hours": 168,
+          "justification": "System is operating normally with no active fault; routine monitoring suffices until next scheduled maintenance window given 10h RUL buffer and normal operation status."
+        }
+      },
+      "action": {
+        "llm": "deepseek-v4-pro:cloud",
+        "elapsed_s": 9.846904754638672,
+        "raw": "{\"work_order_id\": \"WO-M31-4A7B2C1D\", \"action_type\": \"monitor\", \"dispatched_to\": \"Maintenance-Team-A\", \"scheduled_time\": \"2025-04-08T12:00:00Z\", \"approval_required\": false, \"status\": \"dispatched\", \"audit_note\": \"Routine monitoring dispatched for M-31 with no active faults and 10h RUL buffer; no appro",
+        "parsed": {
+          "work_order_id": "WO-M31-4A7B2C1D",
+          "action_type": "monitor",
+          "dispatched_to": "Maintenance-Team-A",
+          "scheduled_time": "2025-04-08T12:00:00Z",
+          "approval_required": false,
+          "status": "dispatched",
+          "audit_note": "Routine monitoring dispatched for M-31 with no active faults and 10h RUL buffer; no approval required per P4 automatic dispatch policy."
+        }
+      }
+    },
+    "total_elapsed_s": 23.696001291275024
+  },
+  {
+    "machine_id": 31,
+    "gt_tier": "Medium",
+    "stages": {
+      "monitoring": {
+        "llm": "glm-5.1:cloud",
+        "elapsed_s": 3.6403517723083496,
+        "raw": "```json\n{\n  \"status\": \"anomaly\",\n  \"severity\": \"high\",\n  \"flagged_sensors\": [\n    \"Vibration\",\n    \"Humidity\",\n    \"Energy Consumption\"\n  ],\n  \"reasoning\": \"Vibration and energy consumption have exceeded critical thresholds while humidity is in the warning zone, indicating a severe multi-sensor anom",
+        "parsed": {
+          "status": "anomaly",
+          "severity": "high",
+          "flagged_sensors": [
+            "Vibration",
+            "Humidity",
+            "Energy Consumption"
+          ],
+          "reasoning": "Vibration and energy consumption have exceeded critical thresholds while humidity is in the warning zone, indicating a severe multi-sensor anomaly.",
+          "confidence": 0.95
+        }
+      },
+      "diagnosing": {
+        "llm": "deepseek-v4-pro:cloud",
+        "elapsed_s": 12.899366617202759,
+        "raw": "{\n  \"root_cause\": \"seal degradation\",\n  \"affected_component\": \"hydraulic seal\",\n  \"failure_progression\": \"The degraded seal will continue to leak, causing further pressure drop, increased pump energy consumption, and eventual hydraulic system failure.\",\n  \"evidence\": [\n    \"Pressure Drop failure-typ",
+        "parsed": {
+          "root_cause": "seal degradation",
+          "affected_component": "hydraulic seal",
+          "failure_progression": "The degraded seal will continue to leak, causing further pressure drop, increased pump energy consumption, and eventual hydraulic system failure.",
+          "evidence": [
+            "Pressure Drop failure-type signature directly points to a leak or seal issue.",
+            "Elevated energy consumption suggests the pump is working harder to compensate for pressure loss.",
+            "High vibration indicates potential cavitation or pump strain due to fluid loss.",
+            "Elevated humidity may be caused by atomized hydraulic fluid from a high-pressure leak."
+          ],
+          "confidence": 0.89
+        }
+      },
+      "planning": {
+        "llm": "kimi-k2.6:cloud",
+        "elapsed_s": 2.7711644172668457,
+        "raw": "{\"action\": \"replace\", \"priority\": \"P3\", \"estimated_duration_hours\": 8, \"employees_needed\": 3, \"skills_needed\": [\"hydraulics\", \"seal_replacement\", \"system_flushing\", \"pressure_testing\"], \"scheduled_within_hours\": 168, \"justification\": \"Seal degradation with 437h RUL allows planned replacement within ",
+        "parsed": {
+          "action": "replace",
+          "priority": "P3",
+          "estimated_duration_hours": 8,
+          "employees_needed": 3,
+          "skills_needed": [
+            "hydraulics",
+            "seal_replacement",
+            "system_flushing",
+            "pressure_testing"
+          ],
+          "scheduled_within_hours": 168,
+          "justification": "Seal degradation with 437h RUL allows planned replacement within one week to prevent progressive pressure loss, energy waste, and eventual system failure."
+        }
+      },
+      "action": {
+        "llm": "deepseek-v4-pro:cloud",
+        "elapsed_s": 13.270408868789673,
+        "raw": "{\"work_order_id\": \"WO-M31-4A7B2C1D\", \"action_type\": \"replace\", \"dispatched_to\": \"Maintenance-Team-A\", \"scheduled_time\": \"2025-03-28T10:00:00Z\", \"approval_required\": false, \"status\": \"dispatched\", \"audit_note\": \"Planned replacement of M-31 seals due to degradation with 437h RUL, scheduled within 168h",
+        "parsed": {
+          "work_order_id": "WO-M31-4A7B2C1D",
+          "action_type": "replace",
+          "dispatched_to": "Maintenance-Team-A",
+          "scheduled_time": "2025-03-28T10:00:00Z",
+          "approval_required": false,
+          "status": "dispatched",
+          "audit_note": "Planned replacement of M-31 seals due to degradation with 437h RUL, scheduled within 168h to prevent pressure loss and energy waste."
+        }
+      }
+    },
+    "total_elapsed_s": 32.588266372680664
+  },
+  {
+    "machine_id": 9,
+    "gt_tier": "Low",
+    "stages": {
+      "monitoring": {
+        "llm": "glm-5.1:cloud",
+        "elapsed_s": 4.467816591262817,
+        "raw": "```json\n{\n  \"status\": \"warning\",\n  \"severity\": \"medium\",\n  \"flagged_sensors\": [\n    \"Temperature\",\n    \"Pressure\",\n    \"Energy Consumption\"\n  ],\n  \"reasoning\": \"Temperature, Pressure, and Energy Consumption have exceeded their warning thresholds, despite the upstream classifier indicating a normal s",
+        "parsed": {
+          "status": "warning",
+          "severity": "medium",
+          "flagged_sensors": [
+            "Temperature",
+            "Pressure",
+            "Energy Consumption"
+          ],
+          "reasoning": "Temperature, Pressure, and Energy Consumption have exceeded their warning thresholds, despite the upstream classifier indicating a normal state.",
+          "confidence": 0.85
+        }
+      },
+      "diagnosing": {
+        "llm": "deepseek-v4-pro:cloud",
+        "elapsed_s": 40.41720366477966,
+        "raw": "{\"root_cause\": \"cooling system inefficiency\", \"affected_component\": \"cooling fan or heat exchanger\", \"failure_progression\": \"If unaddressed, reduced cooling capacity will lead to sustained high temperatures, causing thermal expansion, increased friction, and eventual mechanical seizure or electrical",
+        "parsed": {
+          "root_cause": "cooling system inefficiency",
+          "affected_component": "cooling fan or heat exchanger",
+          "failure_progression": "If unaddressed, reduced cooling capacity will lead to sustained high temperatures, causing thermal expansion, increased friction, and eventual mechanical seizure or electrical overload.",
+          "evidence": [
+            "Temperature elevated to 85.43, exceeding warning threshold",
+            "Pressure elevated to 4.37, suggesting possible blockage or pump strain",
+            "Energy Consumption elevated to 3.81, indicating increased load on cooling or circulation systems",
+            "Vibration and Humidity remain normal, ruling out immediate mechanical imbalance or moisture ingress",
+            "Failure-type signature is 'Normal', suggesting no catastrophic fault yet, but a developing subsystem issue"
+          ],
+          "confidence": 0.82
+        }
+      },
+      "planning": {
+        "llm": "kimi-k2.6:cloud",
+        "elapsed_s": 4.077925205230713,
+        "raw": "{\"action\": \"inspect\", \"priority\": \"P3\", \"estimated_duration_hours\": 4, \"employees_needed\": 2, \"skills_needed\": [\"thermal systems\", \"mechanical inspection\", \"cooling systems diagnostics\"], \"scheduled_within_hours\": 72, \"justification\": \"With 296h RUL and normal failure signature, a targeted inspectio",
+        "parsed": {
+          "action": "inspect",
+          "priority": "P3",
+          "estimated_duration_hours": 4,
+          "employees_needed": 2,
+          "skills_needed": [
+            "thermal systems",
+            "mechanical inspection",
+            "cooling systems diagnostics"
+          ],
+          "scheduled_within_hours": 72,
+          "justification": "With 296h RUL and normal failure signature, a targeted inspection of the cooling fan and heat exchanger within 72 hours will identify whether blockage, degradation, or pump strain is causing the inefficiency before it progresses to thermal damage."
+        }
+      },
+      "action": {
+        "llm": "deepseek-v4-pro:cloud",
+        "elapsed_s": 4.171244144439697,
+        "raw": "{\"work_order_id\": \"WO-M9-20250320\", \"action_type\": \"inspect\", \"dispatched_to\": \"Maintenance-Team-C\", \"scheduled_time\": \"2025-03-23T08:00:00Z\", \"approval_required\": false, \"status\": \"dispatched\", \"audit_note\": \"P3 inspection of cooling fan and heat exchanger on M-9 dispatched automatically due to nor",
+        "parsed": {
+          "work_order_id": "WO-M9-20250320",
+          "action_type": "inspect",
+          "dispatched_to": "Maintenance-Team-C",
+          "scheduled_time": "2025-03-23T08:00:00Z",
+          "approval_required": false,
+          "status": "dispatched",
+          "audit_note": "P3 inspection of cooling fan and heat exchanger on M-9 dispatched automatically due to normal failure signature and 296h RUL; no supervisor approval required."
+        }
+      }
+    },
+    "total_elapsed_s": 53.141197204589844
+  },
+  {
+    "machine_id": 15,
+    "gt_tier": "Low",
+    "stages": {
+      "monitoring": {
+        "llm": "glm-5.1:cloud",
+        "elapsed_s": 13.269314050674438,
+        "raw": "```json\n{\n  \"status\": \"warning\",\n  \"severity\": \"low\",\n  \"flagged_sensors\": [\n    \"Temperature\"\n  ],\n  \"reasoning\": \"Temperature exceeded the warning threshold of 82 C, though all other sensors and upstream classifier indicators remain within normal limits.\",\n  \"confidence\": 0.95\n}\n```",
+        "parsed": {
+          "status": "warning",
+          "severity": "low",
+          "flagged_sensors": [
+            "Temperature"
+          ],
+          "reasoning": "Temperature exceeded the warning threshold of 82 C, though all other sensors and upstream classifier indicators remain within normal limits.",
+          "confidence": 0.95
+        }
+      },
+      "diagnosing": {
+        "llm": "deepseek-v4-pro:cloud",
+        "elapsed_s": 10.174710512161255,
+        "raw": "{\"root_cause\": \"cooling system degradation\", \"affected_component\": \"cooling fan or heat exchanger\", \"failure_progression\": \"If unaddressed, reduced cooling efficiency will lead to sustained high temperatures, accelerating thermal stress on components and potentially causing premature bearing failure",
+        "parsed": {
+          "root_cause": "cooling system degradation",
+          "affected_component": "cooling fan or heat exchanger",
+          "failure_progression": "If unaddressed, reduced cooling efficiency will lead to sustained high temperatures, accelerating thermal stress on components and potentially causing premature bearing failure or winding insulation breakdown.",
+          "evidence": [
+            "Temperature exceeded warning threshold of 82 C",
+            "All other sensors (vibration, humidity, pressure, energy) remain within normal limits",
+            "Failure-type signature is Normal, ruling out immediate mechanical or electrical faults",
+            "RUL forecast of 290 hours suggests gradual degradation rather than imminent failure"
+          ],
+          "confidence": 0.85
+        }
+      },
+      "planning": {
+        "llm": "kimi-k2.6:cloud",
+        "elapsed_s": 3.2276577949523926,
+        "raw": "{\"action\": \"inspect\", \"priority\": \"P3\", \"estimated_duration_hours\": 4, \"employees_needed\": 2, \"skills_needed\": [\"thermal systems\", \"mechanical inspection\", \"vibration analysis\"], \"scheduled_within_hours\": 168, \"justification\": \"Gradual cooling system degradation with 290h RUL warrants a thorough ins",
+        "parsed": {
+          "action": "inspect",
+          "priority": "P3",
+          "estimated_duration_hours": 4,
+          "employees_needed": 2,
+          "skills_needed": [
+            "thermal systems",
+            "mechanical inspection",
+            "vibration analysis"
+          ],
+          "scheduled_within_hours": 168,
+          "justification": "Gradual cooling system degradation with 290h RUL warrants a thorough inspection to identify whether the fan or heat exchanger needs repair or replacement before thermal stress causes secondary damage."
+        }
+      },
+      "action": {
+        "llm": "deepseek-v4-pro:cloud",
+        "elapsed_s": 1.852433681488037,
+        "raw": "{\"work_order_id\": \"WO-M15-4A7B2C1D\", \"action_type\": \"inspect\", \"dispatched_to\": \"Maintenance-Team-C\", \"scheduled_time\": \"2025-04-05T08:00:00Z\", \"approval_required\": false, \"status\": \"dispatched\", \"audit_note\": \"P3 inspection of cooling system on M-15 dispatched automatically due to gradual degradati",
+        "parsed": {
+          "work_order_id": "WO-M15-4A7B2C1D",
+          "action_type": "inspect",
+          "dispatched_to": "Maintenance-Team-C",
+          "scheduled_time": "2025-04-05T08:00:00Z",
+          "approval_required": false,
+          "status": "dispatched",
+          "audit_note": "P3 inspection of cooling system on M-15 dispatched automatically due to gradual degradation and 290h RUL; thermal and vibration specialists assigned."
+        }
+      }
+    },
+    "total_elapsed_s": 28.531079292297363
+  }
+]
