@@ -100,11 +100,23 @@ def draw_kafka_topology(ax):
         col = "#3b82f6" if j < 8 else ("#94a3b8" if j == 8 else "#e2e8f0")
         ax.add_patch(Rectangle((bx, ring_y), 0.32, 0.55,
                                facecolor=col, edgecolor="black", lw=0.6))
-    ax.text(cons_x0 + 0.35, ring_y - 0.20,
-            "t-9   t-8   t-7   t-6   t-5   t-4   t-3   t-2   t-1   t",
-            ha="left", va="top", fontsize=7, color="#1e3a8a", family="monospace")
+        ax.text(bx + 0.16, ring_y + 0.27, str(j + 1),
+                ha="center", va="center", fontsize=7,
+                color="white", fontweight="bold")
+    # Direction arrow + endpoint annotations (replace the prior "t-9 ... t" lag
+    # labels which were easily misread as negative sensor values)
+    ax.annotate("", xy=(cons_x0 + 4.20, ring_y - 0.05),
+                xytext=(cons_x0 + 0.35, ring_y - 0.05),
+                arrowprops=dict(arrowstyle="->", color="#1e3a8a", lw=1.0))
+    ax.text(cons_x0 + 0.35, ring_y - 0.30, "oldest event",
+            ha="left", va="top", fontsize=7.5, color="#1e3a8a",
+            style="italic")
+    ax.text(cons_x0 + 4.20, ring_y - 0.30, "newest event",
+            ha="right", va="top", fontsize=7.5, color="#1e3a8a",
+            style="italic")
     ax.text(cons_x0 + cons_w/2, ring_y - 0.55,
-            "ring buffer for one machine\n(oldest-evicted on each new event)",
+            "ring buffer (W = 10) for one machine — slot index 1 .. 10\n"
+            "(oldest-evicted FIFO; new event appended at slot 10)",
             ha="center", va="top", fontsize=8, style="italic", color="#1e3a8a")
 
     # MongoDB persistence sink
